@@ -10608,13 +10608,10 @@ MonoBehaviour:
   m_PlayerNumber: 1
   m_Shell: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   m_FireTransform: {fileID: 435794}
-  m_AimSlider: {fileID: 11407922}
   m_ShootingAudio: {fileID: 8268710}
-  m_ChargingClip: {fileID: 8300000, guid: c17f124fcdc0f5446a72f793898bd74b, type: 3}
   m_FireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
-  m_MinLaunchForce: 15
-  m_MaxLaunchForce: 30
-  m_MaxChargeTime: 0.75
+  m_LaunchForce: 20
+  m_FireDelay: 1
 --- !u!1 &173936
 GameObject:
   m_ObjectHideFlags: 0

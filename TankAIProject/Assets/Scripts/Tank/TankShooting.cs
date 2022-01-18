@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Complete
@@ -11,7 +12,9 @@ namespace Complete
         public AudioSource m_ShootingAudio;         // Reference to the audio source used to play the shooting audio. NB: different to the movement audio source.
         public AudioClip m_FireClip;                // Audio that plays when each shot is fired.
         public float m_LaunchForce = 20f;           // The force given to the shell.
-
+        public float m_FireDelay = 1f;             // The delay between two possible fires.
+        private WaitForSeconds m_FireWait;         // Used to have the fire delay.
+        private bool m_Reloading = false;
 
         private string m_FireButton;                // The input axis that is used for launching shells.
 
@@ -26,22 +29,26 @@ namespace Complete
         {
             // The fire axis is based on the player number.
             m_FireButton = "Fire" + m_PlayerNumber;
+
+            m_FireWait = new WaitForSeconds(m_FireDelay);
         }
 
 
         private void Update ()
         {
             // Otherwise, if the fire button has just started being pressed...
-            if (Input.GetButtonDown (m_FireButton))
+            if (Input.GetButton(m_FireButton) && !m_Reloading)
             {
                 // ... reset the fired flag and reset the launch force.
-                Fire();
+                StartCoroutine(Fire());
             }
         }
 
 
-        private void Fire ()
+        private IEnumerator Fire()
         {
+            m_Reloading = true;
+
             // Create an instance of the shell and store a reference to it's rigidbody.
             Rigidbody shellInstance =
                 Instantiate (m_Shell, m_FireTransform.position, m_FireTransform.rotation) as Rigidbody;
@@ -52,6 +59,10 @@ namespace Complete
             // Change the clip to the firing clip and play it.
             m_ShootingAudio.clip = m_FireClip;
             m_ShootingAudio.Play ();
+
+            yield return m_FireWait;
+
+            m_Reloading = false;
         }
     }
 }
