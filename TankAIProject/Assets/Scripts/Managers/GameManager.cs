@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,6 +17,7 @@ namespace Complete
         public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
         public bool[] m_IsPlayerTank;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
+        public VirtualGrid m_ClassGrid;             // Reference Grid
         
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -23,7 +25,8 @@ namespace Complete
         private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
         private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
-
+        private Graph m_Graph;
+        
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
         
@@ -38,6 +41,24 @@ namespace Complete
 
             SpawnAllTanks();
             SetCameraTargets();
+            
+            // preparation Dijsktra features
+            List<Node> nodes = new List<Node>();
+            for (int i = 0; i < m_ClassGrid.gridSize; i++)
+            {
+                for (int j = 0; j < m_ClassGrid.gridSize; j++)
+                {
+                    Vector3 vect3 = m_ClassGrid.GetWorldPositionByIndex(i, j);
+                    Node node = new Node(m_ClassGrid.grid[i,j], new Vector2(vect3.x, vect3.y));
+                    nodes.Add(node);
+                }
+            }
+            m_Graph = new Graph(nodes);
+            
+            // try move since A point to B point
+            Path m_Path = m_Graph.GetShortestPath (nodes[0], nodes[50]);
+            Debug.Log("Length = " + m_Path.length);
+            Debug.Log("Length = " + m_Path.length);
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
