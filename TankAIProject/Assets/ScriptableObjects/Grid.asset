@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b04e86ba141c134f82e5f4b7f9b4537, type: 3}
   m_Name: Grid
   m_EditorClassIdentifier: 
+  m_GridTransformPosition: {x: 0, y: 0, z: 0}
+  m_UnwalkableLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_GridWorldSize: 100
+  m_NbNode: 100
