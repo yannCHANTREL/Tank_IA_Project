@@ -17,11 +17,20 @@ public class Node
 
     private int m_StateNode;
     private Vector2 m_Position;
+    private int m_posGridX;
+    private int m_posGridY;
 
-    public Node(int number, Vector2 position)
+    public Node(int number, Vector2 position, int posGridI, int posGridJ)
     {
         m_StateNode = number;
         m_Position = position;
+        m_posGridX = posGridI;
+        m_posGridY = posGridJ;
+    }
+
+    public void AddNeighbors(Node nodeNeighbors)
+    {
+        m_Connections.Add(nodeNeighbors);
     }
 
     /// <summary>
@@ -57,6 +66,22 @@ public class Node
         get
         {
             return m_Position;
+        }
+    }
+    
+    public int posGridI
+    {
+        get
+        {
+            return m_posGridX;
+        }
+    }
+    
+    public int posGridJ
+    {
+        get
+        {
+            return m_posGridY;
         }
     }
 

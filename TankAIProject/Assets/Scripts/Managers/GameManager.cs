@@ -43,28 +43,78 @@ namespace Complete
             SetCameraTargets();
             
             // preparation Dijsktra features
-            List<Node> nodes = new List<Node>();
-            for (int i = 0; i < m_ClassGrid.gridSize; i++)
-            {
-                for (int j = 0; j < m_ClassGrid.gridSize; j++)
-                {
-                    Vector3 vect3 = m_ClassGrid.GetWorldPositionByIndex(i, j);
-                    Node node = new Node(m_ClassGrid.grid[i,j], new Vector2(vect3.x, vect3.y));
-                    nodes.Add(node);
-                }
-            }
-            m_Graph = new Graph(nodes);
-            
-            // try move since A point to B point
-            Path m_Path = m_Graph.GetShortestPath (nodes[0], nodes[50]);
-            Debug.Log("Length = " + m_Path.length);
-            Debug.Log("Length = " + m_Path.length);
+            PreparationForDijsktraFeatures();
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
         }
 
+        private void PreparationForDijsktraFeatures()
+        {
+            List<Node> nodes = new List<Node>();
+            
+            // create all nodes
+            for (int i = 0; i < m_ClassGrid.gridSize; i++)
+            {
+                for (int j = 0; j < m_ClassGrid.gridSize; j++)
+                {
+                    Vector3 vect3 = m_ClassGrid.GetWorldPositionByIndex(i, j);
+                    Node node = new Node(m_ClassGrid.grid[i,j], new Vector2(vect3.x, vect3.z), i, j);
+                    nodes.Add(node);
+                }
+            }
 
+            // create all neighbors for each nodes
+            foreach (var nodeTarget in nodes)
+            {
+                int posGridI = nodeTarget.posGridI;
+                int posGridJ = nodeTarget.posGridJ;
+
+                int nbNeighborsToFind = 0;
+                if (posGridJ - 1 >= 0) nbNeighborsToFind++;
+                if (posGridI + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
+                if (posGridJ + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
+                if (posGridI - 1 >= 0) nbNeighborsToFind++;
+                
+                //Debug.Log("node " + posGridI + "," + posGridJ + " : " + nbNeighborsToFind);
+                
+                foreach (var nodeNeighbors in nodes)
+                {
+                    if (nbNeighborsToFind != 0)
+                    {
+                        int posNeighborsGridI = nodeNeighbors.posGridI;
+                        int posNeighborsGridJ = nodeNeighbors.posGridJ;
+                        if (posGridJ - 1 >= 0 && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ - 1)
+                        {
+                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nbNeighborsToFind--;
+                        }
+                        else if (posGridI + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI + 1 && posNeighborsGridJ == posGridJ)
+                        {
+                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nbNeighborsToFind--;
+                        }
+                        else if (posGridJ + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ + 1)
+                        {
+                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nbNeighborsToFind--;
+                        }
+                        else if (posGridI - 1 >= 0 && posNeighborsGridI == posGridI - 1 && posNeighborsGridJ == posGridJ)
+                        {
+                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nbNeighborsToFind--;
+                        }
+                    }
+                }
+            }
+            
+            m_Graph = new Graph(nodes);
+            
+            // try move since A point to B point
+            Path m_Path = m_Graph.GetShortestPath (nodes[0], nodes[50]);
+            Debug.Log("Length = " + m_Path.length);
+        }
+        
         private void SpawnAllTanks()
         {
             // For all the tanks...

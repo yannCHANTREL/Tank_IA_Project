@@ -25,7 +25,7 @@ public class VirtualGrid : ScriptableObject
         m_NodeDiameter = (float) m_GridWorldSize / m_NbNode;
         m_NodeRadius = m_NodeDiameter / 2;
 
-        m_GridSize = Mathf.RoundToInt(m_GridWorldSize / m_NodeDiameter);
+        m_GridSize = Mathf.RoundToInt(Mathf.Sqrt(m_GridWorldSize / m_NodeDiameter));
 
         m_WorldBottomLeft = m_GridTransformPosition - Vector3.right * m_GridWorldSize / 2 - Vector3.forward * m_GridWorldSize / 2;
         m_tankDiameter = Mathf.Sqrt(Mathf.Pow(m_PrefabTankCollider.size.x, 2) + Mathf.Pow(m_PrefabTankCollider.size.z, 2));
