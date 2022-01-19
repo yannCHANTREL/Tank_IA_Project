@@ -6,10 +6,23 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public VirtualGrid m_VirualGrid;
+    public TankList m_TankList;                 // Reference Tank List
     
-    void Start()
+    void Awake()
     {
         m_VirualGrid.CreateGrid();
+        //DetectionTank();
+    }
+
+    private void Update()
+    {
+        //DetectionTank();
+    }
+
+    private void DetectionTank()
+    {
+        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
+        //m_VirualGrid.UpdateGrid(m_TankList.GameObjectsTanks);
     }
 
     private void OnDrawGizmos()

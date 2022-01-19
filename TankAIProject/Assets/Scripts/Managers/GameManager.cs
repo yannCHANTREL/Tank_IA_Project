@@ -18,6 +18,7 @@ namespace Complete
         public bool[] m_IsPlayerTank;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
         public VirtualGrid m_ClassGrid;             // Reference Grid
+        public TankList m_TankList;                 // Reference Tank List
         
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -58,9 +59,12 @@ namespace Complete
             {
                 for (int j = 0; j < m_ClassGrid.gridSize; j++)
                 {
-                    Vector3 vect3 = m_ClassGrid.GetWorldPositionByIndex(i, j);
-                    Node node = new Node(m_ClassGrid.grid[i,j], new Vector2(vect3.x, vect3.z), i, j);
-                    nodes.Add(node);
+                    if (m_ClassGrid.grid[i,j] == 0)
+                    {
+                        Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
+                        Node node = new Node(m_ClassGrid.grid[i,j], vect2, i, j);
+                        nodes.Add(node);
+                    }
                 }
             }
 
@@ -106,13 +110,16 @@ namespace Complete
                         }
                     }
                 }
+                //Debug.Log("nb neighbors : " + nodeTarget.posGridI + "," + nodeTarget.posGridJ + " : " + nodeTarget.connections.Count);
             }
             
             m_Graph = new Graph(nodes);
             
             // try move since A point to B point
             Path m_Path = m_Graph.GetShortestPath (nodes[0], nodes[50]);
+            Path m_Path2 = m_Graph.GetShortestPath (nodes[0], nodes[99]);
             Debug.Log("Length = " + m_Path.length);
+            Debug.Log("Length = " + m_Path2.length);
         }
         
         private void SpawnAllTanks()
@@ -125,6 +132,7 @@ namespace Complete
                     Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
                 m_Tanks[i].m_PlayerNumber = i + 1;
                 m_Tanks[i].Setup();
+                m_TankList.AddTank(m_Tanks[i]);
             }
         }
 

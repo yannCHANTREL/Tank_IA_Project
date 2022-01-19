@@ -17,7 +17,8 @@ public class VirtualGrid : ScriptableObject
     private float m_NodeDiameter;
     private float m_NodeRadius;
     private int m_GridSize;
-    private Vector3 m_WorldBottomLeft;
+    private Vector3 m_WorldBottomLeft3DPos;
+    private Vector2 m_WorldBottomLeft;
     private float m_tankDiameter;
 
     public void CreateGrid()
@@ -25,9 +26,10 @@ public class VirtualGrid : ScriptableObject
         m_NodeDiameter = (float) m_GridWorldSize / m_NbNode;
         m_NodeRadius = m_NodeDiameter / 2;
 
-        m_GridSize = Mathf.RoundToInt(Mathf.Sqrt(m_GridWorldSize / m_NodeDiameter));
+        m_GridSize = Mathf.RoundToInt(m_GridWorldSize / m_NodeDiameter);
 
-        m_WorldBottomLeft = m_GridTransformPosition - Vector3.right * m_GridWorldSize / 2 - Vector3.forward * m_GridWorldSize / 2;
+        m_WorldBottomLeft3DPos = m_GridTransformPosition - Vector3.right * m_GridWorldSize / 2 - Vector3.forward * m_GridWorldSize / 2;
+        m_WorldBottomLeft = new Vector2(m_WorldBottomLeft3DPos.x, m_WorldBottomLeft3DPos.z);
         m_tankDiameter = Mathf.Sqrt(Mathf.Pow(m_PrefabTankCollider.size.x, 2) + Mathf.Pow(m_PrefabTankCollider.size.z, 2));
         
         m_Grid = new int[m_GridSize, m_GridSize];
@@ -36,24 +38,52 @@ public class VirtualGrid : ScriptableObject
         {
             for (int y = 0; y < m_GridSize; y++)
             {
-                Vector3 worldPoint = GetWorldPositionByIndex(x, y);
+                Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(x, y));
                 
                 bool walkable = !Physics.CheckSphere(worldPoint, m_tankDiameter - m_NodeRadius, m_UnwalkableLayerMask);
                 
                 m_Grid[x, y] = (walkable ? 0 : -1);
-                // Verif char à faire
             }
         }
     }
 
-    public Vector3 GetWorldPositionByIndex(int x, int y)
+    public List<Vector2Int> DetectCircle(Vector2 position, float radius)
     {
-        return m_WorldBottomLeft + Vector3.right * (x * m_NodeDiameter + m_NodeRadius)
-                                 + Vector3.forward * (y * m_NodeDiameter + m_NodeRadius);
+        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
+        List<Vector2Int> ret = new List<Vector2Int>();
+        return ret;
+    }
+
+    public void UpdateGrid(List<GameObject> listOfGameObjectTanks)
+    {
+        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
+        foreach (var gameObjectTank in listOfGameObjectTanks)
+        {
+            Vector3 position = gameObjectTank.transform.position;
+            Vector2 posTank = new Vector2(position.x, position.z);
+            
+        }
+    }
+
+    public Vector2 GetVector2WorldPositionByIndex(Vector2Int gridPos)
+    {
+        return Vector3ToVector2(GetVector3WorldPositionByIndex(gridPos));
+    }
+
+    public Vector2 Vector3ToVector2(Vector3 vect3)
+    {
+        return new Vector2(vect3.x, vect3.z);
+    }
+    
+    public Vector3 GetVector3WorldPositionByIndex(Vector2Int gridPos)
+    {
+        return m_WorldBottomLeft3DPos + Vector3.right * (gridPos.x * m_NodeDiameter + m_NodeRadius)
+                                 + Vector3.forward * (gridPos.y * m_NodeDiameter + m_NodeRadius);
     }
 
     public Vector2Int GetIndexByWorldPosition(Vector2 worldPosition)
     {
+        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
         return new Vector2Int();
     }
 
@@ -68,7 +98,7 @@ public class VirtualGrid : ScriptableObject
                 for (int y = 0; y < m_GridSize; y++)
                 {
                     int n = m_Grid[x, y];
-                    Vector3 worldPoint = GetWorldPositionByIndex(x, y);
+                    Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(x, y));
                     
                     switch (n)
                     {
@@ -77,9 +107,6 @@ public class VirtualGrid : ScriptableObject
                             break;
                         case 0:
                             Gizmos.color = Color.white;
-                            break;
-                        case 1:
-                            Gizmos.color = Color.cyan;
                             break;
                     }
 

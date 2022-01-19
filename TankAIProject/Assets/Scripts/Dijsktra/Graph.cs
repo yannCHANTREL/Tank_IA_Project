@@ -48,7 +48,6 @@ public class Graph
 		{
 			throw new ArgumentNullException ();
 		}
-		Debug.Log("Pass control 1 OK");
 		
 		// The final path
 		Path path = new Path ();
@@ -59,10 +58,6 @@ public class Graph
 			path.nodes.Add ( start );
 			return path;
 		}
-		Debug.Log("Pass control 2 OK");
-		Debug.Log("NbNodes = " + m_Nodes.Count);
-		Debug.Log("NbNeighbors node1 = " + m_Nodes[0].connections.Count);
-		Debug.Log("NbNeighbors node2 = " + m_Nodes[1].connections.Count);
 		
 		// The list of unvisited nodes
 		List<Node> unvisited = new List<Node> ();
@@ -84,10 +79,6 @@ public class Graph
 		
 		// Set the starting Node distance to zero
 		distances [ start ] = 0f;
-		
-		Debug.Log("distances node1 = " + distances[m_Nodes[0]]);
-		Debug.Log("distances node2 = " + distances[m_Nodes[1]]);
-		Debug.Log("unvisited count = " + unvisited.Count);
 		
 		while ( unvisited.Count != 0 )
 		{
@@ -128,7 +119,6 @@ public class Graph
 				
 				// Getting the distance between the current node and the connection (neighbor)
 				float length = Vector2.Distance ( current.position, neighbor.position );
-				Debug.Log("length between two nodes = " + length);
 				
 				// The distance from start node to this connection (neighbor) of current node
 				float alt = distances [ current ] + length;
@@ -136,7 +126,6 @@ public class Graph
 				// A shorter path to the connection (neighbor) has been found
 				if ( alt < distances [ neighbor ] )
 				{
-					Debug.Log("AAA");
 					distances [ neighbor ] = alt;
 					previous [ neighbor ] = current;
 				}
