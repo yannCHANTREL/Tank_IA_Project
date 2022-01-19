@@ -23,6 +23,12 @@ namespace Complete
         private TankShooting m_Shooting;                        // Reference to tank's shooting script, used to disable and enable control.
         private GameObject m_CanvasGameObject;                  // Used to disable the world space UI during the Starting and Ending phases of each round.
 
+        public TankManager(int playerNumber, Color playerColor, Transform spawnPoint)
+        {
+            m_PlayerNumber = playerNumber;
+            m_PlayerColor = playerColor;
+            m_SpawnPoint = spawnPoint;
+        }
 
         public void Setup ()
         {

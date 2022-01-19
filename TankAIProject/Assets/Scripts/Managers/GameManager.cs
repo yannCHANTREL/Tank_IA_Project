@@ -14,12 +14,17 @@ namespace Complete
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
         public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
         public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
-        public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+        
+        public int m_TankAmountPerTeam; 
+        
         public bool[] m_IsPlayerTank;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
         public VirtualGrid m_ClassGrid;             // Reference Grid
-        public TankList m_TankList;                 // Reference Tank List
+        public TeamList m_TeamList;                 // Reference Tank List
         
+        public Transform[] m_TeamsSpawn; 
+        public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
+
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
         private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -29,7 +34,6 @@ namespace Complete
         private Graph m_Graph;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
-
         
         private void Start()
         {
@@ -124,15 +128,25 @@ namespace Complete
         
         private void SpawnAllTanks()
         {
-            // For all the tanks...
-            for (int i = 0; i < m_Tanks.Length; i++)
+            m_Tanks = new TankManager[m_TeamList.m_Teams.Count * m_TankAmountPerTeam];
+            // For all the team ...
+            for (int i = 0; i < m_TeamList.m_Teams.Count; i++)
             {
-                // ... create them, set their player number and references needed for control.
-                m_Tanks[i].m_Instance =
-                    Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
-                m_Tanks[i].m_PlayerNumber = i + 1;
-                m_Tanks[i].Setup();
-                m_TankList.AddTank(m_Tanks[i]);
+                // For the number of player per team ...
+                for (int j = 0; j < m_TankAmountPerTeam; j++)
+                {
+                    // ... create them, set their player number and references needed for control.
+                    int index = m_TankAmountPerTeam * i + j;
+
+                    m_Tanks[index] = new TankManager(index + 1, m_TeamList.m_Teams[i].m_TeamColor, m_TeamsSpawn[i])
+                    {
+                        m_Instance = Instantiate(m_TankPrefab, m_TeamsSpawn[i].position,m_TeamsSpawn[i].rotation) as GameObject
+                    };
+
+                    m_Tanks[index].Setup();
+                    
+                    // m_TankList.AddTank(m_Tanks[i]);
+                }
             }
         }
 

@@ -6,7 +6,7 @@ using UnityEngine;
 public class GridManager : MonoBehaviour
 {
     public VirtualGrid m_VirualGrid;
-    public TankList m_TankList;                 // Reference Tank List
+    public TeamList m_TankList;                 // Reference Tank List
     
     void Awake()
     {
