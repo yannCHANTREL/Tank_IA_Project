@@ -19,6 +19,9 @@ namespace Complete
 
         public VirtualGrid m_ClassGrid;             // Reference Grid
         public TankList m_TankList;                 // Reference Tank List
+
+        public Vector2Int m_start;
+        public Vector2Int m_end;
         
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
@@ -52,7 +55,7 @@ namespace Complete
 
         private void PreparationForDijsktraFeatures()
         {
-            List<Node> nodes = new List<Node>();
+            Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
             
             // create all nodes
             for (int i = 0; i < m_ClassGrid.gridSize; i++)
@@ -63,7 +66,7 @@ namespace Complete
                     {
                         Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
                         Node node = new Node(m_ClassGrid.grid[i,j], vect2, i, j);
-                        nodes.Add(node);
+                        nodes.Add(new Vector2Int(i,j),node);
                     }
                 }
             }
@@ -71,8 +74,8 @@ namespace Complete
             // create all neighbors for each nodes
             foreach (var nodeTarget in nodes)
             {
-                int posGridI = nodeTarget.posGridI;
-                int posGridJ = nodeTarget.posGridJ;
+                int posGridI = nodeTarget.Value.posGridI;
+                int posGridJ = nodeTarget.Value.posGridJ;
 
                 int nbNeighborsToFind = 0;
                 if (posGridJ - 1 >= 0) nbNeighborsToFind++;
@@ -86,26 +89,26 @@ namespace Complete
                 {
                     if (nbNeighborsToFind != 0)
                     {
-                        int posNeighborsGridI = nodeNeighbors.posGridI;
-                        int posNeighborsGridJ = nodeNeighbors.posGridJ;
+                        int posNeighborsGridI = nodeNeighbors.Value.posGridI;
+                        int posNeighborsGridJ = nodeNeighbors.Value.posGridJ;
                         if (posGridJ - 1 >= 0 && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ - 1)
                         {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
                             nbNeighborsToFind--;
                         }
                         else if (posGridI + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI + 1 && posNeighborsGridJ == posGridJ)
                         {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
                             nbNeighborsToFind--;
                         }
                         else if (posGridJ + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ + 1)
                         {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
                             nbNeighborsToFind--;
                         }
                         else if (posGridI - 1 >= 0 && posNeighborsGridI == posGridI - 1 && posNeighborsGridJ == posGridJ)
                         {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
+                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
                             nbNeighborsToFind--;
                         }
                     }
@@ -116,10 +119,10 @@ namespace Complete
             m_Graph = new Graph(nodes);
             
             // try move since A point to B point
-            Path m_Path = m_Graph.GetShortestPath (nodes[0], nodes[50]);
-            Path m_Path2 = m_Graph.GetShortestPath (nodes[0], nodes[99]);
+            Path m_Path = m_Graph.GetShortestPath (nodes[m_start], nodes[m_end]);
+            //Path m_Path = m_Graph.GetShortestPath (nodes[m_start.x + m_ClassGrid.gridSize * m_start.y], nodes[m_end.x + m_ClassGrid.gridSize * m_end.y]);
             Debug.Log("Length = " + m_Path.length);
-            Debug.Log("Length = " + m_Path2.length);
+            m_ClassGrid.DrawPath(m_Path);
         }
         
         private void SpawnAllTanks()

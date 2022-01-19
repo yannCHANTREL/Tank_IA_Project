@@ -990,6 +990,8 @@ MonoBehaviour:
   m_IsPlayerTank: 
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
   m_TankList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_start: {x: 50, y: 50}
+  m_end: {x: 70, y: 70}
 --- !u!4 &1304999366
 Transform:
   m_ObjectHideFlags: 0
