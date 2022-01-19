@@ -131,6 +131,12 @@ namespace Complete
                 m_Tanks[i].m_Instance =
                     Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
                 m_Tanks[i].m_PlayerNumber = i + 1;
+                
+                TankEventListener tankEventListener = m_Tanks[i].m_Instance.GetComponent<TankEventListener>();
+                if (tankEventListener) tankEventListener.m_TankIndex = m_Tanks[i].m_PlayerNumber;
+                TankIndexManager tankIndexManager = m_Tanks[i].m_Instance.GetComponent<TankIndexManager>();
+                if (tankIndexManager) tankIndexManager.m_TankIndex = m_Tanks[i].m_PlayerNumber;
+                
                 m_Tanks[i].Setup();
                 m_TankList.AddTank(m_Tanks[i]);
             }

@@ -6,6 +6,7 @@ namespace Complete
 {
     public class TankShooting : MonoBehaviour
     {
+        [SerializeField] private TankEvent m_FireCommand;
         public int m_PlayerNumber = 1;              // Used to identify the different players.
         public Rigidbody m_Shell;                   // Prefab of the shell.
         public Transform m_FireTransform;           // A child of the tank where the shells are spawned.
@@ -37,13 +38,17 @@ namespace Complete
         private void Update ()
         {
             // Otherwise, if the fire button has just started being pressed...
-            if (Input.GetButton(m_FireButton) && !m_Reloading)
+            /*if (Input.GetButton(m_FireButton) && !m_Reloading)
             {
                 // ... reset the fired flag and reset the launch force.
                 StartCoroutine(Fire());
-            }
+            }*/
         }
 
+        public void OnFireCommand()
+        {
+            StartCoroutine(Fire());
+        }
 
         private IEnumerator Fire()
         {
