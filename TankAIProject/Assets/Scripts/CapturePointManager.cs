@@ -32,8 +32,6 @@ public class CapturePointManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (m_Value >= 100) return; // Win condition
-
         if (m_OldTeamCapturing == m_CurrentTeamCapturing)
         {
             m_Value += m_IncrementSpeed * Time.deltaTime;
@@ -42,16 +40,20 @@ public class CapturePointManager : MonoBehaviour
         {
             m_Value -= m_IncrementSpeed * Time.deltaTime;
         }
-
+        
+        m_Slider.value = m_Value;
+        
+        if (m_Value >= 100)
+        {
+            m_Value = 100;
+            // TODO : Increment score for the team that captured the point
+            return;
+        }
+        
         if (m_Value < 0)
         {
             m_OldTeamCapturing = m_CurrentTeamCapturing;
             m_FillImage.color = m_ColorsPerTeam[m_CurrentTeamCapturing - 1];
         }
-        
-        m_Slider.value = m_Value;
-        
-        Debug.Log(m_Value);
     }
-    
 }

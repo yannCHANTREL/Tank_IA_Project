@@ -296,7 +296,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Slider: {fileID: 461175623}
-  m_IncrementSpeed: 5
+  m_IncrementSpeed: 10
+  m_FillImage: {fileID: 838813271}
+  m_ColorsPerTeam:
+  - {r: 0.16470589, g: 0.3921569, b: 0.69803923, a: 0.78431374}
+  - {r: 0.8980393, g: 0.18039216, b: 0.15686275, a: 0.78431374}
+  - {r: 0.8980393, g: 0.15686275, b: 0.8235295, a: 0.78431374}
 --- !u!135 &216353004
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -674,7 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.05156803, a: 0.78431374}
+  m_Color: {r: 0.75, g: 1, b: 0.7572799, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1318,7 +1323,7 @@ BoxCollider:
   m_GameObject: {fileID: 1245770786}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.65619206, y: 1.0387259, z: 2.2011528}
   m_Center: {x: -3.3723295, y: 0.054742575, z: -2.9786878}
@@ -1331,7 +1336,7 @@ BoxCollider:
   m_GameObject: {fileID: 1245770786}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6.740436, y: 1.0979586, z: 6.48668}
   m_Center: {x: 0.29541534, y: 0.08435893, z: -0.02967599}
