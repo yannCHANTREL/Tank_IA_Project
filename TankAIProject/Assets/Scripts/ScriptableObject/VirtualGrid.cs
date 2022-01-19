@@ -135,7 +135,7 @@ public class VirtualGrid : ScriptableObject
         foreach (var node in listNodes)
         {
             Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(node.posGridI, node.posGridJ));
-            Gizmos.color = Color.yellow;
+            Gizmos.color = Color.blue;
             Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
         }
     }

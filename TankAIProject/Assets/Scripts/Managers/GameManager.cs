@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Complete
         private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
         private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
+        private Dictionary<Vector2Int, Node> m_Nodes;
         private Graph m_Graph;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
@@ -51,11 +53,13 @@ namespace Complete
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
+            
+            InvokeRepeating("ImplementedDijsktra", 0, 1.0f);
         }
 
         private void PreparationForDijsktraFeatures()
         {
-            Dictionary<Vector2Int, Node> nodes = new Dictionary<Vector2Int, Node>();
+            m_Nodes = new Dictionary<Vector2Int, Node>();
             
             // create all nodes
             for (int i = 0; i < m_ClassGrid.gridSize; i++)
@@ -66,13 +70,13 @@ namespace Complete
                     {
                         Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
                         Node node = new Node(m_ClassGrid.grid[i,j], vect2, i, j);
-                        nodes.Add(new Vector2Int(i,j),node);
+                        m_Nodes.Add(new Vector2Int(i,j),node);
                     }
                 }
             }
 
             // create all neighbors for each nodes
-            foreach (var nodeTarget in nodes)
+            foreach (var nodeTarget in m_Nodes)
             {
                 int posGridI = nodeTarget.Value.posGridI;
                 int posGridJ = nodeTarget.Value.posGridJ;
@@ -83,9 +87,7 @@ namespace Complete
                 if (posGridJ + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
                 if (posGridI - 1 >= 0) nbNeighborsToFind++;
                 
-                //Debug.Log("node " + posGridI + "," + posGridJ + " : " + nbNeighborsToFind);
-                
-                foreach (var nodeNeighbors in nodes)
+                foreach (var nodeNeighbors in m_Nodes)
                 {
                     if (nbNeighborsToFind != 0)
                     {
@@ -113,18 +115,36 @@ namespace Complete
                         }
                     }
                 }
-                //Debug.Log("nb neighbors : " + nodeTarget.posGridI + "," + nodeTarget.posGridJ + " : " + nodeTarget.connections.Count);
             }
             
-            m_Graph = new Graph(nodes);
+            m_Graph = new Graph(m_Nodes);
             
-            // try move since A point to B point
-            Path m_Path = m_Graph.GetShortestPath (nodes[m_start], nodes[m_end]);
-            //Path m_Path = m_Graph.GetShortestPath (nodes[m_start.x + m_ClassGrid.gridSize * m_start.y], nodes[m_end.x + m_ClassGrid.gridSize * m_end.y]);
-            Debug.Log("Length = " + m_Path.length);
-            m_ClassGrid.DrawPath(m_Path);
+            
         }
-        
+
+        private void ImplementedDijsktra()
+        {
+            // try move since A point to B point
+            if (m_Nodes.ContainsKey(m_start) && m_Nodes.ContainsKey(m_end))
+            {
+                Path m_Path = m_Graph.GetShortestPath (m_Nodes[m_start], m_Nodes[m_end]);
+                Debug.Log("Length = " + m_Path.length);
+                m_ClassGrid.DrawPath(m_Path);
+            }
+            else 
+            {
+                if (!m_Nodes.ContainsKey(m_start))
+                {
+                    Debug.Log("Error start incorrect");
+                }
+                if (!m_Nodes.ContainsKey(m_end))
+                {
+                    Debug.Log("Error end incorrect");
+                }
+            }
+            
+        }
+
         private void SpawnAllTanks()
         {
             // For all the tanks...
