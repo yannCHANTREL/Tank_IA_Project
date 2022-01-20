@@ -5,7 +5,10 @@ using UnityEngine;
 public class AIMove : MonoBehaviour
 {
     public Vector3 m_TargetPos;
-    public bool m_Move;
+    public bool m_MoveToTarget;
+    public bool m_MoveToFireRange;
+    public bool m_MoveForward = true;
+    public float m_FireRange = 10;
     public float m_AnleClamp = 20;
     public float m_RadiusTolerance = 0.5f;
     public float m_AngularTolerancePercentage = 0.1f;
@@ -23,7 +26,7 @@ public class AIMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_Move)
+        if (m_MoveToFireRange)
         {
             ProceedMovements();
         }
@@ -58,6 +61,7 @@ public class AIMove : MonoBehaviour
 
     private void Turn(Vector3 distance, Vector3 tankForward, Vector3 tankRight)
     {
+        if (!m_MoveForward) { distance *= -1; }
         if (!m_TankIndexManager || !m_TurnAxis) return;
         float angleSign = Vector3.Dot(tankRight, distance) >= 0 ? 1 : -1;
         float angleToTarget = Mathf.Clamp(Vector3.Angle(distance, tankForward) * angleSign / m_AnleClamp, -1f, 1f);
