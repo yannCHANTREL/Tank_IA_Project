@@ -50,6 +50,11 @@ namespace Complete
             
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
+
+            Debug.Log("0");
+            //Test test = new Test();
+            Debug.Log("1");
+            //test.TestAStar();
         }
 
         private void SpawnAllTanks()

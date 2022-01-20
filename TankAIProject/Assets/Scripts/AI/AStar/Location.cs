@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Location : MonoBehaviour
+public class Location
 {
     // Implementation notes: I am using the default Equals but it can
     // be slow. You'll probably want to override both Equals and

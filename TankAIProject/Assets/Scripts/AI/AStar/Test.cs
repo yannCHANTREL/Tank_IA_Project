@@ -31,7 +31,9 @@ public class Test
     public void TestAStar()
     {
         // Make "diagram 4" from main article
+        Debug.Log("A");
         var grid = new SquareGrid(10, 10);
+        Debug.Log("B");
         for (var x = 1; x < 4; x++)
         {
             for (var y = 7; y < 9; y++)
@@ -39,6 +41,7 @@ public class Test
                 grid.walls.Add(new Location(x, y));
             }
         }
+        Debug.Log("C");
         grid.forests = new HashSet<Location>
             {
                 new Location(3, 4), new Location(3, 5),
@@ -56,11 +59,13 @@ public class Test
                 new Location(7, 3), new Location(7, 4),
                 new Location(7, 5)
             };
+        Debug.Log("D");
 
         // Run A*
         var astar = new AStarSearch(grid, new Location(1, 4),
                                     new Location(8, 5));
-
+        Debug.Log("E");
         DrawGrid(grid, astar);
+        Debug.Log("F");
     }
 }
