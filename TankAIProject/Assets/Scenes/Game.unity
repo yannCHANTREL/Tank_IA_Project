@@ -1523,8 +1523,8 @@ MonoBehaviour:
   m_CameraControl: {fileID: 1771596988}
   m_MessageText: {fileID: 102963701}
   m_TankPrefab: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  m_TankAIPrefab: {fileID: 8059248493399890314, guid: 1447a59e4d037f644bdd91faec4bc2c3, type: 3}
   m_TankAmountPerTeam: 2
-  m_IsPlayerTank: 
   m_TankVariableList:
   - {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
   - {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
