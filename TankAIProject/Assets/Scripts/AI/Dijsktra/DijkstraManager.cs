@@ -91,19 +91,21 @@ public class DijkstraManager : MonoBehaviour
     private void ImplementedDijsktra()
     {
         // try move since A point to B point
-        if (m_Nodes.ContainsKey(m_start) && m_Nodes.ContainsKey(m_end))
+        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_start);
+        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_end);
+        if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
         {
-            Path m_Path = m_Graph.GetShortestPath (m_Nodes[m_start], m_Nodes[m_end]);
+            Path m_Path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
             //Debug.Log("Length = " + m_Path.length);
             m_ClassGrid.DrawPath(m_Path);
         }
         else 
         {
-            if (!m_Nodes.ContainsKey(m_start))
+            if (!m_Nodes.ContainsKey(start))
             {
                 Debug.Log("Error start incorrect");
             }
-            if (!m_Nodes.ContainsKey(m_end))
+            if (!m_Nodes.ContainsKey(end))
             {
                 Debug.Log("Error end incorrect");
             }
