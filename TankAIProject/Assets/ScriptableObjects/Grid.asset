@@ -16,6 +16,6 @@ MonoBehaviour:
   m_UnwalkableLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  m_GridWorldSize: 10
-  m_NbNode: 10
+  m_GridWorldSize: 100
+  m_NbNode: 60
   m_PrefabTankCollider: {fileID: 6507708, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}

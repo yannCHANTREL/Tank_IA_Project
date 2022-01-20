@@ -46,7 +46,7 @@ namespace Complete
 
         public void OnFireCommand()
         {
-            StartCoroutine(Fire());
+            if (m_Reloading == false) { StartCoroutine(Fire()); }
         }
 
         private IEnumerator Fire()

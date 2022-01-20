@@ -12,20 +12,15 @@ public class Node
     /// <summary>
     /// The connections (neighbors).
     /// </summary>
-    [SerializeField]
     protected List<Node> m_Connections = new List<Node>();
 
     private int m_StateNode;
     private Vector2 m_Position;
-    private int m_posGridX;
-    private int m_posGridY;
 
-    public Node(int number, Vector2 position, int posGridI, int posGridJ)
+    public Node(int number, Vector2 position)
     {
         m_StateNode = number;
         m_Position = position;
-        m_posGridX = posGridI;
-        m_posGridY = posGridJ;
     }
 
     public void AddNeighbors(Node nodeNeighbors)
@@ -66,22 +61,6 @@ public class Node
         get
         {
             return m_Position;
-        }
-    }
-    
-    public int posGridI
-    {
-        get
-        {
-            return m_posGridX;
-        }
-    }
-    
-    public int posGridJ
-    {
-        get
-        {
-            return m_posGridY;
         }
     }
 

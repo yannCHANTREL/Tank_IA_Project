@@ -9,13 +9,7 @@ public class TankEvent : ScriptableObject
 
     public void Raise(int TankIndex)
     {
-        for (int i = m_Listeners.Count - 1; i >= 0; i--)
-        {
-            if (m_Listeners[i].m_TankIndex == TankIndex)
-            {
-                m_Listeners[i].OnEventRaised();
-            }
-        }
+        m_Listeners[TankIndex - 1].OnEventRaised();
     }
 
     public void RegisterListener(TankEventListener listener)
