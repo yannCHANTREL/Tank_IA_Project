@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -32,6 +33,7 @@ namespace Complete
 
         private Dictionary<Vector2Int, Node> m_Nodes;
         private Graph m_Graph;
+        private List<Thread> listThread;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -53,8 +55,9 @@ namespace Complete
 
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
-            
-            InvokeRepeating("ImplementedDijsktra", 0, 1.0f);
+
+            // Algorithm of research of the shortest path (Dijsktra)
+            StartCoroutine(LaunchThreadWithDijsktra());
         }
 
         private void PreparationForDijsktraFeatures()
@@ -69,7 +72,7 @@ namespace Complete
                     if (m_ClassGrid.grid[i,j] == 0)
                     {
                         Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
-                        Node node = new Node(m_ClassGrid.grid[i,j], vect2, i, j);
+                        Node node = new Node(m_ClassGrid.grid[i,j], vect2);
                         m_Nodes.Add(new Vector2Int(i,j),node);
                     }
                 }
@@ -78,49 +81,50 @@ namespace Complete
             // create all neighbors for each nodes
             foreach (var nodeTarget in m_Nodes)
             {
-                int posGridI = nodeTarget.Value.posGridI;
-                int posGridJ = nodeTarget.Value.posGridJ;
+                int posGridI = nodeTarget.Key.x;
+                int posGridJ = nodeTarget.Key.y;
 
-                int nbNeighborsToFind = 0;
-                if (posGridJ - 1 >= 0) nbNeighborsToFind++;
-                if (posGridI + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
-                if (posGridJ + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
-                if (posGridI - 1 >= 0) nbNeighborsToFind++;
-                
-                foreach (var nodeNeighbors in m_Nodes)
+                Node neighbors1, neighbors2, neighbors3, neighbors4;
+                if (m_Nodes.TryGetValue(new Vector2Int(posGridI, posGridJ - 1), out neighbors1))
                 {
-                    if (nbNeighborsToFind != 0)
-                    {
-                        int posNeighborsGridI = nodeNeighbors.Value.posGridI;
-                        int posNeighborsGridJ = nodeNeighbors.Value.posGridJ;
-                        if (posGridJ - 1 >= 0 && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ - 1)
-                        {
-                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
-                            nbNeighborsToFind--;
-                        }
-                        else if (posGridI + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI + 1 && posNeighborsGridJ == posGridJ)
-                        {
-                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
-                            nbNeighborsToFind--;
-                        }
-                        else if (posGridJ + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ + 1)
-                        {
-                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
-                            nbNeighborsToFind--;
-                        }
-                        else if (posGridI - 1 >= 0 && posNeighborsGridI == posGridI - 1 && posNeighborsGridJ == posGridJ)
-                        {
-                            nodeTarget.Value.AddNeighbors(nodeNeighbors.Value);
-                            nbNeighborsToFind--;
-                        }
-                    }
+                    nodeTarget.Value.AddNeighbors(neighbors1);
+                }
+                if (m_Nodes.TryGetValue(new Vector2Int(posGridI + 1, posGridJ), out neighbors2))
+                {
+                    nodeTarget.Value.AddNeighbors(neighbors2);
+                }
+                if (m_Nodes.TryGetValue(new Vector2Int(posGridI, posGridJ + 1), out neighbors3))
+                {
+                    nodeTarget.Value.AddNeighbors(neighbors3);
+                }
+                if (m_Nodes.TryGetValue(new Vector2Int(posGridI - 1, posGridJ), out neighbors4))
+                {
+                    nodeTarget.Value.AddNeighbors(neighbors4);
                 }
             }
-            
+
+            // create graph with the dictionnary of nodes
             m_Graph = new Graph(m_Nodes);
-            
-            
         }
+
+        private IEnumerator LaunchThreadWithDijsktra()
+        {
+            // Launch one thread each second, or when the previous is finish
+            while (true)
+            {
+                Thread t = new Thread(ImplementedDijsktra);
+                var temp = Time.realtimeSinceStartup;
+                t.Start();
+                
+                // wait end execution thread
+                // OR 1 second difference between now and the start of the thread
+                while(t.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
+                {
+                    yield return null;
+                }
+                //Debug.Log("time execution thread : " + (Time.realtimeSinceStartup - temp));
+            }
+        } 
 
         private void ImplementedDijsktra()
         {
@@ -128,7 +132,7 @@ namespace Complete
             if (m_Nodes.ContainsKey(m_start) && m_Nodes.ContainsKey(m_end))
             {
                 Path m_Path = m_Graph.GetShortestPath (m_Nodes[m_start], m_Nodes[m_end]);
-                Debug.Log("Length = " + m_Path.length);
+                //Debug.Log("Length = " + m_Path.length);
                 m_ClassGrid.DrawPath(m_Path);
             }
             else 
