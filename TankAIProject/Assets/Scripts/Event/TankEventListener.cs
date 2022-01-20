@@ -15,7 +15,7 @@ public class TankEventListener : MonoBehaviour
         m_OnEventRaised.Invoke();
     }
 
-    public void Awake()
+    public void OnEnable()
     {
         m_Event.RegisterListener(this);
     }

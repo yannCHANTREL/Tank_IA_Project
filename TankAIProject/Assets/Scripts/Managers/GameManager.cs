@@ -19,7 +19,7 @@ namespace Complete
         public bool[] m_IsPlayerTank;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
         public TankList m_TankList;                 // Reference Tank List
-
+        public List<FloatListVariable> m_TankVariableList;// Reference to all tank variables SO
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
         private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
@@ -37,6 +37,7 @@ namespace Complete
             m_StartWait = new WaitForSeconds (m_StartDelay);
             m_EndWait = new WaitForSeconds (m_EndDelay);
 
+            ResetTankValues();
             SpawnAllTanks();
             SetCameraTargets();
             
@@ -49,6 +50,7 @@ namespace Complete
             // For all the tanks...
             for (int i = 0; i < m_Tanks.Length; i++)
             {
+                AddTankValue();
                 // ... create them, set their player number and references needed for control.
                 m_Tanks[i].m_Instance =
                     Instantiate(m_TankPrefab, m_Tanks[i].m_SpawnPoint.position, m_Tanks[i].m_SpawnPoint.rotation) as GameObject;
@@ -63,7 +65,15 @@ namespace Complete
                 m_TankList.AddTank(m_Tanks[i]);
             }
         }
+        private void ResetTankValues()
+        {
+            foreach (FloatListVariable flv in m_TankVariableList) { flv.Reset(); }
+        }
 
+        private void AddTankValue()
+        {
+            foreach (FloatListVariable flv in m_TankVariableList) { flv.IncrementSize(); }
+        }
         private void SetCameraTargets()
         {
             // Create a collection of transforms the same size as the number of tanks.
