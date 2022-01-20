@@ -8,6 +8,7 @@ public class TeamTankList : ScriptableObject
 {
     public int m_TeamNumber;
     public Color m_TeamColor;
+    public bool m_AI;
     
     public List<TankManager> m_TeamTank;
 }

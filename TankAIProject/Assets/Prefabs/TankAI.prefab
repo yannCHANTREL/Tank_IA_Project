@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3611370229372402754
+--- !u!1001 &8059248493399735338
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
       propertyPath: m_Name
-      value: Tank
+      value: TankAI
       objectReference: {fileID: 0}
     - target: {fileID: 446194, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
       propertyPath: m_RootOrder
@@ -67,5 +67,39 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5059432242605588651, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+--- !u!1 &8059248493399890314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  m_PrefabInstance: {fileID: 8059248493399735338}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2870660015159044341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5192247799311865055, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+  m_PrefabInstance: {fileID: 8059248493399735338}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6475975a2d2f3f40876f8f1c0135782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8785127412315307360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a3b8e79dc6bbbd4fba9391b8f52b220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TargetPos: {x: 0, y: 0, z: 0}
+  m_Move: 0
+  m_TankIndexManager: {fileID: 2870660015159044341}
+  m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
+  m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}

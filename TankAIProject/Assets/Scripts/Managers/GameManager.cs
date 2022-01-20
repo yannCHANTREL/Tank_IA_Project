@@ -15,10 +15,9 @@ namespace Complete
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
         public Text m_MessageText;                  // Reference to the overlay Text to display winning text, etc.
         public GameObject m_TankPrefab;             // Reference to the prefab the players will control.
+        public GameObject m_TankAIPrefab;           // Reference to the prefab the AI will control.
         
         public int m_TankAmountPerTeam; 
-        
-        public bool[] m_IsPlayerTank;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
         public List<FloatListVariable> m_TankVariableList;// Reference to all tank variables SO
         public VirtualGrid m_ClassGrid;             // Reference Grid
@@ -58,6 +57,7 @@ namespace Complete
             // For all the team ...
             for (int i = 0; i < m_TeamList.m_Teams.Count; i++)
             {
+                GameObject tankPrefab = m_TeamList.m_Teams[i].m_AI ? m_TankAIPrefab : m_TankPrefab;
                 // For the number of player per team ...
                 for (int j = 0; j < m_TankAmountPerTeam; j++)
                 {
@@ -68,7 +68,7 @@ namespace Complete
 
                     m_Tanks[index] = new TankManager(index + 1, m_TeamList.m_Teams[i].m_TeamColor, m_TeamsSpawn[i])
                     {
-                        m_Instance = Instantiate(m_TankPrefab, m_TeamsSpawn[i].position,m_TeamsSpawn[i].rotation) as GameObject
+                        m_Instance = Instantiate(tankPrefab, m_TeamsSpawn[i].position,m_TeamsSpawn[i].rotation) as GameObject
                     };
                     
                     TankEventListener tankEventListener = m_Tanks[index].m_Instance.GetComponent<TankEventListener>();
