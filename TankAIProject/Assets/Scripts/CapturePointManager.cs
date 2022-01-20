@@ -20,6 +20,8 @@ public class CapturePointManager : MonoBehaviour
     private bool m_DidOnce = true;
     private void OnTriggerEnter(Collider other)
     {
+        // TODO : Redo that for team and not only player
+        
         TankMovement tankMovement = other.GetComponent<TankMovement>();
         m_CurrentTeamCapturing = tankMovement.m_PlayerNumber;
 
@@ -32,6 +34,8 @@ public class CapturePointManager : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        // TODO : Redo that for team and not only player
+        
         if (m_OldTeamCapturing == m_CurrentTeamCapturing)
         {
             m_Value += m_IncrementSpeed * Time.deltaTime;

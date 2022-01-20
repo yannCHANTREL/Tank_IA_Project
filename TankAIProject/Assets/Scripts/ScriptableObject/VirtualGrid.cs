@@ -83,8 +83,12 @@ public class VirtualGrid : ScriptableObject
 
     public Vector2Int GetIndexByWorldPosition(Vector2 worldPosition)
     {
-        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
-        return new Vector2Int();
+        float posX = (worldPosition.x - m_WorldBottomLeft.x) / (Vector3.right.x * m_NodeDiameter) -
+                     m_NodeRadius / m_NodeDiameter;
+        float posY = (worldPosition.y - m_WorldBottomLeft.y) / (Vector3.forward.z * m_NodeDiameter) -
+                     m_NodeRadius / m_NodeDiameter;
+        
+        return new Vector2Int(Mathf.RoundToInt(posX),Mathf.RoundToInt(posY));
     }
 
     public void DrawGizmos()
