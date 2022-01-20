@@ -10578,9 +10578,6 @@ MonoBehaviour:
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PitchRange: 0.1
-  m_TankIndexManager: {fileID: 5192247799311865055}
-  m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
-  m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
 --- !u!114 &11409376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10611,6 +10608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184d72ea2424d1443bca885930fe844a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FireCommand: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
   m_PlayerNumber: 1
   m_Shell: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   m_FireTransform: {fileID: 435794}
@@ -10674,8 +10672,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TankIndexManager: {fileID: 5192247799311865055}
   m_FireCommandEvent: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
-  m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
-  m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
 --- !u!1 &173936
 GameObject:
   m_ObjectHideFlags: 0
