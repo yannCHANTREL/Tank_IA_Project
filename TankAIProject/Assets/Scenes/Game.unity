@@ -1525,7 +1525,9 @@ MonoBehaviour:
   m_TankPrefab: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_TankAmountPerTeam: 2
   m_IsPlayerTank: 
-  m_TankVariableList: []
+  m_TankVariableList:
+  - {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
+  - {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_TeamsSpawn:

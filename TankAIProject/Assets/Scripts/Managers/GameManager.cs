@@ -65,7 +65,7 @@ namespace Complete
                     int index = m_TankAmountPerTeam * i + j;
 
                     AddTankValue();
-                    
+
                     m_Tanks[index] = new TankManager(index + 1, m_TeamList.m_Teams[i].m_TeamColor, m_TeamsSpawn[i])
                     {
                         m_Instance = Instantiate(m_TankPrefab, m_TeamsSpawn[i].position,m_TeamsSpawn[i].rotation) as GameObject
