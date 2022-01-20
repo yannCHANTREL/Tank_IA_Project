@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,20 +18,16 @@ namespace Complete
         public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
         public bool[] m_IsPlayerTank;               // A collection of managers for enabling and disabling different aspects of the tanks.
 
-        public VirtualGrid m_ClassGrid;             // Reference Grid
         public TankList m_TankList;                 // Reference Tank List
-        
+
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
         private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
         private TankManager m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
         private TankManager m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
-        private Graph m_Graph;
-        
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
-        
         private void Start()
         {
             // This line fixes a change to the physics engine.
@@ -43,85 +40,10 @@ namespace Complete
             SpawnAllTanks();
             SetCameraTargets();
             
-            // preparation Dijsktra features
-            PreparationForDijsktraFeatures();
-
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
         }
 
-        private void PreparationForDijsktraFeatures()
-        {
-            List<Node> nodes = new List<Node>();
-            
-            // create all nodes
-            for (int i = 0; i < m_ClassGrid.gridSize; i++)
-            {
-                for (int j = 0; j < m_ClassGrid.gridSize; j++)
-                {
-                    if (m_ClassGrid.grid[i,j] == 0)
-                    {
-                        Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
-                        Node node = new Node(m_ClassGrid.grid[i,j], vect2, i, j);
-                        nodes.Add(node);
-                    }
-                }
-            }
-
-            // create all neighbors for each nodes
-            foreach (var nodeTarget in nodes)
-            {
-                int posGridI = nodeTarget.posGridI;
-                int posGridJ = nodeTarget.posGridJ;
-
-                int nbNeighborsToFind = 0;
-                if (posGridJ - 1 >= 0) nbNeighborsToFind++;
-                if (posGridI + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
-                if (posGridJ + 1 < m_ClassGrid.gridSize) nbNeighborsToFind++;
-                if (posGridI - 1 >= 0) nbNeighborsToFind++;
-                
-                //Debug.Log("node " + posGridI + "," + posGridJ + " : " + nbNeighborsToFind);
-                
-                foreach (var nodeNeighbors in nodes)
-                {
-                    if (nbNeighborsToFind != 0)
-                    {
-                        int posNeighborsGridI = nodeNeighbors.posGridI;
-                        int posNeighborsGridJ = nodeNeighbors.posGridJ;
-                        if (posGridJ - 1 >= 0 && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ - 1)
-                        {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
-                            nbNeighborsToFind--;
-                        }
-                        else if (posGridI + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI + 1 && posNeighborsGridJ == posGridJ)
-                        {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
-                            nbNeighborsToFind--;
-                        }
-                        else if (posGridJ + 1 < m_ClassGrid.gridSize && posNeighborsGridI == posGridI && posNeighborsGridJ == posGridJ + 1)
-                        {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
-                            nbNeighborsToFind--;
-                        }
-                        else if (posGridI - 1 >= 0 && posNeighborsGridI == posGridI - 1 && posNeighborsGridJ == posGridJ)
-                        {
-                            nodeTarget.AddNeighbors(nodeNeighbors);
-                            nbNeighborsToFind--;
-                        }
-                    }
-                }
-                //Debug.Log("nb neighbors : " + nodeTarget.posGridI + "," + nodeTarget.posGridJ + " : " + nodeTarget.connections.Count);
-            }
-            
-            m_Graph = new Graph(nodes);
-            
-            // try move since A point to B point
-            Path m_Path = m_Graph.GetShortestPath (nodes[0], nodes[50]);
-            Path m_Path2 = m_Graph.GetShortestPath (nodes[0], nodes[99]);
-            Debug.Log("Length = " + m_Path.length);
-            Debug.Log("Length = " + m_Path2.length);
-        }
-        
         private void SpawnAllTanks()
         {
             // For all the tanks...
@@ -142,7 +64,6 @@ namespace Complete
             }
         }
 
-
         private void SetCameraTargets()
         {
             // Create a collection of transforms the same size as the number of tanks.
@@ -158,7 +79,6 @@ namespace Complete
             // These are the targets the camera should follow.
             m_CameraControl.m_Targets = targets;
         }
-
 
         // This is called from start and will run each phase of the game one after another.
         private IEnumerator GameLoop ()
@@ -186,7 +106,6 @@ namespace Complete
             }
         }
 
-
         private IEnumerator RoundStarting ()
         {
             // As soon as the round starts reset the tanks and make sure they can't move.
@@ -204,7 +123,6 @@ namespace Complete
             yield return m_StartWait;
         }
 
-
         private IEnumerator RoundPlaying ()
         {
             // As soon as the round begins playing let the players control the tanks.
@@ -220,7 +138,6 @@ namespace Complete
                 yield return null;
             }
         }
-
 
         private IEnumerator RoundEnding ()
         {
@@ -248,7 +165,6 @@ namespace Complete
             yield return m_EndWait;
         }
 
-
         // This is used to check if there is one or fewer tanks remaining and thus the round should end.
         private bool OneTankLeft()
         {
@@ -267,7 +183,6 @@ namespace Complete
             return numTanksLeft <= 1;
         }
         
-        
         // This function is to find out if there is a winner of the round.
         // This function is called with the assumption that 1 or fewer tanks are currently active.
         private TankManager GetRoundWinner()
@@ -284,7 +199,6 @@ namespace Complete
             return null;
         }
 
-
         // This function is to find out if there is a winner of the game.
         private TankManager GetGameWinner()
         {
@@ -299,7 +213,6 @@ namespace Complete
             // If no tanks have enough rounds to win, return null.
             return null;
         }
-
 
         // Returns a string message to display at the end of each round.
         private string EndMessage()
@@ -327,7 +240,6 @@ namespace Complete
             return message;
         }
 
-
         // This function is used to turn all the tanks back on and reset their positions and properties.
         private void ResetAllTanks()
         {
@@ -337,7 +249,6 @@ namespace Complete
             }
         }
 
-
         private void EnableTankControl()
         {
             for (int i = 0; i < m_Tanks.Length; i++)
@@ -345,7 +256,6 @@ namespace Complete
                 m_Tanks[i].EnableControl();
             }
         }
-
 
         private void DisableTankControl()
         {

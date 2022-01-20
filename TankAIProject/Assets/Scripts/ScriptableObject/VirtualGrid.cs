@@ -21,8 +21,11 @@ public class VirtualGrid : ScriptableObject
     private Vector2 m_WorldBottomLeft;
     private float m_tankDiameter;
 
+    private Path m_Path;
+
     public void CreateGrid()
     {
+        m_Path = null;
         m_NodeDiameter = (float) m_GridWorldSize / m_NbNode;
         m_NodeRadius = m_NodeDiameter / 2;
 
@@ -75,6 +78,11 @@ public class VirtualGrid : ScriptableObject
         return new Vector2(vect3.x, vect3.z);
     }
     
+public Vector3 Vector2ToVector3(Vector2 vect2)
+    {
+        return new Vector3(vect2.x, 0, vect2.y);
+    }
+    
     public Vector3 GetVector3WorldPositionByIndex(Vector2Int gridPos)
     {
         return m_WorldBottomLeft3DPos + Vector3.right * (gridPos.x * m_NodeDiameter + m_NodeRadius)
@@ -113,6 +121,27 @@ public class VirtualGrid : ScriptableObject
                     Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
                 }
             }
+
+            if (m_Path != null)
+            {
+                DrawDijsktraPathChoose();
+            }
+        }
+    }
+
+    public void DrawPath(Path path)
+    {
+        m_Path = path;
+    }
+    
+    public void DrawDijsktraPathChoose()
+    {
+        List<Node> listNodes = m_Path.nodes;
+        foreach (var node in listNodes)
+        {
+            Vector3 worldPoint = Vector2ToVector3(node.position);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
         }
     }
     

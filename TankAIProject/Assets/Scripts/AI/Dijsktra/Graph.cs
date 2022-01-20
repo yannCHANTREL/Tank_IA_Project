@@ -13,20 +13,19 @@ public class Graph
 	/// <summary>
 	/// The nodes.
 	/// </summary>
-	[SerializeField]
-	protected List<Node> m_Nodes = new List<Node> ();
+	protected Dictionary<Vector2Int, Node> m_Nodes;
 
 	// Create nodes
-	public Graph(List<Node> nodes)
+	public Graph(Dictionary<Vector2Int, Node> dictionaryNodes)
 	{
-		m_Nodes = nodes;
+		m_Nodes = dictionaryNodes;
 	}
 
 	/// <summary>
 	/// Gets the nodes.
 	/// </summary>
 	/// <value>The nodes.</value>
-	public virtual List<Node> nodes
+	public virtual Dictionary<Vector2Int, Node> nodes
 	{
 		get
 		{
@@ -68,9 +67,9 @@ public class Graph
 		// The calculated distances, set all to Infinity at start, except the start Node
 		Dictionary<Node, float> distances = new Dictionary<Node, float> ();
 		
-		for ( int i = 0; i < m_Nodes.Count; i++ )
+		foreach (var keyNode in m_Nodes)
 		{
-			Node node = m_Nodes [ i ];
+			Node node = keyNode.Value;
 			unvisited.Add ( node );
 			
 			// Setting the node distance to Infinity
