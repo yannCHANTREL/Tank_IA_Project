@@ -9,6 +9,8 @@ public class CommandManager : MonoBehaviour
     [SerializeField] private FloatListVariable m_MoveAxis;
     [SerializeField] private FloatListVariable m_TurnAxis;
     private string m_FireButton;                // The input axis that is used for launching shells.
+    private string m_MovementAxisName;                // The input axis that is used for launching shells.
+    private string m_TurnAxisName;                // The input axis that is used for launching shells.
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,8 @@ public class CommandManager : MonoBehaviour
         {
             // The axes names are based on player number.
             m_FireButton = "Fire" + m_TankIndexManager.m_TankIndex;
+            m_MovementAxisName = "Vertical" + m_TankIndexManager.m_TankIndex;
+            m_TurnAxisName = "Horizontal" + m_TankIndexManager.m_TankIndex;
         }
     }
 
@@ -30,7 +34,8 @@ public class CommandManager : MonoBehaviour
 
     private void UpdateAxis()
     {
-
+        if (m_MoveAxis) { m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex-1] = Input.GetAxis(m_MovementAxisName); };
+        if (m_TurnAxis) { m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex-1] = Input.GetAxis(m_TurnAxisName); };
     }
 
     private void Fire()

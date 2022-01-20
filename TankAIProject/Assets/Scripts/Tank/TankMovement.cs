@@ -12,13 +12,15 @@ namespace Complete
         public AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
 		public float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
 
-        private string m_MovementAxisName;          // The name of the input axis for moving forward and back.
-        private string m_TurnAxisName;              // The name of the input axis for turning.
         private Rigidbody m_Rigidbody;              // Reference used to move the tank.
         private float m_MovementInputValue;         // The current value of the movement input.
         private float m_TurnInputValue;             // The current value of the turn input.
         private float m_OriginalPitch;              // The pitch of the audio source at the start of the scene.
         private ParticleSystem[] m_particleSystems; // References to all the particles systems used by the Tanks
+
+        [SerializeField] private TankIndexManager m_TankIndexManager;
+        [SerializeField] private FloatListVariable m_MoveAxis;
+        [SerializeField] private FloatListVariable m_TurnAxis;
 
         private void Awake ()
         {
@@ -61,10 +63,6 @@ namespace Complete
 
         private void Start ()
         {
-            // The axes names are based on player number.
-            m_MovementAxisName = "Vertical" + m_PlayerNumber;
-            m_TurnAxisName = "Horizontal" + m_PlayerNumber;
-
             // Store the original pitch of the audio source.
             m_OriginalPitch = m_MovementAudio.pitch;
         }
@@ -72,10 +70,6 @@ namespace Complete
 
         private void Update ()
         {
-            // Store the value of both input axes.
-            m_MovementInputValue = Input.GetAxis (m_MovementAxisName);
-            m_TurnInputValue = Input.GetAxis (m_TurnAxisName);
-
             EngineAudio ();
         }
 
@@ -118,8 +112,9 @@ namespace Complete
 
         private void Move ()
         {
+            if (!m_TankIndexManager || !m_MoveAxis) return;
             // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
-            Vector3 movement = transform.forward * m_MovementInputValue * m_Speed * Time.deltaTime;
+            Vector3 movement = transform.forward * m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex-1] * m_Speed * Time.deltaTime;
 
             // Apply this movement to the rigidbody's position.
             m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
@@ -128,8 +123,10 @@ namespace Complete
 
         private void Turn ()
         {
+            if (!m_TankIndexManager || !m_TurnAxis) return;
+
             // Determine the number of degrees to be turned based on the input, speed and time between frames.
-            float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
+            float turn = m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex - 1] * m_TurnSpeed * Time.deltaTime;
 
             // Make this into a rotation in the y axis.
             Quaternion turnRotation = Quaternion.Euler (0f, turn, 0f);

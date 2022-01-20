@@ -36,12 +36,7 @@ namespace Complete
 
         private void Update ()
         {
-            // Otherwise, if the fire button has just started being pressed...
-            /*if (Input.GetButton(m_FireButton) && !m_Reloading)
-            {
-                // ... reset the fired flag and reset the launch force.
-                StartCoroutine(Fire());
-            }*/
+            
         }
 
         public void OnFireCommand()
