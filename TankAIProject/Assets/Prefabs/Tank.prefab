@@ -10309,6 +10309,9 @@ GameObject:
   - component: {fileID: 11443146}
   - component: {fileID: 11409376}
   - component: {fileID: 11488788}
+  - component: {fileID: 5192247799311865055}
+  - component: {fileID: 7822518353279334600}
+  - component: {fileID: 5059432242605588651}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
@@ -10605,6 +10608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184d72ea2424d1443bca885930fe844a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FireCommand: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
   m_PlayerNumber: 1
   m_Shell: {fileID: 5409530, guid: 008ecb1b70bec724fa2cd34255b0d8f8, type: 3}
   m_FireTransform: {fileID: 435794}
@@ -10612,6 +10616,62 @@ MonoBehaviour:
   m_FireClip: {fileID: 8300000, guid: 672a9941361ad494a99fba36759eca80, type: 3}
   m_LaunchForce: 20
   m_FireDelay: 1
+--- !u!114 &5192247799311865055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6475975a2d2f3f40876f8f1c0135782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TankIndex: 0
+--- !u!114 &7822518353279334600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d6dbd5dbd841c439c3622923800aed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Event: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
+  m_OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11488788}
+        m_TargetAssemblyTypeName: Complete.TankShooting, Assembly-CSharp
+        m_MethodName: OnFireCommand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_TankIndex: 0
+--- !u!114 &5059432242605588651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d85380691de2d6438420681eec55568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TankIndexManager: {fileID: 5192247799311865055}
+  m_FireCommandEvent: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
 --- !u!1 &173936
 GameObject:
   m_ObjectHideFlags: 0
