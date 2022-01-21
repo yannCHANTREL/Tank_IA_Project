@@ -8,7 +8,6 @@ public class TankEventListener : MonoBehaviour
 {
     [SerializeField] private TankEvent m_Event;
     [SerializeField] private UnityEvent m_OnEventRaised;
-    public int m_TankIndex;
 
     public void OnEventRaised()
     {

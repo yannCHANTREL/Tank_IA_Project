@@ -18,9 +18,10 @@ public class CommandManager : MonoBehaviour
         if (m_TankIndexManager)
         {
             // The axes names are based on player number.
-            m_FireButton = "Fire" + m_TankIndexManager.m_TankIndex;
-            m_MovementAxisName = "Vertical" + m_TankIndexManager.m_TankIndex;
-            m_TurnAxisName = "Horizontal" + m_TankIndexManager.m_TankIndex;
+            int playerNumber = m_TankIndexManager.m_TankIndex + 1;
+            m_FireButton = "Fire" + playerNumber;
+            m_MovementAxisName = "Vertical" + playerNumber;
+            m_TurnAxisName = "Horizontal" + playerNumber;
         }
     }
 
@@ -34,8 +35,8 @@ public class CommandManager : MonoBehaviour
 
     private void UpdateAxis()
     {
-        if (m_MoveAxis) { m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex-1] = Input.GetAxis(m_MovementAxisName); };
-        if (m_TurnAxis) { m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex-1] = Input.GetAxis(m_TurnAxisName); };
+        if (m_MoveAxis) { m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] = Input.GetAxis(m_MovementAxisName); };
+        if (m_TurnAxis) { m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex] = Input.GetAxis(m_TurnAxisName); };
     }
 
     private void Fire()

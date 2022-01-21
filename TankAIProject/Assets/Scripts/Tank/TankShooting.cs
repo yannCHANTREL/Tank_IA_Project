@@ -14,9 +14,7 @@ namespace Complete
         public float m_LaunchForce = 20f;           // The force given to the shell.
         public float m_FireDelay = 1f;             // The delay between two possible fires.
         private WaitForSeconds m_FireWait;         // Used to have the fire delay.
-        private bool m_Reloading = false;
-
-        private string m_FireButton;                // The input axis that is used for launching shells.
+        private bool m_Reloading = false;           // The input axis that is used for launching shells.
 
 
         private void OnEnable()
@@ -27,9 +25,6 @@ namespace Complete
 
         private void Start ()
         {
-            // The fire axis is based on the player number.
-            m_FireButton = "Fire" + m_PlayerNumber;
-
             m_FireWait = new WaitForSeconds(m_FireDelay);
         }
 
