@@ -67,6 +67,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7822518353279334600, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_TankIndexManager
+      value: 
+      objectReference: {fileID: 2870660015159044341}
     m_RemovedComponents:
     - {fileID: 5059432242605588651, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
@@ -98,7 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86183d02e7dec8e4cb9030de716c105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Target: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
+  m_PredictTargetMovement: 1
   m_FireRange: 13
   m_AngularTolerance: 5
   m_RadiusTolerance: 0.5
@@ -117,8 +123,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TankTarget: {fileID: 0}
-  m_FireTarget: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TankTargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TankTargetSpeed: {fileID: 11400000, guid: b99aff4a0450cdf4ca954e751794550e, type: 2}
+  m_TankTargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
+  m_TankTargetLastPos: {fileID: 11400000, guid: 7fdfa2827b785074baf5984d30b3b299, type: 2}
   m_TankIndexManager: {fileID: 2870660015159044341}
+  m_ShellSpeed: 20
 --- !u!114 &8785127412315307360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,8 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Move: 0
-  m_MoveToFireRange: 0
+  m_MoveToFireRange: 1
   m_MoveForward: 1
+  m_PredictTargetMovement: 1
   m_FirePlacementRange: 13
   m_AnleClamp: 20
   m_RadiusTolerance: 0.5
@@ -141,4 +152,5 @@ MonoBehaviour:
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
   m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
-  m_Target: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}

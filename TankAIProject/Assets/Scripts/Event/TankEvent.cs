@@ -7,9 +7,9 @@ public class TankEvent : ScriptableObject
     [SerializeField]
     private List<TankEventListener> m_Listeners;
 
-    public void Raise(int TankIndex)
+    public void Raise(int tankIndex)
     {
-        m_Listeners[TankIndex].OnEventRaised();
+        foreach (TankEventListener listener in m_Listeners) { listener.OnEventRaised(tankIndex); }
     }
 
     public void RegisterListener(TankEventListener listener)

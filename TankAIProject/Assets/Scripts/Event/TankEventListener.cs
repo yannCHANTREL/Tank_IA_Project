@@ -8,10 +8,11 @@ public class TankEventListener : MonoBehaviour
 {
     [SerializeField] private TankEvent m_Event;
     [SerializeField] private UnityEvent m_OnEventRaised;
+    [SerializeField] private TankIndexManager m_TankIndexManager;
 
-    public void OnEventRaised()
+    public void OnEventRaised(int tankIndex)
     {
-        m_OnEventRaised.Invoke();
+        if (tankIndex == m_TankIndexManager.m_TankIndex) { m_OnEventRaised.Invoke(); }
     }
 
     public void OnEnable()

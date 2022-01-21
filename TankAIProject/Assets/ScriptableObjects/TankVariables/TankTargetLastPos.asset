@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44290559885e82645a92b3922f234f7e, type: 3}
-  m_Name: FireTarget
+  m_Name: TankTargetLastPos
   m_EditorClassIdentifier: 
   m_Values: []

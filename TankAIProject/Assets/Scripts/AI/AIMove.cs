@@ -7,6 +7,7 @@ public class AIMove : MonoBehaviour
     public bool m_Move;
     public bool m_MoveToFireRange;
     public bool m_MoveForward = true;
+    public bool m_PredictTargetMovement = true;
     public float m_FirePlacementRange = 13;
     public float m_AnleClamp = 20;
     public float m_RadiusTolerance = 0.5f;
@@ -15,7 +16,8 @@ public class AIMove : MonoBehaviour
     [SerializeField] private TankIndexManager m_TankIndexManager;
     [SerializeField] private FloatListVariable m_MoveAxis;
     [SerializeField] private FloatListVariable m_TurnAxis;
-    [SerializeField] private Vector3ListVariable m_Target;
+    [SerializeField] private Vector3ListVariable m_TargetPos;
+    [SerializeField] private Vector3ListVariable m_TargetEstimatedPos;
 
     // Update is called once per frame
     void Update()
@@ -36,7 +38,8 @@ public class AIMove : MonoBehaviour
         Vector3 tankPos = transform.position;
         Vector3 tankForward = transform.forward;
         Vector3 tankRight = transform.right;
-        Vector3 distance = m_Target.m_Values[m_TankIndexManager.m_TankIndex] - tankPos;
+        Vector3 targetPos = m_PredictTargetMovement ? m_TargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] : m_TargetPos.m_Values[m_TankIndexManager.m_TankIndex];
+        Vector3 distance = targetPos - tankPos;
         
         if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance) { Move(distance, tankForward); }
         else { StopMove(); }

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class AIShoot : MonoBehaviour
 {
-    
-    public Vector3ListVariable m_Target;
+    public Vector3ListVariable m_TargetPos;
+    public Vector3ListVariable m_TargetEstimatedPos;
+    public bool m_PredictTargetMovement = true;
     public float m_FireRange = 13;
     public float m_AngularTolerance = 5f;
     public float m_RadiusTolerance = 0.5f;
@@ -22,12 +23,12 @@ public class AIShoot : MonoBehaviour
     {
         Vector3 tankPos = transform.position;
         Vector3 tankForward = transform.forward;
-        Vector3 distance = m_Target.m_Values[m_TankIndexManager.m_TankIndex] - tankPos;
+        Vector3 targetPos = m_PredictTargetMovement ? m_TargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] : m_TargetPos.m_Values[m_TankIndexManager.m_TankIndex];
+        Vector3 distance = targetPos - tankPos;
         float angleToTarget = Vector3.Angle(distance, tankForward);
         
         if (distance.magnitude < m_FireRange + m_RadiusTolerance && angleToTarget < m_AngularTolerance)
         {
-            print(distance.magnitude + "    " + angleToTarget);
             m_FireCommand.Raise(m_TankIndexManager.m_TankIndex);
         }
     }
