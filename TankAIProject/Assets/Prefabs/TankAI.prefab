@@ -100,6 +100,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TargetPos: {x: 0, y: 0, z: 0}
   m_Move: 0
+  m_MoveToFireRange: 0
+  m_MoveForward: 1
+  m_FirePlacementRange: 13
+  m_AnleClamp: 20
+  m_RadiusTolerance: 0.5
+  m_AngularTolerancePercentage: 0.1
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
   m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
