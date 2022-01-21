@@ -7,6 +7,21 @@ using UnityEngine;
 public class TeamList : ScriptableObject
 {
     public Team[] m_Teams;
+
+    public int GetNumberTeam()
+    {
+        return m_Teams.Length;
+    }
+
+    public Color GetColorTeam(int index)
+    {
+        return m_Teams[index].m_TeamColor;
+    }
+
+    public bool IsAI(int index)
+    {
+        return m_Teams[index].m_AI;
+    }
     
     public void ResetTeamScore()
     {
@@ -114,7 +129,7 @@ public class TeamList : ScriptableObject
 
         foreach (Team team in m_Teams)
         {
-            text += $"{team.GetColoredTeamText()}: {team.m_RoundScore} WINS\n";
+            text += $"{team.GetColoredTeamText()} : {team.m_RoundScore} WINS\n";
         }
 
         return text;

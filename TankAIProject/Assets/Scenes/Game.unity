@@ -1533,7 +1533,6 @@ MonoBehaviour:
   m_TeamsSpawn:
   - {fileID: 194018016}
   - {fileID: 2083660209}
-  m_Tanks: []
 --- !u!4 &1304999366
 Transform:
   m_ObjectHideFlags: 0

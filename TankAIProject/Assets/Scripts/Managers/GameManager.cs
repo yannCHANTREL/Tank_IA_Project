@@ -25,14 +25,15 @@ namespace Complete
         
         public Transform[] m_TeamsSpawn; 
         
-        public TankManager[] m_Tanks;               // A collection of managers for enabling and disabling different aspects of the tanks.
-
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
         private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
         private Team m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
         private Team m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
+        public CapturePointManager m_CapturePointManager;
+        public int m_ScoreForRoundWin;
+        
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
         private void Start()
@@ -59,28 +60,33 @@ namespace Complete
 
         private void SpawnAllTanks()
         {
-            m_Tanks = new TankManager[m_TeamList.m_Teams.Length * m_TankAmountPerTeam];
+            // In case we dont give enough spawn point
+            if(m_TeamList.GetNumberTeam() != m_TeamsSpawn.Length)
+                Debug.LogError("There is not the same number of team and spawn location");
+            
             // For all the team ...
-            for (int i = 0; i < m_TeamList.m_Teams.Length; i++)
+            for (int i = 0; i < m_TeamList.GetNumberTeam(); i++)
             {
-                GameObject tankPrefab = m_TeamList.m_Teams[i].m_AI ? m_TankAIPrefab : m_TankPrefab;
-                // For the number of player per team ...
+                // Is this team an AI
+                GameObject tankPrefab = m_TeamList.IsAI(i) ? m_TankAIPrefab : m_TankPrefab;
+                Transform spawn = m_TeamsSpawn[i % (m_TeamList.GetNumberTeam() - 1)];
+                Color teamColor = m_TeamList.GetColorTeam(i);
+                
+                // ... For the number of player per team ...
                 for (int j = 0; j < m_TankAmountPerTeam; j++)
                 {
                     // ... create them, set their player number and references needed for control.
                     int index = m_TankAmountPerTeam * i + j;
 
                     AddTankValue();
-                    
-                    TankManager tankManager = new TankManager(index + 1, m_TeamList.m_Teams[i].m_TeamColor, m_TeamsSpawn[i])
+
+                    TankManager tankManager = new TankManager(index + 1, teamColor , spawn)
                     {
-                        m_Instance = Instantiate(tankPrefab, m_TeamsSpawn[i].position,m_TeamsSpawn[i].rotation) as GameObject
+                        m_Instance = Instantiate(tankPrefab, spawn.position, spawn.rotation)
                     };
 
                     m_TeamList.AddTankToTeam(tankManager, i);
                     
-                    m_Tanks[index] = tankManager;
-
                     TankEventListener tankEventListener = tankManager.m_Instance.GetComponent<TankEventListener>();
             		if (tankEventListener) tankEventListener.m_TankIndex = tankManager.m_PlayerNumber;
                 	TankIndexManager tankIndexManager = tankManager.m_Instance.GetComponent<TankIndexManager>();
