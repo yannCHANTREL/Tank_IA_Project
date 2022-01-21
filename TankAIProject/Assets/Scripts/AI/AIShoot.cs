@@ -5,7 +5,7 @@ using UnityEngine;
 public class AIShoot : MonoBehaviour
 {
     
-    public Vector3 m_TargetPos;
+    public Vector3ListVariable m_Target;
     public float m_FireRange = 13;
     public float m_AngularTolerance = 5f;
     public float m_RadiusTolerance = 0.5f;
@@ -22,7 +22,7 @@ public class AIShoot : MonoBehaviour
     {
         Vector3 tankPos = transform.position;
         Vector3 tankForward = transform.forward;
-        Vector3 distance = m_TargetPos - tankPos;
+        Vector3 distance = m_Target.m_Values[m_TankIndexManager.m_TankIndex] - tankPos;
         float angleToTarget = Vector3.Angle(distance, tankForward);
         
         if (distance.magnitude < m_FireRange + m_RadiusTolerance && angleToTarget < m_AngularTolerance)

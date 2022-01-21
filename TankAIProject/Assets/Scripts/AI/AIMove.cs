@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AIMove : MonoBehaviour
 {
-    public Vector3 m_TargetPos;
     public bool m_Move;
     public bool m_MoveToFireRange;
     public bool m_MoveForward = true;
@@ -16,6 +15,7 @@ public class AIMove : MonoBehaviour
     [SerializeField] private TankIndexManager m_TankIndexManager;
     [SerializeField] private FloatListVariable m_MoveAxis;
     [SerializeField] private FloatListVariable m_TurnAxis;
+    [SerializeField] private Vector3ListVariable m_Target;
 
     // Update is called once per frame
     void Update()
@@ -36,7 +36,7 @@ public class AIMove : MonoBehaviour
         Vector3 tankPos = transform.position;
         Vector3 tankForward = transform.forward;
         Vector3 tankRight = transform.right;
-        Vector3 distance = m_TargetPos - tankPos;
+        Vector3 distance = m_Target.m_Values[m_TankIndexManager.m_TankIndex] - tankPos;
         
         if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance) { Move(distance, tankForward); }
         else { StopMove(); }

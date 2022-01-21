@@ -19,7 +19,7 @@ namespace Complete
         
         public int m_TankAmountPerTeam; 
 
-        public List<FloatListVariable> m_TankVariableList;// Reference to all tank variables SO
+        public List<ListVariable> m_TankVariableList;// Reference to all tank variables SO
         public VirtualGrid m_ClassGrid;             // Reference Grid
         public TeamList m_TeamList;                 // Reference Tank List
         
@@ -81,12 +81,12 @@ namespace Complete
         }
         private void ResetTankValues()
         {
-            foreach (FloatListVariable flv in m_TankVariableList) { flv.Reset(); }
+            foreach (ListVariable lv in m_TankVariableList) { lv.Reset(); }
         }
 
         private void AddTankValue()
         {
-            foreach (FloatListVariable flv in m_TankVariableList) { flv.IncrementSize(); }
+            foreach (ListVariable lv in m_TankVariableList) { lv.IncrementSize(); }
         }
         private void SetCameraTargets()
         {

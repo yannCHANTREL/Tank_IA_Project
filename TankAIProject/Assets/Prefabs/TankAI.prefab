@@ -98,11 +98,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86183d02e7dec8e4cb9030de716c105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetPos: {x: 0, y: 0, z: 0}
+  m_Target: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
   m_FireRange: 13
   m_AngularTolerance: 5
+  m_RadiusTolerance: 0.5
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_FireCommand: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
+--- !u!114 &723087465036166876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734e3b698acba26419764773636d1c6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TankTarget: {fileID: 0}
+  m_FireTarget: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  m_TankIndexManager: {fileID: 2870660015159044341}
 --- !u!114 &8785127412315307360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3b8e79dc6bbbd4fba9391b8f52b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetPos: {x: 0, y: 0, z: 0}
   m_Move: 0
   m_MoveToFireRange: 0
   m_MoveForward: 1
@@ -126,3 +141,4 @@ MonoBehaviour:
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
   m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
+  m_Target: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
