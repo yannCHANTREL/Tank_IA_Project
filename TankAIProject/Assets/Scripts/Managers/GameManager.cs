@@ -32,7 +32,7 @@ namespace Complete
         private Team m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
         public CapturePointManager m_CapturePointManager;
-        public int m_ScoreForRoundWin;
+        public int m_ScoreForWinRound;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -60,16 +60,13 @@ namespace Complete
 
         private void SpawnAllTanks()
         {
-            // In case we dont give enough spawn point
-            if(m_TeamList.GetNumberTeam() != m_TeamsSpawn.Length)
-                Debug.LogError("There is not the same number of team and spawn location");
-            
             // For all the team ...
             for (int i = 0; i < m_TeamList.GetNumberTeam(); i++)
             {
                 // Is this team an AI
                 GameObject tankPrefab = m_TeamList.IsAI(i) ? m_TankAIPrefab : m_TankPrefab;
-                Transform spawn = m_TeamsSpawn[i % (m_TeamList.GetNumberTeam() - 1)];
+                
+                Transform spawn = m_TeamsSpawn[i % m_TeamsSpawn.Length];
                 Color teamColor = m_TeamList.GetColorTeam(i);
                 
                 // ... For the number of player per team ...
