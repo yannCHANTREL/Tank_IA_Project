@@ -14,7 +14,9 @@ public class AStarSearch
     // also Heuristic
     static public double Heuristic(Location a, Location b)
     {
-        return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
+        Vector2 posA = a.position;
+        Vector2 posB = b.position;
+        return Math.Abs(posA.x - posB.x) + Math.Abs(posA.y - posB.y);
     }
 
     public AStarSearch(WeightedGraph<Location> graph, Location start, Location goal)
@@ -25,8 +27,11 @@ public class AStarSearch
         cameFrom[start] = start;
         costSoFar[start] = 0;
 
-        while (frontier.Count > 0)
+        int a = 100;
+        while (a > 0)
+        //while (frontier.Count > 0)
         {
+            a--;
             var current = frontier.Dequeue();
 
             if (current.Equals(goal))
@@ -34,10 +39,10 @@ public class AStarSearch
                 break;
             }
 
-            foreach (var next in graph.Neighbors(current))
+            foreach (var next in current.neighbors)
             {
-                double newCost = costSoFar[current]
-                                 + graph.Cost(current, next);
+                //Debug.Log("A");
+                double newCost = costSoFar[current] + graph.Cost(current, next);
                 if (!costSoFar.ContainsKey(next)
                     || newCost < costSoFar[next])
                 {

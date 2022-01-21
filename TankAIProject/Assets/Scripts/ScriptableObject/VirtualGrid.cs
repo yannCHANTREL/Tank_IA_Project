@@ -21,7 +21,14 @@ public class VirtualGrid : ScriptableObject
     private Vector2 m_WorldBottomLeft;
     private float m_tankDiameter;
 
+    // Dijkstra needs
     private Path m_Path;
+    
+    // AStar needs
+    private SquareGrid m_SquareGrid;
+    private Dictionary<Vector2Int,Location> m_ListLocation;
+    private AStarSearch m_AStar;
+    public bool launch = false;
 
     public void CreateGrid()
     {
@@ -130,12 +137,25 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
             {
                 DrawDijsktraPathChoose();
             }
+            
+            if (m_SquareGrid != null && m_ListLocation != null)
+            {
+                launch = false;
+                DrawAStarPathChoose();
+            }
         }
     }
 
-    public void DrawPath(Path path)
+    public void DrawDijkstraPath(Path path)
     {
         m_Path = path;
+    }
+    
+    public void DrawAStarPath(SquareGrid squareGrid, Dictionary<Vector2Int,Location> listLocation, AStarSearch aStar)
+    {
+        m_SquareGrid = squareGrid;
+        m_ListLocation = listLocation;
+        m_AStar = aStar;
     }
     
     public void DrawDijsktraPathChoose()
@@ -148,7 +168,30 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
             Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
         }
     }
-    
+
+    public void DrawAStarPathChoose()
+    {
+        foreach (var location in m_ListLocation)
+        {
+            Location ptr = null;
+            Debug.Log("length : " + m_AStar.cameFrom.Count);
+            if (!m_AStar.cameFrom.TryGetValue(location.Value, out ptr))
+            {
+                Debug.Log("A");
+                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
+                Gizmos.color = Color.black;
+                Gizmos.DrawCube(worldPoint, Vector3.one * 0.8f);
+            }
+            else
+            {
+                Debug.Log("B");
+                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawCube(worldPoint, Vector3.one * 0.8f);
+            }
+        }
+    }
+
     public int[,] grid
     {
         get

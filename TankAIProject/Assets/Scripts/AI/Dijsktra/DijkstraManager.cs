@@ -97,7 +97,7 @@ public class DijkstraManager : MonoBehaviour
         {
             Path m_Path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
             //Debug.Log("Length = " + m_Path.length);
-            m_ClassGrid.DrawPath(m_Path);
+            m_ClassGrid.DrawDijkstraPath(m_Path);
         }
         else 
         {
