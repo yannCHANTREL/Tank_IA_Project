@@ -5,10 +5,14 @@ using UnityEngine;
 
 public class AStarSearch
 {
-    public Dictionary<Location, Location> cameFrom
-        = new Dictionary<Location, Location>();
-    public Dictionary<Location, double> costSoFar
-        = new Dictionary<Location, double>();
+    private WeightedGraph<Location> m_Graph;
+
+    public Dictionary<Location, Location> m_CameFrom;
+
+    public AStarSearch(WeightedGraph<Location> graph)
+    {
+        m_Graph = graph;
+    }
 
     // Note: a generic version of A* would abstract over Location and
     // also Heuristic
@@ -19,39 +23,68 @@ public class AStarSearch
         return Math.Abs(posA.x - posB.x) + Math.Abs(posA.y - posB.y);
     }
 
-    public AStarSearch(WeightedGraph<Location> graph, Location start, Location goal)
+    public FinalPath GetShortestPath(Location start, Location goal)
     {
+        
+        // We don't accept null arguments
+        if ( start == null || goal == null )
+        {
+            throw new ArgumentNullException ();
+        }
+        
+        // The final path
+        FinalPath path = new FinalPath ();
+        
+        // If the start and end are same node, we can return the start node
+        if ( start == goal )
+        {
+            path.locations.Add ( start );
+            return path;
+        }
+        
+        m_CameFrom = new Dictionary<Location, Location>();
+        Dictionary<Location, double> costSoFar = new Dictionary<Location, double>();
+
         var frontier = new PriorityQueue<Location>();
         frontier.Enqueue(start, 0);
-
-        cameFrom[start] = start;
+        
         costSoFar[start] = 0;
-
-        int a = 100;
-        while (a > 0)
-        //while (frontier.Count > 0)
+        
+        while (frontier.Count > 0)
         {
-            a--;
             var current = frontier.Dequeue();
 
+            // When the current node is equal to the goal node, then we can break and return the path
             if (current.Equals(goal))
             {
+                // Construct the shortest path
+                while (m_CameFrom.ContainsKey(current))
+                {
+                    Debug.Log(current.position);
+                    // Insert the node into the final result
+                    path.locations.Insert ( 0, current );
+                    
+                    // Traverse from start to end
+                    current = m_CameFrom[current];
+                }
+                // Insert the source onto the final result
+                path.locations.Insert ( 0, current );
                 break;
             }
 
             foreach (var next in current.neighbors)
             {
-                //Debug.Log("A");
-                double newCost = costSoFar[current] + graph.Cost(current, next);
+                double newCost = costSoFar[current] + m_Graph.Cost(current, next);
                 if (!costSoFar.ContainsKey(next)
                     || newCost < costSoFar[next])
                 {
                     costSoFar[next] = newCost;
                     double priority = newCost + Heuristic(next, goal);
                     frontier.Enqueue(next, priority);
-                    cameFrom[next] = current;
+                    m_CameFrom[next] = current;
                 }
             }
         }
+        return path;
     }
 }

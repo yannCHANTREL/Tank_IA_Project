@@ -22,17 +22,16 @@ public class VirtualGrid : ScriptableObject
     private float m_tankDiameter;
 
     // Dijkstra needs
-    private Path m_Path;
+    private Path m_DijsktraPath;
     
     // AStar needs
-    private SquareGrid m_SquareGrid;
     private Dictionary<Vector2Int,Location> m_ListLocation;
     private AStarSearch m_AStar;
-    public bool launch = false;
+    private FinalPath m_AStarPath;
 
     public void CreateGrid()
     {
-        m_Path = null;
+        m_DijsktraPath = null;
         m_NodeDiameter = (float) m_GridWorldSize / m_NbNode;
         m_NodeRadius = m_NodeDiameter / 2;
 
@@ -133,14 +132,13 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
                 }
             }
 
-            if (m_Path != null)
+            if (m_DijsktraPath != null)
             {
                 DrawDijsktraPathChoose();
             }
             
-            if (m_SquareGrid != null && m_ListLocation != null)
+            if (m_AStarPath != null && m_AStar != null && m_ListLocation != null)
             {
-                launch = false;
                 DrawAStarPathChoose();
             }
         }
@@ -148,34 +146,23 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
 
     public void DrawDijkstraPath(Path path)
     {
-        m_Path = path;
+        m_DijsktraPath = path;
     }
     
-    public void DrawAStarPath(SquareGrid squareGrid, Dictionary<Vector2Int,Location> listLocation, AStarSearch aStar)
+    public void DrawAStarPath(Dictionary<Vector2Int,Location> listLocation, AStarSearch aStar, FinalPath path)
     {
-        m_SquareGrid = squareGrid;
         m_ListLocation = listLocation;
         m_AStar = aStar;
-    }
-    
-    public void DrawDijsktraPathChoose()
-    {
-        List<Node> listNodes = m_Path.nodes;
-        foreach (var node in listNodes)
-        {
-            Vector3 worldPoint = Vector2ToVector3(node.position);
-            Gizmos.color = Color.blue;
-            Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
-        }
+        m_AStarPath = path;
     }
 
     public void DrawAStarPathChoose()
     {
-        foreach (var location in m_ListLocation)
+        /*foreach (var location in m_ListLocation)
         {
             Location ptr = null;
-            Debug.Log("length : " + m_AStar.cameFrom.Count);
-            if (!m_AStar.cameFrom.TryGetValue(location.Value, out ptr))
+            Debug.Log("length : " + m_AStar.m_CameFrom.Count);
+            if (!m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
             {
                 Debug.Log("A");
                 Vector3 worldPoint = Vector2ToVector3(location.Value.position);
@@ -189,6 +176,47 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
                 Gizmos.color = Color.cyan;
                 Gizmos.DrawCube(worldPoint, Vector3.one * 0.8f);
             }
+        }*/
+        
+        List<Location> listLocations = m_AStarPath.locations;
+        
+        // Display the grid in black and all the location go through to find the path
+        Location ptr = null;
+        foreach (var location in m_ListLocation)
+        {
+            if (!m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
+            {
+                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
+                Gizmos.color = Color.black;
+                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+            }
+            else
+            {
+                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
+                Gizmos.color = Color.gray;
+                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+            }
+        }
+        
+        // Display the path choose
+        foreach (var location in listLocations)
+        {
+            Vector3 worldPoint = Vector2ToVector3(location.position);
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+        }
+        
+        
+    }
+    
+    public void DrawDijsktraPathChoose()
+    {
+        List<Node> listNodes = m_DijsktraPath.nodes;
+        foreach (var node in listNodes)
+        {
+            Vector3 worldPoint = Vector2ToVector3(node.position);
+            Gizmos.color = Color.blue;
+            Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
         }
     }
 

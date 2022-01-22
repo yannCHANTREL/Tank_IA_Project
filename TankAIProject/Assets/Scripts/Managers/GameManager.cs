@@ -50,9 +50,6 @@ namespace Complete
             
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
-
-            AStarManager aStarManager = new AStarManager();
-            aStarManager.TestAStar(m_ClassGrid);
         }
 
         private void SpawnAllTanks()
