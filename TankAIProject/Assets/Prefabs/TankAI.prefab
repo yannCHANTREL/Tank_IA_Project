@@ -104,10 +104,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
   m_TargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
+  m_TargetTimeToReachEstimatedPos: {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
   m_PredictTargetMovement: 1
   m_FireRange: 13
   m_AngularTolerance: 5
   m_RadiusTolerance: 0.5
+  m_ShellSpeed: 20
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_FireCommand: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
 --- !u!114 &723087465036166876
@@ -124,11 +126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TankTarget: {fileID: 0}
   m_TankTargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
-  m_TankTargetSpeed: {fileID: 11400000, guid: b99aff4a0450cdf4ca954e751794550e, type: 2}
-  m_TankTargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
   m_TankTargetLastPos: {fileID: 11400000, guid: 7fdfa2827b785074baf5984d30b3b299, type: 2}
+  m_TankTargetSpeed: {fileID: 11400000, guid: b99aff4a0450cdf4ca954e751794550e, type: 2}
+  m_TankTargetLastSpeed: {fileID: 11400000, guid: daa3f7238862fd94c88a248be11e888b, type: 2}
+  m_TankTargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
+  m_TankTargetTimeToReachEstimatedPos: {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_ShellSpeed: 20
+  m_StraightEstimation: 1
+  m_MaxEstimationStep: 1000
 --- !u!114 &8785127412315307360
 MonoBehaviour:
   m_ObjectHideFlags: 0
