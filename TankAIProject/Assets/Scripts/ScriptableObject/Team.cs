@@ -14,7 +14,16 @@ public class Team : ScriptableObject
     public int m_CaptureScore;
     
     public List<TankManager> m_TeamTank;
+
+    public bool HasRoundScore(int value)
+    {
+        return m_CaptureScore == value;
+    }
     
+    public void IncrementCaptureScore(int value)
+    {
+        m_CaptureScore += value;
+    }
     public string GetColoredTeamText()
     {
         return "<color=#" + ColorUtility.ToHtmlStringRGB(m_TeamColor) + ">TEAM " + m_TeamNumber + "</color>";
@@ -71,4 +80,17 @@ public class Team : ScriptableObject
 
         return numTankLeft >= 1;
     }
+
+    public List<int> GetPlayersNumber()
+    {
+        List<int> playerNumbers = new List<int>();
+
+        foreach (TankManager tank in m_TeamTank)
+        {
+            playerNumbers.Add(tank.m_PlayerNumber);
+        }
+        
+        return playerNumbers;
+    }
+    
 }

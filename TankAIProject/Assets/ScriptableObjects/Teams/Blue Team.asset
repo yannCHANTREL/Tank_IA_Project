@@ -12,20 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193bb6393408c9b44813fa05e8f47acf, type: 3}
   m_Name: Blue Team
   m_EditorClassIdentifier: 
-  m_TeamNumber: 0
+  m_TeamNumber: 1
   m_TeamColor: {r: 0.16470589, g: 0.39215687, b: 0.69803923, a: 0}
   m_AI: 0
-  m_score: 0
+  m_RoundScore: 0
+  m_CaptureScore: 0
   m_TeamTank:
   - m_PlayerColor: {r: 0.16470589, g: 0.39215687, b: 0.69803923, a: 0}
     m_SpawnPoint: {fileID: 0}
     m_PlayerNumber: 1
     m_ColoredPlayerText: <color=#2A64B2>PLAYER 1</color>
-    m_Instance: {fileID: 0}
-    m_Wins: 1
-  - m_PlayerColor: {r: 0.16470589, g: 0.39215687, b: 0.69803923, a: 0}
-    m_SpawnPoint: {fileID: 0}
-    m_PlayerNumber: 2
-    m_ColoredPlayerText: <color=#2A64B2>PLAYER 2</color>
     m_Instance: {fileID: 0}
     m_Wins: 0

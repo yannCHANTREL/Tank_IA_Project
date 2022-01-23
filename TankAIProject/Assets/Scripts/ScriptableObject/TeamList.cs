@@ -8,6 +8,11 @@ public class TeamList : ScriptableObject
 {
     public Team[] m_Teams;
 
+    public void IncrementCaptureScore(int index, int value)
+    {
+        m_Teams[index].IncrementCaptureScore(value);
+    }
+    
     public int GetNumberTeam()
     {
         return m_Teams.Length;
@@ -22,8 +27,16 @@ public class TeamList : ScriptableObject
     {
         return m_Teams[index].m_AI;
     }
+
+    public void ResetCaptureScore()
+    {
+        foreach (Team team in m_Teams)
+        {
+            team.m_CaptureScore = 0;
+        }
+    }
     
-    public void ResetTeamScore()
+    public void ResetAllScore()
     {
         foreach (Team team in m_Teams)
         {
@@ -87,31 +100,28 @@ public class TeamList : ScriptableObject
             team.DisableTeamControl();
         }
     }
-
-    public bool OneTeamLeft()
+    
+    public bool OneTeamObtainedRoundScore(int value)
     {
-        int numTeamLeft = 0;
-
         foreach (Team team in m_Teams)
         {
-            if (team.IsTeamAlive())
-                numTeamLeft += 1;
+            if (team.HasRoundScore(value))
+                return true;
         }
-        
-        return numTeamLeft <= 1;
+
+        return false;
     }
 
-    public Team GetAliveTeam()
+    public Team GetTeamRoundWinner(int value)
     {
         foreach (Team team in m_Teams)
         {
-            if (team.IsTeamAlive())
+            if (team.HasRoundScore(value))
                 return team;
         }
-
+        
         return null;
     }
-
     public Team GetGameWinner(int numRoundToWin)
     {
         foreach (Team team in m_Teams)
@@ -133,5 +143,18 @@ public class TeamList : ScriptableObject
         }
 
         return text;
+    }
+
+    public int GetTeamNumberByPlayerNumber(int playerNumber)
+    {
+        foreach (Team team in m_Teams)
+        {
+            if (team.GetPlayersNumber().Contains(playerNumber))
+            {
+                return team.m_TeamNumber;
+            }
+        }
+        
+        return -1;
     }
 }

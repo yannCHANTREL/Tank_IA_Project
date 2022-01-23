@@ -297,8 +297,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Slider: {fileID: 461175623}
   m_FillImage: {fileID: 838813271}
-  m_FullCaptureDuration: 0
-  m_ScoreIncrement: 0
+  m_AlphaColor: 200
+  m_FullCaptureDuration: 10
+  m_ScoreIncrement: 10
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_IntervalScoreSeconds: 1
 --- !u!135 &216353004
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1530,8 +1533,8 @@ MonoBehaviour:
   m_TeamsSpawn:
   - {fileID: 194018016}
   - {fileID: 2083660209}
-  m_CapturePointManager: {fileID: 0}
-  m_ScoreForWinRound: 0
+  m_CapturePointManager: {fileID: 216353003}
+  m_RoundScoreForWin: 100
 --- !u!4 &1304999366
 Transform:
   m_ObjectHideFlags: 0

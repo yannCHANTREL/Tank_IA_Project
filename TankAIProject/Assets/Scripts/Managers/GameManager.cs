@@ -32,7 +32,7 @@ namespace Complete
         private Team m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
         public CapturePointManager m_CapturePointManager;
-        public int m_ScoreForWinRound;
+        public int m_RoundScoreForWin;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -47,7 +47,7 @@ namespace Complete
 
             m_TeamList.EmptyTeamList();
             m_TeamList.GiveTeamNumber();
-            m_TeamList.ResetTeamScore();
+            m_TeamList.ResetAllScore();
 
             ResetTankValues();
             SpawnAllTanks();
@@ -135,6 +135,9 @@ namespace Complete
 
         private IEnumerator RoundStarting ()
         {
+            m_CapturePointManager.ResetCapture();
+            m_TeamList.ResetCaptureScore();
+            
             // As soon as the round starts reset the tanks and make sure they can't move.
             ResetAllTanks ();
             DisableTankControl ();
@@ -159,7 +162,7 @@ namespace Complete
             m_MessageText.text = string.Empty;
 
             // While there is not one tank left...
-            while (!OneTeamLeft())
+            while (!OneTeamObtainedRoundScore())
             {
                 // ... return on the next frame.
                 yield return null;
@@ -192,14 +195,14 @@ namespace Complete
             yield return m_EndWait;
         }
 
-        private bool OneTeamLeft()
+        private bool OneTeamObtainedRoundScore()
         {
-           return m_TeamList.OneTeamLeft();
+            return m_TeamList.OneTeamObtainedRoundScore(m_RoundScoreForWin);
         }
 
         private Team GetRoundWinner()
         {
-            return m_TeamList.GetAliveTeam();
+            return m_TeamList.GetTeamRoundWinner(m_RoundScoreForWin);
         }
 
         private Team GetGameWinner()
