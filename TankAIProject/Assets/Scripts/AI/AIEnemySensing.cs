@@ -31,56 +31,6 @@ public class AIEnemySensing : MonoBehaviour
     {
         if (m_TankTarget) TrajectoryEstimationB(); 
     }
-    /*
-    public void TrajectoryEstimationA()
-    {
-        Vector3 tankTargetEstimatedPos;
-        float dt = Time.fixedDeltaTime;
-        Vector3 tankTargetLastPos = m_TankTargetPos.m_Values[m_TankIndexManager.m_TankIndex];
-        Vector3 tankTargetPos = m_TankTarget.transform.position;
-        Vector3 tankTargetDeltaPos = tankTargetPos - tankTargetLastPos;
-        Vector3 tankTargetPenultimateSpeed = m_TankTargetLastSpeed.m_Values[m_TankIndexManager.m_TankIndex];
-        Vector3 tankTargetLastSpeed = m_TankTargetSpeed.m_Values[m_TankIndexManager.m_TankIndex];
-        Vector3 tankTargetSpeed = tankTargetDeltaPos / dt;
-        float tankTargetLinearAcceleration = (tankTargetSpeed.magnitude - tankTargetLastSpeed.magnitude) / dt;
-        float tankTargetLastAngularSpeed = m_TankTargetAngularSpeed.m_Values[m_TankIndexManager.m_TankIndex];
-        float tankTargetAngularSpeed = Vector3.SignedAngle(tankTargetLastSpeed, tankTargetSpeed, Vector3.up) / dt;
-        float tankTargetAngularAcceleration = (tankTargetAngularSpeed - tankTargetLastAngularSpeed) / dt;
-        float tankTargetTimeToReachEstimatedPos;
-        Vector3 tankPos = transform.position;
-
-        float currentTankTargetEstimatedError;
-        float currentTankTargetTravelTime = 0;
-        float shellTravelTime;
-        float bestTankTargetTimeEstimatedError = float.MaxValue;
-        Vector3 tankTargetStepEstimatedDeltaPos = tankTargetDeltaPos;
-        tankTargetEstimatedPos = tankTargetPos;
-
-        for (int i = 0; i < m_MaxEstimationStep; i++)
-        {
-            tankTargetStepEstimatedDeltaPos = Quaternion.AngleAxis(tankTargetLastAngleForward, Vector3.up) * tankTargetStepEstimatedDeltaPos;
-            Debug.DrawLine(tankTargetEstimatedPos + new Vector3(0f, 1f, 0f), tankTargetEstimatedPos + tankTargetStepEstimatedDeltaPos + new Vector3(0f, 1f, 0f), Color.magenta);
-            tankTargetEstimatedPos += tankTargetStepEstimatedDeltaPos;
-            currentTankTargetTravelTime += dt;
-            shellTravelTime = (tankTargetEstimatedPos - tankPos).magnitude / m_ShellSpeed;
-            currentTankTargetEstimatedError = Mathf.Abs(currentTankTargetTravelTime - shellTravelTime);
-
-            if (currentTankTargetEstimatedError < bestTankTargetTimeEstimatedError)
-            {
-                bestTankTargetTimeEstimatedError = currentTankTargetEstimatedError;
-            }
-            else break;
-        }
-
-        tankTargetTimeToReachEstimatedPos = currentTankTargetTravelTime - dt;
-
-        m_TankTargetLastPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetLastPos;
-        m_TankTargetPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetPos;
-        m_TankTargetSpeed.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetSpeed;
-        m_TankTargetLastSpeed.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetLastSpeed;
-        m_TankTargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetEstimatedPos;
-        m_TankTargetTimeToReachEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetTimeToReachEstimatedPos;
-    }*/
 
     public void TrajectoryEstimationB()
     {
@@ -109,12 +59,6 @@ public class AIEnemySensing : MonoBehaviour
         float lastStepDeltaAngle = tankTargetLastAngleDir;
         float stepAngle = 0;
         float temp;
-
-        ////////////////
-
-        print(tankTargetSpeed.magnitude + "            " + tankTargetAngleDir);
-
-        ////////////////
 
         for (int i = 0; i < m_MaxEstimationStep; i++)
         {

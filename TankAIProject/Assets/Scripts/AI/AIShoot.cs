@@ -15,7 +15,7 @@ public class AIShoot : MonoBehaviour
     public TankIndexManager m_TankIndexManager;
     public TankEvent m_FireCommand;
 
-    // Update is called once per frame
+   
     void Update()
     {
         Fire();
