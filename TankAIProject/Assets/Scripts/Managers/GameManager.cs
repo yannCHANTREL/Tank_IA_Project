@@ -32,7 +32,6 @@ namespace Complete
         private Team m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
         public CapturePointManager m_CapturePointManager;
-        public int m_RoundScoreForWin;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -52,7 +51,6 @@ namespace Complete
             ResetTankValues();
             SpawnAllTanks();
             SetCameraTargets();
-            
             
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
@@ -195,12 +193,12 @@ namespace Complete
 
         private bool OneTeamObtainedRoundScore()
         {
-            return m_TeamList.OneTeamObtainedRoundScore(m_RoundScoreForWin);
+            return m_CapturePointManager.OneTeamObtainedRoundScore();
         }
 
         private Team GetRoundWinner()
         {
-            return m_TeamList.GetTeamRoundWinner(m_RoundScoreForWin);
+            return m_CapturePointManager.GetTeamRoundWinner();
         }
 
         private Team GetGameWinner()

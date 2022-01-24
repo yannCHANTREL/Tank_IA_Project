@@ -13,6 +13,7 @@ public class CapturePointManager : MonoBehaviour
     [Space(10)]
     public float m_FullCaptureDuration;
     public int m_ScoreIncrement;
+    public int m_RoundScoreForWin;
     [Space(10)] 
     public TeamList m_TeamList;
     public float m_IntervalScoreSeconds;
@@ -26,13 +27,23 @@ public class CapturePointManager : MonoBehaviour
     private float m_SavedTime;
 
     private Dictionary<int, int> m_PlayerNumbersPerTeam;
-
+    
     private void Start()
     {
         m_PlayerNumbersPerTeam = new Dictionary<int, int>();
         InitDictionnary();
     }
 
+    public bool OneTeamObtainedRoundScore()
+    {
+        return m_TeamList.OneTeamObtainedRoundScore(m_RoundScoreForWin);
+    }
+
+    public Team GetTeamRoundWinner()
+    {
+        return m_TeamList.GetTeamRoundWinner(m_RoundScoreForWin);
+    }
+    
     private void OnTriggerEnter(Collider other)
     { 
         TankMovement tankMovement = other.GetComponent<TankMovement>();
@@ -66,6 +77,8 @@ public class CapturePointManager : MonoBehaviour
     {
         TankMovement tankMovement = other.GetComponent<TankMovement>();
         if (tankMovement == null) return; // This is not a tank
+
+        if (OneTeamObtainedRoundScore()) return;
 
         if (m_CurrentTeamCapturing == 0) return; // No team is capturing
         
