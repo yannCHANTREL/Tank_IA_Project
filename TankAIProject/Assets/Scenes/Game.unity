@@ -1581,6 +1581,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b99aff4a0450cdf4ca954e751794550e, type: 2}
   - {fileID: 11400000, guid: daa3f7238862fd94c88a248be11e888b, type: 2}
   - {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
+  - {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_TeamsSpawn:

@@ -27,6 +27,6 @@ public class GridManager : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        m_VirualGrid.DrawGizmos();
+        //m_VirualGrid.DrawGizmos();
     }
 }
