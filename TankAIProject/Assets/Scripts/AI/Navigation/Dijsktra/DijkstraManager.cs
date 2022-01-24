@@ -6,9 +6,9 @@ using UnityEngine;
 public class DijkstraManager : MonoBehaviour
 {
     public VirtualGrid m_ClassGrid;             // Reference Grid
-    public Vector2Int m_start;
-    public Vector2Int m_end;
-    public bool m_activate;
+    public Vector2Int m_Start;
+    public Vector2Int m_End;
+    public bool m_Activate;
     
     private Dictionary<Vector2Int, Node> m_Nodes;
     private Graph m_Graph;
@@ -16,7 +16,7 @@ public class DijkstraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (m_activate)
+        if (m_Activate)
         {
             // preparation Dijsktra features
             PreparationForDijsktraFeatures();
@@ -91,12 +91,12 @@ public class DijkstraManager : MonoBehaviour
     private void ImplementedDijsktra()
     {
         // try move since A point to B point
-        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_start);
-        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_end);
+        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_Start);
+        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_End);
         if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
         {
-            Path m_Path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
-            m_ClassGrid.DrawDijkstraPath(m_Path);
+            Path path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
+            m_ClassGrid.DrawDijkstraPath(path);
         }
         else 
         {

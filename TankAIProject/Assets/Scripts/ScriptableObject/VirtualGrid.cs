@@ -6,13 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Virtual Grid")]
 public class VirtualGrid : ScriptableObject
 {
-
     public Vector3 m_GridTransformPosition;
     public LayerMask m_UnwalkableLayerMask;
     public int m_GridWorldSize;
     public int m_NbNode;
     public BoxCollider m_PrefabTankCollider;
-    public bool m_activateGizmos;
+    public bool m_ActivateGizmos;
 
     private int[,] m_Grid;
     private float m_NodeDiameter;
@@ -20,7 +19,7 @@ public class VirtualGrid : ScriptableObject
     private int m_GridSize;
     private Vector3 m_WorldBottomLeft3DPos;
     private Vector2 m_WorldBottomLeft;
-    private float m_tankDiameter;
+    private float m_TankDiameter;
 
     // Dijkstra needs
     private Path m_DijsktraPath;
@@ -40,7 +39,7 @@ public class VirtualGrid : ScriptableObject
 
         m_WorldBottomLeft3DPos = m_GridTransformPosition - Vector3.right * m_GridWorldSize / 2 - Vector3.forward * m_GridWorldSize / 2;
         m_WorldBottomLeft = new Vector2(m_WorldBottomLeft3DPos.x, m_WorldBottomLeft3DPos.z);
-        m_tankDiameter = Mathf.Sqrt(Mathf.Pow(m_PrefabTankCollider.size.x, 2) + Mathf.Pow(m_PrefabTankCollider.size.z, 2));
+        m_TankDiameter = Mathf.Sqrt(Mathf.Pow(m_PrefabTankCollider.size.x, 2) + Mathf.Pow(m_PrefabTankCollider.size.z, 2));
         
         m_Grid = new int[m_GridSize, m_GridSize];
        
@@ -50,7 +49,7 @@ public class VirtualGrid : ScriptableObject
             {
                 Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(x, y));
                 
-                bool walkable = !Physics.CheckSphere(worldPoint, m_tankDiameter - m_NodeRadius, m_UnwalkableLayerMask);
+                bool walkable = !Physics.CheckSphere(worldPoint, m_TankDiameter - m_NodeRadius, m_UnwalkableLayerMask);
                 
                 m_Grid[x, y] = (walkable ? 0 : -1);
             }
@@ -108,7 +107,7 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
 
     public void DrawGizmos()
     {
-        if (m_activateGizmos)
+        if (m_ActivateGizmos)
         {
             Gizmos.DrawWireCube(m_GridTransformPosition, new Vector3(m_GridWorldSize, 1, m_GridWorldSize));
 

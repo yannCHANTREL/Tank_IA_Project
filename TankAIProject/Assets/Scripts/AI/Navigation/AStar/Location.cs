@@ -8,32 +8,32 @@ public class Location
     // be slow. You'll probably want to override both Equals and
     // GetHashCode in a real project.
     
-    private List<Location> m_neighbors;
-    private int m_stateLocation; // -1 Wall ; 0 Empty ; 1 Forest
+    private List<Location> m_Neighbors;
+    private int m_StateLocation; // -1 Wall ; 0 Empty ; 1 Forest
     private Vector2 m_Position;
 
     public Location(int number, Vector2 Position)
     {
         m_Position = Position;
-        m_neighbors = new List<Location>();
-        m_stateLocation = number;
+        m_Neighbors = new List<Location>();
+        m_StateLocation = number;
     }
 
     public void AddNeighbors(Location location)
     {
-        m_neighbors.Add(location);
+        m_Neighbors.Add(location);
     }
 
     public void ChangeStateLocation(int stateLocation)
     {
-        m_stateLocation = stateLocation;
+        m_StateLocation = stateLocation;
     }
     
     public virtual List<Location> neighbors
     {
         get
         {
-            return m_neighbors;
+            return m_Neighbors;
         }
     }
     
@@ -41,7 +41,7 @@ public class Location
     {
         get
         {
-            return m_stateLocation;
+            return m_StateLocation;
         }
     }
     

@@ -50,7 +50,7 @@ public class AStarSearch
         
         costSoFar[start] = 0;
         
-        while (frontier.Count > 0)
+        while (frontier.count > 0)
         {
             var current = frontier.Dequeue();
 
