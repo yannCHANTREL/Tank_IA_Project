@@ -5,5 +5,4 @@ using UnityEngine;
 public interface WeightedGraph<L>
 {
     double Cost(Location a, Location b);
-    IEnumerable<Location> Neighbors(Location id);
 }
