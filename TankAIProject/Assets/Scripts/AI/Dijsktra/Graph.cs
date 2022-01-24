@@ -81,7 +81,6 @@ public class Graph
 		
 		while ( unvisited.Count != 0 )
 		{
-			
 			// Ordering the unvisited list by distance, smallest distance at start and largest at end
 			unvisited = unvisited.OrderBy ( node => distances [ node ] ).ToList ();
 			
@@ -117,8 +116,16 @@ public class Graph
 				Node neighbor = current.connections [ i ];
 				
 				// Getting the distance between the current node and the connection (neighbor)
-				float length = Vector2.Distance ( current.position, neighbor.position );
-				
+				float length = 0;
+				if (neighbor.stateNode == 0)
+				{
+					length = Vector2.Distance ( current.position, neighbor.position );
+				}
+				else
+				{
+					length = Vector2.Distance ( current.position, neighbor.position ) * m_Nodes.Count;
+				}
+
 				// The distance from start node to this connection (neighbor) of current node
 				float alt = distances [ current ] + length;
 				
