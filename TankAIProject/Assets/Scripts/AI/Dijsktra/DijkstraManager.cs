@@ -35,11 +35,8 @@ public class DijkstraManager : MonoBehaviour
         {
             for (int j = 0; j < m_ClassGrid.gridSize; j++)
             {
-                if (m_ClassGrid.grid[i,j] == 0)
-                {
-                    Node node = new Node(m_ClassGrid.grid[i,j], m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j)));
-                    m_Nodes.Add(new Vector2Int(i,j),node);
-                }
+                Node node = new Node(m_ClassGrid.grid[i,j], m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j)));
+                m_Nodes.Add(new Vector2Int(i,j),node);
             }
         }
 
