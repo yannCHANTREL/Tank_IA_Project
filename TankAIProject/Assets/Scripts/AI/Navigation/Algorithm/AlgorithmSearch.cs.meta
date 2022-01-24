@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: 21d204aba99eeb84ca6b71700c0f978d
+guid: 8a6d60d16daa0da41a332ea12d2b6e07
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

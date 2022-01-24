@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquareGrid : WeightedGraph<Location>
+public class SquareGrid : WeightedGraph<Node>
 {
     private int m_NumberLocations;
 
@@ -11,9 +11,9 @@ public class SquareGrid : WeightedGraph<Location>
         m_NumberLocations = numberLocations;
     }
 
-    public double Cost(Location a, Location b)
+    public double Cost(Node a, Node b)
     {
-        if (b.stateLocation == 0)
+        if (b.stateNode == 0)
         {
             return Vector2.Distance ( a.position, b.position );
         }

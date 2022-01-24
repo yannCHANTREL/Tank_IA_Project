@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class DijkstraManager : MonoBehaviour
+public class DijkstraManager : AlgorithmSearch
 {
-    public VirtualGrid m_ClassGrid;             // Reference Grid
-    public Vector2Int m_Start;
-    public Vector2Int m_End;
     public bool m_Activate;
     
     private Dictionary<Vector2Int, Node> m_Nodes;
@@ -26,6 +23,12 @@ public class DijkstraManager : MonoBehaviour
         }
     }
     
+    public override void Initialization()
+    {
+        // preparation Dijsktra features
+        PreparationForDijsktraFeatures();
+    }
+
     private void PreparationForDijsktraFeatures()
     {
         m_Nodes = new Dictionary<Vector2Int, Node>();
@@ -74,7 +77,7 @@ public class DijkstraManager : MonoBehaviour
         // Launch one thread each second, or when the previous is finish
         while (true)
         {
-            Thread t = new Thread(ImplementedDijsktra);
+            Thread t = new Thread(ImplementedDijsktraEditor);
             var temp = Time.realtimeSinceStartup;
             t.Start();
                 
@@ -88,7 +91,7 @@ public class DijkstraManager : MonoBehaviour
         }
     } 
     
-    private void ImplementedDijsktra()
+    private void ImplementedDijsktraEditor()
     {
         // try move since A point to B point
         Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_Start);
@@ -107,6 +110,25 @@ public class DijkstraManager : MonoBehaviour
             if (!m_Nodes.ContainsKey(end))
             {
                 Debug.Log("Error Dijsktra end incorrect");
+            }
+        }
+    }
+
+    public override void LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
+    {
+        if (m_Nodes.ContainsKey(indexStart) && m_Nodes.ContainsKey(indexEnd))
+        {
+            navigationManager.path = m_Graph.GetShortestPath (m_Nodes[indexStart], m_Nodes[indexEnd]);
+        }
+        else 
+        {
+            if (!m_Nodes.ContainsKey(indexStart))
+            {
+                Debug.Log("Error Dijsktra LaunchSearch start incorrect");
+            }
+            if (!m_Nodes.ContainsKey(indexEnd))
+            {
+                Debug.Log("Error Dijsktra LaunchSearch end incorrect");
             }
         }
     }

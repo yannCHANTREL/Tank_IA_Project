@@ -110,10 +110,10 @@ public class Graph
 				break;
 			}
 			
-			// Looping through the Node connections (neighbors) and where the connection (neighbor) is available at unvisited list
-			for ( int i = 0; i < current.connections.Count; i++ )
+			// Looping through the Node neighbors and where the connection (neighbor) is available at unvisited list
+			for ( int i = 0; i < current.neighbors.Count; i++ )
 			{
-				Node neighbor = current.connections [ i ];
+				Node neighbor = current.neighbors [ i ];
 				
 				// Getting the distance between the current node and the connection (neighbor)
 				float length = 0;

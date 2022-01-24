@@ -25,9 +25,9 @@ public class VirtualGrid : ScriptableObject
     private Path m_DijsktraPath;
     
     // AStar needs
-    private Dictionary<Vector2Int,Location> m_ListLocation;
+    private Dictionary<Vector2Int,Node> m_ListLocation;
     private AStarSearch m_AStar;
-    private FinalPath m_AStarPath;
+    private Path m_AStarPath;
 
     public void CreateGrid()
     {
@@ -152,7 +152,7 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
         m_DijsktraPath = path;
     }
     
-    public void DrawAStarPath(Dictionary<Vector2Int,Location> listLocation, AStarSearch aStar, FinalPath path)
+    public void DrawAStarPath(Dictionary<Vector2Int,Node> listLocation, AStarSearch aStar, Path path)
     {
         m_ListLocation = listLocation;
         m_AStar = aStar;
@@ -161,10 +161,10 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
 
     public void DrawAStarPathChoose()
     {
-        List<Location> listLocations = m_AStarPath.locations;
+        List<Node> listNodes = m_AStarPath.nodes;
         
         // Display the grid in black and all the location go through to find the path
-        Location ptr = null;
+        Node ptr = null;
         foreach (var location in m_ListLocation)
         {
             if (m_AStar.m_CameFrom != null && m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
@@ -176,7 +176,7 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
         }
         
         // Display the path choose
-        foreach (var location in listLocations)
+        foreach (var location in listNodes)
         {
             Vector3 worldPoint = Vector2ToVector3(location.position);
             Gizmos.color = Color.cyan;

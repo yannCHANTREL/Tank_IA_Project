@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface WeightedGraph<L>
 {
-    double Cost(Location a, Location b);
+    double Cost(Node a, Node b);
 }

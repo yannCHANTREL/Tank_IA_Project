@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class AStarSearch
 {
-    private WeightedGraph<Location> m_Graph;
+    private WeightedGraph<Node> m_Graph;
 
-    public Dictionary<Location, Location> m_CameFrom;
+    public Dictionary<Node, Node> m_CameFrom;
 
-    public AStarSearch(WeightedGraph<Location> graph)
+    public AStarSearch(WeightedGraph<Node> graph)
     {
         m_Graph = graph;
     }
 
-    // Note: a generic version of A* would abstract over Location and
+    // Note: a generic version of A* would abstract over node and
     // also Heuristic
-    static public double Heuristic(Location a, Location b)
+    static public double Heuristic(Node a, Node b)
     {
         Vector2 posA = a.position;
         Vector2 posB = b.position;
         return Math.Abs(posA.x - posB.x) + Math.Abs(posA.y - posB.y);
     }
 
-    public FinalPath GetShortestPath(Location start, Location goal)
+    public Path GetShortestPath(Node start, Node goal)
     {
         
         // We don't accept null arguments
@@ -33,19 +33,19 @@ public class AStarSearch
         }
         
         // The final path
-        FinalPath path = new FinalPath ();
+        Path path = new Path ();
         
         // If the start and end are same node, we can return the start node
         if ( start == goal )
         {
-            path.locations.Add ( start );
+            path.nodes.Add ( start );
             return path;
         }
         
-        m_CameFrom = new Dictionary<Location, Location>();
-        Dictionary<Location, double> costSoFar = new Dictionary<Location, double>();
+        m_CameFrom = new Dictionary<Node, Node>();
+        Dictionary<Node, double> costSoFar = new Dictionary<Node, double>();
 
-        var frontier = new PriorityQueue<Location>();
+        var frontier = new PriorityQueue<Node>();
         frontier.Enqueue(start, 0);
         
         costSoFar[start] = 0;
@@ -61,13 +61,13 @@ public class AStarSearch
                 while (m_CameFrom.ContainsKey(current))
                 {
                     // Insert the node into the final result
-                    path.locations.Insert ( 0, current );
+                    path.nodes.Insert ( 0, current );
                     
                     // Traverse from start to end
                     current = m_CameFrom[current];
                 }
                 // Insert the source onto the final result
-                path.locations.Insert ( 0, current );
+                path.nodes.Insert ( 0, current );
                 break;
             }
 
