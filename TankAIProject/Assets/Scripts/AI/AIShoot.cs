@@ -28,7 +28,7 @@ public class AIShoot : MonoBehaviour
         Vector3 targetPos = m_PredictTargetMovement ? m_TargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] : m_TargetPos.m_Values[m_TankIndexManager.m_TankIndex];
         Vector3 distance = targetPos - tankPos;
         float angleToTarget = Vector3.Angle(distance, tankForward);
-        
+        Debug.DrawLine(tankPos + new Vector3(0f,1f,0f), new Vector3(0f,1f,0f) + tankPos + tankForward * m_ShellSpeed * m_TargetTimeToReachEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex], Color.blue);
         if (distance.magnitude < m_FireRange + m_RadiusTolerance && angleToTarget < m_AngularTolerance && (distance - tankForward * m_ShellSpeed * m_TargetTimeToReachEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex]).magnitude < m_RadiusTolerance)
         {
             m_FireCommand.Raise(m_TankIndexManager.m_TankIndex);

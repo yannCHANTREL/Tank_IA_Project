@@ -34,6 +34,9 @@ public class AIEnemySensing : MonoBehaviour
             float tankTargetVelocityMagnitude = tankTargetSpeed.magnitude;
             float tankDistanceMagnitude = tankTargetDistance.magnitude;
             float tankTargetAngleDir = Vector3.SignedAngle(tankTargetDistance, tankTargetSpeed, Vector3.up);
+            Vector3 tankTargetDir = Vector3.Dot(tankTargetSpeed, m_TankTarget.transform.forward) >= 0 ? m_TankTarget.transform.forward : -m_TankTarget.transform.forward;
+            //float tankTargetLastAngleForward = Vector3.SignedAngle(tankTargetSpeed, tankTargetDir, Vector3.up);
+            float tankTargetLastAngleForward = Vector3.SignedAngle(tankTargetLastSpeed, tankTargetSpeed, Vector3.up);
             float tankTargetTimeToReachEstimatedPos;
 
             if (m_StraightEstimation)
@@ -50,28 +53,28 @@ public class AIEnemySensing : MonoBehaviour
             {
                 float currentTankTargetEstimatedError;
                 float currentTankTargetTravelTime = 0;
-                float TankTargetStepTravelTime = tankTargetDeltaPos.magnitude / m_ShellSpeed;
                 float shellTravelTime;
                 float bestTankTargetTimeEstimatedError = float.MaxValue;
-                Vector3 currentTankTargetEstimatedPos = tankTargetPos;
-                Vector3 TankTargetStepEstimatedDeltaPos = tankTargetDeltaPos;
-                tankTargetEstimatedPos = currentTankTargetEstimatedPos;
+                Vector3 tankTargetStepEstimatedDeltaPos = tankTargetDeltaPos;
+                tankTargetEstimatedPos = tankTargetPos;
 
                 for (int i = 0; i < m_MaxEstimationStep; i++)
                 {
-                    TankTargetStepEstimatedDeltaPos = Quaternion.AngleAxis(tankTargetAngleDir, Vector3.up) * TankTargetStepEstimatedDeltaPos;
-                    tankTargetEstimatedPos += TankTargetStepEstimatedDeltaPos;
-                    currentTankTargetTravelTime += TankTargetStepTravelTime;
+                    tankTargetStepEstimatedDeltaPos = Quaternion.AngleAxis(tankTargetLastAngleForward, Vector3.up) * tankTargetStepEstimatedDeltaPos;
+                    Debug.DrawLine(tankTargetEstimatedPos + new Vector3(0f,1f,0f), tankTargetEstimatedPos + tankTargetStepEstimatedDeltaPos + new Vector3(0f,1f,0f), Color.magenta);
+                    tankTargetEstimatedPos += tankTargetStepEstimatedDeltaPos;
+                    currentTankTargetTravelTime += dt;
                     shellTravelTime = (tankTargetEstimatedPos - tankPos).magnitude / m_ShellSpeed;
                     currentTankTargetEstimatedError = Mathf.Abs(currentTankTargetTravelTime - shellTravelTime);
+                    
                     if (currentTankTargetEstimatedError < bestTankTargetTimeEstimatedError)
                     {
                         bestTankTargetTimeEstimatedError = currentTankTargetEstimatedError;
                     }
                     else { break; }
                 }
-
-                tankTargetTimeToReachEstimatedPos = currentTankTargetTravelTime - TankTargetStepTravelTime;
+                
+                tankTargetTimeToReachEstimatedPos = currentTankTargetTravelTime - dt;
             }
 
             m_TankTargetLastPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetLastPos;
