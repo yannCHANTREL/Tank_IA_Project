@@ -8,6 +8,7 @@ public class DijkstraManager : MonoBehaviour
     public VirtualGrid m_ClassGrid;             // Reference Grid
     public Vector2Int m_start;
     public Vector2Int m_end;
+    public bool m_activate;
     
     private Dictionary<Vector2Int, Node> m_Nodes;
     private Graph m_Graph;
@@ -15,11 +16,14 @@ public class DijkstraManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // preparation Dijsktra features
-        PreparationForDijsktraFeatures();
-        
-        // Algorithm of research of the shortest path (Dijsktra)
-        StartCoroutine(LaunchThreadWithDijsktra());
+        if (m_activate)
+        {
+            // preparation Dijsktra features
+            PreparationForDijsktraFeatures();
+
+            // Algorithm of research of the shortest path (Dijsktra)
+            StartCoroutine(LaunchThreadWithDijsktra());
+        }
     }
     
     private void PreparationForDijsktraFeatures()
@@ -33,8 +37,7 @@ public class DijkstraManager : MonoBehaviour
             {
                 if (m_ClassGrid.grid[i,j] == 0)
                 {
-                    Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
-                    Node node = new Node(m_ClassGrid.grid[i,j], vect2);
+                    Node node = new Node(m_ClassGrid.grid[i,j], m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j)));
                     m_Nodes.Add(new Vector2Int(i,j),node);
                 }
             }
@@ -103,11 +106,11 @@ public class DijkstraManager : MonoBehaviour
         {
             if (!m_Nodes.ContainsKey(start))
             {
-                Debug.Log("Error start incorrect");
+                Debug.Log("Error Dijsktra start incorrect");
             }
             if (!m_Nodes.ContainsKey(end))
             {
-                Debug.Log("Error end incorrect");
+                Debug.Log("Error Dijsktra end incorrect");
             }
         }
     }

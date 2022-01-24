@@ -9,31 +9,46 @@ public class AStarManager : MonoBehaviour
     public VirtualGrid m_ClassGrid;             // Reference Grid
     public Vector2Int m_start;
     public Vector2Int m_end;
+    public bool m_activate;
     
     private Dictionary<Vector2Int, Location> m_Locations;
     private AStarSearch m_AStar;
     
     void Start()
     {
-        // preparation AStar features
-        PreparationForAStarFeatures();
+        if (m_activate)
+        {
+            // preparation AStar features
+            PreparationForAStarFeatures();
 
-        // Algorithm of research of the shortest path (AStar)
-        StartCoroutine(LaunchThreadWithAStar());
+            // Algorithm of research of the shortest path (AStar)
+            StartCoroutine(LaunchThreadWithAStar());
+        }
     }
     
     private void PreparationForAStarFeatures()
     {
         SquareGrid grid = new SquareGrid(10, 10);
+        m_Locations = new Dictionary<Vector2Int,Location>();
         
         // create locations
-        m_Locations = new Dictionary<Vector2Int,Location>();
-        for (int i = 0; i < 10; i++)
+        /*for (int i = 0; i < 10; i++)
         {
             for (int j = 0; j < 10; j++)
             {
                 Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
                 m_Locations.Add(new Vector2Int(i,j),new Location(vect2));
+            }
+        }*/
+        for (int i = 0; i < m_ClassGrid.gridSize; i++)
+        {
+            for (int j = 0; j < m_ClassGrid.gridSize; j++)
+            {
+                if (m_ClassGrid.grid[i, j] == 0)
+                {
+                    Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
+                    m_Locations.Add(new Vector2Int(i, j), new Location(vect2));
+                }
             }
         }
         
@@ -96,8 +111,24 @@ public class AStarManager : MonoBehaviour
 
     private void ImplementedAStar()
     {
-        FinalPath path = m_AStar.GetShortestPath(m_Locations[new Vector2Int(1,4)],
-            m_Locations[new Vector2Int(8,5)]);
-        m_ClassGrid.DrawAStarPath(m_Locations, m_AStar, path);
+        // try move since A point to B point
+        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_start);
+        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_end);
+        if (m_Locations.ContainsKey(start) && m_Locations.ContainsKey(end))
+        {
+            FinalPath path = m_AStar.GetShortestPath(m_Locations[start], m_Locations[end]);
+            m_ClassGrid.DrawAStarPath(m_Locations, m_AStar, path);
+        }
+        else 
+        {
+            if (!m_Locations.ContainsKey(start))
+            {
+                Debug.Log("Error AStar start incorrect");
+            }
+            if (!m_Locations.ContainsKey(end))
+            {
+                Debug.Log("Error AStar end incorrect");
+            }
+        }
     }
 }

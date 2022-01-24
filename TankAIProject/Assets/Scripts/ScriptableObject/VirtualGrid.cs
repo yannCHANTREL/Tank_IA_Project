@@ -12,6 +12,7 @@ public class VirtualGrid : ScriptableObject
     public int m_GridWorldSize;
     public int m_NbNode;
     public BoxCollider m_PrefabTankCollider;
+    public bool m_activateGizmos;
 
     private int[,] m_Grid;
     private float m_NodeDiameter;
@@ -107,39 +108,42 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
 
     public void DrawGizmos()
     {
-        Gizmos.DrawWireCube(m_GridTransformPosition, new Vector3(m_GridWorldSize, 1, m_GridWorldSize));
-
-        if (m_Grid != null)
+        if (m_activateGizmos)
         {
-            for (int x = 0; x < m_GridSize; x++)
+            Gizmos.DrawWireCube(m_GridTransformPosition, new Vector3(m_GridWorldSize, 1, m_GridWorldSize));
+
+            if (m_Grid != null)
             {
-                for (int y = 0; y < m_GridSize; y++)
+                for (int x = 0; x < m_GridSize; x++)
                 {
-                    int n = m_Grid[x, y];
-                    Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(x, y));
-                    
-                    switch (n)
+                    for (int y = 0; y < m_GridSize; y++)
                     {
-                        case -1:
-                            Gizmos.color = Color.red;
-                            break;
-                        case 0:
-                            Gizmos.color = Color.white;
-                            break;
+                        int n = m_Grid[x, y];
+                        Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(x, y));
+                    
+                        switch (n)
+                        {
+                            case -1:
+                                Gizmos.color = Color.red;
+                                break;
+                            case 0:
+                                Gizmos.color = Color.white;
+                                break;
+                        }
+
+                        Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
                     }
-
-                    Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
                 }
-            }
 
-            if (m_DijsktraPath != null)
-            {
-                DrawDijsktraPathChoose();
-            }
+                if (m_DijsktraPath != null)
+                {
+                    DrawDijsktraPathChoose();
+                }
             
-            if (m_AStarPath != null && m_AStar != null && m_ListLocation != null)
-            {
-                DrawAStarPathChoose();
+                if (m_AStarPath != null && m_AStar != null && m_ListLocation != null)
+                {
+                    DrawAStarPathChoose();
+                }
             }
         }
     }
@@ -158,33 +162,14 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
 
     public void DrawAStarPathChoose()
     {
-        /*foreach (var location in m_ListLocation)
-        {
-            Location ptr = null;
-            Debug.Log("length : " + m_AStar.m_CameFrom.Count);
-            if (!m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
-            {
-                Debug.Log("A");
-                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(worldPoint, Vector3.one * 0.8f);
-            }
-            else
-            {
-                Debug.Log("B");
-                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
-                Gizmos.color = Color.cyan;
-                Gizmos.DrawCube(worldPoint, Vector3.one * 0.8f);
-            }
-        }*/
-        
+        Debug.Log("");
         List<Location> listLocations = m_AStarPath.locations;
         
         // Display the grid in black and all the location go through to find the path
         Location ptr = null;
         foreach (var location in m_ListLocation)
         {
-            if (!m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
+            if (m_AStar.m_CameFrom != null && !m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
             {
                 Vector3 worldPoint = Vector2ToVector3(location.Value.position);
                 Gizmos.color = Color.black;
@@ -205,8 +190,6 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
             Gizmos.color = Color.cyan;
             Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
         }
-        
-        
     }
     
     public void DrawDijsktraPathChoose()
