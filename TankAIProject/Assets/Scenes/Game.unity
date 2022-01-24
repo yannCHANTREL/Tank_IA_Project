@@ -736,7 +736,7 @@ MonoBehaviour:
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
   m_start: {x: 12, y: 20}
   m_end: {x: 12, y: 30}
-  m_activate: 0
+  m_activate: 1
 --- !u!4 &938093267
 Transform:
   m_ObjectHideFlags: 0

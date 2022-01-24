@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class SquareGrid : WeightedGraph<Location>
 {
-    // Implementation notes: I made the fields public for convenience,
-    // but in a real project you'll probably want to follow standard
-    // style and make them private.
+    private int m_NumberLocations;
 
-    public int width, height;
-    public HashSet<Location> walls = new HashSet<Location>();
-    public HashSet<Location> forests = new HashSet<Location>();
-
-    public SquareGrid(int width, int height)
+    public SquareGrid(int numberLocations)
     {
-        this.width = width;
-        this.height = height;
-    }
-
-    public bool Passable(Location id)
-    {
-        return !walls.Contains(id);
+        m_NumberLocations = numberLocations;
     }
 
     public double Cost(Location a, Location b)
     {
-        return forests.Contains(b) ? 5 : 1;
+        if (b.stateLocation == 0)
+        {
+            return Vector2.Distance ( a.position, b.position );
+        }
+        return Vector2.Distance ( a.position, b.position ) * m_NumberLocations;
     }
 }

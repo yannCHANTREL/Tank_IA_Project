@@ -120,7 +120,7 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
                     {
                         int n = m_Grid[x, y];
                         Vector3 worldPoint = GetVector3WorldPositionByIndex(new Vector2Int(x, y));
-                    
+                        
                         switch (n)
                         {
                             case -1:
@@ -139,7 +139,7 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
                 {
                     DrawDijsktraPathChoose();
                 }
-            
+                
                 if (m_AStarPath != null && m_AStar != null && m_ListLocation != null)
                 {
                     DrawAStarPathChoose();
@@ -162,20 +162,13 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
 
     public void DrawAStarPathChoose()
     {
-        Debug.Log("");
         List<Location> listLocations = m_AStarPath.locations;
         
         // Display the grid in black and all the location go through to find the path
         Location ptr = null;
         foreach (var location in m_ListLocation)
         {
-            if (m_AStar.m_CameFrom != null && !m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
-            {
-                Vector3 worldPoint = Vector2ToVector3(location.Value.position);
-                Gizmos.color = Color.black;
-                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
-            }
-            else
+            if (m_AStar.m_CameFrom != null && m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
             {
                 Vector3 worldPoint = Vector2ToVector3(location.Value.position);
                 Gizmos.color = Color.gray;

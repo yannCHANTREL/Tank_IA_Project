@@ -60,7 +60,6 @@ public class AStarSearch
                 // Construct the shortest path
                 while (m_CameFrom.ContainsKey(current))
                 {
-                    Debug.Log(current.position);
                     // Insert the node into the final result
                     path.locations.Insert ( 0, current );
                     

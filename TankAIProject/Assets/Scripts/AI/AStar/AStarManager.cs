@@ -28,27 +28,15 @@ public class AStarManager : MonoBehaviour
     
     private void PreparationForAStarFeatures()
     {
-        SquareGrid grid = new SquareGrid(10, 10);
         m_Locations = new Dictionary<Vector2Int,Location>();
         
         // create locations
-        /*for (int i = 0; i < 10; i++)
-        {
-            for (int j = 0; j < 10; j++)
-            {
-                Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
-                m_Locations.Add(new Vector2Int(i,j),new Location(vect2));
-            }
-        }*/
         for (int i = 0; i < m_ClassGrid.gridSize; i++)
         {
             for (int j = 0; j < m_ClassGrid.gridSize; j++)
             {
-                if (m_ClassGrid.grid[i, j] == 0)
-                {
-                    Vector2 vect2 = m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j));
-                    m_Locations.Add(new Vector2Int(i, j), new Location(vect2));
-                }
+                Location location = new Location(m_ClassGrid.grid[i, j], m_ClassGrid.GetVector2WorldPositionByIndex(new Vector2Int(i, j)));
+                m_Locations.Add(new Vector2Int(i, j), location);
             }
         }
         
@@ -57,17 +45,7 @@ public class AStarManager : MonoBehaviour
         {
             int posX = location.Key.x;
             int posY = location.Key.y;
-            // place wall
-            if (posX >= 1 && posX <= 3 && posY >= 7 && posY <= 8)
-            {
-                location.Value.ChangeStateLocation(-1);
-            }
-            // place forest
-            if (posX >= 4 && posX <= 6 && posY >= 5 && posY <= 8)
-            {
-                location.Value.ChangeStateLocation(1);
-            }
-            
+
             Location neighbors1, neighbors2, neighbors3, neighbors4;
             if (m_Locations.TryGetValue(new Vector2Int(posX, posY - 1), out neighbors1))
             {
@@ -86,7 +64,7 @@ public class AStarManager : MonoBehaviour
                 location.Value.AddNeighbors(neighbors4);
             }
         }
-        m_AStar = new AStarSearch(grid);
+        m_AStar = new AStarSearch(new SquareGrid(m_Locations.Count));
     }
     
     private IEnumerator LaunchThreadWithAStar()
@@ -102,7 +80,6 @@ public class AStarManager : MonoBehaviour
             // OR 1 second difference between now and the start of the thread
             while(t.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
             {
-                //Debug.Log("B");
                 yield return null;
             }
             //Debug.Log("time execution thread : " + (Time.realtimeSinceStartup - temp));

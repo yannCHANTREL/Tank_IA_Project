@@ -96,7 +96,6 @@ public class DijkstraManager : MonoBehaviour
         if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
         {
             Path m_Path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
-            //Debug.Log("Length = " + m_Path.length);
             m_ClassGrid.DrawDijkstraPath(m_Path);
         }
         else 

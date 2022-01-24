@@ -12,11 +12,11 @@ public class Location
     private int m_stateLocation; // -1 Wall ; 0 Empty ; 1 Forest
     private Vector2 m_Position;
 
-    public Location(Vector2 Position)
+    public Location(int number, Vector2 Position)
     {
         m_Position = Position;
         m_neighbors = new List<Location>();
-        m_stateLocation = 0;
+        m_stateLocation = number;
     }
 
     public void AddNeighbors(Location location)
@@ -34,6 +34,14 @@ public class Location
         get
         {
             return m_neighbors;
+        }
+    }
+    
+    public int stateLocation
+    {
+        get
+        {
+            return m_stateLocation;
         }
     }
     
