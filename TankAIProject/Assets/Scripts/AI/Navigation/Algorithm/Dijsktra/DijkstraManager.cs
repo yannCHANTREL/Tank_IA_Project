@@ -131,4 +131,9 @@ public class DijkstraManager : SearchAlgorithm
             }
         }
     }
+
+    public override Dictionary<Vector2Int, Node> GetListNode()
+    {
+        return m_Nodes;
+    }
 }

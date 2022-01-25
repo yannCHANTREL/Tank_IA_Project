@@ -210,4 +210,12 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
             return m_GridSize;
         }
     }
+
+    public float nodeDiameter
+    {
+        get
+        {
+            return m_NodeDiameter;
+        }
+    }
 }

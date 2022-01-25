@@ -130,4 +130,9 @@ public class AStarManager : SearchAlgorithm
             }
         }
     }
+    
+    public override Dictionary<Vector2Int, Node> GetListNode()
+    {
+        return m_Nodes;
+    }
 }
