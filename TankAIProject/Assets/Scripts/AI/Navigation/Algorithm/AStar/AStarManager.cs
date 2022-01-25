@@ -4,32 +4,74 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class AStarManager : AlgorithmSearch
+public class AStarManager : SearchAlgorithm
 {
-    public bool m_Activate;
-    
+    private VirtualGrid m_ClassGrid;
     private Dictionary<Vector2Int, Node> m_Nodes;
     private AStarSearch m_AStar;
-    
-    void Start()
-    {
-        if (m_Activate)
-        {
-            // preparation AStar features
-            PreparationForAStarFeatures();
 
-            // Algorithm of research of the shortest path (AStar)
-            StartCoroutine(LaunchThreadWithAStar());
-        }
+    #region LaunchSinceEditor
+
+    private AStarEditor m_Editor;
+
+    public void InitializationCordinates(AStarEditor editor)
+    {
+        m_Editor = editor;
+        m_ClassGrid = editor.m_ClassGrid;
     }
     
-    public override void Initialization()
+    public IEnumerator LaunchThreadWithAStar()
     {
+        // Launch one thread each second, or when the previous is finish
+        while (true)
+        {
+            Thread t = new Thread(ImplementedAStarEditor);
+            var temp = Time.realtimeSinceStartup;
+            t.Start();
+                
+            // wait end execution thread
+            // OR 1 second difference between now and the start of the thread
+            while(t.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
+            {
+                yield return null;
+            }
+            //Debug.Log("time execution thread : " + (Time.realtimeSinceStartup - temp));
+        }
+    } 
+    
+    private void ImplementedAStarEditor()
+    {
+        // try move since A point to B point
+        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_Editor.m_Start);
+        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_Editor.m_End);
+        if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
+        {
+            Path path = m_AStar.GetShortestPath(m_Nodes[start], m_Nodes[end]);
+            m_ClassGrid.DrawAStarPath(m_Nodes, m_AStar, path);
+        }
+        else 
+        {
+            if (!m_Nodes.ContainsKey(start))
+            {
+                Debug.Log("Error AStar start incorrect");
+            }
+            if (!m_Nodes.ContainsKey(end))
+            {
+                Debug.Log("Error AStar end incorrect");
+            }
+        }
+    }
+
+    #endregion
+
+    public override void Initialization(VirtualGrid grid)
+    {
+        m_ClassGrid = grid;
         // preparation AStar features
         PreparationForAStarFeatures();
     }
 
-    private void PreparationForAStarFeatures()
+    public void PreparationForAStarFeatures()
     {
         m_Nodes = new Dictionary<Vector2Int,Node>();
         
@@ -68,48 +110,6 @@ public class AStarManager : AlgorithmSearch
             }
         }
         m_AStar = new AStarSearch(new SquareGrid(m_Nodes.Count));
-    }
-    
-    private IEnumerator LaunchThreadWithAStar()
-    {
-        // Launch one thread each second, or when the previous is finish
-        while (true)
-        {
-            Thread t = new Thread(ImplementedAStarEditor);
-            var temp = Time.realtimeSinceStartup;
-            t.Start();
-                
-            // wait end execution thread
-            // OR 1 second difference between now and the start of the thread
-            while(t.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
-            {
-                yield return null;
-            }
-            //Debug.Log("time execution thread : " + (Time.realtimeSinceStartup - temp));
-        }
-    } 
-    
-    private void ImplementedAStarEditor()
-    {
-        // try move since A point to B point
-        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_Start);
-        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_End);
-        if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
-        {
-            Path path = m_AStar.GetShortestPath(m_Nodes[start], m_Nodes[end]);
-            m_ClassGrid.DrawAStarPath(m_Nodes, m_AStar, path);
-        }
-        else 
-        {
-            if (!m_Nodes.ContainsKey(start))
-            {
-                Debug.Log("Error AStar start incorrect");
-            }
-            if (!m_Nodes.ContainsKey(end))
-            {
-                Debug.Log("Error AStar end incorrect");
-            }
-        }
     }
 
     public override void LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)

@@ -3,33 +3,74 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class DijkstraManager : AlgorithmSearch
+public class DijkstraManager : SearchAlgorithm
 {
-    public bool m_Activate;
-    
+    private VirtualGrid m_ClassGrid;
     private Dictionary<Vector2Int, Node> m_Nodes;
     private Graph m_Graph;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (m_Activate)
-        {
-            // preparation Dijsktra features
-            PreparationForDijsktraFeatures();
 
-            // Algorithm of research of the shortest path (Dijsktra)
-            StartCoroutine(LaunchThreadWithDijsktra());
+    #region LaunchSinceEditor
+    
+    private DijsktraEditor m_Editor;
+
+    public void InitializationCordinates(DijsktraEditor editor)
+    {
+        m_Editor = editor;
+        m_ClassGrid = editor.m_ClassGrid;
+    }
+
+    public IEnumerator LaunchThreadWithDijsktra()
+    {
+        // Launch one thread each second, or when the previous is finish
+        while (true)
+        {
+            Thread t = new Thread(ImplementedDijsktraEditor);
+            var temp = Time.realtimeSinceStartup;
+            t.Start();
+                
+            // wait end execution thread
+            // OR 1 second difference between now and the start of the thread
+            while(t.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
+            {
+                yield return null;
+            }
+            //Debug.Log("time execution thread : " + (Time.realtimeSinceStartup - temp));
+        }
+    } 
+    
+    private void ImplementedDijsktraEditor()
+    {
+        // try move since A point to B point
+        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_Editor.m_Start);
+        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_Editor.m_End);
+        if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
+        {
+            Path path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
+            m_ClassGrid.DrawDijkstraPath(path);
+        }
+        else 
+        {
+            if (!m_Nodes.ContainsKey(start))
+            {
+                Debug.Log("Error Dijsktra start incorrect");
+            }
+            if (!m_Nodes.ContainsKey(end))
+            {
+                Debug.Log("Error Dijsktra end incorrect");
+            }
         }
     }
-    
-    public override void Initialization()
+
+    #endregion
+
+    public override void Initialization(VirtualGrid grid)
     {
+        m_ClassGrid = grid;
         // preparation Dijsktra features
         PreparationForDijsktraFeatures();
     }
-
-    private void PreparationForDijsktraFeatures()
+    
+    public void PreparationForDijsktraFeatures()
     {
         m_Nodes = new Dictionary<Vector2Int, Node>();
         
@@ -70,48 +111,6 @@ public class DijkstraManager : AlgorithmSearch
 
         // create graph with the dictionnary of nodes
         m_Graph = new Graph(m_Nodes);
-    }
-    
-    private IEnumerator LaunchThreadWithDijsktra()
-    {
-        // Launch one thread each second, or when the previous is finish
-        while (true)
-        {
-            Thread t = new Thread(ImplementedDijsktraEditor);
-            var temp = Time.realtimeSinceStartup;
-            t.Start();
-                
-            // wait end execution thread
-            // OR 1 second difference between now and the start of the thread
-            while(t.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
-            {
-                yield return null;
-            }
-            //Debug.Log("time execution thread : " + (Time.realtimeSinceStartup - temp));
-        }
-    } 
-    
-    private void ImplementedDijsktraEditor()
-    {
-        // try move since A point to B point
-        Vector2Int start = m_ClassGrid.GetIndexByWorldPosition(m_Start);
-        Vector2Int end = m_ClassGrid.GetIndexByWorldPosition(m_End);
-        if (m_Nodes.ContainsKey(start) && m_Nodes.ContainsKey(end))
-        {
-            Path path = m_Graph.GetShortestPath (m_Nodes[start], m_Nodes[end]);
-            m_ClassGrid.DrawDijkstraPath(path);
-        }
-        else 
-        {
-            if (!m_Nodes.ContainsKey(start))
-            {
-                Debug.Log("Error Dijsktra start incorrect");
-            }
-            if (!m_Nodes.ContainsKey(end))
-            {
-                Debug.Log("Error Dijsktra end incorrect");
-            }
-        }
     }
 
     public override void LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class NavigationManager
+public class NavigationManager : MonoBehaviour
 {
     public DijkstraManager m_DijkstraManager;
     public AStarManager m_AStarManager;
     public VirtualGrid m_ClassGrid;
     
-    private List<AlgorithmSearch> m_ListAlgorithm;
+    private List<SearchAlgorithm> m_ListAlgorithm;
     private int m_AlgorithmMode;
     private Path m_Path;
     
-    public void Initialization()
+    public void Start()
     {
-        m_ListAlgorithm = new List<AlgorithmSearch>();
+        m_ListAlgorithm = new List<SearchAlgorithm>();
         m_ListAlgorithm.Add(m_DijkstraManager);
         m_ListAlgorithm.Add(m_AStarManager);
         m_Path = null;
@@ -23,7 +23,7 @@ public class NavigationManager
 
     public void ChooseAAlgorithmMode(int index)
     {
-        m_ListAlgorithm[index].Initialization();
+        m_ListAlgorithm[index].Initialization(m_ClassGrid);
         m_AlgorithmMode = index;
     }
 
