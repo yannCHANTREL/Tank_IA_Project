@@ -6,6 +6,7 @@ using UnityEngine;
 public class StateMachineManager : MonoBehaviour
 {
     public StateBase m_DefaultStateBase;
+    public StateDataBase m_Data;
     
     private StateBase m_CurrentStateBase;
 
