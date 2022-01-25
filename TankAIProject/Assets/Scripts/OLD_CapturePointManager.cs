@@ -5,7 +5,7 @@ using Complete;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CapturePointManager : MonoBehaviour
+public class OLD_CapturePointManager : MonoBehaviour
 {
     public Slider m_Slider;
     public Image m_FillImage;

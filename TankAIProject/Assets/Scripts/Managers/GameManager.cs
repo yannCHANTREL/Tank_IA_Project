@@ -25,14 +25,23 @@ namespace Complete
         
         public Transform[] m_TeamsSpawn; 
         
+        public float m_MaxRoundTimeInSeconds; 
+        
+        // TODO : Stop the round after that timing, display the time left on the UI
+        
         private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
         private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
         private Team m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
         private Team m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
-        public CapturePointManager m_CapturePointManager;
-        
+        public OLD_CapturePointManager m_CapturePointManager;
+
+        [Header("Coroutine")] 
+        public Text m_Text;
+        private Coroutine m_Coroutine;
+
+        private bool m_IsRoundOver;
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
         private void Start()
@@ -47,6 +56,8 @@ namespace Complete
             m_TeamList.EmptyTeamList();
             m_TeamList.GiveTeamNumber();
             m_TeamList.ResetAllScore();
+
+            m_IsRoundOver = false;
 
             ResetTankValues();
             SpawnAllTanks();
@@ -154,15 +165,19 @@ namespace Complete
             // As soon as the round begins playing let the players control the tanks.
             EnableTankControl ();
 
+            m_Coroutine = StartCoroutine(RoundTimeCoroutine());
+
             // Clear the text from the screen.
             m_MessageText.text = string.Empty;
 
             // While there is not one tank left...
-            while (!OneTeamObtainedRoundScore())
+            while (!OneTeamObtainedRoundScore() && !m_IsRoundOver)
             {
                 // ... return on the next frame.
                 yield return null;
             }
+
+            StopRoundTimeCoroutine();
         }
 
         private IEnumerator RoundEnding ()
@@ -173,8 +188,7 @@ namespace Complete
             // Clear the winner from the previous round.
             m_RoundWinner = null;
 
-            // See if there is a winner now the round is over.
-            m_RoundWinner = GetRoundWinner ();
+            m_RoundWinner = m_IsRoundOver ? GetTeamRoundMaxScore() : GetRoundWinner ();
 
             // If there is a winner, increment their score.
             if (m_RoundWinner != null)
@@ -204,6 +218,11 @@ namespace Complete
         private Team GetGameWinner()
         {
             return m_TeamList.GetGameWinner(m_NumRoundsToWin);
+        }
+
+        private Team GetTeamRoundMaxScore()
+        {
+            return m_TeamList.GetTeamRoundMaxScore();
         }
         
         // Returns a string message to display at the end of each round.
@@ -241,6 +260,30 @@ namespace Complete
         private void DisableTankControl()
         {
             m_TeamList.DisableAllTankControl();
+        }
+
+        private void StopRoundTimeCoroutine()
+        {
+            StopCoroutine(m_Coroutine);
+            m_Text.gameObject.SetActive(false);
+        }
+
+        private IEnumerator RoundTimeCoroutine()
+        {
+            m_Text.gameObject.SetActive(true);
+            float counter = m_MaxRoundTimeInSeconds;
+            float timeToDisplay = 0;
+            while (counter > -0.5f)
+            {
+                counter -= Time.deltaTime;
+                timeToDisplay = counter + 0.5f;
+                m_Text.text = timeToDisplay.ToString("N1");
+
+                yield return null;
+            }
+
+            m_IsRoundOver = true;
+            m_Text.gameObject.SetActive(false);
         }
     }
 }

@@ -132,6 +132,22 @@ public class TeamList : ScriptableObject
 
         return null;
     }
+    
+    public Team GetTeamRoundMaxScore()
+    {
+        int maxScore = -1;
+        Team winner = null;
+        
+        foreach (Team team in m_Teams)
+        {
+            if (team.m_RoundScore > maxScore)
+            {
+                winner = team;
+                maxScore = team.m_RoundScore;
+            }
+        }
+        return winner;
+    }
 
     public string GetScores()
     {
