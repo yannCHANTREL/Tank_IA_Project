@@ -10631,6 +10631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TankIndex: 0
+  m_TeamIndex: 0
 --- !u!114 &7822518353279334600
 MonoBehaviour:
   m_ObjectHideFlags: 0

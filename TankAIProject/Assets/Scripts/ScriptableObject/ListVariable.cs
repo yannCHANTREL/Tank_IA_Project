@@ -5,5 +5,6 @@ using UnityEngine;
 public abstract class ListVariable : ScriptableObject
 {
     public abstract void Reset();
-    public abstract void IncrementSize();
+    public abstract void IncrementTankSize();
+    public abstract void IncrementTeamSize();
 }

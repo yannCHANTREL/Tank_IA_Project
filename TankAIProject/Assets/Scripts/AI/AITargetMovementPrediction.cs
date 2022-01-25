@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIEnemySensing : MonoBehaviour
+public class AITargetMovementPrediction : MonoBehaviour
 {
     public GameObject m_TankTarget;
     public Vector3ListVariable m_TankTargetPos;

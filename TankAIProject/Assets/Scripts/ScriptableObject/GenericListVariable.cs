@@ -10,8 +10,12 @@ public abstract class GenericListVariable<T> : ListVariable
         m_Values = new List<T>();
     }
 
-    public override void IncrementSize()
+    public override void IncrementTankSize()
     {
         m_Values.Add(default(T));
+    }
+    
+    public override void IncrementTeamSize()
+    {
     }
 }

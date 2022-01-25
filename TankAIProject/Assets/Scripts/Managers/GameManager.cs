@@ -67,6 +67,8 @@ namespace Complete
                 Transform spawn = m_TeamsSpawn[i % m_TeamsSpawn.Length];
                 Color teamColor = m_TeamList.GetColorTeam(i);
                 
+                AddTeamValue();
+                
                 // ... For the number of player per team ...
                 for (int j = 0; j < m_TankAmountPerTeam; j++)
                 {
@@ -83,7 +85,11 @@ namespace Complete
                     m_TeamList.AddTankToTeam(tankManager, i);
                     
                     TankIndexManager tankIndexManager = tankManager.m_Instance.GetComponent<TankIndexManager>();
-                    if (tankIndexManager) tankIndexManager.m_TankIndex = index;
+                    if (tankIndexManager)
+                    {
+                        tankIndexManager.m_TankIndex = index;
+                        tankIndexManager.m_TeamIndex = i;
+                    }
                     
                     tankManager.Setup();
                 }
@@ -96,7 +102,11 @@ namespace Complete
 
         private void AddTankValue()
         {
-            foreach (ListVariable lv in m_TankVariableList) { lv.IncrementSize(); }
+            foreach (ListVariable lv in m_TankVariableList) { lv.IncrementTankSize(); }
+        }
+        private void AddTeamValue()
+        {
+            foreach (ListVariable lv in m_TankVariableList) { lv.IncrementTeamSize(); }
         }
         private void SetCameraTargets()
         {
