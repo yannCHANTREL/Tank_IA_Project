@@ -8,7 +8,7 @@ public abstract class SearchAlgorithm : MonoBehaviour
 {
     public abstract void Initialization(VirtualGrid grid);
 
-    public abstract void LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager);
+    public abstract Path LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager);
 
     public abstract Dictionary<Vector2Int, Node> GetListNode();
 }

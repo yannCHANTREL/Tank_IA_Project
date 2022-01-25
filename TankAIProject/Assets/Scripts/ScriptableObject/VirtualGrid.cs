@@ -28,9 +28,15 @@ public class VirtualGrid : ScriptableObject
     private Dictionary<Vector2Int,Node> m_ListLocation;
     private AStarSearch m_AStar;
     private Path m_AStarPath;
+    
+    // NavigationManager needs
+    private bool m_DisplayNavigationPath;
+    private List<Node> m_EntryPath;
+    private List<Node> m_FinalPath;
 
     public void CreateGrid()
     {
+        m_DisplayNavigationPath = false;
         m_DijsktraPath = null;
         m_NodeDiameter = (float) m_GridWorldSize / m_NbNode;
         m_NodeRadius = m_NodeDiameter / 2;
@@ -143,6 +149,11 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
                 {
                     DrawAStarPathChoose();
                 }
+
+                if (m_DisplayNavigationPath)
+                {
+                    DrawNavigationPathChoose();
+                }
             }
         }
     }
@@ -157,6 +168,38 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
         m_ListLocation = listLocation;
         m_AStar = aStar;
         m_AStarPath = path;
+    }
+    
+    public void DrawNavigationPath(List<Node> entryPath, List<Node> finalPath)
+    {
+        m_EntryPath = entryPath;
+        m_FinalPath = finalPath;
+        //Debug.Log("a : " + m_EntryPath.Count);
+        //Debug.Log("b : " + m_FinalPath.Count);
+        m_DisplayNavigationPath = true;
+    }
+    
+    public void DrawNavigationPathChoose()
+    {
+        if (m_EntryPath != null)
+        {
+            foreach (var node in m_EntryPath)
+            {
+                Vector3 worldPoint = Vector2ToVector3(node.position);
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+            }
+        }
+
+        if (m_FinalPath != null)
+        {
+            foreach (var node in m_FinalPath)
+            {
+                Vector3 worldPoint = Vector2ToVector3(node.position);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+            }
+        }
     }
 
     public void DrawAStarPathChoose()

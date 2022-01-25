@@ -112,23 +112,22 @@ public class AStarManager : SearchAlgorithm
         m_AStar = new AStarSearch(new SquareGrid(m_Nodes.Count));
     }
 
-    public override void LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
+    public override Path LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
     {
         if (m_Nodes.ContainsKey(indexStart) && m_Nodes.ContainsKey(indexEnd))
         {
-            navigationManager.path = m_AStar.GetShortestPath(m_Nodes[indexStart], m_Nodes[indexEnd]);
+            return m_AStar.GetShortestPath(m_Nodes[indexStart], m_Nodes[indexEnd]);
         }
-        else 
+        
+        if (!m_Nodes.ContainsKey(indexStart))
         {
-            if (!m_Nodes.ContainsKey(indexStart))
-            {
-                Debug.Log("Error AStar LaunchSearch start incorrect");
-            }
-            if (!m_Nodes.ContainsKey(indexEnd))
-            {
-                Debug.Log("Error AStar LaunchSearch end incorrect");
-            }
+            Debug.Log("Error AStar LaunchSearch start incorrect");
         }
+        if (!m_Nodes.ContainsKey(indexEnd))
+        {
+            Debug.Log("Error AStar LaunchSearch end incorrect");
+        }
+        return null;
     }
     
     public override Dictionary<Vector2Int, Node> GetListNode()

@@ -14,13 +14,16 @@ public class DijsktraEditor : MonoBehaviour
         if (m_Activate)
         {
             DijkstraManager dijkstraManager = gameObject.AddComponent(typeof(DijkstraManager)) as DijkstraManager;
-            dijkstraManager.InitializationCordinates(this);
+            if (dijkstraManager != null)
+            {
+                dijkstraManager.InitializationCordinates(this);
             
-            // preparation Dijsktra features
-            dijkstraManager.PreparationForDijsktraFeatures();
+                // preparation Dijsktra features
+                dijkstraManager.PreparationForDijsktraFeatures();
 
-            // Algorithm of research of the shortest path (Dijsktra)
-            StartCoroutine(dijkstraManager.LaunchThreadWithDijsktra());
+                // Algorithm of research of the shortest path (Dijsktra)
+                StartCoroutine(dijkstraManager.LaunchThreadWithDijsktra());
+            }
         }
     }
 }

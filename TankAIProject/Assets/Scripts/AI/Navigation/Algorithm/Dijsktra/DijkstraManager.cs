@@ -113,23 +113,22 @@ public class DijkstraManager : SearchAlgorithm
         m_Graph = new Graph(m_Nodes);
     }
 
-    public override void LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
+    public override Path LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
     {
         if (m_Nodes.ContainsKey(indexStart) && m_Nodes.ContainsKey(indexEnd))
         {
-            navigationManager.path = m_Graph.GetShortestPath (m_Nodes[indexStart], m_Nodes[indexEnd]);
+            return m_Graph.GetShortestPath (m_Nodes[indexStart], m_Nodes[indexEnd]);
         }
-        else 
+        
+        if (!m_Nodes.ContainsKey(indexStart))
         {
-            if (!m_Nodes.ContainsKey(indexStart))
-            {
-                Debug.Log("Error Dijsktra LaunchSearch start incorrect");
-            }
-            if (!m_Nodes.ContainsKey(indexEnd))
-            {
-                Debug.Log("Error Dijsktra LaunchSearch end incorrect");
-            }
+            Debug.Log("Error Dijsktra LaunchSearch start incorrect");
         }
+        if (!m_Nodes.ContainsKey(indexEnd))
+        {
+            Debug.Log("Error Dijsktra LaunchSearch end incorrect");
+        }
+        return null;
     }
 
     public override Dictionary<Vector2Int, Node> GetListNode()

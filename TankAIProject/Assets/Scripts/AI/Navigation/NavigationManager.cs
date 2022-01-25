@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class NavigationManager : MonoBehaviour
@@ -13,15 +15,25 @@ public class NavigationManager : MonoBehaviour
     private int m_AlgorithmMode;
     
     private Path m_Path;
-    private List<Vector3> m_FinalPath; 
-    
+
     public void Start()
     {
         m_ListAlgorithm = new List<SearchAlgorithm>();
         m_ListAlgorithm.Add(m_DijkstraManager);
         m_ListAlgorithm.Add(m_AStarManager);
         m_Path = null;
-        m_FinalPath = null;
+    }
+
+    public void InitializationForEditor(DijkstraManager dijkstraManager, AStarManager aStarManager, VirtualGrid classGrid)
+    {
+        m_Path = null;
+        m_ClassGrid = classGrid;
+        m_DijkstraManager = dijkstraManager;
+        m_AStarManager = aStarManager;
+        
+        m_ListAlgorithm = new List<SearchAlgorithm>();
+        m_ListAlgorithm.Add(m_DijkstraManager);
+        m_ListAlgorithm.Add(m_AStarManager);
     }
 
     public void ChooseAAlgorithmMode(int index)
@@ -30,72 +42,82 @@ public class NavigationManager : MonoBehaviour
         m_AlgorithmMode = index;
     }
 
-    public IEnumerator LaunchAlgorithmSearch(Vector3 posStart, Vector3 posEnd)
+    public async Task<Tuple<List<Node>,List<Node>>> LaunchAlgorithmSearch(Vector3 posStart, Vector3 posEnd)
     {
         Vector2Int indexStart = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posStart));
         Vector2Int indexEnd = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posEnd));
 
-        Thread thread = new Thread(() => m_ListAlgorithm[m_AlgorithmMode].LaunchSearch(indexStart, indexEnd, this));
-        float temp = Time.realtimeSinceStartup;
-        thread.Start();
-
-        // wait end execution thread
-        // OR 1 second difference between now and the start of the thread
-        while(thread.IsAlive || (Time.realtimeSinceStartup - temp) < 1.0f)
-        {
-            yield return null;
-        }
-
-        List<Node> path = CalculFinalPath();
-        m_FinalPath = new List<Vector3>();
-        foreach (var node in path)
-        {
-            m_FinalPath.Add(new Vector3(node.position.x, 0, node.position.y));
-        }
+        // Get the path
+        Path thread = await Task.Run(() => m_ListAlgorithm[m_AlgorithmMode].LaunchSearch(indexStart, indexEnd, this));
+        List<Node> entryPath = thread.nodes;
         
-        yield return 1;
+        // Get the final path (clean)
+        List<Node> finalPath = CalculFinalPath(entryPath);
+        Tuple<List<Node>, List<Node>> ret = new Tuple<List<Node>, List<Node>>(entryPath,finalPath);
+        return ret;
     }
 
-    public List<Node> CalculFinalPath()
+    public List<Node> CalculFinalPath(List<Node> entryPath)
     {
-        List<Node> entryPath = path.nodes;
+        List<Node> ret = new List<Node>();
         int size = entryPath.Count;
 
-        if (path == null || size < 2)
+        if (entryPath == null || size < 2)
         {
-            return null;
+            Debug.Log("A : " + size);
+            return ret;
+        }
+
+        Node current = entryPath[1];
+        if (size == 2)
+        {
+            Debug.Log("B");
+            ret.Add(current);
+            return ret;
         }
 
         float nodeDiameter = m_ClassGrid.nodeDiameter;
         float nodeHalfDiagonale = (nodeDiameter * Mathf.Sqrt(2)) / 2;
             
-        List<Node> finalNodes = new List<Node>();
         Node nodeStart = entryPath[0];
-        Node current = entryPath[1];
-        
         Node nodeEnd = null;
         Vector3 line = Vector3.zero;
-        List<Node> nodes = null;
+        List<Node> nodesHasCheck = null;
+        
+        //Debug.Log("nodeHalfDiagonale : " + nodeHalfDiagonale);
 
         for (int i = 2; i < size; i++)
         {
             nodeEnd = entryPath[i];
-            line = nodeEnd.position - nodeStart.position;
-            nodes = FindNodeNeedVerification(nodeStart, nodeEnd);
             
-            if (nodes.Count == 0)
+            if (i + 1 == size)
+            {
+                ret.Add(nodeEnd); // last case => save this case
+                break;
+            }
+            
+            nodesHasCheck = FindNodeNeedVerification(nodeStart, nodeEnd, entryPath);
+            if (nodesHasCheck.Count == 0)
             {
                 current = nodeEnd; // not blocker => not save this case
-            }
+            } 
             else
             {
                 bool canPass = true;
-                foreach (var node in nodes)
+                foreach (var node in nodesHasCheck)
                 {
                     float distanceBtwNodeAndLine = CalcDistPointLine(node.position, nodeStart.position, nodeEnd.position);
+                    //Debug.Log("distanceBtwNodeAndLine : " + distanceBtwNodeAndLine);
+                    if (node.stateNode == -1)
+                    {
+                        Debug.Log("position : " + node.position.x + "," + node.position.y);
+                        Debug.Log("distanceBtwNodeAndLine : " + distanceBtwNodeAndLine);
+                    }
+                    //Debug.Log("state : " + node.stateNode);
                     if (distanceBtwNodeAndLine <= nodeHalfDiagonale && node.stateNode == -1)
                     {
-                        finalNodes.Add(current); // blocker => save this case
+                        Debug.Log("D");
+                        ret.Add(current); // blocker => save this case
                         nodeStart = current;
                         current = nodeEnd;
                         canPass = false;
@@ -109,17 +131,17 @@ public class NavigationManager : MonoBehaviour
             }
         }
         
-        return finalNodes;
+        return ret;
     }
 
-    private List<Node> FindNodeNeedVerification(Node nodeStart, Node nodeEnd)
+    private List<Node> FindNodeNeedVerification(Node nodeStart, Node nodeEnd, List<Node> entryPath)
     {
         Dictionary<Vector2Int, Node> nodes = m_ListAlgorithm[m_AlgorithmMode].GetListNode();
         List<Node> ret = new List<Node>();
 
         foreach (var node in nodes)
         {
-            if (node.Key.x >= nodeStart.position.x && node.Key.x <= nodeEnd.position.x && node.Key.y >= nodeStart.position.y && node.Key.y <= nodeEnd.position.y && !path.nodes.Contains(node.Value))
+            if (node.Key.x >= nodeStart.position.x && node.Key.x <= nodeEnd.position.x && node.Key.y >= nodeStart.position.y && node.Key.y <= nodeEnd.position.y && !entryPath.Contains(node.Value))
             {
                 ret.Add(node.Value);
             }
@@ -137,25 +159,5 @@ public class NavigationManager : MonoBehaviour
     float CalcDistPointLine(Vector3 A, Vector3 B, Vector3 C)
     {
         return (A - NearestPointFromLine(A, B, C)).magnitude;
-    }
-    
-    public Path path
-    {
-        get
-        {
-            return m_Path;
-        }
-        set
-        {
-            m_Path = value;
-        }
-    }
-    
-    public List<Vector3> finalPath
-    {
-        get
-        {
-            return m_FinalPath;
-        }
     }
 }
