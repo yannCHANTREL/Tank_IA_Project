@@ -3459,7 +3459,7 @@ GameObject:
   - component: {fileID: 1840771906}
   - component: {fileID: 1840771910}
   m_Layer: 5
-  m_Name: UI
+  m_Name: UI Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3561,6 +3561,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TitleScreen: {fileID: 268218876}
   m_OptionScreen: {fileID: 571762413}
+  m_GameSceneName: Game
 --- !u!1 &1862568843
 GameObject:
   m_ObjectHideFlags: 0

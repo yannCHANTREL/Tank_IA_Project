@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
 {
     public GameObject m_TitleScreen;
     public GameObject m_OptionScreen;
+    [Space(10)] 
+    public string m_GameSceneName; 
 
     private void Start()
     {
@@ -29,7 +31,7 @@ public class UIManager : MonoBehaviour
 
     public void LoadGameScene()
     {
-        SceneManager.LoadScene("Scenes/Game");
+        SceneManager.LoadScene(m_GameSceneName);
     }
     
 }
