@@ -106,6 +106,18 @@ MonoBehaviour:
   m_SensedTank: {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_DetectionRange: 20
+--- !u!114 &-7734663040450953690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea21bb9b29134e41aa54dea662039b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-270030048353792997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +165,22 @@ MonoBehaviour:
   m_MaxStepAngle: 3.6
   m_MaxStepDist: 12
   m_MaxEstimationStep: 1000
+--- !u!114 &1002921781810151909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23949b450cfe35f4d84fbee2acdaef95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DijkstraManager: {fileID: 8013724432126141267}
+  m_AStarManager: {fileID: 7912885149352023125}
+  m_NavMeshManager: {fileID: -7734663040450953690}
+  m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
 --- !u!114 &7912885149352023125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +191,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5772167c9337c02459eac3cc38d9b0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8013724432126141267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d1b95b80e7344429a39eafbd28372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8785127412315307360
