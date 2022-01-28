@@ -9,6 +9,7 @@ public class NavigationManager : MonoBehaviour
 {
     public DijkstraManager m_DijkstraManager;
     public AStarManager m_AStarManager;
+    public NavMeshManager m_NavMeshManager;
     public VirtualGrid m_ClassGrid;
     
     private List<SearchAlgorithm> m_ListAlgorithm;
@@ -19,6 +20,7 @@ public class NavigationManager : MonoBehaviour
         m_ListAlgorithm = new List<SearchAlgorithm>();
         m_ListAlgorithm.Add(m_DijkstraManager);
         m_ListAlgorithm.Add(m_AStarManager);
+        m_ListAlgorithm.Add(m_NavMeshManager);
     }
 
     public void InitializationForEditor(DijkstraManager dijkstraManager, AStarManager aStarManager, VirtualGrid classGrid)
@@ -40,10 +42,11 @@ public class NavigationManager : MonoBehaviour
 
     public async Task<List<Vector3>> FindPath(Vector3 posStart, Vector3 posEnd)
     {
+        List<Vector3> ret = new List<Vector3>();
+        
         Tuple<List<Node>, List<Node>> globalPath = await LaunchAlgorithmSearch(posStart, posEnd);
         List<Node> results = globalPath.Item2;
-        List<Vector3> ret = new List<Vector3>();
-
+        
         foreach (var result in results)
         {
             ret.Add(new Vector3(result.position.x, 0, result.position.y));
@@ -54,11 +57,8 @@ public class NavigationManager : MonoBehaviour
 
     public async Task<Tuple<List<Node>,List<Node>>> LaunchAlgorithmSearch(Vector3 posStart, Vector3 posEnd)
     {
-        Vector2Int indexStart = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posStart));
-        Vector2Int indexEnd = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posEnd));
-
         // Get the path
-        Path thread = await Task.Run(() => m_ListAlgorithm[m_AlgorithmMode].LaunchSearch(indexStart, indexEnd, this));
+        Path thread = await Task.Run(() => m_ListAlgorithm[m_AlgorithmMode].LaunchSearch(posStart, posEnd));
         List<Node> entryPath = thread.nodes;
         
         // Get the final path (clean)

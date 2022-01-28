@@ -20,6 +20,8 @@ public class TestNavMesh : MonoBehaviour
          if (Physics.Raycast(ray, out hit))
          {
             agent.SetDestination(hit.point);
+            NavMeshPath p = agent.path;
+            Vector3[] v = p.corners;
          }
       }
    }

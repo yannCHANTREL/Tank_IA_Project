@@ -75,7 +75,7 @@ public class AStarManager : SearchAlgorithm
     {
         m_Nodes = new Dictionary<Vector2Int,Node>();
         
-        // create locations
+        // create nodes
         for (int i = 0; i < m_ClassGrid.gridSize; i++)
         {
             for (int j = 0; j < m_ClassGrid.gridSize; j++)
@@ -85,35 +85,38 @@ public class AStarManager : SearchAlgorithm
             }
         }
         
-        // add state walls and forest and several neighbors
-        foreach (var location in m_Nodes)
+        // create all neighbors for each nodes
+        foreach (var node in m_Nodes)
         {
-            int posX = location.Key.x;
-            int posY = location.Key.y;
+            int posX = node.Key.x;
+            int posY = node.Key.y;
 
             Node neighbors1, neighbors2, neighbors3, neighbors4;
             if (m_Nodes.TryGetValue(new Vector2Int(posX, posY - 1), out neighbors1))
             {
-                location.Value.AddNeighbors(neighbors1);
+                node.Value.AddNeighbors(neighbors1);
             }
             if (m_Nodes.TryGetValue(new Vector2Int(posX + 1, posY), out neighbors2))
             {
-                location.Value.AddNeighbors(neighbors2);
+                node.Value.AddNeighbors(neighbors2);
             }
             if (m_Nodes.TryGetValue(new Vector2Int(posX, posY + 1), out neighbors3))
             {
-                location.Value.AddNeighbors(neighbors3);
+                node.Value.AddNeighbors(neighbors3);
             }
             if (m_Nodes.TryGetValue(new Vector2Int(posX - 1, posY), out neighbors4))
             {
-                location.Value.AddNeighbors(neighbors4);
+                node.Value.AddNeighbors(neighbors4);
             }
         }
         m_AStar = new AStarSearch(new SquareGrid(m_Nodes.Count));
     }
 
-    public override Path LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
+    public override Path LaunchSearch(Vector3 posStart, Vector3 posEnd)
     {
+        Vector2Int indexStart = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posStart));
+        Vector2Int indexEnd = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posEnd));
+        
         if (m_Nodes.ContainsKey(indexStart) && m_Nodes.ContainsKey(indexEnd))
         {
             return m_AStar.GetShortestPath(m_Nodes[indexStart], m_Nodes[indexEnd]);

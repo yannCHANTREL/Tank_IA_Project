@@ -37,10 +37,10 @@ public class NavigationEditor : MonoBehaviour
     private IEnumerator LaunchInBoucle(NavigationManager navigationManager)
     {
        while (true)
-        {
-            LaunchOnce(navigationManager);
-            yield return new WaitUntil(() => m_Finish);
-        }
+       {
+           LaunchOnce(navigationManager);
+           yield return new WaitUntil(() => m_Finish);
+       }
     }
     
     private async void LaunchOnce(NavigationManager navigationManager)
@@ -53,15 +53,4 @@ public class NavigationEditor : MonoBehaviour
         m_ClassGrid.DrawNavigationPath(globalPath.Item1, globalPath.Item2);
         m_Finish = true;
     }
-
-    /*
-     List<Vector3> finalPath = navigationManager.CleanPath();
-     
-     List<Vector3> finalPath = new List<Vector3>();
-        foreach (var node in entryPath)
-        {
-            finalPath.Add(new Vector3(node.position.x, 0, node.position.y));
-        }
-     
-     */
 }

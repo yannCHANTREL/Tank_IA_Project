@@ -113,8 +113,11 @@ public class DijkstraManager : SearchAlgorithm
         m_Graph = new Graph(m_Nodes);
     }
 
-    public override Path LaunchSearch(Vector2Int indexStart, Vector2Int indexEnd, NavigationManager navigationManager)
+    public override Path LaunchSearch(Vector3 posStart, Vector3 posEnd)
     {
+        Vector2Int indexStart = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posStart));
+        Vector2Int indexEnd = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posEnd));
+        
         if (m_Nodes.ContainsKey(indexStart) && m_Nodes.ContainsKey(indexEnd))
         {
             return m_Graph.GetShortestPath (m_Nodes[indexStart], m_Nodes[indexEnd]);
