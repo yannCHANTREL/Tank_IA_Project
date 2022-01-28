@@ -54,9 +54,9 @@ public class Path
         for ( int i = 0; i < m_Nodes.Count; i++ )
         {
             Node node = m_Nodes [ i ];
-            for ( int j = 0; j < node.connections.Count; j++ )
+            for ( int j = 0; j < node.neighbors.Count; j++ )
             {
-                Node connection = node.connections [ j ];
+                Node connection = node.neighbors [ j ];
 				
                 // Don't calcualte calculated nodes
                 if ( m_Nodes.Contains ( connection ) && !calculated.Contains ( connection ) )

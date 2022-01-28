@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6475975a2d2f3f40876f8f1c0135782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6817290288290990129
+--- !u!114 &-8971833773620335881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,6 +153,18 @@ MonoBehaviour:
   m_MaxStepAngle: 3.6
   m_MaxStepDist: 12
   m_MaxEstimationStep: 1000
+--- !u!114 &7912885149352023125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5772167c9337c02459eac3cc38d9b0c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8785127412315307360
 MonoBehaviour:
   m_ObjectHideFlags: 0

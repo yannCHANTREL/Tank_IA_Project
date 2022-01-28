@@ -12,7 +12,7 @@ public class Node
     /// <summary>
     /// The connections (neighbors).
     /// </summary>
-    protected List<Node> m_Connections = new List<Node>();
+    protected List<Node> m_Neighbors = new List<Node>();
 
     private int m_StateNode;
     private Vector2 m_Position;
@@ -25,29 +25,21 @@ public class Node
 
     public void AddNeighbors(Node nodeNeighbors)
     {
-        m_Connections.Add(nodeNeighbors);
+        m_Neighbors.Add(nodeNeighbors);
     }
 
     /// <summary>
     /// Gets the connections (neighbors).
     /// </summary>
     /// <value>The connections.</value>
-    public virtual List<Node> connections
+    public virtual List<Node> neighbors
     {
         get
         {
-            return m_Connections;
+            return m_Neighbors;
         }
     }
 
-    public Node this[int index]
-    {
-        get
-        {
-            return m_Connections[index];
-        }
-    }
-    
     public int stateNode
     {
         get

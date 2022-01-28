@@ -25,12 +25,18 @@ public class VirtualGrid : ScriptableObject
     private Path m_DijsktraPath;
     
     // AStar needs
-    private Dictionary<Vector2Int,Location> m_ListLocation;
+    private Dictionary<Vector2Int,Node> m_ListLocation;
     private AStarSearch m_AStar;
-    private FinalPath m_AStarPath;
+    private Path m_AStarPath;
+    
+    // NavigationManager needs
+    private bool m_DisplayNavigationPath;
+    private List<Node> m_EntryPath;
+    private List<Node> m_FinalPath;
 
     public void CreateGrid()
     {
+        m_DisplayNavigationPath = false;
         m_DijsktraPath = null;
         m_NodeDiameter = (float) m_GridWorldSize / m_NbNode;
         m_NodeRadius = m_NodeDiameter / 2;
@@ -143,6 +149,11 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
                 {
                     DrawAStarPathChoose();
                 }
+
+                if (m_DisplayNavigationPath)
+                {
+                    DrawNavigationPathChoose();
+                }
             }
         }
     }
@@ -152,19 +163,49 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
         m_DijsktraPath = path;
     }
     
-    public void DrawAStarPath(Dictionary<Vector2Int,Location> listLocation, AStarSearch aStar, FinalPath path)
+    public void DrawAStarPath(Dictionary<Vector2Int,Node> listLocation, AStarSearch aStar, Path path)
     {
         m_ListLocation = listLocation;
         m_AStar = aStar;
         m_AStarPath = path;
     }
+    
+    public void DrawNavigationPath(List<Node> entryPath, List<Node> finalPath)
+    {
+        m_EntryPath = entryPath;
+        m_FinalPath = finalPath;
+        m_DisplayNavigationPath = true;
+    }
+    
+    public void DrawNavigationPathChoose()
+    {
+        if (m_EntryPath != null)
+        {
+            foreach (var node in m_EntryPath)
+            {
+                Vector3 worldPoint = Vector2ToVector3(node.position);
+                Gizmos.color = Color.green;
+                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+            }
+        }
+
+        if (m_FinalPath != null)
+        {
+            foreach (var node in m_FinalPath)
+            {
+                Vector3 worldPoint = Vector2ToVector3(node.position);
+                Gizmos.color = Color.magenta;
+                Gizmos.DrawCube(worldPoint, Vector3.one * (m_NodeDiameter - 0.1f));
+            }
+        }
+    }
 
     public void DrawAStarPathChoose()
     {
-        List<Location> listLocations = m_AStarPath.locations;
+        List<Node> listNodes = m_AStarPath.nodes;
         
         // Display the grid in black and all the location go through to find the path
-        Location ptr = null;
+        Node ptr = null;
         foreach (var location in m_ListLocation)
         {
             if (m_AStar.m_CameFrom != null && m_AStar.m_CameFrom.TryGetValue(location.Value, out ptr))
@@ -176,7 +217,7 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
         }
         
         // Display the path choose
-        foreach (var location in listLocations)
+        foreach (var location in listNodes)
         {
             Vector3 worldPoint = Vector2ToVector3(location.position);
             Gizmos.color = Color.cyan;
@@ -208,6 +249,14 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
         get
         {
             return m_GridSize;
+        }
+    }
+
+    public float nodeDiameter
+    {
+        get
+        {
+            return m_NodeDiameter;
         }
     }
 }
