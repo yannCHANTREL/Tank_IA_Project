@@ -16,11 +16,6 @@ public class Idle : StateBase
 
     protected override void Execute(StateMachineManager stateMachineManager)
     {
-        CaptureData data = (CaptureData)stateMachineManager.m_Data;
-        
-        if (data.m_Value == 0) return;
-        
-        data.m_Value -= Time.deltaTime * 100;
-        data.UpdateSlider();
+        Debug.Log("Idle");
     }
 }

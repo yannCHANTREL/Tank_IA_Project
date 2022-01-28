@@ -172,7 +172,7 @@ namespace Complete
             m_MessageText.text = string.Empty;
 
             // While there is not one tank left...
-            while (!OneTeamObtainedRoundScore() && !m_IsRoundOver)
+            while (!OneTeamObtainedCaptureScore() && !m_IsRoundOver)
             {
                 // ... return on the next frame.
                 yield return null;
@@ -207,14 +207,14 @@ namespace Complete
             yield return m_EndWait;
         }
 
-        private bool OneTeamObtainedRoundScore()
+        private bool OneTeamObtainedCaptureScore()
         {
-            return m_TeamList.OneTeamObtainedRoundScore(m_RoundScoreForWin);
+            return m_TeamList.OneTeamObtainedCaptureScore(m_RoundScoreForWin);
         }
 
         private Team GetRoundWinner()
         {
-            return m_TeamList.GetTeamRoundWinner(m_RoundScoreForWin);
+            return m_TeamList.GetTeamCaptureWinner(m_RoundScoreForWin);
         }
 
         private Team GetGameWinner()

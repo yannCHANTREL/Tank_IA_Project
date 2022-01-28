@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e1b6ae62ada254942b4c1408f08cdf49, type: 3}
-  m_Name: Entering
+  m_Name: Triggered
   m_EditorClassIdentifier: 
   m_Transitions:
   - {fileID: 11400000, guid: 96f89394aad5cf348b720a7cb6538d55, type: 2}

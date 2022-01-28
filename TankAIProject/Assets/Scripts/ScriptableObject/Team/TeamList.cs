@@ -101,22 +101,22 @@ public class TeamList : ScriptableObject
         }
     }
     
-    public bool OneTeamObtainedRoundScore(int value)
+    public bool OneTeamObtainedCaptureScore(int value)
     {
         foreach (Team team in m_Teams)
         {
-            if (team.HasRoundScore(value))
+            if (team.HasCaptureScore(value))
                 return true;
         }
 
         return false;
     }
 
-    public Team GetTeamRoundWinner(int value)
+    public Team GetTeamCaptureWinner(int value)
     {
         foreach (Team team in m_Teams)
         {
-            if (team.HasRoundScore(value))
+            if (team.HasCaptureScore(value))
                 return team;
         }
         
@@ -135,20 +135,37 @@ public class TeamList : ScriptableObject
     
     public Team GetTeamRoundMaxScore()
     {
+        if (AreAllTeamHaveTheSamePoint())
+        {
+            return null;
+        }
+        
         int maxScore = -1;
         Team winner = null;
         
         foreach (Team team in m_Teams)
         {
-            if (team.m_RoundScore > maxScore)
+            if (team.m_CaptureScore > maxScore)
             {
                 winner = team;
-                maxScore = team.m_RoundScore;
+                maxScore = team.m_CaptureScore;
             }
         }
         return winner;
     }
 
+    private bool AreAllTeamHaveTheSamePoint()
+    {
+        int currentScore = m_Teams[0].m_CaptureScore;
+        foreach (Team team in m_Teams)
+        {
+            if (team.m_CaptureScore != currentScore)
+                return false;
+        }
+
+        return true;
+    }
+    
     public string GetScores()
     {
         string text = "";

@@ -15,5 +15,8 @@ public class Start : StateBase
     { }
 
     protected override void Execute(StateMachineManager stateMachineManager)
-    { }
+    {
+        Debug.Log("Start");
+
+    }
 }

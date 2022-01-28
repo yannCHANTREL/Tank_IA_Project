@@ -8,6 +8,6 @@ public class IsCapturing : TransitionBase
     public override bool IsValid(StateMachineManager stateMachineManager)
     {
         CaptureData data = (CaptureData)stateMachineManager.m_Data;
-        return data.GetTeamCapturing() != 0;
+        return data.GetTeamCapturingNumber() != 0;
     }
 }

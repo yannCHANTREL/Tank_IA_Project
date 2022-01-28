@@ -16,5 +16,7 @@ public class Triggered : StateBase
     { }
 
     protected override void Execute(StateMachineManager stateMachineManager)
-    { }
+    {
+        Debug.Log("Triggered");
+    }
 }

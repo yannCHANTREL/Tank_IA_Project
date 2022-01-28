@@ -15,7 +15,7 @@ public class Team : ScriptableObject
     
     public List<TankManager> m_TeamTank;
 
-    public bool HasRoundScore(int value)
+    public bool HasCaptureScore(int value)
     {
         return m_CaptureScore == value;
     }

@@ -15,5 +15,7 @@ public class Finished : StateBase
     { }
 
     protected override void Execute(StateMachineManager stateMachineManager)
-    { }
+    {
+        Debug.Log("Finished");
+    }
 }
