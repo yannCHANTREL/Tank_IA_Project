@@ -19,4 +19,4 @@ MonoBehaviour:
   m_GridWorldSize: 100
   m_NbNode: 60
   m_PrefabTankCollider: {fileID: 6507708, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
-  m_ActivateGizmos: 1
+  m_ActivateGizmos: 0

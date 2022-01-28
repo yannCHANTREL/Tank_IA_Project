@@ -14,19 +14,15 @@ public class NavigationManager : MonoBehaviour
     private List<SearchAlgorithm> m_ListAlgorithm;
     private int m_AlgorithmMode;
     
-    private Path m_Path;
-
     public void Start()
     {
         m_ListAlgorithm = new List<SearchAlgorithm>();
         m_ListAlgorithm.Add(m_DijkstraManager);
         m_ListAlgorithm.Add(m_AStarManager);
-        m_Path = null;
     }
 
     public void InitializationForEditor(DijkstraManager dijkstraManager, AStarManager aStarManager, VirtualGrid classGrid)
     {
-        m_Path = null;
         m_ClassGrid = classGrid;
         m_DijkstraManager = dijkstraManager;
         m_AStarManager = aStarManager;

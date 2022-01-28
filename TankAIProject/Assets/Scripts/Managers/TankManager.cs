@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Complete
 {
@@ -32,6 +33,7 @@ namespace Complete
 
         public void Setup ()
         {
+            m_Instance.AddComponent<NavMeshAgent>();
             // Get references to the components.
             m_Movement = m_Instance.GetComponent<TankMovement> ();
             m_Shooting = m_Instance.GetComponent<TankShooting> ();
