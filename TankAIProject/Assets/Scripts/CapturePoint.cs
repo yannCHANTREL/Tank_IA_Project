@@ -9,17 +9,32 @@ public class CapturePoint : MonoBehaviour
 {
     public CaptureData m_CaptureData;
     
-    private bool m_DidOnce = false;
-    
     public Slider m_Slider;
     public Image m_FillImage;
+    public Text m_ScoreText;
+
+    public TeamList m_TeamList;
     
+    private bool m_DidOnce = false;
+
     private void Start()
     {
-        m_CaptureData.ReferenceSliderAndImage(m_Slider, m_FillImage);
-        
+        m_CaptureData.Init(m_Slider, m_FillImage, UpdateScoreText);
+
         m_CaptureData.m_PlayerNumbersPerTeam = new Dictionary<int, int>();
         m_CaptureData.InitDictionnary();
+        
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        string scoreText = string.Empty;
+        foreach (Team team in m_TeamList.m_Teams)
+        {
+            scoreText += team.GetColoredRoundScoreText() + "\n";
+        }
+        m_ScoreText.text = scoreText;
     }
 
     private void OnTriggerEnter(Collider other)

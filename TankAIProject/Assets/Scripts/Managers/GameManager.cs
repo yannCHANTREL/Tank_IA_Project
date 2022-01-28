@@ -279,7 +279,7 @@ namespace Complete
             {
                 counter -= Time.deltaTime;
                 timeToDisplay = counter + 0.5f;
-                m_Text.text = timeToDisplay.ToString("N1");
+                m_Text.text = timeToDisplay.ToString("N0");
 
                 yield return null;
             }

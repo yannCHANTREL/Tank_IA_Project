@@ -26,7 +26,17 @@ public class Team : ScriptableObject
     }
     public string GetColoredTeamText()
     {
-        return "<color=#" + ColorUtility.ToHtmlStringRGB(m_TeamColor) + ">TEAM " + m_TeamNumber + "</color>";
+        return GetColoredText("TEAM " + m_TeamNumber);
+    }
+
+    public string GetColoredRoundScoreText()
+    {
+        return GetColoredText(m_CaptureScore.ToString());
+    }
+
+    private string GetColoredText(string text)
+    {
+        return "<color=#" + ColorUtility.ToHtmlStringRGB(m_TeamColor) + ">" + text + "</color>";
     }
 
     public void AddTank(TankManager tank)

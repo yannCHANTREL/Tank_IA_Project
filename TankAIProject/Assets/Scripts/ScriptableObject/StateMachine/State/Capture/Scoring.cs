@@ -27,6 +27,7 @@ public class Scoring : StateBase
         if (m_SavedTime >= m_IntervalScoreSeconds)
         {
             data.m_TeamList.IncrementCaptureScore(data.m_CurrentTeamCapturing - 1, m_ScoreIncrement);
+            data.UpdateScoreText();
             m_SavedTime = 0;
         }
     }

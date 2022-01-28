@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Complete;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "State Machine/Data/Capture")]
@@ -29,10 +31,13 @@ public class CaptureData : StateDataBase
     [HideInInspector] public Slider m_Slider;
     [HideInInspector] public Image m_FillImage;
 
-    public void ReferenceSliderAndImage(Slider slider, Image image)
+    private Action m_UpdateScoreText;
+
+    public void Init(Slider slider, Image image, Action updateScoreAction)
     {
         m_Slider = slider;
         m_FillImage = image;
+        m_UpdateScoreText = updateScoreAction;
     }
     
     public void ChangeFillColor()
@@ -42,6 +47,11 @@ public class CaptureData : StateDataBase
     public void UpdateSlider()
     {
         m_Slider.value = m_Value;
+    }
+
+    public void UpdateScoreText()
+    {
+        m_UpdateScoreText.Invoke();
     }
 
     public void TriggerEnter(Collider other)
@@ -115,6 +125,7 @@ public class CaptureData : StateDataBase
         m_CurrentTeamCapturing = 0;
         
         InitDictionnary();
+        UpdateScoreText();
         
         m_Slider.value = m_Value;
     }
