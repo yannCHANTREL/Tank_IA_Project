@@ -639,7 +639,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
   m_Start: {x: 12, y: 0, z: 20}
-  m_End: {x: 14, y: 0, z: 40}
+  m_End: {x: 5, y: 0, z: 39}
   m_Activate: 1
 --- !u!1 &828111198
 GameObject:

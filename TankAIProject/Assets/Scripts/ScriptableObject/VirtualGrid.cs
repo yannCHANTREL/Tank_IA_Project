@@ -174,8 +174,6 @@ public Vector3 Vector2ToVector3(Vector2 vect2)
     {
         m_EntryPath = entryPath;
         m_FinalPath = finalPath;
-        //Debug.Log("a : " + m_EntryPath.Count);
-        //Debug.Log("b : " + m_FinalPath.Count);
         m_DisplayNavigationPath = true;
     }
     

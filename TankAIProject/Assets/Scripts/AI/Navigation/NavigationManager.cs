@@ -42,6 +42,20 @@ public class NavigationManager : MonoBehaviour
         m_AlgorithmMode = index;
     }
 
+    public async Task<List<Vector3>> FindPath(Vector3 posStart, Vector3 posEnd)
+    {
+        Tuple<List<Node>, List<Node>> globalPath = await LaunchAlgorithmSearch(posStart, posEnd);
+        List<Node> results = globalPath.Item2;
+        List<Vector3> ret = new List<Vector3>();
+
+        foreach (var result in results)
+        {
+            ret.Add(new Vector3(result.position.x, 0, result.position.y));
+        }
+
+        return ret;
+    }
+
     public async Task<Tuple<List<Node>,List<Node>>> LaunchAlgorithmSearch(Vector3 posStart, Vector3 posEnd)
     {
         Vector2Int indexStart = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(posStart));
@@ -64,14 +78,12 @@ public class NavigationManager : MonoBehaviour
 
         if (entryPath == null || size < 2)
         {
-            Debug.Log("A : " + size);
             return ret;
         }
 
         Node current = entryPath[1];
         if (size == 2)
         {
-            Debug.Log("B");
             ret.Add(current);
             return ret;
         }
@@ -80,11 +92,8 @@ public class NavigationManager : MonoBehaviour
         float nodeHalfDiagonale = (nodeDiameter * Mathf.Sqrt(2)) / 2;
             
         Node nodeStart = entryPath[0];
-        Node nodeEnd = null;
-        Vector3 line = Vector3.zero;
-        List<Node> nodesHasCheck = null;
-        
-        //Debug.Log("nodeHalfDiagonale : " + nodeHalfDiagonale);
+        Node nodeEnd;
+        List<Node> nodesHasCheck;
 
         for (int i = 2; i < size; i++)
         {
@@ -107,16 +116,8 @@ public class NavigationManager : MonoBehaviour
                 foreach (var node in nodesHasCheck)
                 {
                     float distanceBtwNodeAndLine = CalcDistPointLine(node.position, nodeStart.position, nodeEnd.position);
-                    //Debug.Log("distanceBtwNodeAndLine : " + distanceBtwNodeAndLine);
-                    if (node.stateNode == -1)
-                    {
-                        Debug.Log("position : " + node.position.x + "," + node.position.y);
-                        Debug.Log("distanceBtwNodeAndLine : " + distanceBtwNodeAndLine);
-                    }
-                    //Debug.Log("state : " + node.stateNode);
                     if (distanceBtwNodeAndLine <= nodeHalfDiagonale && node.stateNode == -1)
                     {
-                        Debug.Log("D");
                         ret.Add(current); // blocker => save this case
                         nodeStart = current;
                         current = nodeEnd;
@@ -139,9 +140,18 @@ public class NavigationManager : MonoBehaviour
         Dictionary<Vector2Int, Node> nodes = m_ListAlgorithm[m_AlgorithmMode].GetListNode();
         List<Node> ret = new List<Node>();
 
+        float startX = nodeStart.position.x;
+        float startY = nodeStart.position.y;
+        float endX = nodeEnd.position.x;
+        float endY = nodeEnd.position.y;
+
+        float nodeX, nodeY;
+        
         foreach (var node in nodes)
         {
-            if (node.Key.x >= nodeStart.position.x && node.Key.x <= nodeEnd.position.x && node.Key.y >= nodeStart.position.y && node.Key.y <= nodeEnd.position.y && !entryPath.Contains(node.Value))
+            nodeX = node.Value.position.x;
+            nodeY = node.Value.position.y;
+            if (((nodeX >= startX && nodeX <= endX) || (nodeX >= endX && nodeX <= startX)) && ((nodeY >= startY && nodeY <= endY) || (nodeY >= endY && nodeY <= startY)) && !entryPath.Contains(node.Value))
             {
                 ret.Add(node.Value);
             }

@@ -36,11 +36,11 @@ public class NavigationEditor : MonoBehaviour
 
     private IEnumerator LaunchInBoucle(NavigationManager navigationManager)
     {
-       // while (true)
-        //{
+       while (true)
+        {
             LaunchOnce(navigationManager);
             yield return new WaitUntil(() => m_Finish);
-        //}
+        }
     }
     
     private async void LaunchOnce(NavigationManager navigationManager)
