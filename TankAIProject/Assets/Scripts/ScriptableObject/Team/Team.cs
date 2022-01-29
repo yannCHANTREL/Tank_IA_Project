@@ -11,7 +11,7 @@ public class Team : ScriptableObject
     public bool m_AI;
 
     public int m_RoundScore;
-    public int m_CaptureScore;
+    public float m_CaptureScore;
     
     public List<TankManager> m_TeamTank;
 
@@ -20,7 +20,7 @@ public class Team : ScriptableObject
         return m_CaptureScore == value;
     }
     
-    public void IncrementCaptureScore(int value)
+    public void IncrementCaptureScore(float value)
     {
         m_CaptureScore += value;
     }

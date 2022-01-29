@@ -28,7 +28,7 @@ public class Capturing : StateBase
         }
         
         data.UpdateSlider();
-                
+      
         if (data.m_Value < 0)
         {
             data.m_Value = 0;

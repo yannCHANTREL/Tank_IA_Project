@@ -27,6 +27,7 @@ public class CaptureData : StateDataBase
 
     [HideInInspector] public bool m_IsRoundFinished;
     [HideInInspector] public bool m_IsRoundStarting;
+    [HideInInspector] public bool m_IsCaptured;
     
     [HideInInspector] public Slider m_Slider;
     [HideInInspector] public Image m_FillImage;

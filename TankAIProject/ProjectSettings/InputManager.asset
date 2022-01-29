@@ -73,7 +73,7 @@ InputManager:
     m_Name: Horizontal1
     descriptiveName: Horizontal keyboard axis for player 1
     descriptiveNegativeName: 
-    negativeButton: q
+    negativeButton: a
     positiveButton: d
     altNegativeButton: 
     altPositiveButton: 
@@ -90,7 +90,7 @@ InputManager:
     descriptiveName: Vertical keyboard axis for player 1
     descriptiveNegativeName: 
     negativeButton: s
-    positiveButton: z
+    positiveButton: w
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3

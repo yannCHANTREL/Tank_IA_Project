@@ -56,9 +56,7 @@ namespace Complete
             m_TeamList.EmptyTeamList();
             m_TeamList.GiveTeamNumber();
             m_TeamList.ResetAllScore();
-
-            m_IsRoundOver = false;
-
+            
             ResetTankValues();
             SpawnAllTanks();
             SetCameraTargets();
@@ -143,6 +141,7 @@ namespace Complete
         private IEnumerator RoundStarting ()
         {
             m_TeamList.ResetCaptureScore();
+            m_CaptureData.UpdateScoreText();
             
             // As soon as the round starts reset the tanks and make sure they can't move.
             ResetAllTanks ();
@@ -156,6 +155,7 @@ namespace Complete
             m_MessageText.text = "ROUND " + m_RoundNumber;
 
             m_CaptureData.m_IsRoundStarting = true;
+            m_IsRoundOver = false;
 
             // Wait for the specified length of time until yielding control back to the game loop.
             yield return m_StartWait;

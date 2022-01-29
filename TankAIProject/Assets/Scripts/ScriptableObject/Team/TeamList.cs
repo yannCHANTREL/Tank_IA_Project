@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Complete;
@@ -8,7 +9,7 @@ public class TeamList : ScriptableObject
 {
     public Team[] m_Teams;
 
-    public void IncrementCaptureScore(int index, int value)
+    public void IncrementCaptureScore(int index, float value)
     {
         m_Teams[index].IncrementCaptureScore(value);
     }
@@ -140,7 +141,7 @@ public class TeamList : ScriptableObject
             return null;
         }
         
-        int maxScore = -1;
+        float maxScore = -1;
         Team winner = null;
         
         foreach (Team team in m_Teams)
@@ -156,10 +157,10 @@ public class TeamList : ScriptableObject
 
     private bool AreAllTeamHaveTheSamePoint()
     {
-        int currentScore = m_Teams[0].m_CaptureScore;
+        float currentScore = m_Teams[0].m_CaptureScore;
         foreach (Team team in m_Teams)
         {
-            if (team.m_CaptureScore != currentScore)
+            if (Math.Abs(team.m_CaptureScore - currentScore) > float.Epsilon)
                 return false;
         }
 
