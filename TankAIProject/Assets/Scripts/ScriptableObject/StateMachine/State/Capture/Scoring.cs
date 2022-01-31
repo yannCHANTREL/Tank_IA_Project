@@ -21,8 +21,6 @@ public class Scoring : StateBase
 
     protected override void Execute(StateMachineManager stateMachineManager)
     {
-        Debug.Log("Scoring");
-
         CaptureData data = (CaptureData)stateMachineManager.m_Data;
  
         m_SavedTime += Time.deltaTime;

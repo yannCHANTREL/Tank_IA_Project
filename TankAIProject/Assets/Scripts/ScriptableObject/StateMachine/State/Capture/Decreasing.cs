@@ -15,8 +15,6 @@ public class Decreasing : StateBase
 
     protected override void Execute(StateMachineManager stateMachineManager)
     {
-        Debug.Log("Decrease");
-
         CaptureData data = (CaptureData)stateMachineManager.m_Data;
         
         if (data.m_Value == 0) return;
