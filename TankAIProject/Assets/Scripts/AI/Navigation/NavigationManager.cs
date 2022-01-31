@@ -167,7 +167,7 @@ public class NavigationManager : MonoBehaviour
         return (A - NearestPointFromLine(A, B, C)).magnitude;
     }
 
-    public string AlgorithmChoose()
+    public string DisplayAlgorithmChoose()
     {
         if (m_AlgorithmMode == 0) return "DijkstraManager";
         if (m_AlgorithmMode == 1) return "AStarManager";
