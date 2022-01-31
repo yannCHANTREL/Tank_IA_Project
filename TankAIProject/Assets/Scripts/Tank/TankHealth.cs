@@ -6,6 +6,7 @@ namespace Complete
     public class TankHealth : MonoBehaviour
     {
         public float m_StartingHealth = 100f;               // The amount of health each tank starts with.
+        public float m_MaxHealth = 100f;
         public Slider m_Slider;                             // The slider to represent how much health the tank currently has.
         public Image m_FillImage;                           // The image component of the slider.
         public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
@@ -56,6 +57,16 @@ namespace Complete
             {
                 OnDeath ();
             }
+        }
+        
+        public void Heal (float amount)
+        {
+            // Increase current health by the amount (not more than max)
+            m_CurrentHealth += amount;
+            if (m_CurrentHealth > m_MaxHealth) m_CurrentHealth = m_MaxHealth;
+
+            // Change the UI elements appropriately.
+            SetHealthUI ();
         }
 
 
