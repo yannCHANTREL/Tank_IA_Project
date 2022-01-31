@@ -15,9 +15,19 @@ public class Team : ScriptableObject
     
     public List<TankManager> m_TeamTank;
 
+    public void SetTeamAsAI()
+    {
+        m_AI = true;
+    }
+    
+    public void SetTeamAsPlayer()
+    {
+        m_AI = false;
+    }
+    
     public bool HasCaptureScore(int value)
     {
-        return m_CaptureScore == value;
+        return m_CaptureScore >= value;
     }
     
     public void IncrementCaptureScore(float value)

@@ -41,6 +41,8 @@ namespace Complete
         private Coroutine m_Coroutine;
 
         private bool m_IsRoundOver;
+
+        public GameOptions m_GameOptions;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -56,6 +58,8 @@ namespace Complete
             m_TeamList.EmptyTeamList();
             m_TeamList.GiveTeamNumber();
             m_TeamList.ResetAllScore();
+
+            SetTeamType();
             
             ResetTankValues();
             SpawnAllTanks();
@@ -63,6 +67,18 @@ namespace Complete
             
             // Once the tanks have been created and the camera is using them as targets, start the game.
             StartCoroutine (GameLoop ());
+        }
+
+        private void SetTeamType()
+        {
+            if (m_GameOptions.m_Mode == GameOptions.Mode.PVP)
+            {
+                m_TeamList.SetAllTeamAsPlayer();
+            }
+            else
+            {
+                m_TeamList.SetOtherTeamsAsAI();
+            }
         }
 
         private void SpawnAllTanks()

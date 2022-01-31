@@ -9,6 +9,29 @@ public class TeamList : ScriptableObject
 {
     public Team[] m_Teams;
 
+    public void SetOtherTeamsAsAI()
+    {
+        for (int i = 0; i < m_Teams.Length; i++)
+        {
+            if (i == 0)
+            {
+                m_Teams[i].SetTeamAsPlayer();
+            }
+            else
+            {
+                m_Teams[i].SetTeamAsAI();
+            }
+        }
+    }
+
+    public void SetAllTeamAsPlayer()
+    {
+        foreach (Team team in m_Teams)
+        {
+            team.SetTeamAsPlayer();
+        }
+    }
+    
     public void IncrementCaptureScore(int index, float value)
     {
         m_Teams[index].IncrementCaptureScore(value);

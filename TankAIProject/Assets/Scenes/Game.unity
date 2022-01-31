@@ -1799,6 +1799,7 @@ MonoBehaviour:
   m_CaptureData: {fileID: 11400000, guid: ee892dfdee9924a489c1d3b33566262a, type: 2}
   m_RoundScoreForWin: 100
   m_Text: {fileID: 1741358425}
+  m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
 --- !u!4 &1304999366
 Transform:
   m_ObjectHideFlags: 0
