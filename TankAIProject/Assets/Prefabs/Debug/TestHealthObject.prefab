@@ -109,6 +109,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d620065bb0fc6814499f6e462430dabe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AmountHeal: 0
+  m_AmountHeal: 50
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
-  m_Grid: {fileID: 0}
+  m_Grid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}

@@ -13,7 +13,7 @@ public class HealthObject : MonoBehaviour
     [SerializeField] private TeamList m_TeamList;
     
     [SerializeField] private VirtualGrid m_Grid;
-        
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +56,9 @@ public class HealthObject : MonoBehaviour
         if (pvManager != null)
         {
             pvManager.Heal(m_AmountHeal);
-            Destroy(this);
+            Destroy(gameObject);
+            
+            Debug.Log("Heal !");
         }
         else
         {
