@@ -8,6 +8,7 @@ public class SmartObjectManager : MonoBehaviour
     [SerializeField] private Transform[] m_ListSpawnPoint;
 
     private GameObject m_HealthObject;
+    private bool isAlive;
     
     public void Start()
     {
@@ -15,7 +16,7 @@ public class SmartObjectManager : MonoBehaviour
         createHealthObject();
 
         // Verification object is always alive, and manage it recreation
-        LaunchUpdate();
+        StartCoroutine(LaunchUpdate());
     }
     
     public IEnumerator LaunchUpdate()
@@ -23,26 +24,17 @@ public class SmartObjectManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            UpdateHealthObject();
+            if (m_HealthObject == null)
+            {
+                yield return new WaitForSeconds(10f);
+                createHealthObject();
+            }
         }
-    }
-
-    public IEnumerator UpdateHealthObject()
-    {
-        Debug.Log("A");
-        // if destroy, wait 10 seconds and recreate healthObject
-        if (m_HealthObject != null)
-        {
-            Debug.Log("B");
-            yield return new WaitForSeconds(10f);
-            createHealthObject();
-        }
-
-        yield return null;
     }
 
     public void createHealthObject()
     {
+        isAlive = true;
         int indexSpawn = Random.Range(0, m_ListSpawnPoint.Length);
         m_HealthObject = Instantiate(m_PrefabHealthObject, m_ListSpawnPoint[indexSpawn].position, m_ListSpawnPoint[indexSpawn].rotation);
     }
