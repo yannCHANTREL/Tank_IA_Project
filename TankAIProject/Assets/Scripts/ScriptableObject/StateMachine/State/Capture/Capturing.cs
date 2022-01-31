@@ -14,8 +14,6 @@ public class Capturing : StateBase
 
     protected override void Execute(StateMachineManager stateMachineManager)
     {
-        Debug.Log("Capturing");
-        
         CaptureData data = (CaptureData)stateMachineManager.m_Data;
         
         if (data.m_OldTeamCapturing == data.m_CurrentTeamCapturing)

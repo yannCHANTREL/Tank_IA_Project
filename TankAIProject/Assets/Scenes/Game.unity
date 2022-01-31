@@ -258,7 +258,9 @@ GameObject:
   m_Component:
   - component: {fileID: 216353002}
   - component: {fileID: 216353004}
+  - component: {fileID: 216353005}
   - component: {fileID: 216353003}
+  - component: {fileID: 216353006}
   m_Layer: 0
   m_Name: CapturePoint
   m_TagString: Untagged
@@ -313,6 +315,48 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &216353005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216353001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5824bf1f3effe4bba315d95517f08b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DefaultStateBase: {fileID: 11400000, guid: c32c3cd04514f3e419ce315c25111f29, type: 2}
+  m_Data: {fileID: 11400000, guid: ee892dfdee9924a489c1d3b33566262a, type: 2}
+--- !u!114 &216353006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216353001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3715a2fb55726c9459429ca0e600b3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Event: {fileID: 11400000, guid: 8a44d8911b8e0f949bf8096f9d812ec0, type: 2}
+  m_OnEventRaised:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 216353003}
+        m_TargetAssemblyTypeName: CapturePoint, Assembly-CSharp
+        m_MethodName: UpdateCurrentTeamCapturing
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &410768073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,9 +2153,9 @@ MonoBehaviour:
   m_TeamsSpawn:
   - {fileID: 194018016}
   - {fileID: 2083660209}
-  m_MaxRoundTimeInSeconds: 100
+  m_MaxRoundTimeInSeconds: 90
   m_CaptureData: {fileID: 11400000, guid: ee892dfdee9924a489c1d3b33566262a, type: 2}
-  m_RoundScoreForWin: 2
+  m_CaptureScoreForRoundWin: 100
   m_Text: {fileID: 3933875172912496329}
   m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
 --- !u!4 &1304999366

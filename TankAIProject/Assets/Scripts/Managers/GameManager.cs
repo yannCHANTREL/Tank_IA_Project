@@ -35,7 +35,7 @@ namespace Complete
 
         public CaptureData m_CaptureData;
         
-        public int m_RoundScoreForWin;
+        public int m_CaptureScoreForRoundWin;
         
         public Text m_Text;
         private Coroutine m_Coroutine;
@@ -245,12 +245,12 @@ namespace Complete
 
         private bool OneTeamObtainedCaptureScore()
         {
-            return m_TeamList.OneTeamObtainedCaptureScore(m_RoundScoreForWin);
+            return m_TeamList.OneTeamObtainedCaptureScore(m_CaptureScoreForRoundWin);
         }
 
         private Team GetRoundWinner()
         {
-            return m_TeamList.GetTeamCaptureWinner(m_RoundScoreForWin);
+            return m_TeamList.GetTeamCaptureWinner(m_CaptureScoreForRoundWin);
         }
 
         private Team GetGameWinner()

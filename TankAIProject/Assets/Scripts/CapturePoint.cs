@@ -5,6 +5,7 @@ using Complete;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(SphereCollider))]
 public class CapturePoint : MonoBehaviour
 {
     public CaptureData m_CaptureData;
@@ -16,9 +17,14 @@ public class CapturePoint : MonoBehaviour
     public TeamList m_TeamList;
     
     private bool m_DidOnce = false;
+    private float m_ColliderRadius;
+
+    private float m_SecureRadius = 2;
 
     private void Start()
     {
+        m_ColliderRadius = GetComponent<SphereCollider>().radius;
+        
         m_CaptureData.Init(m_Slider, m_FillImage, UpdateScoreText);
 
         m_CaptureData.m_PlayerNumbersPerTeam = new Dictionary<int, int>();
@@ -55,5 +61,31 @@ public class CapturePoint : MonoBehaviour
         if (!other.CompareTag("Tank")) return;
         
         m_CaptureData.TriggerExit(other);
+    }
+
+    public void UpdateCurrentTeamCapturing(GameObject go)
+    {
+        // Check if the position is not far
+        if (Vector3.Distance(transform.position, go.transform.position) > m_ColliderRadius + m_SecureRadius) return;
+        
+        Dictionary<int, int> playerNumbersPerTeam = new Dictionary<int, int>();
+        playerNumbersPerTeam.Clear();
+        for (int i = 1; i <= m_TeamList.GetNumberTeam(); i++)
+        {
+            playerNumbersPerTeam.Add(i, 0);
+        }
+        
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_ColliderRadius);
+        foreach (Collider c in colliders)
+        {
+            if (!c.CompareTag("Tank")) continue;
+            
+            TankMovement tankMovement = c.GetComponent<TankMovement>();
+        
+            int teamNumber = m_TeamList.GetTeamNumberByPlayerNumber(tankMovement.m_PlayerNumber);
+            playerNumbersPerTeam[teamNumber] += 1;
+        }
+        
+        m_CaptureData.UpdateDictionnary(playerNumbersPerTeam);
     }
 }
