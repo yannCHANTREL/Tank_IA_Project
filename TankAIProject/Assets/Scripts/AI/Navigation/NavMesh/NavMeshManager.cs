@@ -11,6 +11,7 @@ public class NavMeshManager : SearchAlgorithm
     public override void Initialization(VirtualGrid grid)
     {
         m_ClassGrid = grid;
+        m_Nodes = new Dictionary<Vector2Int, Node>();
         PreparationSearch();
     }
 

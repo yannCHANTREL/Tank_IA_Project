@@ -15,7 +15,7 @@ public class NavigationManager : MonoBehaviour
     private List<SearchAlgorithm> m_ListAlgorithm;
     private int m_AlgorithmMode;
     
-    public void Start()
+    public void Awake()
     {
         m_ListAlgorithm = new List<SearchAlgorithm>();
         m_ListAlgorithm.Add(m_DijkstraManager);

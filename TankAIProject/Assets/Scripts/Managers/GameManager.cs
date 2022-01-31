@@ -87,7 +87,8 @@ namespace Complete
             for (int i = 0; i < m_TeamList.GetNumberTeam(); i++)
             {
                 // Is this team an AI
-                GameObject tankPrefab = m_TeamList.IsAI(i) ? m_TankAIPrefab : m_TankPrefab;
+                bool isAITeam = m_TeamList.IsAI(i);
+                GameObject tankPrefab = isAITeam ? m_TankAIPrefab : m_TankPrefab;
                 
                 Transform spawn = m_TeamsSpawn[i % m_TeamsSpawn.Length];
                 Color teamColor = m_TeamList.GetColorTeam(i);
@@ -115,7 +116,16 @@ namespace Complete
                         tankIndexManager.m_TankIndex = index;
                         tankIndexManager.m_TeamIndex = i;
                     }
-                    
+
+                    if (isAITeam)
+                    {
+                        NavigationManager navigationManager = tankManager.m_Instance.GetComponent<NavigationManager>();
+                        if (navigationManager)
+                        {
+                            navigationManager.ChooseAAlgorithmMode((int) m_GameOptions.m_SearchAlgo);
+                        }
+                    }
+
                     tankManager.Setup();
                 }
             }
