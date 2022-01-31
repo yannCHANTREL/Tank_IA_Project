@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5f202762427ab47ac81710eb1a933b, type: 3}
+  m_Name: CaptureData
+  m_EditorClassIdentifier: 
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_OldTeamCapturing: 2
+  m_CurrentTeamCapturing: 2
+  m_FullCaptureDuration: 10
+  m_AlphaColor: 200
+  m_TriggerEntered: 1
+  m_TriggerExit: 1
+  m_Value: 100
+  m_IsRoundFinished: 0
+  m_IsRoundStarting: 0
+  m_Slider: {fileID: 0}
+  m_FillImage: {fileID: 0}

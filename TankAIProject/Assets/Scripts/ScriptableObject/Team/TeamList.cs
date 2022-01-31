@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Complete;
@@ -8,7 +9,30 @@ public class TeamList : ScriptableObject
 {
     public Team[] m_Teams;
 
-    public void IncrementCaptureScore(int index, int value)
+    public void SetOtherTeamsAsAI()
+    {
+        for (int i = 0; i < m_Teams.Length; i++)
+        {
+            if (i == 0)
+            {
+                m_Teams[i].SetTeamAsPlayer();
+            }
+            else
+            {
+                m_Teams[i].SetTeamAsAI();
+            }
+        }
+    }
+
+    public void SetAllTeamAsPlayer()
+    {
+        foreach (Team team in m_Teams)
+        {
+            team.SetTeamAsPlayer();
+        }
+    }
+    
+    public void IncrementCaptureScore(int index, float value)
     {
         m_Teams[index].IncrementCaptureScore(value);
     }
@@ -101,22 +125,22 @@ public class TeamList : ScriptableObject
         }
     }
     
-    public bool OneTeamObtainedRoundScore(int value)
+    public bool OneTeamObtainedCaptureScore(int value)
     {
         foreach (Team team in m_Teams)
         {
-            if (team.HasRoundScore(value))
+            if (team.HasCaptureScore(value))
                 return true;
         }
 
         return false;
     }
 
-    public Team GetTeamRoundWinner(int value)
+    public Team GetTeamCaptureWinner(int value)
     {
         foreach (Team team in m_Teams)
         {
-            if (team.HasRoundScore(value))
+            if (team.HasCaptureScore(value))
                 return team;
         }
         
@@ -132,7 +156,40 @@ public class TeamList : ScriptableObject
 
         return null;
     }
+    
+    public Team GetTeamRoundMaxScore()
+    {
+        if (AreAllTeamHaveTheSamePoint())
+        {
+            return null;
+        }
+        
+        float maxScore = -1;
+        Team winner = null;
+        
+        foreach (Team team in m_Teams)
+        {
+            if (team.m_CaptureScore > maxScore)
+            {
+                winner = team;
+                maxScore = team.m_CaptureScore;
+            }
+        }
+        return winner;
+    }
 
+    private bool AreAllTeamHaveTheSamePoint()
+    {
+        float currentScore = m_Teams[0].m_CaptureScore;
+        foreach (Team team in m_Teams)
+        {
+            if (Math.Abs(team.m_CaptureScore - currentScore) > float.Epsilon)
+                return false;
+        }
+
+        return true;
+    }
+    
     public string GetScores()
     {
         string text = "";

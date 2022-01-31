@@ -11,22 +11,42 @@ public class Team : ScriptableObject
     public bool m_AI;
 
     public int m_RoundScore;
-    public int m_CaptureScore;
+    public float m_CaptureScore;
     
     public List<TankManager> m_TeamTank;
 
-    public bool HasRoundScore(int value)
+    public void SetTeamAsAI()
     {
-        return m_CaptureScore == value;
+        m_AI = true;
     }
     
-    public void IncrementCaptureScore(int value)
+    public void SetTeamAsPlayer()
+    {
+        m_AI = false;
+    }
+    
+    public bool HasCaptureScore(int value)
+    {
+        return m_CaptureScore >= value;
+    }
+    
+    public void IncrementCaptureScore(float value)
     {
         m_CaptureScore += value;
     }
     public string GetColoredTeamText()
     {
-        return "<color=#" + ColorUtility.ToHtmlStringRGB(m_TeamColor) + ">TEAM " + m_TeamNumber + "</color>";
+        return GetColoredText("TEAM " + m_TeamNumber);
+    }
+
+    public string GetColoredRoundScoreText()
+    {
+        return GetColoredText(m_CaptureScore.ToString());
+    }
+
+    private string GetColoredText(string text)
+    {
+        return "<color=#" + ColorUtility.ToHtmlStringRGB(m_TeamColor) + ">" + text + "</color>";
     }
 
     public void AddTank(TankManager tank)
