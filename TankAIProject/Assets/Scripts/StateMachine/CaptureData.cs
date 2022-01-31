@@ -27,14 +27,13 @@ public class CaptureData : StateDataBase
 
     [HideInInspector] public bool m_IsRoundFinished;
     [HideInInspector] public bool m_IsRoundStarting;
-    [HideInInspector] public bool m_IsCaptured;
     
     [HideInInspector] public Slider m_Slider;
     [HideInInspector] public Image m_FillImage;
 
-    private Action m_UpdateScoreText;
+    private System.Action m_UpdateScoreText;
 
-    public void Init(Slider slider, Image image, Action updateScoreAction)
+    public void Init(Slider slider, Image image, System.Action updateScoreAction)
     {
         m_Slider = slider;
         m_FillImage = image;
