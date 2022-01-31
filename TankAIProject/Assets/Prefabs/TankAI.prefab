@@ -205,6 +205,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d1b95b80e7344429a39eafbd28372c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8274096779164622947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf66744ef2e1c1408544c353987d28c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_SensedTank: {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
+  m_TankIndexManager: {fileID: 2870660015159044341}
+  m_AttackMaxAngle: 20
+  m_AttackMaxDistance: 20
 --- !u!114 &8785127412315307360
 MonoBehaviour:
   m_ObjectHideFlags: 0

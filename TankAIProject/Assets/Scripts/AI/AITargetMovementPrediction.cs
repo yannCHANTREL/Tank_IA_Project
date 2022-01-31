@@ -29,7 +29,7 @@ public class AITargetMovementPrediction : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (m_TankTarget) TrajectoryEstimationB(); 
+        if (m_TankTarget) TrajectoryEstimationB();
     }
 
     public void TrajectoryEstimationB()
