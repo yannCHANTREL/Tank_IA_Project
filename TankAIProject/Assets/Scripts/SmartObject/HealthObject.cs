@@ -11,9 +11,7 @@ public class HealthObject : MonoBehaviour
     [SerializeField] private float m_AmountHeal;
 
     [SerializeField] private TeamList m_TeamList;
-    
-    [SerializeField] private VirtualGrid m_Grid;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +32,8 @@ public class HealthObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        double radius = m_Grid.nodeDiameter / 2;
+        Renderer renderer = gameObject.GetComponent<Renderer>();
+        double radius = renderer.bounds.size.x / 2;
         double distance;
         Vector3 myPosition = transform.position;
         Vector3 posTank;
