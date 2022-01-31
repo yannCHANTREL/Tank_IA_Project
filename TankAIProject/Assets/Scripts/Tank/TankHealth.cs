@@ -19,6 +19,7 @@ namespace Complete
         private float m_CurrentHealth;                      // How much health the tank currently has.
         private bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
 
+        public GameEventWithArgument m_DeathEvent;
 
         private void Awake ()
         {
@@ -94,9 +95,14 @@ namespace Complete
 
             // Play the tank explosion sound effect.
             m_ExplosionAudio.Play();
-
+            
             // Turn the tank off.
-            gameObject.SetActive (false);
+            GameObject o = gameObject;
+            
+            o.SetActive (false);
+            
+            // Raise the Death Event
+            m_DeathEvent.Raise(o);
         }
     }
 }

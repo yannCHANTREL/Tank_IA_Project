@@ -64,7 +64,7 @@ public class CaptureData : StateDataBase
         int teamNumber = m_TeamList.GetTeamNumberByPlayerNumber(tankMovement.m_PlayerNumber);
         m_PlayerNumbersPerTeam[teamNumber] += 1;
         
-        m_CurrentTeamCapturing = GetTeamCapturingNumber();
+        UpdateCurrentTeamCapturing();
     }
 
     public void TriggerExit(Collider other)
@@ -77,7 +77,7 @@ public class CaptureData : StateDataBase
         int teamNumber = m_TeamList.GetTeamNumberByPlayerNumber(tankMovement.m_PlayerNumber);
         m_PlayerNumbersPerTeam[teamNumber] -= 1;
 
-        m_CurrentTeamCapturing = GetTeamCapturingNumber();
+        UpdateCurrentTeamCapturing();
     }
     
     public int GetTeamCapturingNumber()
@@ -144,5 +144,16 @@ public class CaptureData : StateDataBase
         UpdateScoreText();
         
         m_Slider.value = m_Value;
+    }
+
+    public void UpdateDictionnary(Dictionary<int, int> dictionary)
+    {
+        m_PlayerNumbersPerTeam = dictionary;
+        UpdateCurrentTeamCapturing();
+    }
+    
+    private void UpdateCurrentTeamCapturing()
+    {
+        m_CurrentTeamCapturing = GetTeamCapturingNumber();
     }
 }

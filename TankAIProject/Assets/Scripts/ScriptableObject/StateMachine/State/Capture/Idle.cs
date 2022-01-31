@@ -15,7 +15,5 @@ public class Idle : StateBase
     { }
 
     protected override void Execute(StateMachineManager stateMachineManager)
-    {
-        Debug.Log("Idle");
-    }
+    { }
 }
