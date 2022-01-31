@@ -10594,6 +10594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_StartingHealth: 100
+  m_MaxHealth: 100
   m_Slider: {fileID: 11482748}
   m_FillImage: {fileID: 11404512}
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
