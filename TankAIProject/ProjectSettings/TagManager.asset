@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tank
+  - mySelf
+  - BlockerEnvironment
   layers:
   - Default
   - TransparentFX
