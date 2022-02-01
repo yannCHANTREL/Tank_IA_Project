@@ -2153,7 +2153,7 @@ MonoBehaviour:
   m_TeamsSpawn:
   - {fileID: 194018016}
   - {fileID: 2083660209}
-  m_MaxRoundTimeInSeconds: 90
+  m_MaxRoundTimeInSeconds: 99
   m_CaptureData: {fileID: 11400000, guid: ee892dfdee9924a489c1d3b33566262a, type: 2}
   m_CaptureScoreForRoundWin: 100
   m_Text: {fileID: 3933875172912496329}

@@ -26,6 +26,10 @@ public class OptionManager : MonoBehaviour
         m_DropdownAlgo.AddOptions(GetEnumString(typeof(GameOptions.AISearchAlgo)));
         m_DropdownDifficulty.AddOptions(GetEnumString(typeof(GameOptions.AIDifficulty)));
         m_DropdownMode.AddOptions(GetEnumString(typeof(GameOptions.Mode)));
+
+        m_DropdownAlgo.value = (int) m_GameOptions.m_SearchAlgo;
+        m_DropdownDifficulty.value = (int) m_GameOptions.m_AIDifficulty;
+        m_DropdownMode.value = (int) m_GameOptions.m_Mode;
     }
 
     private List<string> GetEnumString(Type type)

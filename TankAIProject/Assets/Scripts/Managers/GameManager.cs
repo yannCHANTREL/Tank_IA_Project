@@ -71,13 +71,14 @@ namespace Complete
 
         private void SetTeamType()
         {
-            if (m_GameOptions.m_Mode == GameOptions.Mode.PVP)
+            switch (m_GameOptions.m_Mode)
             {
-                m_TeamList.SetAllTeamAsPlayer();
-            }
-            else
-            {
-                m_TeamList.SetOtherTeamsAsAI();
+                case GameOptions.Mode.PVP:
+                    m_TeamList.SetAllTeamAsPlayer();
+                    break;
+                case GameOptions.Mode.PVE:
+                    m_TeamList.SetOtherTeamsAsAI();
+                    break;
             }
         }
 
