@@ -8,7 +8,7 @@ public class Finished : StateBase
     public override void OnEnter(StateMachineManager stateMachineManager)
     {
         CaptureData data = (CaptureData)stateMachineManager.m_Data;
-        data.m_IsRoundFinished = false;
+        data.m_IsGameFinished = false;
     }
 
     public override void OnExit(StateMachineManager stateMachineManager)

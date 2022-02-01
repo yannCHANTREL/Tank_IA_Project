@@ -70,7 +70,7 @@ public class TeamList : ScriptableObject
     {
         foreach (Team team in m_Teams)
         {
-            team.m_RoundScore = 0;
+            // team.m_RoundScore = 0;
             team.m_CaptureScore = 0;
         }
     }
@@ -141,29 +141,8 @@ public class TeamList : ScriptableObject
 
         return false;
     }
-
-    public Team GetTeamCaptureWinner(int value)
-    {
-        foreach (Team team in m_Teams)
-        {
-            if (team.HasCaptureScore(value))
-                return team;
-        }
-        
-        return null;
-    }
-    public Team GetGameWinner(int numRoundToWin)
-    {
-        foreach (Team team in m_Teams)
-        {
-            if (team.m_RoundScore == numRoundToWin)
-                return team;
-        }
-
-        return null;
-    }
     
-    public Team GetTeamRoundMaxScore()
+    public Team GetTeamMaxScore()
     {
         if (AreAllTeamHaveTheSamePoint())
         {
@@ -194,18 +173,6 @@ public class TeamList : ScriptableObject
         }
 
         return true;
-    }
-    
-    public string GetScores()
-    {
-        string text = "";
-
-        foreach (Team team in m_Teams)
-        {
-            text += $"{team.GetColoredTeamText()} : {team.m_RoundScore} WINS\n";
-        }
-
-        return text;
     }
 
     public int GetTeamNumberByPlayerNumber(int playerNumber)

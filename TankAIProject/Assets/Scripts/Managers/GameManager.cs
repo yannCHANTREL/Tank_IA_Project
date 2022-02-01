@@ -9,7 +9,6 @@ namespace Complete
 {
     public class GameManager : MonoBehaviour
     {
-        public int m_NumRoundsToWin = 5;            // The number of rounds a single player has to win to win the game.
         public float m_StartDelay = 3f;             // The delay between the start of RoundStarting and RoundPlaying phases.
         public float m_EndDelay = 3f;               // The delay between the end of RoundPlaying and RoundEnding phases.
         public CameraControl m_CameraControl;       // Reference to the CameraControl script for control during different phases.
@@ -20,27 +19,24 @@ namespace Complete
         public int m_TankAmountPerTeam; 
 
         public List<ListVariable> m_TankVariableList;// Reference to all tank variables SO
-        public VirtualGrid m_ClassGrid;             // Reference Grid
         public TeamList m_TeamList;                 // Reference Tank List
         
         public Transform[] m_TeamsSpawn; 
         
-        public float m_MaxRoundTimeInSeconds; 
+        public float m_MaxGameTimeInSeconds; 
         
-        private int m_RoundNumber;                  // Which round the game is currently on.
         private WaitForSeconds m_StartWait;         // Used to have a delay whilst the round starts.
         private WaitForSeconds m_EndWait;           // Used to have a delay whilst the round or game ends.
-        private Team m_RoundWinner;          // Reference to the winner of the current round.  Used to make an announcement of who won.
         private Team m_GameWinner;           // Reference to the winner of the game.  Used to make an announcement of who won.
 
         public CaptureData m_CaptureData;
         
-        public int m_CaptureScoreForRoundWin;
+        // public int m_CaptureScoreForRoundWin;
         
         public Text m_Text;
         private Coroutine m_Coroutine;
 
-        private bool m_IsRoundOver;
+        private bool m_IsGameOver;
 
         public GameOptions m_GameOptions;
         
@@ -154,70 +150,50 @@ namespace Complete
         private IEnumerator GameLoop ()
         {
             // Start off by running the 'RoundStarting' coroutine but don't return until it's finished.
-            yield return StartCoroutine (RoundStarting ());
+            yield return StartCoroutine (GameStarting ());
 
             // Once the 'RoundStarting' coroutine is finished, run the 'RoundPlaying' coroutine but don't return until it's finished.
-            yield return StartCoroutine (RoundPlaying());
+            yield return StartCoroutine (GamePlaying());
 
             // Once execution has returned here, run the 'RoundEnding' coroutine, again don't return until it's finished.
             yield return StartCoroutine (RoundEnding());
-
-            // This code is not run until 'RoundEnding' has finished.  At which point, check if a game winner has been found.
-            if (m_GameWinner != null)
-            {
-                // If there is a game winner, restart the level.
-                SceneManager.LoadScene (0);
-            }
-            else
-            {
-                // If there isn't a winner yet, restart this coroutine so the loop continues.
-                // Note that this coroutine doesn't yield.  This means that the current version of the GameLoop will end.
-                StartCoroutine (GameLoop ());
-            }
         }
 
-        private IEnumerator RoundStarting ()
+        private IEnumerator GameStarting ()
         {
             m_TeamList.ResetCaptureScore();
             m_CaptureData.UpdateScoreText();
             
-            // As soon as the round starts reset the tanks and make sure they can't move.
+            // As soon as the game starts reset the tanks and make sure they can't move.
             ResetAllTanks ();
             DisableTankControl ();
 
             // Snap the camera's zoom and position to something appropriate for the reset tanks.
             m_CameraControl.SetStartPositionAndSize ();
-
-            // Increment the round number and display text showing the players what round it is.
-            m_RoundNumber++;
-            m_MessageText.text = "ROUND " + m_RoundNumber;
-
-            m_CaptureData.m_IsRoundStarting = true;
-            m_IsRoundOver = false;
+            m_MessageText.text = string.Empty;
+            
+            m_CaptureData.m_IsGameStarting = true;
+            m_IsGameOver = false;
 
             // Wait for the specified length of time until yielding control back to the game loop.
             yield return m_StartWait;
         }
 
-        private IEnumerator RoundPlaying ()
+        private IEnumerator GamePlaying ()
         {
-            // As soon as the round begins playing let the players control the tanks.
+            // As soon as the game begins playing let the players control the tanks.
             EnableTankControl ();
 
-            m_Coroutine = StartCoroutine(RoundTimeCoroutine());
+            m_Coroutine = StartCoroutine(GameTimeCoroutine());
 
-            // Clear the text from the screen.
-            m_MessageText.text = string.Empty;
-
-            // While there is not one tank left...
-            while (!OneTeamObtainedCaptureScore() && !m_IsRoundOver)
+            while (!m_IsGameOver)
             {
                 // ... return on the next frame.
                 yield return null;
             }
 
-            m_CaptureData.m_IsRoundFinished = true;
-            StopRoundTimeCoroutine();
+            m_CaptureData.m_IsGameFinished = true;
+            StopGameTimeCoroutine();
         }
 
         private IEnumerator RoundEnding ()
@@ -225,17 +201,7 @@ namespace Complete
             // Stop tanks from moving.
             DisableTankControl ();
 
-            // Clear the winner from the previous round.
-            m_RoundWinner = null;
-
-            m_RoundWinner = m_IsRoundOver ? GetTeamRoundMaxScore() : GetRoundWinner();
-
-            // If there is a winner, increment their score.
-            if (m_RoundWinner != null)
-                m_RoundWinner.m_RoundScore += 1;
-
-            // Now the winner's score has been incremented, see if someone has won the game.
-            m_GameWinner = GetGameWinner();
+            m_GameWinner = GetTeamMaxScore();
 
             // Get a message based on the scores and whether or not there is a game winner and display it.
             string message = EndMessage ();
@@ -244,41 +210,15 @@ namespace Complete
             // Wait for the specified length of time until yielding control back to the game loop.
             yield return m_EndWait;
         }
-
-        private bool OneTeamObtainedCaptureScore()
+        
+        private Team GetTeamMaxScore()
         {
-            return m_TeamList.OneTeamObtainedCaptureScore(m_CaptureScoreForRoundWin);
-        }
-
-        private Team GetRoundWinner()
-        {
-            return m_TeamList.GetTeamCaptureWinner(m_CaptureScoreForRoundWin);
-        }
-
-        private Team GetGameWinner()
-        {
-            return m_TeamList.GetGameWinner(m_NumRoundsToWin);
-        }
-
-        private Team GetTeamRoundMaxScore()
-        {
-            return m_TeamList.GetTeamRoundMaxScore();
+            return m_TeamList.GetTeamMaxScore();
         }
         
-        // Returns a string message to display at the end of each round.
         private string EndMessage()
         {
-            // By default when a round ends there are no winners so the default end message is a draw.
-            string message = "DRAW!";
-
-            if (m_RoundWinner != null)
-                message = m_RoundWinner.GetColoredTeamText() +
-                          " WINS THE ROUND!";
-            
-            // Add some line breaks after the initial message.
-            message += "\n\n\n\n";
-            
-            message += m_TeamList.GetScores(); 
+            string message = "NOBODY WON !";
 
             if (m_GameWinner != null)
                 message = m_GameWinner.GetColoredTeamText() + " WINS THE GAME!";
@@ -286,7 +226,6 @@ namespace Complete
             return message;
         }
 
-        // This function is used to turn all the tanks back on and reset their positions and properties.
         private void ResetAllTanks()
         {
             m_TeamList.ResetAllTank();
@@ -302,16 +241,16 @@ namespace Complete
             m_TeamList.DisableAllTankControl();
         }
 
-        private void StopRoundTimeCoroutine()
+        private void StopGameTimeCoroutine()
         {
             StopCoroutine(m_Coroutine);
             m_Text.gameObject.SetActive(false);
         }
 
-        private IEnumerator RoundTimeCoroutine()
+        private IEnumerator GameTimeCoroutine()
         {
             m_Text.gameObject.SetActive(true);
-            float counter = m_MaxRoundTimeInSeconds;
+            float counter = m_MaxGameTimeInSeconds;
             float timeToDisplay = 0;
             while (counter > -0.5f)
             {
@@ -322,7 +261,7 @@ namespace Complete
                 yield return null;
             }
 
-            m_IsRoundOver = true;
+            m_IsGameOver = true;
             m_Text.gameObject.SetActive(false);
         }
     }

@@ -9,8 +9,7 @@ public class Team : ScriptableObject
     public int m_TeamNumber;
     public Color m_TeamColor;
     public bool m_AI;
-
-    public int m_RoundScore;
+    
     public float m_CaptureScore;
     
     public List<TankManager> m_TeamTank;

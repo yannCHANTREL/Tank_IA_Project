@@ -8,7 +8,7 @@ public class Idle : StateBase
     public override void OnEnter(StateMachineManager stateMachineManager)
     {
         CaptureData data = (CaptureData)stateMachineManager.m_Data;
-        data.m_IsRoundStarting = false;
+        data.m_IsGameStarting = false;
     }
 
     public override void OnExit(StateMachineManager stateMachineManager)

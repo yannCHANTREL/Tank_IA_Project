@@ -25,8 +25,8 @@ public class CaptureData : StateDataBase
     [HideInInspector] public bool m_TriggerExit;
     [HideInInspector] public float m_Value = 0;
 
-    [HideInInspector] public bool m_IsRoundFinished;
-    [HideInInspector] public bool m_IsRoundStarting;
+    [HideInInspector] public bool m_IsGameFinished;
+    [HideInInspector] public bool m_IsGameStarting;
     
     [HideInInspector] public Slider m_Slider;
     [HideInInspector] public Image m_FillImage;
@@ -131,8 +131,8 @@ public class CaptureData : StateDataBase
     public void ResetCapture()
     {
         m_TriggerEntered = false;
-        m_IsRoundFinished = false;
-        m_IsRoundStarting = false;
+        m_IsGameFinished = false;
+        m_IsGameStarting = false;
         m_TriggerExit = false;
         
         m_Value = 0;

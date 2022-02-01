@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: CaptureData
   m_EditorClassIdentifier: 
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
-  m_OldTeamCapturing: 2
-  m_CurrentTeamCapturing: 2
-  m_FullCaptureDuration: 10
+  m_OldTeamCapturing: 0
+  m_CurrentTeamCapturing: 0
+  m_FullCaptureDuration: 1
   m_AlphaColor: 200
-  m_TriggerEntered: 1
-  m_TriggerExit: 1
-  m_Value: 100
-  m_IsRoundFinished: 0
-  m_IsRoundStarting: 0
+  m_TriggerEntered: 0
+  m_TriggerExit: 0
+  m_Value: 0
+  m_IsGameFinished: 0
+  m_IsGameStarting: 0
   m_Slider: {fileID: 0}
   m_FillImage: {fileID: 0}

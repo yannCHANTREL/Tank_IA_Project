@@ -7,6 +7,7 @@ using UnityEngine;
 public class RespawnManager : MonoBehaviour
 {
     public TeamList m_TeamList;
+    [Range(5,10)]
     public float m_TimeToRespawn;
     
     public void RespawnTank(GameObject go)
