@@ -8,7 +8,6 @@ public class SmartObjectManager : MonoBehaviour
     [SerializeField] private Transform[] m_ListSpawnPoint;
 
     private GameObject m_HealthObject;
-    private bool isAlive;
     
     public void Start()
     {
@@ -34,7 +33,6 @@ public class SmartObjectManager : MonoBehaviour
 
     public void createHealthObject()
     {
-        isAlive = true;
         int indexSpawn = Random.Range(0, m_ListSpawnPoint.Length);
         m_HealthObject = Instantiate(m_PrefabHealthObject, m_ListSpawnPoint[indexSpawn].position, m_ListSpawnPoint[indexSpawn].rotation);
     }

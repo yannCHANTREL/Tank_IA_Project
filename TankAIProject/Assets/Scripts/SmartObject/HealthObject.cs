@@ -11,9 +11,7 @@ public class HealthObject : MonoBehaviour
     [SerializeField] private float m_AmountHeal;
 
     [SerializeField] private TeamList m_TeamList;
-    
-    [SerializeField] private VirtualGrid m_Grid;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,15 +32,26 @@ public class HealthObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        double radius = m_Grid.nodeDiameter / 2;
-        double distance;
-        Vector3 myPosition = transform.position;
+        Renderer renderer = gameObject.GetComponent<Renderer>();
+        double radiusObject = renderer.bounds.size.x / 2;
+        
+        double radiusTank, radius;
+        Collider collider;
         Vector3 posTank;
+        double distance;
+        
+        Vector3 myPosition = transform.position;
         foreach (var instanceOfTank in m_ListInstanceOfTank)
         {
+            collider = instanceOfTank.GetComponent<Collider>();
+            radiusTank = collider.bounds.size.x / 2;
+            radius = radiusObject + radiusTank;
+            
             posTank = instanceOfTank.transform.position;
             distance = Math.Sqrt(Math.Pow((posTank.x - myPosition.x), 2f) +
-                                 Math.Pow((posTank.y - myPosition.y), 2f));
+                                 Math.Pow((posTank.z - myPosition.z), 2f));
+            Debug.Log("distance :" + distance);
+            
             if (distance < radius)
             {
                 ActionHealthObject(instanceOfTank);
