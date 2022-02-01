@@ -90,7 +90,7 @@ public class VirtualGrid : ScriptableObject
         return new Vector2(vect3.x, vect3.z);
     }
     
-public Vector3 Vector2ToVector3(Vector2 vect2)
+    public Vector3 Vector2ToVector3(Vector2 vect2)
     {
         return new Vector3(vect2.x, 0, vect2.y);
     }
