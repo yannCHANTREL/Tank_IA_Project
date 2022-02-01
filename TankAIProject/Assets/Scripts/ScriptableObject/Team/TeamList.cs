@@ -8,7 +8,13 @@ using UnityEngine;
 public class TeamList : ScriptableObject
 {
     public Team[] m_Teams;
+    [HideInInspector] public Transform[] m_TeamsSpawn;
 
+    public void SetTeamSpawn(Transform[] spawns)
+    {
+        m_TeamsSpawn = spawns;
+    }
+    
     public void SetOtherTeamsAsAI()
     {
         for (int i = 0; i < m_Teams.Length; i++)

@@ -58,6 +58,7 @@ namespace Complete
             m_TeamList.EmptyTeamList();
             m_TeamList.GiveTeamNumber();
             m_TeamList.ResetAllScore();
+            m_TeamList.SetTeamSpawn(m_TeamsSpawn);
 
             SetTeamType();
             
