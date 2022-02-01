@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 96f89394aad5cf348b720a7cb6538d55, type: 2}
   - {fileID: 11400000, guid: d62196af44a1e254db06200ac30c7c51, type: 2}
   - {fileID: 11400000, guid: 5c21c05ea8f4d1943903050657f766de, type: 2}
-  m_DecreaseSpeed: 20
+  - {fileID: 11400000, guid: 56ab4a6c7a0bfcb49a960cc387493c67, type: 2}
