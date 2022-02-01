@@ -39,6 +39,7 @@ namespace Complete
         private bool m_IsGameOver;
 
         public GameOptions m_GameOptions;
+        public UIGameManager m_UIGameManager;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -206,6 +207,8 @@ namespace Complete
             // Get a message based on the scores and whether or not there is a game winner and display it.
             string message = EndMessage ();
             m_MessageText.text = message;
+            
+            m_UIGameManager.DisplayEndMenu();
 
             // Wait for the specified length of time until yielding control back to the game loop.
             yield return m_EndWait;
