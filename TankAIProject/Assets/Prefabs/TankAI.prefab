@@ -55,6 +55,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6507708, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507708, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507708, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_Size.z
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6507708, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11409376, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
       propertyPath: m_MaxHealth
       value: 100
@@ -199,6 +215,18 @@ MonoBehaviour:
   m_AStarManager: {fileID: 7912885149352023125}
   m_NavMeshManager: {fileID: -7734663040450953690}
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
+--- !u!114 &3997655906782302068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703a0fc2dea8b564db3f69917fec5b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7912885149352023125
 MonoBehaviour:
   m_ObjectHideFlags: 0

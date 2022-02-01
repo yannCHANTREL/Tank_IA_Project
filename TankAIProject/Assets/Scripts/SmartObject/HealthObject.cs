@@ -50,7 +50,6 @@ public class HealthObject : MonoBehaviour
             posTank = instanceOfTank.transform.position;
             distance = Math.Sqrt(Math.Pow((posTank.x - myPosition.x), 2f) +
                                  Math.Pow((posTank.z - myPosition.z), 2f));
-            Debug.Log("distance :" + distance);
             
             if (distance < radius)
             {
