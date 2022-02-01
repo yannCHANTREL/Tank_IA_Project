@@ -10694,6 +10694,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RayCastBackLength: 1
   m_RayCastFrontLength: 10
+  m_RayCastAnglesOfResearch: 2
 --- !u!1 &173936
 GameObject:
   m_ObjectHideFlags: 0

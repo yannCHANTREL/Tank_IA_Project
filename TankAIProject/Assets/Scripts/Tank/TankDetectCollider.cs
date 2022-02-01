@@ -14,6 +14,7 @@ public class TankDetectCollider : MonoBehaviour
 
     [SerializeField] private float m_RayCastBackLength = 1f;
     [SerializeField] private float m_RayCastFrontLength = 5f;
+    [SerializeField] private float m_RayCastAnglesOfResearch = 2f;
 
     void Start()
     {
@@ -32,13 +33,13 @@ public class TankDetectCollider : MonoBehaviour
     {
         // Test BackwardSensing
         
-        collisionFeedback cfb = BackwardSensing();
+        /*collisionFeedback cfb = BackwardSensing();
         if (cfb.componentStaticDetected || cfb.AlliedDetected || cfb.EnemyDetected)
         {
             Debug.Log("cfb componentStatic : " + cfb.componentStaticDetected);
             Debug.Log("cfb allied : " + cfb.AlliedDetected);
             Debug.Log("cfb enemy : " + cfb.EnemyDetected);
-        }
+        }*/
         
         
         // Test DirectionnalSensing
@@ -55,6 +56,18 @@ public class TankDetectCollider : MonoBehaviour
         string team = "blue";
         if (gameObject.GetComponent<TankIndexManager>().m_TeamIndex == 1) team = "red";
         Debug.Log("cfb " + team + " : " + result);*/
+        
+        
+        // Test DetectWhatSideFree
+
+        /*float result = DetectDynamicObstacle();
+        if (result < float.MaxValue - 1f)
+        {
+            WhatSide ws = DetectWhatSideFree();
+            string team = "blue";
+            if (gameObject.GetComponent<TankIndexManager>().m_TeamIndex == 1) team = "red";
+            Debug.Log("ws " + team + " : " + ws);
+        }*/
     }
 
     public struct cardinalsPointsCollisionFeedback
@@ -76,7 +89,7 @@ public class TankDetectCollider : MonoBehaviour
     }
 
     public enum WhatSide {
-        left, right
+        left, right, nothing
     };
 
     public float DetectDynamicObstacle()
@@ -101,6 +114,53 @@ public class TankDetectCollider : MonoBehaviour
         if (frontLeftTest.EnemyDetected.Item1 && frontLeftTest.EnemyDetected.Item2 < ret) ret = frontLeftTest.EnemyDetected.Item2;
         
         return ret;
+    }
+
+    public WhatSide DetectWhatSideFree()
+    {
+        Vector3 tankPos = m_Transform.position;
+        Quaternion tankRotation = m_Transform.rotation;
+        
+        Vector3 frontRightSensorGlobalPos = tankPos + tankRotation * m_FrontRightSensorLocalPos;
+        Vector3 frontLeftSensorGlobalPos = tankPos + tankRotation * m_FackLeftSensorLocalPos;
+
+        Quaternion rightTurnRotation = Quaternion.Euler (0f, m_RayCastAnglesOfResearch, 0f); 
+        Quaternion leftTurnRotation = Quaternion.Euler (0f, -m_RayCastAnglesOfResearch, 0f); 
+
+        Vector3 rightSensorDirection = m_Transform.forward;
+        Vector3 leftSensorDirection = m_Transform.forward;
+
+        int nbOccurencesMax = 95 / Mathf.CeilToInt(m_RayCastAnglesOfResearch);
+        for (int i = 0; i < nbOccurencesMax; i++)
+        {
+            // Send an raycast in right side of tank
+            rightSensorDirection = rightTurnRotation * rightSensorDirection;
+            List<cardinalsPointsCollisionFeedback> rightListCollisionFeedback = new List<cardinalsPointsCollisionFeedback>();
+            
+            RaycastHit[] frontRightHits = Physics.RaycastAll(frontRightSensorGlobalPos,  rightSensorDirection, m_RayCastFrontLength);
+            rightListCollisionFeedback.Add(AnalysisCollisions(frontRightHits));
+
+            collisionFeedback rightRaycastCollisionFeedback = AnalysisResultCardinalsPointCollisionFeedback(rightListCollisionFeedback);
+            if (!rightRaycastCollisionFeedback.componentStaticDetected && !rightRaycastCollisionFeedback.AlliedDetected && !rightRaycastCollisionFeedback.EnemyDetected)
+            {
+                return WhatSide.right;
+            }
+            
+            // Send an raycast in left side of tank
+            leftSensorDirection = leftTurnRotation * leftSensorDirection;
+            List<cardinalsPointsCollisionFeedback> leftListCollisionFeedback = new List<cardinalsPointsCollisionFeedback>();
+
+            RaycastHit[] frontLeftHits = Physics.RaycastAll(frontLeftSensorGlobalPos,  leftSensorDirection, m_RayCastFrontLength);
+            leftListCollisionFeedback.Add(AnalysisCollisions(frontLeftHits));
+            
+            collisionFeedback leftRaycastCollisionFeedback = AnalysisResultCardinalsPointCollisionFeedback(leftListCollisionFeedback);
+            if (!leftRaycastCollisionFeedback.componentStaticDetected && !leftRaycastCollisionFeedback.AlliedDetected && !leftRaycastCollisionFeedback.EnemyDetected)
+            {
+                return WhatSide.left;
+            }
+        }
+
+        return WhatSide.nothing;
     }
 
     public collisionFeedback DirectionnalSensing(Vector3 goal)
