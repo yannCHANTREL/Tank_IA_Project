@@ -15,7 +15,7 @@ MonoBehaviour:
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_OldTeamCapturing: 0
   m_CurrentTeamCapturing: 0
-  m_FullCaptureDuration: 1
+  m_FullCaptureDuration: 5
   m_AlphaColor: 200
   m_TriggerEntered: 0
   m_TriggerExit: 0

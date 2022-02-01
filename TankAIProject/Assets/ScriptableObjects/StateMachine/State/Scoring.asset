@@ -15,5 +15,5 @@ MonoBehaviour:
   m_Transitions:
   - {fileID: 11400000, guid: 96f89394aad5cf348b720a7cb6538d55, type: 2}
   - {fileID: 11400000, guid: c16ec635f7abf634dad265d7a5ce882f, type: 2}
-  m_ScoreIncrement: 10
-  m_IntervalScoreSeconds: 1
+  m_ScoreIncrement: 1
+  m_IntervalScoreSeconds: 0.5
