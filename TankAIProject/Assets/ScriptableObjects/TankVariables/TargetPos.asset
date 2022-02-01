@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44290559885e82645a92b3922f234f7e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ae56375120f1364e962a270025370a4, type: 3}
   m_Name: TargetPos
   m_EditorClassIdentifier: 
-  m_Values: []
+  m_TargetPos: {fileID: 0}

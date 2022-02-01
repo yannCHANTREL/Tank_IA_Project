@@ -10,11 +10,11 @@ public class Sequence : Composite
 
     }
 
-    public override Status BHUpdate(int tankIndex)
+    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
     {
         foreach(var child in m_Children)
         {
-            Status status = child.Tick(tankIndex);
+            Status status = child.Tick(teamIndex, tankIndex);
             if (status != Status.success) { return status; }
         }
         return Status.success;

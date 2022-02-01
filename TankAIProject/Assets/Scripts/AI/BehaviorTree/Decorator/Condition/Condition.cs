@@ -16,11 +16,11 @@ public class Condition : Decorator
 
     }
 
-    public override Status BHUpdate(int tankIndex)
+    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
     {
-        if (Test(tankIndex))
+        if (Test(teamIndex, tankIndex))
         {
-            return m_Child.Tick(tankIndex);
+            return m_Child.Tick(teamIndex, tankIndex);
         }
         else
         {
@@ -33,14 +33,14 @@ public class Condition : Decorator
 
     }
 
-    public bool Test(int tankIndex)
+    public bool Test(int teamIndex, int tankIndex = 0)
     {
         if (m_ConditionTests.Count != m_Signs.Count) return false;
 
         bool isAnd = m_CompositionPolicy == Policy.And;
         for (int i = 0; i < m_ConditionTests.Count; i++)
         {
-            bool test = m_Signs[i] == m_ConditionTests[i].Test(tankIndex);
+            bool test = m_Signs[i] == m_ConditionTests[i].Test(teamIndex, tankIndex);
             if (isAnd && !test) { return false; }
             if (!isAnd && test) { return true; }
         }

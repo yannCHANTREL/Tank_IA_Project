@@ -15,13 +15,13 @@ public class Parallel : Composite
 
     }
 
-    public override Status BHUpdate(int tankIndex)
+    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
     {
         int successCount = 0;
         int FailureCount = 0;
         foreach (var child in m_Children)
         {   
-            if (child.m_Status == Status.running) child.Tick(tankIndex);
+            if (child.m_Status == Status.running) child.Tick(teamIndex, tankIndex);
             if (child.m_Status == Status.success)
             {
                 successCount++;

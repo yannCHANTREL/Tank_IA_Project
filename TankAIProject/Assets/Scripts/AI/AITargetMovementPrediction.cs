@@ -5,21 +5,19 @@ using UnityEngine;
 
 public class AITargetMovementPrediction : MonoBehaviour
 {
-    public GameObject m_TankTarget;
+    public GameObjectListVariable m_TankTarget;
     public Vector3ListVariable m_TankTargetPos;
     public Vector3ListVariable m_TankTargetLastPos;
     public Vector3ListVariable m_TankTargetSpeed;
     public Vector3ListVariable m_TankTargetLastSpeed;
     public Vector3ListVariable m_TankTargetEstimatedPos;
     public FloatListVariable m_TankTargetTimeToReachEstimatedPos;
-    public FloatListVariable m_TankTargetAngularSpeed;
     public TankIndexManager m_TankIndexManager;
 
     public float m_ShellSpeed = 20;
     public float m_MaxStepAngle = 3.6f;
     public float m_MaxStepDist = 12;
     public int m_MaxEstimationStep = 1000;
-
     private Transform m_Transform;
 
     public void Awake()
@@ -29,18 +27,20 @@ public class AITargetMovementPrediction : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (m_TankTarget) TrajectoryEstimationB();
+        int tankIndex = m_TankIndexManager.m_TankIndex;
+        GameObject tankTarget = m_TankTarget.m_Values[tankIndex];
+        if (tankTarget) TrajectoryEstimationB(tankTarget, tankIndex);
     }
 
-    public void TrajectoryEstimationB()
+    public void TrajectoryEstimationB(GameObject tankTarget, int tankIndex)
     {
         Vector3 tankTargetEstimatedPos;
         float dt = Time.fixedDeltaTime;
-        Vector3 tankTargetLastPos = m_TankTargetPos.m_Values[m_TankIndexManager.m_TankIndex];
-        Vector3 tankTargetPos = m_TankTarget.transform.position;
+        Vector3 tankTargetLastPos = m_TankTargetPos.m_Values[tankIndex];
+        Vector3 tankTargetPos = tankTarget.transform.position;
         Vector3 tankTargetDeltaPos = tankTargetPos - tankTargetLastPos;
-        Vector3 tankTargetPenultimateSpeed = m_TankTargetLastSpeed.m_Values[m_TankIndexManager.m_TankIndex];
-        Vector3 tankTargetLastSpeed = m_TankTargetSpeed.m_Values[m_TankIndexManager.m_TankIndex];
+        Vector3 tankTargetPenultimateSpeed = m_TankTargetLastSpeed.m_Values[tankIndex];
+        Vector3 tankTargetLastSpeed = m_TankTargetSpeed.m_Values[tankIndex];
         Vector3 tankTargetSpeed = tankTargetDeltaPos / dt;
         float tankTargetAngleDir = Vector3.SignedAngle(tankTargetLastSpeed, tankTargetSpeed, Vector3.up);
         float tankTargetLastAngleDir = Vector3.SignedAngle(tankTargetPenultimateSpeed, tankTargetLastSpeed, Vector3.up);
@@ -87,11 +87,23 @@ public class AITargetMovementPrediction : MonoBehaviour
 
         tankTargetTimeToReachEstimatedPos = currentTankTargetTravelTime - dt;
 
-        m_TankTargetLastPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetLastPos;
-        m_TankTargetPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetPos;
-        m_TankTargetSpeed.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetSpeed;
-        m_TankTargetLastSpeed.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetLastSpeed;
-        m_TankTargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetEstimatedPos;
-        m_TankTargetTimeToReachEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] = tankTargetTimeToReachEstimatedPos;
+        m_TankTargetLastPos.m_Values[tankIndex] = tankTargetLastPos;
+        m_TankTargetPos.m_Values[tankIndex] = tankTargetPos;
+        m_TankTargetSpeed.m_Values[tankIndex] = tankTargetSpeed;
+        m_TankTargetLastSpeed.m_Values[tankIndex] = tankTargetLastSpeed;
+        m_TankTargetEstimatedPos.m_Values[tankIndex] = tankTargetEstimatedPos;
+        m_TankTargetTimeToReachEstimatedPos.m_Values[tankIndex] = tankTargetTimeToReachEstimatedPos;
+    }
+
+    public void ChangeTarget(GameObject tankTarget, int tankIndex)
+    {
+        m_TankTarget.m_Values[tankIndex] = tankTarget;
+        Vector3 tankPos = tankTarget.transform.position;
+        m_TankTargetLastPos.m_Values[m_TankIndexManager.m_TankIndex] = tankPos;
+        m_TankTargetPos.m_Values[m_TankIndexManager.m_TankIndex] = tankPos;
+        m_TankTargetSpeed.m_Values[m_TankIndexManager.m_TankIndex] = Vector3.zero;
+        m_TankTargetLastSpeed.m_Values[m_TankIndexManager.m_TankIndex] = Vector3.zero;
+        m_TankTargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] = tankPos;
+        m_TankTargetTimeToReachEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] = (tankPos - transform.position).magnitude / m_ShellSpeed;
     }
 }

@@ -6,18 +6,18 @@ public abstract class Composite : Behavior
 {
     public List<Behavior> m_Children;
 
-    public override void AddAITank(int tankIndex)
+    public override void AddAITank(int teamIndex, int tankIndex = 0)
     {
         foreach (var child in m_Children)
         {
-            child.AddAITank(tankIndex);
+            child.AddAITank(teamIndex, tankIndex);
         }
     }
-    public override void RemoveAITank(int tankIndex)
+    public override void RemoveAITank(int teamIndex, int tankIndex = 0)
     {
         foreach (var child in m_Children)
         {
-            child.RemoveAITank(tankIndex);
+            child.RemoveAITank(teamIndex, tankIndex);
         }
     }
 }

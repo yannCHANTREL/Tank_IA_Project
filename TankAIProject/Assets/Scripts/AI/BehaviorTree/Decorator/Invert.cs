@@ -10,9 +10,9 @@ public class Invert : Decorator
 
     }
 
-    public override Status BHUpdate(int tankIndex)
+    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
     {
-        Status status = m_Child.Tick(tankIndex);
+        Status status = m_Child.Tick(teamIndex, tankIndex);
         switch (status)
         {
             case Status.success:

@@ -4,73 +4,66 @@ using UnityEngine;
 
 public class AIMove : MonoBehaviour
 {
-    public bool m_Move;
-    public bool m_MoveToFireRange;
-    public bool m_MoveForward = true;
-    public bool m_PredictTargetMovement = true;
+    public TankMoveInstructionListVariable m_MoveInstructions;
     public float m_FirePlacementRange = 13;
     public float m_AnleClamp = 20;
     public float m_RadiusTolerance = 0.5f;
     public float m_AngularTolerancePercentage = 0.1f;
+    public TankIndexManager m_TankIndexManager;
+    public FloatListVariable m_MoveAxis;
+    public FloatListVariable m_TurnAxis;
+    public Vector3ListVariableVariable m_TargetPosContainer;
+    public PointVariableVariable m_TargetPointContainer;
 
-    [SerializeField] private TankIndexManager m_TankIndexManager;
-    [SerializeField] private FloatListVariable m_MoveAxis;
-    [SerializeField] private FloatListVariable m_TurnAxis;
-    [SerializeField] private Vector3ListVariable m_TargetPos;
-    [SerializeField] private Vector3ListVariable m_TargetEstimatedPos;
+    private Transform m_Transform;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        m_Transform = transform;
+    }
+
     void Update()
     {
-        if (m_Move)
-        {
-            ProceedMovements(m_MoveToFireRange ? m_FirePlacementRange : 0f);
-        }
-        else
-        {
-            StopMove();
-            StopTurn();
-        }
+        int tankIndex = m_TankIndexManager.m_TankIndex;
+        ProceedMovements(m_MoveInstructions.m_MoveToFireRange[tankIndex] ? m_FirePlacementRange : 0f, tankIndex);
     }
 
-    private void ProceedMovements(float targetDistanceToTarget)
+    private void ProceedMovements(float targetDistanceToTarget, int tankIndex)
     {
-        Vector3 tankPos = transform.position;
-        Vector3 tankForward = transform.forward;
-        Vector3 tankRight = transform.right;
-        Vector3 targetPos = m_PredictTargetMovement ? m_TargetEstimatedPos.m_Values[m_TankIndexManager.m_TankIndex] : m_TargetPos.m_Values[m_TankIndexManager.m_TankIndex];
+        Vector3 tankPos = m_Transform.position;
+        Vector3 tankForward = m_Transform.forward;
+        Vector3 tankRight = m_Transform.right;
+        Vector3 targetPos = m_MoveInstructions.m_UseTargetPoint[tankIndex] ? m_TargetPointContainer.m_Point.m_CenterPos : m_TargetPosContainer.m_List.m_Values[tankIndex];
         Vector3 distance = targetPos - tankPos;
-        
-        if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance) { Move(distance, tankForward); }
-        else { StopMove(); }
-        
-        if (distance.magnitude > m_RadiusTolerance) { Turn(distance, tankForward, tankRight); }
-        else { StopTurn(); }
+
+        if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance && m_MoveInstructions.m_Move[tankIndex]) { Move(distance, tankForward, tankIndex); }
+        else { StopMove(tankIndex); }
+
+        if (distance.magnitude > m_RadiusTolerance && m_MoveInstructions.m_Turn[tankIndex]) { Turn(distance, tankForward, tankRight, tankIndex); }
+        else { StopTurn(tankIndex); }
     }
 
-    private void Move(Vector3 distance, Vector3 tankForward)
+    private void Move(Vector3 distance, Vector3 tankForward, int tankIndex)
     {
-        if (!m_TankIndexManager || !m_MoveAxis) return;
-        m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] = Vector3.Dot(distance, tankForward) >= 0 != (m_MoveToFireRange && distance.magnitude - m_FirePlacementRange < 0)? 1 : -1;
+        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance, tankForward) >= 0 != (m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0)? 1 : -1, m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
     }
     
-    private void Turn(Vector3 distance, Vector3 tankForward, Vector3 tankRight)
+    private void Turn(Vector3 distance, Vector3 tankForward, Vector3 tankRight, int tankIndex)
     {
-        if (!m_MoveForward) { distance *= -1; }
+        if (!m_MoveInstructions.m_MoveForward[tankIndex]) { distance *= -1; }
         if (!m_TankIndexManager || !m_TurnAxis) return;
         float angleSign = Vector3.Dot(tankRight, distance) >= 0 ? 1 : -1;
         float angleToTarget = Mathf.Clamp(Vector3.Angle(distance, tankForward) * angleSign / m_AnleClamp, -1f, 1f);
-        if (Mathf.Abs(angleToTarget) > m_AngularTolerancePercentage) { m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex] = angleToTarget; }
-        else { StopTurn(); }
+        m_TurnAxis.m_Values[tankIndex] = Mathf.Abs(angleToTarget) > m_AngularTolerancePercentage ? angleToTarget : 0;
     }
 
-    private void StopMove()
+    private void StopMove(int tankIndex)
     {
-        m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] = 0;
+        m_MoveAxis.m_Values[tankIndex] = 0;
     }
 
-    private void StopTurn()
+    private void StopTurn(int tankIndex)
     {
-        m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex] = 0;
+        m_TurnAxis.m_Values[tankIndex] = 0;
     }
 }

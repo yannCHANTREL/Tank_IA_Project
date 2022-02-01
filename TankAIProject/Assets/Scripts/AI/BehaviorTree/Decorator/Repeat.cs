@@ -11,11 +11,11 @@ public class Repeat : Decorator
 
     }
 
-    public override Status BHUpdate(int tankIndex)
+    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
     {
         for (int i = 0; i < m_Limit; i++)
         {
-            m_Child.Tick(tankIndex);
+            m_Child.Tick(teamIndex, tankIndex);
             if (m_Child.m_Status == Status.running) i--;
             if (m_Child.m_Status == Status.failure) return Status.failure;
         }
