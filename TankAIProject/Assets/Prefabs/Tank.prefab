@@ -10313,6 +10313,7 @@ GameObject:
   - component: {fileID: 7822518353279334600}
   - component: {fileID: 5059432242605588651}
   - component: {fileID: 6784212954481608801}
+  - component: {fileID: -5235771794449231236}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Tank
@@ -10601,6 +10602,7 @@ MonoBehaviour:
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_ExplosionPrefab: {fileID: 151086, guid: 6bc6d0dd8b8428e4ca316513f2cf13c6, type: 3}
+  m_Dead: 0
   m_DeathEvent: {fileID: 11400000, guid: 8a44d8911b8e0f949bf8096f9d812ec0, type: 2}
 --- !u!114 &11488788
 MonoBehaviour:
@@ -10695,6 +10697,20 @@ MonoBehaviour:
   m_RayCastBackLength: 1
   m_RayCastFrontLength: 10
   m_RayCastAnglesOfResearch: 2
+--- !u!114 &-5235771794449231236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 413b52b881dd344448aa2fe7ba9f7c1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TankPos: {fileID: 11400000, guid: e17fe872aef7dc541976e62ad95e98af, type: 2}
+  m_TankIndexManager: {fileID: 5192247799311865055}
 --- !u!1 &173936
 GameObject:
   m_ObjectHideFlags: 0
