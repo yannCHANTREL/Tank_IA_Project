@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Game Options
   m_EditorClassIdentifier: 
   m_SearchAlgo: 0
-  m_AIDifficulty: 0
-  m_Mode: 0
+  m_AIDifficulty: 1
+  m_Mode: 1
