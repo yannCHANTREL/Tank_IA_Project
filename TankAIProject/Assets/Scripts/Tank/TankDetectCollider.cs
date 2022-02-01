@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.WSA;
 
 public class TankDetectCollider : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class TankDetectCollider : MonoBehaviour
     private Vector3 m_BackLeftSensorLocalPos;
     private Vector3 m_FackLeftSensorLocalPos;
 
-    [SerializeField]
-    private float m_RayCastLength = 5f;
+    [SerializeField] private float m_RayCastBackLength = 1f;
+    [SerializeField] private float m_RayCastFrontLength = 5f;
+
     void Start()
     {
         m_Transform = transform;
@@ -21,34 +23,47 @@ public class TankDetectCollider : MonoBehaviour
         m_BackRightSensorLocalPos = new Vector3(bounds.x, 0.5f, -bounds.z);
         m_BackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, -bounds.z);
         m_FackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, bounds.z);
-        
-        
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*collisionFeedback cfb = BackwardSensing();
+        // Test BackwardSensing
+        
+        collisionFeedback cfb = BackwardSensing();
         if (cfb.componentStaticDetected || cfb.AlliedDetected || cfb.EnemyDetected)
         {
             Debug.Log("cfb componentStatic : " + cfb.componentStaticDetected);
             Debug.Log("cfb allied : " + cfb.AlliedDetected);
             Debug.Log("cfb enemy : " + cfb.EnemyDetected);
-        }*/
+        }
         
+        
+        // Test DirectionnalSensing
+
         /*collisionFeedback cfb = DirectionnalSensing(new Vector3(-25f,0f,5f));
         string team = "blue";
         if (gameObject.GetComponent<TankIndexManager>().m_TeamIndex == 1) team = "red";
         Debug.Log("cfb " + team + " : " + cfb.componentStaticDetected + " ; " + cfb.AlliedDetected + " ; " + cfb.EnemyDetected);*/
+
+        
+        // Test DetectDynamicObstacle
+        
+        /*float result = DetectDynamicObstacle();
+        string team = "blue";
+        if (gameObject.GetComponent<TankIndexManager>().m_TeamIndex == 1) team = "red";
+        Debug.Log("cfb " + team + " : " + result);*/
     }
 
     public struct cardinalsPointsCollisionFeedback
     {
-        public Tuple<bool,float> componentStaticDetected;
-        public Tuple<bool,float> AlliedDetected;
-        public Tuple<bool,float> EnemyDetected;
+        public Tuple<bool, float> componentStaticDetected;
+        public Tuple<bool, float> AlliedDetected;
+        public Tuple<bool, float> EnemyDetected;
     }
-    
+
     // return :
     // componentStaticDetected -> true if detected
     // AlliedDetected -> true if detected before an componentStaticDetected and first tank detected
@@ -58,6 +73,34 @@ public class TankDetectCollider : MonoBehaviour
         public bool componentStaticDetected;
         public bool AlliedDetected;
         public bool EnemyDetected;
+    }
+
+    public enum WhatSide {
+        left, right
+    };
+
+    public float DetectDynamicObstacle()
+    {
+        Vector3 tankPos = m_Transform.position;
+        Quaternion tankRotation = m_Transform.rotation;
+        
+        Vector3 frontRightSensorGlobalPos = tankPos + tankRotation * m_FrontRightSensorLocalPos;
+        Vector3 frontLeftSensorGlobalPos = tankPos + tankRotation * m_FackLeftSensorLocalPos;
+        
+        RaycastHit[] rightHits = Physics.RaycastAll(frontRightSensorGlobalPos, m_Transform.forward, m_RayCastFrontLength);
+        RaycastHit[] leftHits = Physics.RaycastAll(frontLeftSensorGlobalPos, m_Transform.forward, m_RayCastFrontLength);
+
+        cardinalsPointsCollisionFeedback frontRightTest = AnalysisCollisions(rightHits);
+        cardinalsPointsCollisionFeedback frontLeftTest = AnalysisCollisions(leftHits);
+
+        // Calcul tank nearest
+        float ret = float.MaxValue;
+        if (frontRightTest.AlliedDetected.Item1 && frontRightTest.AlliedDetected.Item2 < ret) ret = frontRightTest.AlliedDetected.Item2;
+        if (frontRightTest.EnemyDetected.Item1 && frontRightTest.EnemyDetected.Item2 < ret) ret = frontRightTest.EnemyDetected.Item2;
+        if (frontLeftTest.AlliedDetected.Item1 && frontLeftTest.AlliedDetected.Item2 < ret) ret = frontLeftTest.AlliedDetected.Item2;
+        if (frontLeftTest.EnemyDetected.Item1 && frontLeftTest.EnemyDetected.Item2 < ret) ret = frontLeftTest.EnemyDetected.Item2;
+        
+        return ret;
     }
 
     public collisionFeedback DirectionnalSensing(Vector3 goal)
@@ -106,8 +149,8 @@ public class TankDetectCollider : MonoBehaviour
         Vector3 backRightSensorGlobalPos = tankPos + tankRotation * m_BackRightSensorLocalPos;
         Vector3 backLeftSensorGlobalPos = tankPos + tankRotation * m_BackLeftSensorLocalPos;
         
-        RaycastHit[] rightHits = Physics.RaycastAll(backRightSensorGlobalPos, -transform.forward, m_RayCastLength);
-        RaycastHit[] leftHits = Physics.RaycastAll(backLeftSensorGlobalPos, -transform.forward, m_RayCastLength);
+        RaycastHit[] rightHits = Physics.RaycastAll(backRightSensorGlobalPos, -m_Transform.forward, m_RayCastBackLength);
+        RaycastHit[] leftHits = Physics.RaycastAll(backLeftSensorGlobalPos, -m_Transform.forward, m_RayCastBackLength);
         
         List<cardinalsPointsCollisionFeedback> listCollisionFeedback = new List<cardinalsPointsCollisionFeedback>();
         listCollisionFeedback.Add(AnalysisCollisions(rightHits));
