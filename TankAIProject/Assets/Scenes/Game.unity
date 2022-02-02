@@ -1975,6 +1975,9 @@ MonoBehaviour:
   m_PrefabHealthObject: {fileID: 4820705429003575727, guid: 2c6f12e2f834587408fd4f5b3549b715, type: 3}
   m_ListSpawnPoint:
   - {fileID: 817589664}
+  m_TimeRespawn: 10
+  m_DataGameobject: {fileID: 11400000, guid: 75aca47e2d5c40d43ba0bea60fc697ff, type: 2}
+  m_TimeBeforeRespawn: {fileID: 11400000, guid: 4181339503b81224abca51925ff0f17e, type: 2}
 --- !u!4 &1522968165
 Transform:
   m_ObjectHideFlags: 0
