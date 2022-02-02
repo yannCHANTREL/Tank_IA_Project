@@ -35,21 +35,15 @@ public class HealthObject : MonoBehaviour
         Renderer renderer = gameObject.GetComponent<Renderer>();
         double radiusObject = renderer.bounds.size.x / 2;
         
-        double radiusTank, radius;
-        Collider collider;
-        Vector3 posTank;
-        double distance;
-        
         Vector3 myPosition = transform.position;
         foreach (var instanceOfTank in m_ListInstanceOfTank)
         {
-            collider = instanceOfTank.GetComponent<Collider>();
-            radiusTank = collider.bounds.size.x / 2;
-            radius = radiusObject + radiusTank;
+            Collider collider = instanceOfTank.GetComponent<Collider>();
+            double radiusTank = collider.bounds.size.x / 2;
+            double radius = radiusObject + radiusTank;
             
-            posTank = instanceOfTank.transform.position;
-            distance = Math.Sqrt(Math.Pow((posTank.x - myPosition.x), 2f) +
-                                 Math.Pow((posTank.z - myPosition.z), 2f));
+            Vector3 posTank = instanceOfTank.transform.position;
+            double distance = Math.Sqrt(Math.Pow((posTank.x - myPosition.x), 2f) + Math.Pow((posTank.z - myPosition.z), 2f));
             
             if (distance < radius)
             {

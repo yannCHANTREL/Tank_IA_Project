@@ -41,12 +41,8 @@ public class Graph
 	/// <param name="end">End Node.</param>
 	public virtual Path GetShortestPath ( Node start, Node end )
 	{
-		
 		// We don't accept null arguments
-		if ( start == null || end == null )
-		{
-			throw new ArgumentNullException ();
-		}
+		if ( start == null || end == null ) throw new ArgumentNullException ();
 		
 		// The final path
 		Path path = new Path ();
@@ -137,7 +133,6 @@ public class Graph
 				}
 			}
 		}
-		path.Bake ();
 		return path;
 	}
 	

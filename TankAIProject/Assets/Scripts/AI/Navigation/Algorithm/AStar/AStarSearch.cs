@@ -25,7 +25,6 @@ public class AStarSearch
 
     public Path GetShortestPath(Node start, Node goal)
     {
-        
         // We don't accept null arguments
         if ( start == null || goal == null )
         {

@@ -14,11 +14,6 @@ public class PathManager : MonoBehaviour
         
     private List<Vector3> m_ListWayPoints;
 
-    private void Update()
-    {
-        
-    }
-
     public async void SearchPath(Vector3 posStart, Vector3 posEnd)
     {
         m_TargetPos = posEnd;
