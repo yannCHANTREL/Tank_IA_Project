@@ -8,7 +8,7 @@ public class TeamTargetSelection : Action
     public enum SelectionPolicy { lowest, highest }
     public bool m_StrictSelection;
     public SelectionPolicy m_SelectionPolicy;
-    public TeamTankIndexTargetList m_TeamTankIndexTarget;
+    public TeamTankIndexTargetListVariable m_TeamTankIndexTarget;
     public TargetSorter m_TargetSorter;
     public TargetSelector m_TargetSelector;
     public bool m_TestSign;

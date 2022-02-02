@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Variables/TeamTankIndexTargetList")]
-public class TeamTankIndexTargetList : ListVariable
+public class TeamTankIndexTargetListVariable : ListVariable
 {
     public List<int> m_Values;
     public override void IncrementTankSize()
