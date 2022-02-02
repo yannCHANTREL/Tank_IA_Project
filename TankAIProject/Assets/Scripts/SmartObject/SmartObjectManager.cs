@@ -32,8 +32,6 @@ public class SmartObjectManager : MonoBehaviour
         {
             if (m_HealthObject == null)
             {
-                yield return new WaitForSeconds(10f);
-                CreateHealthObject();
                 if (startCountTime)
                 {
                     timeWhenObjectDestroyed = Time.realtimeSinceStartup;
@@ -48,6 +46,8 @@ public class SmartObjectManager : MonoBehaviour
                     startCountTime = true;
                 }
             }
+
+            yield return null;
         }
     }
 
