@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d5824bf1f3effe4bba315d95517f08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DefaultStateBase: {fileID: 11400000, guid: c32c3cd04514f3e419ce315c25111f29, type: 2}
+  m_DefaultState: {fileID: 11400000, guid: c32c3cd04514f3e419ce315c25111f29, type: 2}
   m_Data: {fileID: 11400000, guid: ee892dfdee9924a489c1d3b33566262a, type: 2}
 --- !u!114 &216353006
 MonoBehaviour:
@@ -1297,7 +1297,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_VirualGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
-  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
 --- !u!4 &965700879
 Transform:
   m_ObjectHideFlags: 0
@@ -2229,7 +2228,7 @@ GameObject:
   - component: {fileID: 1950414456}
   - component: {fileID: 1950414458}
   m_Layer: 0
-  m_Name: SpawnManager
+  m_Name: RespawnManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
