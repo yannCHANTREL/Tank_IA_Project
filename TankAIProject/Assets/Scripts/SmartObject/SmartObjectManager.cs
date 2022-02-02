@@ -17,13 +17,8 @@ public class SmartObjectManager : MonoBehaviour
     public void Start()
     {
         // Create first healthObject
-<<<<<<< Updated upstream
         CreateHealthObject();
-
-=======
-        createHealthObject();
         
->>>>>>> Stashed changes
         // Verification object is always alive, and manage it recreation
         StartCoroutine(LaunchUpdate());
     }
@@ -37,10 +32,8 @@ public class SmartObjectManager : MonoBehaviour
         {
             if (m_HealthObject == null)
             {
-<<<<<<< Updated upstream
                 yield return new WaitForSeconds(10f);
                 CreateHealthObject();
-=======
                 if (startCountTime)
                 {
                     timeWhenObjectDestroyed = Time.realtimeSinceStartup;
@@ -51,10 +44,9 @@ public class SmartObjectManager : MonoBehaviour
 
                 if (m_TimeSinceDestroy > m_TimeRespawn)
                 {
-                    createHealthObject();
+                    CreateHealthObject();
                     startCountTime = true;
                 }
->>>>>>> Stashed changes
             }
         }
     }
