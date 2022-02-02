@@ -35,6 +35,8 @@ public class SmartObjectManager : MonoBehaviour
                 m_StartCountTime = false;
             }
             m_TimeSinceDestroy = (Time.realtimeSinceStartup - m_TimeWhenObjectDestroyed);
+            
+            // send remaining time before respawn to a ScriptableObject
             m_TimeBeforeRespawn.m_Value = m_TimeRespawn - m_TimeSinceDestroy;
 
             if (m_TimeSinceDestroy > m_TimeRespawn)
@@ -49,6 +51,7 @@ public class SmartObjectManager : MonoBehaviour
     {
         int indexSpawn = Random.Range(0, m_ListSpawnPoint.Length);
         m_HealthObject = Instantiate(m_PrefabHealthObject, m_ListSpawnPoint[indexSpawn].position, m_ListSpawnPoint[indexSpawn].rotation);
+        // send reference of object to a ScriptableObject
         m_DataGameobject.m_Value = m_HealthObject;
     }
 }

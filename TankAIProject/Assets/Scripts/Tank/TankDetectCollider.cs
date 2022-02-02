@@ -180,11 +180,6 @@ public class TankDetectCollider : MonoBehaviour
         Vector3 backLeftDirection = target - frontRightSensorGlobalPos;
         Vector3 frontLeftDirection = target - frontRightSensorGlobalPos;
 
-        /*Debug.DrawRay(frontRightSensorGlobalPos,frontRightDirection, Color.magenta);
-        Debug.DrawRay(backRightSensorGlobalPos,backRightDirection, Color.magenta);
-        Debug.DrawRay(backLeftSensorGlobalPos,backLeftDirection, Color.magenta);
-        Debug.DrawRay(frontLeftSensorGlobalPos,frontLeftDirection, Color.magenta);*/
-
         RaycastHit[] frontRightHits = Physics.RaycastAll(frontRightSensorGlobalPos, frontRightDirection, frontRightDirection.magnitude);
         RaycastHit[] backRightHits = Physics.RaycastAll(backRightSensorGlobalPos, backRightDirection, backRightDirection.magnitude);
         RaycastHit[] backLeftHits = Physics.RaycastAll(backLeftSensorGlobalPos, backLeftDirection, backLeftDirection.magnitude);
