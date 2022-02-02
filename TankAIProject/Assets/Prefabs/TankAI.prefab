@@ -150,8 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee79a86e66c79d42b17cc1aa0e3723c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PathFound: 0
+  m_TargetPos: {x: 0, y: 0, z: 0}
+  m_RadiusTolerance: 1
   m_NavManager: {fileID: 1002921781810151909}
-  m_Grid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
 --- !u!114 &-270030048353792997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +194,6 @@ MonoBehaviour:
   m_TankTargetLastSpeed: {fileID: 11400000, guid: daa3f7238862fd94c88a248be11e888b, type: 2}
   m_TankTargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
   m_TankTargetTimeToReachEstimatedPos: {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
-  m_TankTargetAngularSpeed: {fileID: 0}
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_ShellSpeed: 20
   m_MaxStepAngle: 3.6
@@ -214,6 +215,22 @@ MonoBehaviour:
   m_AStarManager: {fileID: 7912885149352023125}
   m_NavMeshManager: {fileID: -7734663040450953690}
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
+--- !u!114 &3574630722196496598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3984f9d854f752f4ab9a62a297203f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BehaviorTree: {fileID: 11400000, guid: c8d953d44123f8f4e85dcf6c4633132e, type: 2}
+  m_TankIndexManager: {fileID: 2870660015159044341}
+  TeamIndex: 0
+  m_IsTeamTree: 0
 --- !u!114 &3997655906782302068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RayCastBackLength: 1
   m_RayCastFrontLength: 10
+  m_RayCastAnglesOfResearch: 2
 --- !u!114 &7912885149352023125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,4 +308,8 @@ MonoBehaviour:
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
   m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
-  m_TargetPos: {fileID: 11400000, guid: 5501b054b19855e47b6a07bf55f3fe11, type: 2}
+  m_TargetTank: {fileID: 0}
+  m_LastTargetTank: {fileID: 0}
+  m_TargetPosContainer: {fileID: 0}
+  m_TargetPointContainer: {fileID: 0}
+  m_PathManager: {fileID: 0}

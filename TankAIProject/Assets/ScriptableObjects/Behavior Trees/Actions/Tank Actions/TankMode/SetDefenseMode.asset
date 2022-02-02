@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankMode
   m_Status: 0
   m_ModeToSet: 0
-  m_TankMode: {fileID: 0}
+  m_TankMode: {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}

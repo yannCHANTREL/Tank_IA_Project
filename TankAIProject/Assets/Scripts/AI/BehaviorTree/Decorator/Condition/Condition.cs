@@ -5,12 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BehaviorTree/Decorator/Condition")]
 public class Condition : Decorator
 {
-    public List<ConditionTest> m_ConditionTests;
-    public List<bool> m_Signs;
+    public List<TestData> m_Tests;
     public enum Policy { And, Or };
 
     public Policy m_CompositionPolicy;
 
+    [System.Serializable]
+    public struct TestData { public ConditionTest m_ConditionTests; public bool m_Signs; }
     public override void OnInitialize()
     {
 
@@ -35,12 +36,10 @@ public class Condition : Decorator
 
     public bool Test(int teamIndex, int tankIndex = 0)
     {
-        if (m_ConditionTests.Count != m_Signs.Count) return false;
-
         bool isAnd = m_CompositionPolicy == Policy.And;
-        for (int i = 0; i < m_ConditionTests.Count; i++)
+        for (int i = 0; i < m_Tests.Count; i++)
         {
-            bool test = m_Signs[i] == m_ConditionTests[i].Test(teamIndex, tankIndex);
+            bool test = m_Tests[i].m_Signs == m_Tests[i].m_ConditionTests.Test(teamIndex, tankIndex);
             if (isAnd && !test) { return false; }
             if (!isAnd && test) { return true; }
         }

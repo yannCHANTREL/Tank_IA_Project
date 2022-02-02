@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
+  m_Name: FireModeOffIfNoTargetOrNoVision
+  m_EditorClassIdentifier: 
+  m_Status: 0
+  m_Child: {fileID: 11400000, guid: 1fde2f31d51648f4a8daf268a3c3ff1c, type: 2}
+  m_Tests:
+  - m_ConditionTests: {fileID: 11400000, guid: a607c2c7002fc8b468327865a88af33f, type: 2}
+    m_Signs: 0
+  - m_ConditionTests: {fileID: 11400000, guid: cb0489ce94b45cf4da75c37213d7337b, type: 2}
+    m_Signs: 0
+  m_CompositionPolicy: 1

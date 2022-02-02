@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(menuName = "BehaviorTree/BehaviorTree")]
 public class BehaviorTree : ScriptableObject
 {
     public Behavior m_Root;

@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: DirectMoveToHealth
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Move: 0
-  m_Turn: 0
-  m_Follow: 0
+  m_Move: 1
+  m_Turn: 1
+  m_Follow: 1
   m_MoveToFireRange: 0
-  m_MoveForward: 0
-  m_UseTargetPoint: 0
+  m_MoveForward: 1
+  m_UsePathfinding: 0
+  m_TargetType: 1
   m_TargetPos: {fileID: 0}
-  m_TargetPoint: {fileID: 0}
-  m_TargetPosContainer: {fileID: 0}
-  m_TargetPointContainer: {fileID: 0}
-  m_MoveInstructions: {fileID: 0}
+  m_TargetPoint: {fileID: 11400000, guid: 2345f230f82846a468672d63f7b7685b, type: 2}
+  m_TargetPosContainer: {fileID: 11400000, guid: 5501b054b19855e47b6a07bf55f3fe11, type: 2}
+  m_TargetPointContainer: {fileID: 11400000, guid: f9e424692237dfe47948802708026f16, type: 2}
+  m_MoveInstructions: {fileID: 11400000, guid: 1ff9bbaff6c6f334fbe499415e615233, type: 2}
