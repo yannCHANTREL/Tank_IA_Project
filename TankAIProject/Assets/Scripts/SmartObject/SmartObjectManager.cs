@@ -8,8 +8,8 @@ public class SmartObjectManager : MonoBehaviour
     [SerializeField] private Transform[] m_ListSpawnPoint;
     [SerializeField] private float m_TimeRespawn = 10f;
     
-    [SerializeField] private GameobjectVariable m_DataGameobject;
-    [SerializeField] private floatVariable m_TimeBeforeRespawn;
+    [SerializeField] private GameObjectVariable m_DataGameobject;
+    [SerializeField] private FloatVariable m_TimeBeforeRespawn;
 
     private GameObject m_HealthObject;
     private float m_TimeSinceDestroy = 10f;
@@ -40,7 +40,7 @@ public class SmartObjectManager : MonoBehaviour
                     startCountTime = false;
                 }
                 m_TimeSinceDestroy = (Time.realtimeSinceStartup - timeWhenObjectDestroyed);
-                m_TimeBeforeRespawn.m_float = m_TimeRespawn - m_TimeSinceDestroy;
+                m_TimeBeforeRespawn.m_Value = m_TimeRespawn - m_TimeSinceDestroy;
 
                 if (m_TimeSinceDestroy > m_TimeRespawn)
                 {
@@ -55,6 +55,6 @@ public class SmartObjectManager : MonoBehaviour
     {
         int indexSpawn = Random.Range(0, m_ListSpawnPoint.Length);
         m_HealthObject = Instantiate(m_PrefabHealthObject, m_ListSpawnPoint[indexSpawn].position, m_ListSpawnPoint[indexSpawn].rotation);
-        m_DataGameobject.m_Gameobject = m_HealthObject;
+        m_DataGameobject.m_Value = m_HealthObject;
     }
 }

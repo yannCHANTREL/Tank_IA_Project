@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86183d02e7dec8e4cb9030de716c105f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FireMode: {fileID: 0}
+  m_FireMode: {fileID: 11400000, guid: b2f1d6ccf059a864cac29ed1d30f7ed8, type: 2}
   m_TargetEstimatedPos: {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
   m_TargetTimeToReachEstimatedPos: {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
   m_FireRange: 13
@@ -227,10 +227,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3984f9d854f752f4ab9a62a297203f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BehaviorTree: {fileID: 11400000, guid: c8d953d44123f8f4e85dcf6c4633132e, type: 2}
+  m_TankBehaviorTree: {fileID: 11400000, guid: c8d953d44123f8f4e85dcf6c4633132e, type: 2}
+  m_TeamBehaviorTrees: {fileID: 0}
   m_TankIndexManager: {fileID: 2870660015159044341}
-  TeamIndex: 0
-  m_IsTeamTree: 0
+  m_TreeType: 0
 --- !u!114 &3997655906782302068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_SensedTank: {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
   m_TankIndexManager: {fileID: 2870660015159044341}
-  m_CapturePoint: {fileID: 0}
+  m_CapturePoint: {fileID: 11400000, guid: c01b950aa9570d54fa38164d9821e586, type: 2}
   m_AttackMaxAngle: 20
   m_AttackMaxDistance: 20
 --- !u!114 &8785127412315307360
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3b8e79dc6bbbd4fba9391b8f52b220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MoveInstructions: {fileID: 0}
+  m_MoveInstructions: {fileID: 11400000, guid: 1ff9bbaff6c6f334fbe499415e615233, type: 2}
   m_FirePlacementRange: 13
   m_AnleClamp: 20
   m_RadiusTolerance: 0.5
@@ -308,8 +308,8 @@ MonoBehaviour:
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
   m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
-  m_TargetTank: {fileID: 0}
-  m_LastTargetTank: {fileID: 0}
-  m_TargetPosContainer: {fileID: 0}
-  m_TargetPointContainer: {fileID: 0}
-  m_PathManager: {fileID: 0}
+  m_TargetTank: {fileID: 11400000, guid: 5e32816c7cc3d5c45a9f3774b43ea373, type: 2}
+  m_LastTargetTank: {fileID: 11400000, guid: 6a2b273e200acfe4188ed97cfacfedea, type: 2}
+  m_TargetPosContainer: {fileID: 11400000, guid: 5501b054b19855e47b6a07bf55f3fe11, type: 2}
+  m_TargetPointContainer: {fileID: 11400000, guid: f9e424692237dfe47948802708026f16, type: 2}
+  m_PathManager: {fileID: -529812946582353294}

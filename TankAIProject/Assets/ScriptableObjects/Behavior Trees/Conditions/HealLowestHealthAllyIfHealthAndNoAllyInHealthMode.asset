@@ -15,8 +15,8 @@ MonoBehaviour:
   m_Status: 0
   m_Child: {fileID: 11400000, guid: 165bce7e7be3ec14f95be22cd5977a0a, type: 2}
   m_Tests:
-  - m_ConditionTests: {fileID: 0}
+  - m_ConditionTests: {fileID: 11400000, guid: ccb9b54998b4c6142a1529bbc66142b3, type: 2}
     m_Signs: 1
-  - m_ConditionTests: {fileID: 0}
-    m_Signs: 0
+  - m_ConditionTests: {fileID: 11400000, guid: 5f6a59d8a8ecc234fbf9f697530544d0, type: 2}
+    m_Signs: 1
   m_CompositionPolicy: 0

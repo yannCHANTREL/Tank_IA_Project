@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e8f731fc7a7ec94788397a2441b635d, type: 3}
   m_Name: NoAllyInHealthMode
   m_EditorClassIdentifier: 
-  m_TankModeToTest: 0
+  m_TankModeToTest: 2
   m_TestPolicy: 0
-  m_TeamList: {fileID: 0}
-  m_TankMode: {fileID: 0}
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_TankMode: {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}

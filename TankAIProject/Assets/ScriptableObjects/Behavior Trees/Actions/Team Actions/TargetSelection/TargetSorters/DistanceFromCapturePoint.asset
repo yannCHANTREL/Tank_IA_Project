@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baece352d47ad7f4c94442c6b8363405, type: 3}
   m_Name: DistanceFromCapturePoint
   m_EditorClassIdentifier: 
-  m_Point: {fileID: 0}
-  m_TankPos: {fileID: 0}
+  m_Point: {fileID: 11400000, guid: c01b950aa9570d54fa38164d9821e586, type: 2}
+  m_TankPos: {fileID: 11400000, guid: e17fe872aef7dc541976e62ad95e98af, type: 2}

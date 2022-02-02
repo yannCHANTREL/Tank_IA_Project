@@ -40,6 +40,8 @@ namespace Complete
 
         public GameOptions m_GameOptions;
         public UIGameManager m_UIGameManager;
+
+        public TeamBehaviorTreeListVariable m_TeamBehaviorTrees;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 

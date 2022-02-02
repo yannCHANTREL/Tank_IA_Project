@@ -15,18 +15,14 @@ MonoBehaviour:
   m_TeamNumber: 1
   m_TeamColor: {r: 0.16470589, g: 0.39215687, b: 0.69803923, a: 0}
   m_AI: 0
-  m_RoundScore: 0
   m_CaptureScore: 0
   m_TeamTank:
   - m_PlayerColor: {r: 0.16470589, g: 0.39215687, b: 0.69803923, a: 0}
     m_SpawnPoint: {fileID: 0}
     m_PlayerNumber: 1
-    m_ColoredPlayerText: <color=#2A64B2>PLAYER 1</color>
     m_Instance: {fileID: 0}
-    m_Wins: 0
   - m_PlayerColor: {r: 0.16470589, g: 0.39215687, b: 0.69803923, a: 0}
     m_SpawnPoint: {fileID: 0}
     m_PlayerNumber: 2
-    m_ColoredPlayerText: <color=#2A64B2>PLAYER 2</color>
     m_Instance: {fileID: 0}
-    m_Wins: 0
+  m_BehaviorTree: {fileID: 11400000, guid: 567b8465ebb0f484a8279071279e18e4, type: 2}

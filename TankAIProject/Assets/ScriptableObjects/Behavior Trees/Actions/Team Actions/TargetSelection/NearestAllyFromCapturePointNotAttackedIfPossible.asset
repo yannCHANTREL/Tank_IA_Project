@@ -15,8 +15,8 @@ MonoBehaviour:
   m_Status: 0
   m_StrictSelection: 0
   m_SelectionPolicy: 0
-  m_TeamTankIndexTarget: {fileID: 0}
-  m_TargetSorter: {fileID: 0}
-  m_TargetSelector: {fileID: 0}
-  m_TestSign: 0
-  m_TeamList: {fileID: 0}
+  m_TeamTankIndexTarget: {fileID: 11400000, guid: 14dee889ee8c6244d92bac79d45986c9, type: 2}
+  m_TargetSorter: {fileID: 11400000, guid: 7657d6ae7fec2dd40b23b4f5a7f3a91b, type: 2}
+  m_TargetSelector: {fileID: 11400000, guid: 55a062787c4fc834ea2512208fcb52df, type: 2}
+  m_TestSign: 1
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}

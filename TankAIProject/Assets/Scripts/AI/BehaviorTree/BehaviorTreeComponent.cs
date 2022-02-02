@@ -4,14 +4,41 @@ using UnityEngine;
 
 public class BehaviorTreeComponent : MonoBehaviour
 {
-    public BehaviorTree m_BehaviorTree;
+    public BehaviorTree m_TankBehaviorTree;
+    public TeamBehaviorTreeListVariable m_TeamBehaviorTrees;
     public TankIndexManager m_TankIndexManager;
-    public int TeamIndex;
-    public bool m_IsTeamTree;
-    
+    public TreeType m_TreeType;
+
+    private int tankIndex;
+    private int teamIndex;
+
+    public enum TreeType { tank, team}
+
+    private void Start()
+    {
+        if (m_TankIndexManager)
+        {
+            tankIndex = m_TankIndexManager.m_TankIndex;
+            teamIndex = m_TankIndexManager.m_TeamIndex;
+        }
+    }
+
     void Update()
     {
-        if (m_IsTeamTree) m_BehaviorTree.Tick(TeamIndex);
-        else m_BehaviorTree.Tick(m_TankIndexManager.m_TeamIndex, m_TankIndexManager.m_TankIndex);
+        if (m_TreeType == TreeType.team && m_TeamBehaviorTrees)
+        {
+            for (int i = 0; i < m_TeamBehaviorTrees.m_Value.Count; i++)
+            {
+                BehaviorTree teamBehaviorTree = m_TeamBehaviorTrees.m_Value[i];
+                if (teamBehaviorTree)
+                {
+                    teamBehaviorTree.Tick(i);
+                }
+            }
+        }
+        else if (m_TreeType == TreeType.tank && m_TankIndexManager)
+        {
+            m_TankBehaviorTree.Tick(teamIndex, tankIndex);
+        }
     }
 }

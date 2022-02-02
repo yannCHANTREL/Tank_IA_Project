@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Mode { Defense, Attack, Health };
 
-[CreateAssetMenu(menuName = "Variables/TankModeListVariable")]
+[CreateAssetMenu(menuName = "Variables/TankModeList")]
 public class TankModeListVariable : GenericListVariable<Mode>
 {
 }

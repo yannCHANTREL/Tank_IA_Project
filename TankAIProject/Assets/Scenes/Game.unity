@@ -1277,6 +1277,7 @@ GameObject:
   - component: {fileID: 965700879}
   - component: {fileID: 965700878}
   - component: {fileID: 965700880}
+  - component: {fileID: 965700881}
   m_Layer: 0
   m_Name: AIManager
   m_TagString: Untagged
@@ -1325,6 +1326,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SensedTank: {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+--- !u!114 &965700881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965700877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3984f9d854f752f4ab9a62a297203f70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TankBehaviorTree: {fileID: 0}
+  m_TeamBehaviorTrees: {fileID: 11400000, guid: e2cf241bed345f54881ff7171704cafd, type: 2}
+  m_TankIndexManager: {fileID: 0}
+  m_TreeType: 1
 --- !u!1 &1188723416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1636,17 +1653,25 @@ MonoBehaviour:
   m_TankAIPrefab: {fileID: 8059248493399890314, guid: 1447a59e4d037f644bdd91faec4bc2c3, type: 3}
   m_TankAmountPerTeam: 1
   m_TankVariableList:
-  - {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
-  - {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
-  - {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
-  - {fileID: 11400000, guid: 7fdfa2827b785074baf5984d30b3b299, type: 2}
-  - {fileID: 11400000, guid: b99aff4a0450cdf4ca954e751794550e, type: 2}
-  - {fileID: 11400000, guid: daa3f7238862fd94c88a248be11e888b, type: 2}
-  - {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
-  - {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
-  - {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
+  - {fileID: 11400000, guid: b2f1d6ccf059a864cac29ed1d30f7ed8, type: 2}
   - {fileID: 11400000, guid: 6a2b273e200acfe4188ed97cfacfedea, type: 2}
+  - {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
+  - {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
   - {fileID: 11400000, guid: e5822f4c3f3668442a3687069a34faf2, type: 2}
+  - {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}
+  - {fileID: 11400000, guid: 1ff9bbaff6c6f334fbe499415e615233, type: 2}
+  - {fileID: 11400000, guid: e17fe872aef7dc541976e62ad95e98af, type: 2}
+  - {fileID: 11400000, guid: f532b5e7d1e68034fa0106e2edb3777f, type: 2}
+  - {fileID: 11400000, guid: 7fdfa2827b785074baf5984d30b3b299, type: 2}
+  - {fileID: 11400000, guid: daa3f7238862fd94c88a248be11e888b, type: 2}
+  - {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
+  - {fileID: 11400000, guid: b99aff4a0450cdf4ca954e751794550e, type: 2}
+  - {fileID: 11400000, guid: 09dba9119b35d574886041b1836e89f6, type: 2}
+  - {fileID: 11400000, guid: 3ed543f7d475df0459bb2b69d333043e, type: 2}
+  - {fileID: 11400000, guid: 5e32816c7cc3d5c45a9f3774b43ea373, type: 2}
+  - {fileID: 11400000, guid: e2cf241bed345f54881ff7171704cafd, type: 2}
+  - {fileID: 11400000, guid: 14dee889ee8c6244d92bac79d45986c9, type: 2}
+  - {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_TeamsSpawn:
   - {fileID: 194018016}
@@ -1656,6 +1681,7 @@ MonoBehaviour:
   m_Text: {fileID: 3933875172912496329}
   m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
   m_UIGameManager: {fileID: 575313013}
+  m_TeamBehaviorTrees: {fileID: 0}
 --- !u!4 &1304999366
 Transform:
   m_ObjectHideFlags: 0

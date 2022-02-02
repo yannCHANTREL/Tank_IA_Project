@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: TeamRootSequenceDHA
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 11400000, guid: ea297211c7e995d4b88a5758c2bc7a87, type: 2}
+  - {fileID: 11400000, guid: f52ced6375cd97342b19b7cea51a7285, type: 2}

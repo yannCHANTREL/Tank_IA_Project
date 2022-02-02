@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SetTeamAttackMode
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_ModeToSet: 0
-  m_TeamList: {fileID: 0}
-  m_TankMode: {fileID: 0}
+  m_ModeToSet: 1
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_TankMode: {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}

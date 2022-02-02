@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: DefendHealthPoint
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 11400000, guid: 8109c9fdf0adf3e4aba905a9ce8a937a, type: 2}
+  - {fileID: 11400000, guid: 25d4dd68c5911f94aa1919f0aa115230, type: 2}

@@ -14,6 +14,8 @@ public class Team : ScriptableObject
     
     public List<TankManager> m_TeamTank;
 
+    public BehaviorTree m_BehaviorTree;
+
     public void SetTeamAsAI()
     {
         m_AI = true;

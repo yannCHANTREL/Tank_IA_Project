@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0046b64018e1e9e4588af97a5d747c3c, type: 3}
-  m_Name: HealthGameobject
+  m_Name: HealthGameObject
   m_EditorClassIdentifier: 
   m_Gameobject: {fileID: 0}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b641f72d135f1f84cba96938976e6745, type: 3}
   m_Name: AttackModeTest
   m_EditorClassIdentifier: 
-  m_ModeToTest: 0
-  m_TankMode: {fileID: 0}
+  m_ModeToTest: 1
+  m_TankMode: {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}

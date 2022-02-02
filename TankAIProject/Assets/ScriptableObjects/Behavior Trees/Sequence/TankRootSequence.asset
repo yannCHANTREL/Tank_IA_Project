@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: TankRootSequence
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 11400000, guid: 25775cd3b15d6c74fb17a33625f9bd96, type: 2}
+  - {fileID: 11400000, guid: 41d1f305b76a7284ea4ac26421fc41aa, type: 2}

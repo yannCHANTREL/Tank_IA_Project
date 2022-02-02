@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: SendATankToDefense
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 11400000, guid: 1c9bfc90a366c6c4283028cf0b7299e8, type: 2}
+  - {fileID: 11400000, guid: cbcb97af763f49540ab97ab698ee345a, type: 2}

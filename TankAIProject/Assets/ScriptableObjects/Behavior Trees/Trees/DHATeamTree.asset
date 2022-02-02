@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
-  m_Name: HealthSpawendOrSoonAndNoAllyInHealthMode
+  m_Script: {fileID: 11500000, guid: 3ddf3452b5bc1354096e517230fe26e5, type: 3}
+  m_Name: DHATeamTree
   m_EditorClassIdentifier: 
-  m_Status: 0
-  m_Child: {fileID: 0}
-  m_Tests: []
-  m_CompositionPolicy: 0
+  m_Root: {fileID: 11400000, guid: a0c21fedcd2f9a54bbea4c7e48ffe75e, type: 2}
