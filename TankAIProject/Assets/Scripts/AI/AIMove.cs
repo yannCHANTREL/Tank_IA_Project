@@ -15,8 +15,8 @@ public class AIMove : MonoBehaviour
     public FloatListVariable m_TurnAxis;
     public GameObjectListVariable m_TargetTank;
     public GameObjectListVariable m_LastTargetTank;
-    public Vector3ListVariableVariable m_TargetPosContainer;
-    public PointVariableVariable m_TargetPointContainer;
+    public Vector3ListVariableListVariable m_TargetPosContainer;
+    public PointVariableListVariable m_TargetPointContainer;
     public PathManager m_PathManager;
 
     private Transform m_Transform;
@@ -42,7 +42,7 @@ public class AIMove : MonoBehaviour
         Vector3 tankRight = m_Transform.right;
         TargetType targetType = m_MoveInstructions.m_TargetType[tankIndex];
         bool changedTargetType = targetType != m_LastTargetType;
-        Vector3 targetPos = targetType == TargetType.point ? m_TargetPointContainer.m_Point.m_CenterPos : m_TargetPosContainer.m_List.m_Values[tankIndex];
+        Vector3 targetPos = targetType == TargetType.point ? m_TargetPointContainer.m_Values[tankIndex].m_CenterPos : m_TargetPosContainer.m_Values[tankIndex].m_Values[tankIndex];
 
         bool usePathfinding = m_MoveInstructions.m_UsePathfinding[tankIndex];
 

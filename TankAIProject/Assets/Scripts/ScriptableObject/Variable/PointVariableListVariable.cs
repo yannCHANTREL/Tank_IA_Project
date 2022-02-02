@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Variables/PointVariable")]
-public class PointVariableVariable : ScriptableObject
+public class PointVariableListVariable : GenericListVariable<PointVariable>
 {
-    public PointVariable m_Point;
+
 }
