@@ -6,7 +6,7 @@ using UnityEngine;
 public class TeamTankMode : Action
 {
     public Mode m_ModeToSet;
-    public TeamTankIndexTargetList m_TeamTankTarget;
+    public TeamTankIndexTargetListVariable m_TeamTankTarget;
     public TankModeListVariable m_TankMode;
     public override void AddAITank(int teamIndex, int tankIndex = 0)
     {

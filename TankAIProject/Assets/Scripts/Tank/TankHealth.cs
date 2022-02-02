@@ -12,7 +12,8 @@ namespace Complete
         public Color m_FullHealthColor = Color.green;       // The color the health bar will be when on full health.
         public Color m_ZeroHealthColor = Color.red;         // The color the health bar will be when on no health.
         public GameObject m_ExplosionPrefab;                // A prefab that will be instantiated in Awake, then used whenever the tank dies.
-        
+        public FloatListVariable m_TankHealth;
+        public TankIndexManager m_TankIndexManager;
         
         private AudioSource m_ExplosionAudio;               // The audio source to play when the tank explodes.
         private ParticleSystem m_ExplosionParticles;        // The particle system the will play when the tank is destroyed.
@@ -20,9 +21,12 @@ namespace Complete
         [HideInInspector] public bool m_Dead;                                // Has the tank been reduced beyond zero health yet?
 
         public GameEventWithArgument m_DeathEvent;
+        private int m_TankIndex;
 
         private void Awake ()
         {
+            m_TankIndex = m_TankIndexManager.m_TankIndex;
+  
             // Instantiate the explosion prefab and get a reference to the particle system on it.
             m_ExplosionParticles = Instantiate (m_ExplosionPrefab).GetComponent<ParticleSystem> ();
 
@@ -53,6 +57,8 @@ namespace Complete
             // Change the UI elements appropriately.
             SetHealthUI ();
 
+            UpdateHealth();
+
             // If the current health is at or below zero and it has not yet been registered, call OnDeath.
             if (m_CurrentHealth <= 0f && !m_Dead)
             {
@@ -68,6 +74,8 @@ namespace Complete
 
             // Change the UI elements appropriately.
             SetHealthUI ();
+
+            UpdateHealth();
         }
 
 
@@ -104,5 +112,10 @@ namespace Complete
             // Raise the Death Event
             m_DeathEvent.Raise(o);
         }
+        private void UpdateHealth()
+        {
+            m_TankHealth.m_Values[m_TankIndex] = m_CurrentHealth;
+        }
     }
+
 }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5f5eb538866fae468991ff69ba27638, type: 3}
+  m_Name: PathMoveToCapturePoint
+  m_EditorClassIdentifier: 
+  m_Status: 0
+  m_Move: 1
+  m_Turn: 1
+  m_Follow: 1
+  m_MoveToFireRange: 0
+  m_MoveForward: 1
+  m_UsePathfinding: 1
+  m_TargetType: 1
+  m_TargetPos: {fileID: 0}
+  m_TargetPoint: {fileID: 11400000, guid: c01b950aa9570d54fa38164d9821e586, type: 2}
+  m_TargetPosContainer: {fileID: 11400000, guid: 5501b054b19855e47b6a07bf55f3fe11, type: 2}
+  m_TargetPointContainer: {fileID: 11400000, guid: f9e424692237dfe47948802708026f16, type: 2}
+  m_MoveInstructions: {fileID: 11400000, guid: 1ff9bbaff6c6f334fbe499415e615233, type: 2}

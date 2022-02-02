@@ -5,6 +5,7 @@ using UnityEngine;
 public class TargetManager : MonoBehaviour
 {
     public GameObjectListVariable m_TargetTank;
+    public GameObjectListVariable m_LastTargetTank;
     public TargetCountListVariable m_TargetCount;
     public SensedTankListVariable m_SensedTank;
     public TankIndexManager m_TankIndexManager;
@@ -12,6 +13,8 @@ public class TargetManager : MonoBehaviour
     private void Update()
     {
         if (!(m_SensedTank && m_TargetTank && m_TargetCount && m_TankIndexManager)) return;
+
+        m_LastTargetTank.m_Values = m_TargetTank.m_Values;
 
         int tankIndex = m_TankIndexManager.m_TankIndex;
         int teamIndex = m_TankIndexManager.m_TeamIndex;

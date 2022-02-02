@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class AIMove : MonoBehaviour
@@ -12,10 +13,14 @@ public class AIMove : MonoBehaviour
     public TankIndexManager m_TankIndexManager;
     public FloatListVariable m_MoveAxis;
     public FloatListVariable m_TurnAxis;
+    public GameObjectListVariable m_TargetTank;
+    public GameObjectListVariable m_LastTargetTank;
     public Vector3ListVariableVariable m_TargetPosContainer;
     public PointVariableVariable m_TargetPointContainer;
+    public PathManager m_PathManager;
 
     private Transform m_Transform;
+    TargetType m_LastTargetType;
 
     private void Start()
     {
@@ -28,19 +33,51 @@ public class AIMove : MonoBehaviour
         ProceedMovements(m_MoveInstructions.m_MoveToFireRange[tankIndex] ? m_FirePlacementRange : 0f, tankIndex);
     }
 
+
     private void ProceedMovements(float targetDistanceToTarget, int tankIndex)
     {
+        bool stopMoving = false;
         Vector3 tankPos = m_Transform.position;
         Vector3 tankForward = m_Transform.forward;
         Vector3 tankRight = m_Transform.right;
-        Vector3 targetPos = m_MoveInstructions.m_UseTargetPoint[tankIndex] ? m_TargetPointContainer.m_Point.m_CenterPos : m_TargetPosContainer.m_List.m_Values[tankIndex];
+        TargetType targetType = m_MoveInstructions.m_TargetType[tankIndex];
+        bool changedTargetType = targetType != m_LastTargetType;
+        Vector3 targetPos = targetType == TargetType.point ? m_TargetPointContainer.m_Point.m_CenterPos : m_TargetPosContainer.m_List.m_Values[tankIndex];
+
+        bool usePathfinding = m_MoveInstructions.m_UsePathfinding[tankIndex];
+
+        if (usePathfinding)
+        {
+            bool targetChanged = m_PathManager.m_TargetPos != targetPos;
+            if (targetType == TargetType.point && (targetChanged || changedTargetType))
+            {
+                m_PathManager.SearchPath(tankPos, targetPos);
+            }
+            else if (targetType == TargetType.tank)
+            {
+                targetChanged = m_LastTargetTank.m_Values[tankIndex] != m_TargetTank.m_Values[tankIndex];
+                if (targetChanged || changedTargetType || m_PathManager.m_PathFound)
+                {
+                    m_PathManager.SearchPath(tankPos, targetPos);
+                }
+            }
+            m_PathManager.UpdatePath(tankPos);
+            if ((targetChanged || changedTargetType) && !m_PathManager.m_PathFound)
+            {
+                stopMoving = true;
+            }
+            targetPos = m_PathManager.GetActualWaypoint();
+        }
+
         Vector3 distance = targetPos - tankPos;
 
-        if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance && m_MoveInstructions.m_Move[tankIndex]) { Move(distance, tankForward, tankIndex); }
+        if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance && m_MoveInstructions.m_Move[tankIndex] && !stopMoving) { Move(distance, tankForward, tankIndex); }
         else { StopMove(tankIndex); }
 
-        if (distance.magnitude > m_RadiusTolerance && m_MoveInstructions.m_Turn[tankIndex]) { Turn(distance, tankForward, tankRight, tankIndex); }
+        if (distance.magnitude > m_RadiusTolerance && m_MoveInstructions.m_Turn[tankIndex] && !stopMoving) { Turn(distance, tankForward, tankRight, tankIndex); }
         else { StopTurn(tankIndex); }
+
+        m_LastTargetType = targetType;
     }
 
     private void Move(Vector3 distance, Vector3 tankForward, int tankIndex)

@@ -29,10 +29,10 @@ public class AITargetMovementPrediction : MonoBehaviour
     {
         int tankIndex = m_TankIndexManager.m_TankIndex;
         GameObject tankTarget = m_TankTarget.m_Values[tankIndex];
-        if (tankTarget) TrajectoryEstimationB(tankTarget, tankIndex);
+        if (tankTarget) TrajectoryEstimation(tankTarget, tankIndex);
     }
 
-    public void TrajectoryEstimationB(GameObject tankTarget, int tankIndex)
+    public void TrajectoryEstimation(GameObject tankTarget, int tankIndex)
     {
         Vector3 tankTargetEstimatedPos;
         float dt = Time.fixedDeltaTime;

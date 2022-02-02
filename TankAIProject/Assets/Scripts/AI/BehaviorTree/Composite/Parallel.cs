@@ -30,7 +30,7 @@ public class Parallel : Composite
             if (child.m_Status == Status.failure)
             {
                 FailureCount++;
-                if (m_SuccessPolicy == Policy.RequireOne) return Status.failure;
+                if (m_FailurePolicy == Policy.RequireOne) return Status.failure;
             }
         }
 

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Status: 0
   m_Child: {fileID: 11400000, guid: dca825af4b05ae841b905d6f26fce1b9, type: 2}
-  m_ConditionTests:
-  - {fileID: 11400000, guid: 76e7520398e4b2f4fb30938739c783cd, type: 2}
-  - {fileID: 11400000, guid: a607c2c7002fc8b468327865a88af33f, type: 2}
-  - {fileID: 11400000, guid: 9ea559bc9675c884cb4910ee6363bb25, type: 2}
-  m_Signs: 010100
+  m_Tests:
+  - m_ConditionTests: {fileID: 11400000, guid: 73a00c2cbccd3434bba958a78b451dab, type: 2}
+    m_Signs: 1
+  - m_ConditionTests: {fileID: 11400000, guid: a607c2c7002fc8b468327865a88af33f, type: 2}
+    m_Signs: 1
   m_CompositionPolicy: 0

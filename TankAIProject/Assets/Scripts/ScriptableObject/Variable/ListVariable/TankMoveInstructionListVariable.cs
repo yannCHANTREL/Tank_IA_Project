@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TargetType { tank, point }
+
 [CreateAssetMenu(menuName = "Variables/TankMoveInstructionList")]
 public class TankMoveInstructionListVariable : ListVariable
 {
@@ -10,7 +12,9 @@ public class TankMoveInstructionListVariable : ListVariable
     public List<bool> m_Follow;
     public List<bool> m_MoveToFireRange;
     public List<bool> m_MoveForward;
-    public List<bool> m_UseTargetPoint;
+    public List<bool> m_UsePathfinding;
+    public List<TargetType> m_TargetType;
+
 
     public override void IncrementTankSize()
     {
@@ -19,7 +23,8 @@ public class TankMoveInstructionListVariable : ListVariable
         m_Follow.Add(true);
         m_MoveToFireRange.Add(true);
         m_MoveForward.Add(true);
-        m_UseTargetPoint.Add(false);
+        m_UsePathfinding.Add(false);
+        m_TargetType.Add(TargetType.tank);
     }
 
     public override void IncrementTeamSize()
@@ -34,6 +39,7 @@ public class TankMoveInstructionListVariable : ListVariable
         m_Follow = new List<bool>();
         m_MoveToFireRange = new List<bool>();
         m_MoveForward = new List<bool>();
-        m_UseTargetPoint = new List<bool>();
+        m_UsePathfinding = new List<bool>();
+        m_TargetType = new List<TargetType>();
     }
 }

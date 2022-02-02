@@ -84,7 +84,7 @@ public class TankDetectCollider : MonoBehaviour
     public struct collisionFeedback
     {
         public bool componentStaticDetected;
-        public bool AlliedDetected;
+        public bool AllyDetected;
         public bool EnemyDetected;
     }
 
@@ -141,7 +141,7 @@ public class TankDetectCollider : MonoBehaviour
             rightListCollisionFeedback.Add(AnalysisCollisions(frontRightHits));
 
             collisionFeedback rightRaycastCollisionFeedback = AnalysisResultCardinalsPointCollisionFeedback(rightListCollisionFeedback);
-            if (!rightRaycastCollisionFeedback.componentStaticDetected && !rightRaycastCollisionFeedback.AlliedDetected && !rightRaycastCollisionFeedback.EnemyDetected)
+            if (!rightRaycastCollisionFeedback.componentStaticDetected && !rightRaycastCollisionFeedback.AllyDetected && !rightRaycastCollisionFeedback.EnemyDetected)
             {
                 return WhatSide.right;
             }
@@ -154,7 +154,7 @@ public class TankDetectCollider : MonoBehaviour
             leftListCollisionFeedback.Add(AnalysisCollisions(frontLeftHits));
             
             collisionFeedback leftRaycastCollisionFeedback = AnalysisResultCardinalsPointCollisionFeedback(leftListCollisionFeedback);
-            if (!leftRaycastCollisionFeedback.componentStaticDetected && !leftRaycastCollisionFeedback.AlliedDetected && !leftRaycastCollisionFeedback.EnemyDetected)
+            if (!leftRaycastCollisionFeedback.componentStaticDetected && !leftRaycastCollisionFeedback.AllyDetected && !leftRaycastCollisionFeedback.EnemyDetected)
             {
                 return WhatSide.left;
             }
@@ -163,7 +163,7 @@ public class TankDetectCollider : MonoBehaviour
         return WhatSide.nothing;
     }
 
-    public collisionFeedback DirectionnalSensing(Vector3 goal)
+    public collisionFeedback DirectionnalSensing(Vector3 target)
     {
         gameObject.tag = "mySelf";
             
@@ -175,10 +175,10 @@ public class TankDetectCollider : MonoBehaviour
         Vector3 backLeftSensorGlobalPos = tankPos + tankRotation * m_BackLeftSensorLocalPos;
         Vector3 frontLeftSensorGlobalPos = tankPos + tankRotation * m_FackLeftSensorLocalPos;
 
-        Vector3 frontRightDirection = goal - frontRightSensorGlobalPos;
-        Vector3 backRightDirection = goal - frontRightSensorGlobalPos;
-        Vector3 backLeftDirection = goal - frontRightSensorGlobalPos;
-        Vector3 frontLeftDirection = goal - frontRightSensorGlobalPos;
+        Vector3 frontRightDirection = target - frontRightSensorGlobalPos;
+        Vector3 backRightDirection = target - frontRightSensorGlobalPos;
+        Vector3 backLeftDirection = target - frontRightSensorGlobalPos;
+        Vector3 frontLeftDirection = target - frontRightSensorGlobalPos;
 
         /*Debug.DrawRay(frontRightSensorGlobalPos,frontRightDirection, Color.magenta);
         Debug.DrawRay(backRightSensorGlobalPos,backRightDirection, Color.magenta);
@@ -223,7 +223,7 @@ public class TankDetectCollider : MonoBehaviour
     {
         collisionFeedback ret;
         ret.componentStaticDetected = false;
-        ret.AlliedDetected = false;
+        ret.AllyDetected = false;
         ret.EnemyDetected = false;
 
         float distanceComponentStatic = -2f;
@@ -253,7 +253,7 @@ public class TankDetectCollider : MonoBehaviour
 
         if (distanceAlliedTank >= 0 && (distanceEnemyTank <= 0 || distanceAlliedTank < distanceEnemyTank) && (distanceComponentStatic <= 0 || distanceAlliedTank < distanceComponentStatic))
         {
-            ret.AlliedDetected = true;
+            ret.AllyDetected = true;
         }
         if (distanceEnemyTank >= 0 && (distanceAlliedTank <= 0 || distanceEnemyTank < distanceAlliedTank) && (distanceComponentStatic <= 0 || distanceEnemyTank < distanceComponentStatic))
         {

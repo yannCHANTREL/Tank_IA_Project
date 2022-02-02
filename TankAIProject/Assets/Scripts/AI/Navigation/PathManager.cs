@@ -5,31 +5,44 @@ using UnityEngine;
 
 public class PathManager : MonoBehaviour
 {
-    [SerializeField]
-    private NavigationManager m_NavManager;
+    public bool m_PathFound;
+    public Vector3 m_TargetPos;
+    public float m_RadiusTolerance = 1;
 
     [SerializeField]
-    private VirtualGrid m_Grid;
+    private NavigationManager m_NavManager;
         
     private List<Vector3> m_ListWayPoints;
 
+    private void Update()
+    {
+        
+    }
+
     public async void SearchPath(Vector3 posStart, Vector3 posEnd)
     {
+        m_TargetPos = posEnd;
+        m_PathFound = false;
         m_ListWayPoints = await m_NavManager.FindPath(posStart, posEnd);
+        m_PathFound = true;
     }
 
     public void UpdatePath(Vector3 currentPos) 
     {
-        double radius = m_Grid.nodeDiameter / 2;
         double distance;
         for (int i = 0; i < m_ListWayPoints.Count; i++)
         {
             distance = Math.Sqrt(Math.Pow((m_ListWayPoints[i].x - currentPos.x), 2f) +
                                         Math.Pow((m_ListWayPoints[i].y - currentPos.y), 2f));
-            if (distance < radius)
+            if (distance < m_RadiusTolerance)
             {
                 m_ListWayPoints.RemoveRange(0,i+1);
             }
+        }
+        if (m_ListWayPoints.Count == 0)
+        {
+            m_TargetPos = Vector3.zero;
+            m_PathFound = false;
         }
     }
 

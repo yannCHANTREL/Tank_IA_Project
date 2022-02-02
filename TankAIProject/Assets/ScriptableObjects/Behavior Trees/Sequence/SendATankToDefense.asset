@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4c9b742777f254e9a5a518cbdb7142, type: 3}
-  m_Name: MoveModeSelector
+  m_Script: {fileID: 11500000, guid: 0b9fdc5180dc7de4bbe272e935ff10bd, type: 3}
+  m_Name: SendATankToDefense
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Children:
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Children: []

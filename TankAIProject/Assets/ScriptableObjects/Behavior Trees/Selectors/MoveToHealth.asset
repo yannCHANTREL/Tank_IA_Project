@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: MoveToHealth
   m_EditorClassIdentifier: 
   m_Status: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 11400000, guid: ccfc3ecb8c6f5504a948195416e7aeb4, type: 2}
+  - {fileID: 11400000, guid: a6a64fdbddfc8284691e3abab3e44ab3, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Status: 0
   m_Child: {fileID: 11400000, guid: f043f9d87fe0aee419eaee434df2e4c6, type: 2}
-  m_ConditionTests:
-  - {fileID: 11400000, guid: 9ea559bc9675c884cb4910ee6363bb25, type: 2}
-  m_Signs: 01
+  m_Tests:
+  - m_ConditionTests: {fileID: 11400000, guid: 9ea559bc9675c884cb4910ee6363bb25, type: 2}
+    m_Signs: 1
   m_CompositionPolicy: 0
