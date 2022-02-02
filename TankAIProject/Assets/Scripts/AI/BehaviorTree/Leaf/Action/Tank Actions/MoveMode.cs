@@ -14,8 +14,8 @@ public class MoveMode : Action
     public TargetType m_TargetType;
     public Vector3ListVariable m_TargetPos;
     public PointVariable m_TargetPoint;
-    public Vector3ListVariableVariable m_TargetPosContainer;
-    public PointVariableVariable m_TargetPointContainer;
+    public Vector3ListVariableListVariable m_TargetPosContainer;
+    public PointVariableListVariable m_TargetPointContainer;
     public TankMoveInstructionListVariable m_MoveInstructions;
     public override void AddAITank(int teamIndex, int tankIndex = 0)
     {
@@ -32,8 +32,8 @@ public class MoveMode : Action
         m_MoveInstructions.m_UsePathfinding[tankIndex] = m_UsePathfinding;
         m_MoveInstructions.m_TargetType[tankIndex] = m_TargetType;
 
-        if (m_TargetType == TargetType.point && m_TargetPoint) { m_TargetPosContainer.m_List = m_TargetPos; }
-        else if (m_TargetType == TargetType.tank && m_TargetPos) { m_TargetPointContainer.m_Point = m_TargetPoint; }
+        if (m_TargetType == TargetType.point && m_TargetPoint) { m_TargetPosContainer.m_Values[tankIndex] = m_TargetPos; }
+        else if (m_TargetType == TargetType.tank && m_TargetPos) { m_TargetPointContainer.m_Values[tankIndex] = m_TargetPoint; }
         return Status.success;
     }
 

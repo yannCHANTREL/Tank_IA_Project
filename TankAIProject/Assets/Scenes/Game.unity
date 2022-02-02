@@ -1676,12 +1676,12 @@ MonoBehaviour:
   m_TeamsSpawn:
   - {fileID: 194018016}
   - {fileID: 2083660209}
-  m_MaxGameTimeInSeconds: 5
+  m_MaxGameTimeInSeconds: 300
   m_CaptureData: {fileID: 11400000, guid: ee892dfdee9924a489c1d3b33566262a, type: 2}
   m_Text: {fileID: 3933875172912496329}
   m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
   m_UIGameManager: {fileID: 575313013}
-  m_TeamBehaviorTrees: {fileID: 0}
+  m_TeamBehaviorTrees: {fileID: 11400000, guid: e2cf241bed345f54881ff7171704cafd, type: 2}
 --- !u!4 &1304999366
 Transform:
   m_ObjectHideFlags: 0

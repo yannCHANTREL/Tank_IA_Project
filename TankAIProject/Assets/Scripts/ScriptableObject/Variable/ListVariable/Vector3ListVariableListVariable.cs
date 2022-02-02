@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Variables/Vector3ListVariable")]
-public class Vector3ListVariableVariable : ScriptableObject
+public class Vector3ListVariableListVariable : GenericListVariable<Vector3ListVariable>
 {
-    public Vector3ListVariable m_List;
+
 }
