@@ -5,26 +5,26 @@ using UnityEngine;
 
 public class StateMachineManager : MonoBehaviour
 {
-    public StateBase m_DefaultStateBase;
+    public StateBase m_DefaultState;
     public StateDataBase m_Data;
     
-    private StateBase m_CurrentStateBase;
+    private StateBase m_CurrentState;
 
     private void Start()
     {
-        m_CurrentStateBase = m_DefaultStateBase;
-        m_CurrentStateBase.OnEnter(this);
+        m_CurrentState = m_DefaultState;
+        m_CurrentState.OnEnter(this);
     }
 
     private void Update()
     {
-        m_CurrentStateBase.StateUpdate(this);
+        m_CurrentState.StateUpdate(this);
     }
 
     public void TransitionTo(StateBase stateBase)
     {
-        m_CurrentStateBase.OnExit(this);
-        m_CurrentStateBase = stateBase;
-        m_CurrentStateBase.OnEnter(this);
+        m_CurrentState.OnExit(this);
+        m_CurrentState = stateBase;
+        m_CurrentState.OnEnter(this);
     }
 }

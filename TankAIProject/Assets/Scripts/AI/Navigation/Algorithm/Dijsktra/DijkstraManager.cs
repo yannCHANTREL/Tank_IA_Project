@@ -13,7 +13,7 @@ public class DijkstraManager : SearchAlgorithm
     
     private DijsktraEditor m_Editor;
 
-    public void InitializationCordinates(DijsktraEditor editor)
+    public void InitializationCoordinates(DijsktraEditor editor)
     {
         m_Editor = editor;
         m_ClassGrid = editor.m_ClassGrid;
@@ -25,7 +25,7 @@ public class DijkstraManager : SearchAlgorithm
         while (true)
         {
             Thread t = new Thread(ImplementedDijsktraEditor);
-            var temp = Time.realtimeSinceStartup;
+            float temp = Time.realtimeSinceStartup;
             t.Start();
                 
             // wait end execution thread

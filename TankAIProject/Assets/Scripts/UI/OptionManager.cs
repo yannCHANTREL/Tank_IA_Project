@@ -51,9 +51,4 @@ public class OptionManager : MonoBehaviour
     {
         m_GameOptions.m_Mode = (GameOptions.Mode)index;
     }
-
-    public void LoadGameScene()
-    {
-        SceneManager.LoadScene(m_GameSceneName);
-    }
 }

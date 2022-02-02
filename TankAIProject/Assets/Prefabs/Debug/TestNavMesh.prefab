@@ -132,5 +132,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fd3a7575902afe478603c45e7150640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  agent: {fileID: 4877490480738340042}
+  m_Cam: {fileID: 0}
+  m_Agent: {fileID: 4877490480738340042}

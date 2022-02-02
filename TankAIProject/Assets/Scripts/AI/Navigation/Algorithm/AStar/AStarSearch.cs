@@ -45,14 +45,14 @@ public class AStarSearch
         m_CameFrom = new Dictionary<Node, Node>();
         Dictionary<Node, double> costSoFar = new Dictionary<Node, double>();
 
-        var frontier = new PriorityQueue<Node>();
+        PriorityQueue<Node> frontier = new PriorityQueue<Node>();
         frontier.Enqueue(start, 0);
         
         costSoFar[start] = 0;
         
         while (frontier.count > 0)
         {
-            var current = frontier.Dequeue();
+            Node current = frontier.Dequeue();
 
             // When the current node is equal to the goal node, then we can break and return the path
             if (current.Equals(goal))

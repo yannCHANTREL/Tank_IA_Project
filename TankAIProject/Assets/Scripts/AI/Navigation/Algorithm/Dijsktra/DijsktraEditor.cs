@@ -16,7 +16,7 @@ public class DijsktraEditor : MonoBehaviour
             DijkstraManager dijkstraManager = gameObject.AddComponent(typeof(DijkstraManager)) as DijkstraManager;
             if (dijkstraManager != null)
             {
-                dijkstraManager.InitializationCordinates(this);
+                dijkstraManager.InitializationCoordinates(this);
             
                 // preparation Dijsktra features
                 dijkstraManager.PreparationForDijsktraFeatures();

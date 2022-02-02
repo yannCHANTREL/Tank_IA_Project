@@ -14,7 +14,13 @@ public class AIShoot : MonoBehaviour
     public TankIndexManager m_TankIndexManager;
     public TankEvent m_FireCommand;
 
-   
+    private Transform m_Transform;
+
+    public void Awake()
+    {
+        m_Transform = transform;
+    }
+    
     void Update()
     {
         int tankIndex = m_TankIndexManager.m_TankIndex;
@@ -23,8 +29,8 @@ public class AIShoot : MonoBehaviour
 
     public void Fire(int tankIndex)
     {
-        Vector3 tankPos = transform.position;
-        Vector3 tankForward = transform.forward;
+        Vector3 tankPos = m_Transform.position;
+        Vector3 tankForward = m_Transform.forward;
         Vector3 targetPos = m_TargetEstimatedPos.m_Values[tankIndex];
         Vector3 distance = targetPos - tankPos;
         float angleToTarget = Vector3.Angle(distance, tankForward);

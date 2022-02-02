@@ -17,21 +17,9 @@ namespace Complete
         private bool m_Reloading = false;           // The input axis that is used for launching shells.
 
 
-        private void OnEnable()
-        {
-
-        }
-
-
         private void Start ()
         {
             m_FireWait = new WaitForSeconds(m_FireDelay);
-        }
-
-
-        private void Update ()
-        {
-            
         }
 
         public void OnFireCommand()

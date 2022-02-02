@@ -14,7 +14,7 @@ public class AStarManager : SearchAlgorithm
 
     private AStarEditor m_Editor;
 
-    public void InitializationCordinates(AStarEditor editor)
+    public void InitializationCoordinates(AStarEditor editor)
     {
         m_Editor = editor;
         m_ClassGrid = editor.m_ClassGrid;
@@ -26,7 +26,7 @@ public class AStarManager : SearchAlgorithm
         while (true)
         {
             Thread t = new Thread(ImplementedAStarEditor);
-            var temp = Time.realtimeSinceStartup;
+            float temp = Time.realtimeSinceStartup;
             t.Start();
                 
             // wait end execution thread

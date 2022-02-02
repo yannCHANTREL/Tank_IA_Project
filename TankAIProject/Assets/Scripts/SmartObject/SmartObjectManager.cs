@@ -12,7 +12,7 @@ public class SmartObjectManager : MonoBehaviour
     public void Start()
     {
         // Create first healthObject
-        createHealthObject();
+        CreateHealthObject();
 
         // Verification object is always alive, and manage it recreation
         StartCoroutine(LaunchUpdate());
@@ -26,12 +26,12 @@ public class SmartObjectManager : MonoBehaviour
             if (m_HealthObject == null)
             {
                 yield return new WaitForSeconds(10f);
-                createHealthObject();
+                CreateHealthObject();
             }
         }
     }
 
-    public void createHealthObject()
+    public void CreateHealthObject()
     {
         int indexSpawn = Random.Range(0, m_ListSpawnPoint.Length);
         m_HealthObject = Instantiate(m_PrefabHealthObject, m_ListSpawnPoint[indexSpawn].position, m_ListSpawnPoint[indexSpawn].rotation);

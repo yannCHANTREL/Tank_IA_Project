@@ -62,24 +62,6 @@ public class VirtualGrid : ScriptableObject
         }
     }
 
-    public List<Vector2Int> DetectCircle(Vector2 position, float radius)
-    {
-        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
-        List<Vector2Int> ret = new List<Vector2Int>();
-        return ret;
-    }
-
-    public void UpdateGrid(List<GameObject> listOfGameObjectTanks)
-    {
-        // POTENTIELLEMENT A FAIRE PLUS TARD (dynamic detect tank)
-        foreach (var gameObjectTank in listOfGameObjectTanks)
-        {
-            Vector3 position = gameObjectTank.transform.position;
-            Vector2 posTank = new Vector2(position.x, position.z);
-            
-        }
-    }
-
     public Vector2 GetVector2WorldPositionByIndex(Vector2Int gridPos)
     {
         return Vector3ToVector2(GetVector3WorldPositionByIndex(gridPos));

@@ -23,12 +23,7 @@ public class Team : ScriptableObject
     {
         m_AI = false;
     }
-    
-    public bool HasCaptureScore(int value)
-    {
-        return m_CaptureScore >= value;
-    }
-    
+
     public void IncrementCaptureScore(float value)
     {
         m_CaptureScore += value;
@@ -86,18 +81,6 @@ public class Team : ScriptableObject
         {
             tank.DisableControl();
         }
-    }
-
-    public bool IsTeamAlive()
-    {
-        int numTankLeft = 0;
-        foreach (TankManager tankManager in m_TeamTank)
-        {
-            if (tankManager.m_Instance.activeSelf)
-                numTankLeft += 1;
-        }
-
-        return numTankLeft >= 1;
     }
 
     public List<int> GetPlayersNumber()

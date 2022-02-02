@@ -11,8 +11,6 @@ using UnityEngine.UI;
 [CreateAssetMenu(menuName = "State Machine/Data/Capture")]
 public class CaptureData : StateDataBase
 {
-    // TODO : Bug if the tank is destroyed if in while in the zone, continue to capture the zone (not good)
-    
     public Dictionary<int, int> m_PlayerNumbersPerTeam;
     public TeamList m_TeamList;
     

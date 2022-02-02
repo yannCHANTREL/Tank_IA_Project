@@ -28,7 +28,7 @@ public class AIAttackSensing : MonoBehaviour
     private void AttackSensing()
     {
         Vector3 tankPos = transform.position;
-        Vector3 CapturePos = m_CapturePoint.m_CenterPos;
+        Vector3 capturePos = m_CapturePoint.m_CenterPos;
 
         Team[] teams = m_TeamList.m_Teams;
         for (int i = 0; i < teams.Length; i++)
@@ -48,7 +48,7 @@ public class AIAttackSensing : MonoBehaviour
                         m_SensedTank.m_AttackingTanks[m_TankIndex].Add(tankManager.m_Instance);
                     }
 
-                    Vector3 distanceToCapturePoint = CapturePos - otherTankTransform.position;
+                    Vector3 distanceToCapturePoint = capturePos - otherTankTransform.position;
                     if (distanceToCapturePoint.magnitude < m_CapturePoint.m_Radius)
                     {
                         m_SensedTank.m_EnemyTanksOnCapturePoint[m_TankIndex].Add(tankManager.m_Instance);

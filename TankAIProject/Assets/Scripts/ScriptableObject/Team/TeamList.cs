@@ -131,17 +131,6 @@ public class TeamList : ScriptableObject
         }
     }
     
-    public bool OneTeamObtainedCaptureScore(int value)
-    {
-        foreach (Team team in m_Teams)
-        {
-            if (team.HasCaptureScore(value))
-                return true;
-        }
-
-        return false;
-    }
-    
     public Team GetTeamMaxScore()
     {
         if (AreAllTeamHaveTheSamePoint())

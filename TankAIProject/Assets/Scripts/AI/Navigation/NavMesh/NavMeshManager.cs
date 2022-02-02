@@ -61,9 +61,9 @@ public class NavMeshManager : SearchAlgorithm
 
         Path path = new Path();
         Vector2Int index;
-        foreach (var anPosition in arrayPosition)
+        foreach (var aPosition in arrayPosition)
         {
-            index = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(anPosition));
+            index = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(aPosition));
             path.nodes.Add(m_Nodes[index]);
         }
         

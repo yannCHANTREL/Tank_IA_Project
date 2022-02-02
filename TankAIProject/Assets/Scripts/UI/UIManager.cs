@@ -33,5 +33,4 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(m_GameSceneName);
     }
-    
 }

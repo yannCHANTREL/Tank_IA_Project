@@ -8,13 +8,6 @@ public class AITeamEnemySensing : MonoBehaviour
     public SensedTankListVariable m_SensedTank;
     public TeamList m_TeamList;
     
-    
-    void Start()
-    {
-        
-    }
-
-    
     void Update()
     {
         List<List<GameObject>> tankSensedEnemiesList = m_SensedTank.m_TankSensedEnemies;

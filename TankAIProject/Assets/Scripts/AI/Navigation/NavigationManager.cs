@@ -101,7 +101,7 @@ public class NavigationManager : MonoBehaviour
                 break;
             }
             
-            nodesHasCheck = FindNodeNeedVerification(nodeStart, nodeEnd, entryPath);
+            nodesHasCheck = FindNodesNeedVerification(nodeStart, nodeEnd, entryPath);
             if (nodesHasCheck.Count == 0)
             {
                 current = nodeEnd; // not blocker => not save this case
@@ -131,7 +131,7 @@ public class NavigationManager : MonoBehaviour
         return ret;
     }
 
-    private List<Node> FindNodeNeedVerification(Node nodeStart, Node nodeEnd, List<Node> entryPath)
+    private List<Node> FindNodesNeedVerification(Node nodeStart, Node nodeEnd, List<Node> entryPath)
     {
         Dictionary<Vector2Int, Node> nodes = m_ListAlgorithm[m_AlgorithmMode].GetListNode();
         List<Node> ret = new List<Node>();
@@ -157,14 +157,14 @@ public class NavigationManager : MonoBehaviour
     }
 
     // between A and BC
-    Vector3 NearestPointFromLine(Vector3 A, Vector3 B, Vector3 C)
+    private Vector3 NearestPointFromLine(Vector3 a, Vector3 b, Vector3 c)
     {
-        return B + Vector3.Project(A - B, C - B);
+        return b + Vector3.Project(a - b, c - b);
     }
 
-    float CalcDistPointLine(Vector3 A, Vector3 B, Vector3 C)
+    private float CalcDistPointLine(Vector3 a, Vector3 b, Vector3 c)
     {
-        return (A - NearestPointFromLine(A, B, C)).magnitude;
+        return (a - NearestPointFromLine(a, b, c)).magnitude;
     }
 
     public string DisplayAlgorithmChoose()

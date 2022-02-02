@@ -16,7 +16,7 @@ public class AStarEditor : MonoBehaviour
             AStarManager aStarManager = gameObject.AddComponent(typeof(AStarManager)) as AStarManager;
             if (aStarManager != null)
             {
-                aStarManager.InitializationCordinates(this);
+                aStarManager.InitializationCoordinates(this);
             
                 // preparation Dijsktra features
                 aStarManager.PreparationForAStarFeatures();

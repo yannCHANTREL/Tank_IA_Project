@@ -6,21 +6,21 @@ using UnityEngine.AI;
 
 public class TestNavMesh : MonoBehaviour
 {
-   public Camera cam;
+   public Camera m_Cam;
 
-   public NavMeshAgent agent;
+   public NavMeshAgent m_Agent;
 
    private void Update()
    {
       if (Input.GetMouseButtonDown(0))
       {
-         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+         Ray ray = m_Cam.ScreenPointToRay(Input.mousePosition);
          RaycastHit hit;
 
          if (Physics.Raycast(ray, out hit))
          {
-            agent.SetDestination(hit.point);
-            NavMeshPath p = agent.path;
+            m_Agent.SetDestination(hit.point);
+            NavMeshPath p = m_Agent.path;
             Vector3[] v = p.corners;
          }
       }
