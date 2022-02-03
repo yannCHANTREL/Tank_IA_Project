@@ -1027,7 +1027,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827831371
 GameObject:
@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_MessageText: {fileID: 102963701}
   m_TankPrefab: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_TankAIPrefab: {fileID: 8059248493399890314, guid: 1447a59e4d037f644bdd91faec4bc2c3, type: 3}
-  m_TankAmountPerTeam: 3
+  m_TankAmountPerTeam: 1
   m_TankVariableList:
   - {fileID: 11400000, guid: b2f1d6ccf059a864cac29ed1d30f7ed8, type: 2}
   - {fileID: 11400000, guid: 6a2b273e200acfe4188ed97cfacfedea, type: 2}
@@ -2391,6 +2391,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2426318929247843560, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929248184184, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929250943613, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929260968804, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929263058633, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929334407556, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929454902349, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929457010606, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929470666515, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929479129105, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929479167052, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
     - target: {fileID: 2426318929524499348, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12
@@ -2399,9 +2443,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 2426318929524499349, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929542132678, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929551899172, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929614719792, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
     - target: {fileID: 2426318929667941912, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2426318929667941912, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2447,6 +2507,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelArt
       objectReference: {fileID: 0}
+    - target: {fileID: 2426318929672155170, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929680311971, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929710420581, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929713969974, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929728379548, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929764270364, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929766198366, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929767677301, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929768744355, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929843915671, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
     - target: {fileID: 2426318929862840218, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12
@@ -2455,9 +2555,197 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 2426318929862840219, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929867642305, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929874576439, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929880810811, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929909144366, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929964036354, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930011906537, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930054080173, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930068424847, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930105901255, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930124776619, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930179916870, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930201590319, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
     - target: {fileID: 2426318930213875675, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930214117155, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930219933946, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930226158241, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930231315202, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930256879236, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930266957206, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930312150664, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930345636410, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930382203465, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930388215531, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930476717319, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930506807960, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930509549392, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930549761484, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930567158943, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930592609456, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930628774325, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930655797483, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930740767773, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930790478320, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930800273126, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930846429399, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930933736010, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930941579143, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930967749547, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930998769014, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931080951779, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931164139700, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931171537205, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931238144895, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931242842613, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931259283056, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931307532206, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318931309733422, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_TagString
+      value: BlockerEnvironment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a446eb20b3b8245478cc19712546278b, type: 3}

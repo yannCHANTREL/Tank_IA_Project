@@ -142,6 +142,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ea21bb9b29134e41aa54dea662039b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5420073055571369192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 703a0fc2dea8b564db3f69917fec5b86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RayCastBackLength: 1
+  m_RayCastFrontLength: 10
+  m_RayCastAnglesOfResearch: 2
+  m_SensingAltitudeFactor: 0.2
 --- !u!114 &-529812946582353294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +174,7 @@ MonoBehaviour:
   m_TargetPos: {x: 0, y: 0, z: 0}
   m_RadiusTolerance: 1
   m_NavManager: {fileID: 1002921781810151909}
+  m_ListWayPoints: []
 --- !u!114 &-270030048353792997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,21 +270,6 @@ MonoBehaviour:
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_TreeType: 0
   m_DebugMode: 0
---- !u!114 &3997655906782302068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8059248493399890314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 703a0fc2dea8b564db3f69917fec5b86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RayCastBackLength: 1
-  m_RayCastFrontLength: 10
-  m_RayCastAnglesOfResearch: 2
 --- !u!114 &7912885149352023125
 MonoBehaviour:
   m_ObjectHideFlags: 0

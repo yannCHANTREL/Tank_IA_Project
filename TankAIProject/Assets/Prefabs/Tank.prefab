@@ -10601,8 +10601,8 @@ MonoBehaviour:
   m_FullHealthColor: {r: 0, g: 1, b: 0, a: 1}
   m_ZeroHealthColor: {r: 1, g: 0, b: 0, a: 1}
   m_ExplosionPrefab: {fileID: 151086, guid: 6bc6d0dd8b8428e4ca316513f2cf13c6, type: 3}
-  m_TankHealth: {fileID: 11400000, guid: e5822f4c3f3668442a3687069a34faf2, type: 2}
   m_TankIndexManager: {fileID: 5192247799311865055}
+  m_CurrentHealth: 0
   m_Dead: 0
   m_DeathEvent: {fileID: 11400000, guid: 8a44d8911b8e0f949bf8096f9d812ec0, type: 2}
 --- !u!114 &11488788

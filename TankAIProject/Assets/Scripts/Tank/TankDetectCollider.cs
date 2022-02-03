@@ -21,10 +21,7 @@ public class TankDetectCollider : MonoBehaviour
     {
         m_Transform = transform;
         Vector3 bounds = gameObject.GetComponent<Collider>().bounds.size / 2;
-        /*m_FrontRightSensorLocalPos = new Vector3(bounds.x, 0.5f, bounds.z);
-        m_BackRightSensorLocalPos = new Vector3(bounds.x, 0.5f, -bounds.z);
-        m_BackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, -bounds.z);
-        m_FackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, bounds.z);*/
+        
         m_FrontRightSensorLocalPos = new Vector3(bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, bounds.z);
         m_BackRightSensorLocalPos = new Vector3(bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, -bounds.z);
         m_BackLeftSensorLocalPos = new Vector3(-bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, -bounds.z);
@@ -37,7 +34,7 @@ public class TankDetectCollider : MonoBehaviour
     void Update()
     {
         // Test BackwardSensing
-        
+
         /*collisionFeedback cfb = BackwardSensing();
         if (cfb.componentStaticDetected || cfb.AlliedDetected || cfb.EnemyDetected)
         {
@@ -45,24 +42,28 @@ public class TankDetectCollider : MonoBehaviour
             Debug.Log("cfb allied : " + cfb.AlliedDetected);
             Debug.Log("cfb enemy : " + cfb.EnemyDetected);
         }*/
-        
-        
+
+
         // Test DirectionnalSensing
 
-        /*collisionFeedback cfb = DirectionnalSensing(new Vector3(-25f,0f,5f));
+        /*collisionFeedback cfb = DirectionnalSensing(new Vector3(-25f, 0f, 5f));
         string team = "blue";
         if (gameObject.GetComponent<TankIndexManager>().m_TeamIndex == 1) team = "red";
-        Debug.Log("cfb " + team + " : " + cfb.componentStaticDetected + " ; " + cfb.AlliedDetected + " ; " + cfb.EnemyDetected);*/
+        if (cfb.componentStaticDetected || cfb.AllyDetected || cfb.EnemyDetected)
+        {
+            Debug.Log("cfb " + team + " : " + cfb.componentStaticDetected + " ; " + cfb.AllyDetected + " ; " + cfb.EnemyDetected);
+        }*/
 
-        
+
+
         // Test DetectDynamicObstacle
-        
+
         /*float result = DetectDynamicObstacle();
         string team = "blue";
         if (gameObject.GetComponent<TankIndexManager>().m_TeamIndex == 1) team = "red";
         Debug.Log("cfb " + team + " : " + result);*/
-        
-        
+
+
         // Test DetectWhatSideFree
 
         /*float result = DetectDynamicObstacle();
@@ -187,7 +188,10 @@ public class TankDetectCollider : MonoBehaviour
         Vector3 backLeftDirection = target - frontRightSensorGlobalPos;
         Vector3 frontLeftDirection = target - frontRightSensorGlobalPos;
 
-        Debug.DrawLine(frontRightSensorGlobalPos, frontRightSensorGlobalPos + frontRightDirection, Color.red);
+        /*Debug.DrawLine(frontRightSensorGlobalPos, frontRightSensorGlobalPos + frontRightDirection, Color.red);
+        Debug.DrawLine(backRightSensorGlobalPos, backRightSensorGlobalPos + backLeftDirection, Color.red);
+        Debug.DrawLine(backLeftSensorGlobalPos, backLeftSensorGlobalPos + backLeftDirection, Color.red);
+        Debug.DrawLine(frontLeftSensorGlobalPos, frontLeftSensorGlobalPos + frontLeftDirection, Color.red);*/
 
         RaycastHit[] frontRightHits = Physics.RaycastAll(frontRightSensorGlobalPos, frontRightDirection, frontRightDirection.magnitude);
         RaycastHit[] backRightHits = Physics.RaycastAll(backRightSensorGlobalPos, backRightDirection, backRightDirection.magnitude);

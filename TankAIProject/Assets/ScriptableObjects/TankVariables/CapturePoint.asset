@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: CapturePoint
   m_EditorClassIdentifier: 
   m_CenterPos: {x: 0, y: 0, z: 0}
-  m_Radius: 6
+  m_Radius: 5
