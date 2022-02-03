@@ -5,6 +5,7 @@ using UnityEngine;
 public class BehaviorTreeComponent : MonoBehaviour
 {
     public BehaviorTree m_TankBehaviorTree;
+    
     public TeamBehaviorTreeListVariable m_TeamBehaviorTrees;
     public TankIndexManager m_TankIndexManager;
     public TreeType m_TreeType;

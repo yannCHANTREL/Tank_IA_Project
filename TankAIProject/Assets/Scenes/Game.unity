@@ -1280,6 +1280,7 @@ GameObject:
   - component: {fileID: 965700881}
   - component: {fileID: 965700882}
   - component: {fileID: 965700883}
+  - component: {fileID: 965700884}
   m_Layer: 0
   m_Name: AIManager
   m_TagString: Untagged
@@ -1373,6 +1374,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TankHealth: {fileID: 11400000, guid: e5822f4c3f3668442a3687069a34faf2, type: 2}
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+--- !u!114 &965700884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965700877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2218b4e13298b484db9a2c85b410da83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
+  m_TankBehaviorTreeHDA: {fileID: 11400000, guid: c3db60d5d1550ce4fbee0d5129d2f6de, type: 2}
+  m_TankBehaviorTreeHAD: {fileID: 11400000, guid: 3a9ca375c6534a643b1a6976e3bb242c, type: 2}
+  m_TankBehaviorTreeDHA: {fileID: 11400000, guid: 567b8465ebb0f484a8279071279e18e4, type: 2}
 --- !u!1 &1188723416
 GameObject:
   m_ObjectHideFlags: 0
