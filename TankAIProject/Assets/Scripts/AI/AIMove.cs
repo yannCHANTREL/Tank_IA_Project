@@ -60,6 +60,7 @@ public class AIMove : MonoBehaviour
             stopMoving = true;
         }
 
+        Vector3 finalTargetPos = targetPos;
         bool usePathfinding = m_MoveInstructions.m_UsePathfinding[tankIndex];
 
         if (usePathfinding)
@@ -88,7 +89,7 @@ public class AIMove : MonoBehaviour
 
         Vector3 distance = targetPos - tankPos;
 
-        if (Mathf.Abs(distance.magnitude - targetDistanceToTarget) > m_RadiusTolerance && m_MoveInstructions.m_Move[tankIndex] && !stopMoving) {Move(distance, tankForward, tankIndex); }
+        if ((usePathfinding ? Mathf.Abs(distance.magnitude) : Mathf.Abs(distance.magnitude - targetDistanceToTarget)) > m_RadiusTolerance && m_MoveInstructions.m_Move[tankIndex] && !stopMoving) {Move(distance, tankForward, tankIndex, usePathfinding); }
         else { StopMove(tankIndex); }
 
         if (distance.magnitude > m_RadiusTolerance && m_MoveInstructions.m_Turn[tankIndex] && !stopMoving) { Turn(distance, tankForward, tankRight, tankIndex); }
@@ -106,10 +107,9 @@ public class AIMove : MonoBehaviour
         }
     }
 
-    private void Move(Vector3 distance, Vector3 tankForward, int tankIndex)
+    private void Move(Vector3 distance, Vector3 tankForward, int tankIndex, bool usePathfinding)
     {
-        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance.normalized, tankForward) * ((m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0) ? -1 : 1), m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
-        Debug.Log(m_MoveAxis.m_Values[tankIndex] + "   |   " + Vector3.Dot(distance.normalized, tankForward) * ((m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0) ? -1 : 1));
+        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance.normalized, tankForward) * ((!usePathfinding && m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0) ? -1 : 1), m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
     }
     
     private void Turn(Vector3 distance, Vector3 tankForward, Vector3 tankRight, int tankIndex)
