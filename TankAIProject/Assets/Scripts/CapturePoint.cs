@@ -21,7 +21,7 @@ public class CapturePoint : MonoBehaviour
 
     private float m_SecureRadius = 2;
 
-    private void Start()
+    private void Awake()
     {
         m_ColliderRadius = GetComponent<SphereCollider>().radius;
         
