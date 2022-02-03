@@ -7,17 +7,17 @@ public class GameOptions : ScriptableObject
 {
     public enum AISearchAlgo
     {
-        Dijsktra, AStar, Navmesh
+        Dijkstra, AStar, Navmesh
     }
 
     public enum AIDifficulty
     {
-        Facile, Normal, Difficile
+        Easy, Normal, Hard
     }
 
     public enum Mode
     {
-        PVP, PVE
+        PlayerVSPlayer, PlayerVSAI, AIVSAI
     }
 
     public AISearchAlgo m_SearchAlgo;

@@ -25,8 +25,9 @@ public class OptionManager : MonoBehaviour
         
         m_DropdownAlgo.AddOptions(GetEnumString(typeof(GameOptions.AISearchAlgo)));
         m_DropdownDifficulty.AddOptions(GetEnumString(typeof(GameOptions.AIDifficulty)));
-        m_DropdownMode.AddOptions(GetEnumString(typeof(GameOptions.Mode)));
-
+        List<string> modeString = GetEnumString(typeof(GameOptions.Mode));
+        m_DropdownMode.AddOptions(ReformateModeText(modeString));
+        
         m_DropdownAlgo.value = (int) m_GameOptions.m_SearchAlgo;
         m_DropdownDifficulty.value = (int) m_GameOptions.m_AIDifficulty;
         m_DropdownMode.value = (int) m_GameOptions.m_Mode;
@@ -35,6 +36,21 @@ public class OptionManager : MonoBehaviour
     private List<string> GetEnumString(Type type)
     {
         return Enum.GetNames(type).ToList();
+    }
+
+    private List<string> ReformateModeText(List<string> list)
+    {
+        List<string> returnList = new List<string>();
+        foreach (string s in list)
+        {
+            int indexVS = s.IndexOf("VS", StringComparison.Ordinal);
+            string firstText = s.Substring(0, indexVS);
+            string lastText = s.Substring(indexVS + 2, s.Length - indexVS - 2);
+            
+            returnList.Add(firstText + " VS " + lastText);
+        }
+
+        return returnList;
     }
 
     public void ChangeAlgoOption(int index)

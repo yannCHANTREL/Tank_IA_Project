@@ -73,11 +73,14 @@ namespace Complete
         {
             switch (m_GameOptions.m_Mode)
             {
-                case GameOptions.Mode.PVP:
+                case GameOptions.Mode.PlayerVSPlayer:
                     m_TeamList.SetAllTeamAsPlayer();
                     break;
-                case GameOptions.Mode.PVE:
+                case GameOptions.Mode.PlayerVSAI:
                     m_TeamList.SetOtherTeamsAsAI();
+                    break;
+                case GameOptions.Mode.AIVSAI:
+                    m_TeamList.SetAllTeamAsAI();
                     break;
             }
         }

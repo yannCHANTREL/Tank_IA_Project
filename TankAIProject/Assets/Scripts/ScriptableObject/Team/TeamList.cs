@@ -30,6 +30,14 @@ public class TeamList : ScriptableObject
         }
     }
 
+    public void SetAllTeamAsAI()
+    {
+        foreach (Team team in m_Teams)
+        {
+            team.SetTeamAsAI();
+        }
+    }
+
     public void SetAllTeamAsPlayer()
     {
         foreach (Team team in m_Teams)

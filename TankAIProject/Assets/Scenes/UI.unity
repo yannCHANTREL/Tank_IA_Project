@@ -1329,7 +1329,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: IA
+  m_Text: AI
 --- !u!222 &438746218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2697,7 +2697,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Difficult\xE9"
+  m_Text: Difficulty
 --- !u!222 &1629381964
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3143,7 +3143,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Algorithme de d\xE9placement"
+  m_Text: 'Move algorithm
+
+'
 --- !u!222 &1727008744
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3222,7 +3224,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Lancer
+  m_Text: Launch
 --- !u!222 &1762847407
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3301,7 +3303,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mode de jeu
+  m_Text: Game mode
 --- !u!222 &1766668705
 CanvasRenderer:
   m_ObjectHideFlags: 0
