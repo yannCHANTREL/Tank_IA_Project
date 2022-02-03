@@ -21,7 +21,7 @@ public class GameOptions : ScriptableObject
 
     public enum BehaviorTreeEnum
     {
-        HAD, HDA, DHA
+        HealthAttackDefence, HealthDefenceAttack, DefenceHealthAttack
     }
 
     public AISearchAlgo m_SearchAlgo;
