@@ -21,12 +21,13 @@ public class TargetManager : MonoBehaviour
         Vector3 tankPos = transform.position;
         RemoveTarget(tankIndex, teamIndex);
 
+
         List<GameObject> tankList = m_SensedTank.m_AttackingTanks[tankIndex].m_List;
-        if (tankList.Count > 0)
+        /*if (tankList.Count > 0)
         {
             SetNewTarget(GetNearestTankFromList(tankList, tankPos), tankIndex, teamIndex);
             return;
-        }
+        }*/
         tankList = m_SensedTank.m_EnemyTanksOnCapturePoint[tankIndex].m_List;
         if (tankList.Count > 0)
         {
