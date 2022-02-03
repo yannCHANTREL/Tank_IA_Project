@@ -7,12 +7,19 @@ public class NavMeshManager : SearchAlgorithm
 {
     private VirtualGrid m_ClassGrid;
     private Dictionary<Vector2Int, Node> m_Nodes;
+    
+    private Vector3[] m_NavMeshPath;
 
     public override void Initialization(VirtualGrid grid)
     {
         m_ClassGrid = grid;
         m_Nodes = new Dictionary<Vector2Int, Node>();
         PreparationSearch();
+    }
+    
+    public override void SetArrayForNavMesh(Vector3[] navMeshPath)
+    {
+        m_NavMeshPath = navMeshPath;
     }
 
     public void PreparationSearch()
@@ -55,13 +62,9 @@ public class NavMeshManager : SearchAlgorithm
 
     public override Path LaunchSearch(Vector3 posStart, Vector3 posEnd)
     {
-        NavMeshPath navMeshPath = new NavMeshPath();
-        NavMesh.CalculatePath(posStart, posEnd, NavMesh.AllAreas, navMeshPath);
-        Vector3[] arrayPosition = navMeshPath.corners;
-
         Path path = new Path();
         Vector2Int index;
-        foreach (var aPosition in arrayPosition)
+        foreach (var aPosition in m_NavMeshPath)
         {
             index = m_ClassGrid.GetIndexByWorldPosition(m_ClassGrid.Vector3ToVector2(aPosition));
             path.nodes.Add(m_Nodes[index]);
@@ -72,6 +75,6 @@ public class NavMeshManager : SearchAlgorithm
     
     public override Dictionary<Vector2Int, Node> GetListNode()
     {
-        return null;
+        return m_Nodes;
     }
 }

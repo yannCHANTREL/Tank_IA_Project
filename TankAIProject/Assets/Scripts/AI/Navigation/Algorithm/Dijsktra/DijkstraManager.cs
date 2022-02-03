@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DijkstraManager : SearchAlgorithm
 {
@@ -137,5 +138,9 @@ public class DijkstraManager : SearchAlgorithm
     public override Dictionary<Vector2Int, Node> GetListNode()
     {
         return m_Nodes;
+    }
+    
+    public override void SetArrayForNavMesh(Vector3[] navMeshPath)
+    {
     }
 }

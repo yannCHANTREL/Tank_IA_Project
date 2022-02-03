@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class NavigationManager : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class NavigationManager : MonoBehaviour
     
     private List<SearchAlgorithm> m_ListAlgorithm;
     public int m_AlgorithmMode = 1;
-    
+
     public void Awake()
     {
         m_ListAlgorithm = new List<SearchAlgorithm>();
@@ -40,8 +41,18 @@ public class NavigationManager : MonoBehaviour
         m_AlgorithmMode = index;
     }
 
+    
+
     public async Task<List<Vector3>> FindPath(Vector3 posStart, Vector3 posEnd)
     {
+        if (m_AlgorithmMode == 2)
+        {
+            NavMeshPath navMeshPath = new NavMeshPath();
+            NavMesh.CalculatePath(posStart, posEnd, NavMesh.AllAreas, navMeshPath);
+            Vector3[] arrayPosition = navMeshPath.corners;
+            m_ListAlgorithm[2].SetArrayForNavMesh(arrayPosition);
+        }
+        
         List<Vector3> ret = new List<Vector3>();
         
         Tuple<List<Node>, List<Node>> globalPath = await LaunchAlgorithmSearch(posStart, posEnd);

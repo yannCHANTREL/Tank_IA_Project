@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AStarManager : SearchAlgorithm
 {
@@ -136,5 +137,9 @@ public class AStarManager : SearchAlgorithm
     public override Dictionary<Vector2Int, Node> GetListNode()
     {
         return m_Nodes;
+    }
+    
+    public override void SetArrayForNavMesh(Vector3[] navMeshPath)
+    {
     }
 }
