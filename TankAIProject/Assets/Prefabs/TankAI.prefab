@@ -129,7 +129,7 @@ MonoBehaviour:
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_SensedTank: {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
   m_TankIndexManager: {fileID: 2870660015159044341}
-  m_DetectionRange: 20
+  m_DetectionRange: 30
 --- !u!114 &-7734663040450953690
 MonoBehaviour:
   m_ObjectHideFlags: 0
