@@ -9,7 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "State Machine/Data/Capture")]
-public class CaptureData : StateDataBase
+public class CaptureData : DataBase
 {
     public Dictionary<int, int> m_PlayerNumbersPerTeam;
     public TeamList m_TeamList;
