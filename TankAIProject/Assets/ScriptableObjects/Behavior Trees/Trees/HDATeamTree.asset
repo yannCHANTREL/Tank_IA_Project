@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ddf3452b5bc1354096e517230fe26e5, type: 3}
   m_Name: HDATeamTree
   m_EditorClassIdentifier: 
-  m_Root: {fileID: 0}
+  m_Root: {fileID: 11400000, guid: ca599b6eba40710488722f22c5f33db7, type: 2}
