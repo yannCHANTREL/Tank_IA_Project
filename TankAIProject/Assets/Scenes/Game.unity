@@ -1341,9 +1341,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3984f9d854f752f4ab9a62a297203f70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TankBehaviorTree: {fileID: 0}
+  m_TankBehaviorTree: {fileID: 11400000, guid: c8d953d44123f8f4e85dcf6c4633132e, type: 2}
   m_TeamBehaviorTrees: {fileID: 11400000, guid: e2cf241bed345f54881ff7171704cafd, type: 2}
-  m_TankIndexManager: {fileID: 0}
+  m_TankIndexManager: {fileID: 2870660015159044341, guid: 1447a59e4d037f644bdd91faec4bc2c3, type: 3}
   m_TreeType: 1
   m_DebugMode: 0
 --- !u!114 &965700882
