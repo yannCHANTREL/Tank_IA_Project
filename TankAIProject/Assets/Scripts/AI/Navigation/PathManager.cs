@@ -19,6 +19,11 @@ public class PathManager : MonoBehaviour
         m_ListWayPoints = new List<Vector3>();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public async void SearchPath(Vector3 posStart, Vector3 posEnd)
     {
         m_TargetPos = posEnd;
@@ -41,14 +46,25 @@ public class PathManager : MonoBehaviour
         }
         if (m_ListWayPoints.Count == 0)
         {
-            m_TargetPos = Vector3.zero;
+            m_TargetPos = currentPos;
             m_PathFound = false;
         }
+        DisplayPath(currentPos);
     }
 
     public Vector3 GetActualWaypoint()
     {
         if (m_ListWayPoints != null && m_ListWayPoints.Count > 0) return m_ListWayPoints[0];
         return Vector3.zero;
+    }
+
+    public void DisplayPath(Vector3 currentPos)
+    {
+        Vector3 lastPoint = currentPos;
+        foreach (var point in m_ListWayPoints)
+        {
+            Debug.DrawLine(lastPoint, point, Color.red);
+            lastPoint = point;
+        }
     }
 }

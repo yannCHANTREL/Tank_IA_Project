@@ -65,6 +65,7 @@ public class AIMove : MonoBehaviour
         if (usePathfinding)
         {
             bool targetChanged = m_PathManager.m_TargetPos != targetPos;
+            Debug.Log(m_PathManager.m_TargetPos + " | "+ targetPos);
             if (targetType == TargetType.point && (targetChanged || changedTargetType))
             {
                 m_PathManager.SearchPath(tankPos, targetPos);
