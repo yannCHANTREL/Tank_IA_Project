@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_MessageText: {fileID: 102963701}
   m_TankPrefab: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_TankAIPrefab: {fileID: 8059248493399890314, guid: 1447a59e4d037f644bdd91faec4bc2c3, type: 3}
-  m_TankAmountPerTeam: 1
+  m_TankAmountPerTeam: 2
   m_TankVariableList:
   - {fileID: 11400000, guid: b2f1d6ccf059a864cac29ed1d30f7ed8, type: 2}
   - {fileID: 11400000, guid: 6a2b273e200acfe4188ed97cfacfedea, type: 2}
@@ -2034,7 +2034,7 @@ MonoBehaviour:
   m_PrefabHealthObject: {fileID: 4820705429003575727, guid: 2c6f12e2f834587408fd4f5b3549b715, type: 3}
   m_ListSpawnPoint:
   - {fileID: 817589664}
-  m_TimeRespawn: 10
+  m_TimeRespawn: 40
   m_DataGameobject: {fileID: 11400000, guid: 75aca47e2d5c40d43ba0bea60fc697ff, type: 2}
   m_TimeBeforeRespawn: {fileID: 11400000, guid: 4181339503b81224abca51925ff0f17e, type: 2}
 --- !u!4 &1522968165
@@ -2395,6 +2395,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: BlockerEnvironment
       objectReference: {fileID: 0}
+    - target: {fileID: 2426318929247843563, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318929247843563, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 12.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2426318929248184184, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_TagString
       value: BlockerEnvironment
@@ -2594,6 +2602,18 @@ PrefabInstance:
     - target: {fileID: 2426318930105901255, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_TagString
       value: BlockerEnvironment
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930124776618, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930124776618, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 2426318930124776618, guid: a446eb20b3b8245478cc19712546278b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -43.62
       objectReference: {fileID: 0}
     - target: {fileID: 2426318930124776619, guid: a446eb20b3b8245478cc19712546278b, type: 3}
       propertyPath: m_TagString
