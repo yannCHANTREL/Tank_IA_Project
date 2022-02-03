@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfa68d14f352a643992b40cb1a0aa2e, type: 3}
   m_Name: TimeBeforeHealthRespawn
   m_EditorClassIdentifier: 
-  m_float: 100
+  m_Value: 100
