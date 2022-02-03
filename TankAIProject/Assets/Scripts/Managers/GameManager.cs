@@ -183,7 +183,6 @@ namespace Complete
             m_CameraControl.SetStartPositionAndSize ();
             m_MessageText.text = string.Empty;
             
-            m_CaptureData.m_IsGameStarting = true;
             m_IsGameOver = false;
 
             // Wait for the specified length of time until yielding control back to the game loop.

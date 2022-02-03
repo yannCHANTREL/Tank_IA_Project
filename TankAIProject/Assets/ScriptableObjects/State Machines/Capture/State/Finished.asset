@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8bb079cae49d8a40b108afa69b2beb8, type: 3}
+  m_Script: {fileID: 11500000, guid: 084cb5506b30308449c39005a06fee29, type: 3}
   m_Name: Finished
   m_EditorClassIdentifier: 
-  m_Transitions:
-  - {fileID: 11400000, guid: aa4281f22d60965458073da095d74883, type: 2}
+  m_Transitions: []

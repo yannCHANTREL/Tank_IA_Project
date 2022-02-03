@@ -24,7 +24,6 @@ public class CaptureData : DataBase
     [HideInInspector] public float m_Value = 0;
 
     [HideInInspector] public bool m_IsGameFinished;
-    [HideInInspector] public bool m_IsGameStarting;
     
     [HideInInspector] public Slider m_Slider;
     [HideInInspector] public Image m_FillImage;
@@ -36,6 +35,10 @@ public class CaptureData : DataBase
         m_Slider = slider;
         m_FillImage = image;
         m_UpdateScoreText = updateScoreAction;
+        
+        m_PlayerNumbersPerTeam = new Dictionary<int, int>();
+        
+        SetCaptureDefaultValue();
     }
     
     public void ChangeFillColor()
@@ -111,7 +114,7 @@ public class CaptureData : DataBase
 
     }
     
-    public void InitDictionnary()
+    private void InitDictionnary()
     {
         m_PlayerNumbersPerTeam.Clear();
         for (int i = 1; i <= m_TeamList.GetNumberTeam(); i++)
@@ -126,11 +129,10 @@ public class CaptureData : DataBase
         return color;
     }
     
-    public void ResetCapture()
+    private void SetCaptureDefaultValue()
     {
         m_TriggerEntered = false;
         m_IsGameFinished = false;
-        m_IsGameStarting = false;
         m_TriggerExit = false;
         
         m_Value = 0;
@@ -141,7 +143,7 @@ public class CaptureData : DataBase
         InitDictionnary();
         UpdateScoreText();
         
-        m_Slider.value = m_Value;
+        UpdateSlider();
     }
 
     public void UpdateDictionnary(Dictionary<int, int> dictionary)

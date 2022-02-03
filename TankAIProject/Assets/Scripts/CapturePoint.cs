@@ -26,9 +26,6 @@ public class CapturePoint : MonoBehaviour
         m_ColliderRadius = GetComponent<SphereCollider>().radius;
         
         m_CaptureData.Init(m_Slider, m_FillImage, UpdateScoreText);
-
-        m_CaptureData.m_PlayerNumbersPerTeam = new Dictionary<int, int>();
-        m_CaptureData.InitDictionnary();
         
         UpdateScoreText();
     }
