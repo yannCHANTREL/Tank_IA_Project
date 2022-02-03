@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
-  m_Name: FaceTargetIfOnCapturePoint
+  m_Name: DefendPointIfOnCapturePoint
   m_EditorClassIdentifier: 
   m_Status: 0
   m_Child: {fileID: 11400000, guid: 25d4dd68c5911f94aa1919f0aa115230, type: 2}
