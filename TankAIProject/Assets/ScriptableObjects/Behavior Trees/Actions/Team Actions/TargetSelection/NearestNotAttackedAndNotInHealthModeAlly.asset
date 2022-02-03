@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40c12d8027353b42a18e8461cb008db, type: 3}
+  m_Name: NearestNotAttackedAndNotInHealthModeAlly
+  m_EditorClassIdentifier: 
+  m_Status: 0
+  m_StrictSelection: 0
+  m_TeamTankIndexTarget: {fileID: 11400000, guid: 14dee889ee8c6244d92bac79d45986c9, type: 2}
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
+  m_SortingDatas:
+  - m_TargetSorter: {fileID: 11400000, guid: 7657d6ae7fec2dd40b23b4f5a7f3a91b, type: 2}
+    m_SelectionPolicy: 0
+  m_SelectionDatas:
+  - m_TargetSelector: {fileID: 11400000, guid: 55a062787c4fc834ea2512208fcb52df, type: 2}
+    m_Signs: 0
+  - m_TargetSelector: {fileID: 11400000, guid: bb2e3393a56ef79439fb2381c40336a3, type: 2}
+    m_Signs: 0
+  m_CompositionPolicy: 0

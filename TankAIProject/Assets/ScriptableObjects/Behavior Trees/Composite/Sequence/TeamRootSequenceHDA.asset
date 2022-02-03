@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b9fdc5180dc7de4bbe272e935ff10bd, type: 3}
-  m_Name: HealLowestHealthNotAttackedTank
+  m_Name: TeamRootSequenceHDA
   m_EditorClassIdentifier: 
   m_Status: 0
   m_Children:
-  - {fileID: 11400000, guid: dc1696a8b4b680e4ca66a79130a6e73e, type: 2}
-  - {fileID: 11400000, guid: d5d6c2b8c8c81fd459c64447086b0585, type: 2}
+  - {fileID: 11400000, guid: ea297211c7e995d4b88a5758c2bc7a87, type: 2}
+  - {fileID: 11400000, guid: 6f5747a2ef24093488b1d6e1d7a69b5a, type: 2}
