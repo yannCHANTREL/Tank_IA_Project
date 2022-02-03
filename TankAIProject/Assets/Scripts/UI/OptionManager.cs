@@ -13,6 +13,7 @@ public class OptionManager : MonoBehaviour
     [Space(10)] 
     public Dropdown m_DropdownAlgo;
     public Dropdown m_DropdownDifficulty;
+    public Dropdown m_DropdownBehaviorTree;
     public Dropdown m_DropdownMode;
     [Space(10)] 
     public string m_GameSceneName;
@@ -25,15 +26,18 @@ public class OptionManager : MonoBehaviour
         // Init dropdown options
         m_DropdownAlgo.ClearOptions();
         m_DropdownDifficulty.ClearOptions();
+        m_DropdownBehaviorTree.ClearOptions();
         m_DropdownMode.ClearOptions();
-        
+
         m_DropdownAlgo.AddOptions(GetEnumString(typeof(GameOptions.AISearchAlgo)));
         m_DropdownDifficulty.AddOptions(GetEnumString(typeof(GameOptions.AIDifficulty)));
+        m_DropdownBehaviorTree.AddOptions(GetEnumString(typeof(GameOptions.BehaviorTreeEnum)));
         List<string> modeString = GetEnumString(typeof(GameOptions.Mode));
         m_DropdownMode.AddOptions(ReformateModeText(modeString));
         
         m_DropdownAlgo.value = (int) m_GameOptions.m_SearchAlgo;
         m_DropdownDifficulty.value = (int) m_GameOptions.m_AIDifficulty;
+        m_DropdownBehaviorTree.value = (int) m_GameOptions.m_BehaviorTree;
         m_DropdownMode.value = (int) m_GameOptions.m_Mode;
         
         // Update Slider Text
@@ -73,6 +77,11 @@ public class OptionManager : MonoBehaviour
     public void ChangeModeOption(int index)
     {
         m_GameOptions.m_Mode = (GameOptions.Mode)index;
+    }
+
+    public void ChangeBehaviorTree(int index)
+    {
+        m_GameOptions.m_BehaviorTree = (GameOptions.BehaviorTreeEnum) index;
     }
 
     public void ChangeSliderText(float value)

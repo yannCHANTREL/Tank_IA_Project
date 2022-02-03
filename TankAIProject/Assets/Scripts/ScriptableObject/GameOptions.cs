@@ -19,8 +19,14 @@ public class GameOptions : ScriptableObject
         PlayerVSAI, AIVSAI
     }
 
+    public enum BehaviorTreeEnum
+    {
+        HAD, HDA, DHA
+    }
+
     public AISearchAlgo m_SearchAlgo;
     public AIDifficulty m_AIDifficulty;
+    public BehaviorTreeEnum m_BehaviorTree;
     public Mode m_Mode;
     [Range(1, 3)] 
     public int m_NbPlayer;
