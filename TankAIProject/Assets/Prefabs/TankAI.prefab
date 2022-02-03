@@ -196,6 +196,8 @@ MonoBehaviour:
   m_ShellSpeed: 20
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_FireCommand: {fileID: 11400000, guid: 2d605a6dfd62f8c40a958ec9d91e5c6b, type: 2}
+  m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
+  m_TankTargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}
 --- !u!114 &723087465036166876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +238,7 @@ MonoBehaviour:
   m_AStarManager: {fileID: 7912885149352023125}
   m_NavMeshManager: {fileID: -7734663040450953690}
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
+  m_AlgorithmMode: 1
 --- !u!114 &2861812033467588280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,3 +341,5 @@ MonoBehaviour:
   m_TargetPosContainer: {fileID: 11400000, guid: 5501b054b19855e47b6a07bf55f3fe11, type: 2}
   m_TargetPointContainer: {fileID: 11400000, guid: f9e424692237dfe47948802708026f16, type: 2}
   m_PathManager: {fileID: -529812946582353294}
+  m_GameOptions: {fileID: 11400000, guid: 55111c7234e1c384da5f6b364515a788, type: 2}
+  m_TankTargetPos: {fileID: 11400000, guid: 5ce8e305392138a4d8eba2d506056f2b, type: 2}

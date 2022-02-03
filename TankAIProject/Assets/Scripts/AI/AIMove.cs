@@ -18,6 +18,8 @@ public class AIMove : MonoBehaviour
     public Vector3ListVariableListVariable m_TargetPosContainer;
     public PointVariableListVariable m_TargetPointContainer;
     public PathManager m_PathManager;
+    public GameOptions m_GameOptions;
+    public Vector3ListVariable m_TankTargetPos;
 
     private Transform m_Transform;
     TargetType m_LastTargetType;
@@ -45,7 +47,7 @@ public class AIMove : MonoBehaviour
 
         Vector3 targetPos;
         GameObject tankTarget = m_TargetTank.m_Values[tankIndex];
-        Vector3ListVariable targetPosList = m_TargetPosContainer.m_Values[tankIndex];
+        Vector3ListVariable targetPosList = m_GameOptions.m_AIDifficulty == GameOptions.AIDifficulty.Hard ? m_TargetPosContainer.m_Values[tankIndex] : m_TankTargetPos;
         if (targetType == TargetType.tank && tankTarget && targetPosList)
         {
             targetPos = targetPosList.m_Values[tankIndex];
@@ -110,7 +112,7 @@ public class AIMove : MonoBehaviour
 
     private void Move(Vector3 distance, Vector3 tankForward, int tankIndex, bool usePathfinding)
     {
-        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance.normalized, tankForward) * ((!usePathfinding && m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0) ? -1 : 1), m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
+        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance.normalized, tankForward) * ((!usePathfinding && m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0) ? -1 : 1), m_MoveInstructions.m_Follow[tankIndex] || m_GameOptions.m_AIDifficulty == GameOptions.AIDifficulty.Normal ? 1 : 0);
     }
     
     private void Turn(Vector3 distance, Vector3 tankForward, Vector3 tankRight, int tankIndex)

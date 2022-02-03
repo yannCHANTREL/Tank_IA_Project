@@ -5,14 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "GameOption")]
 public class GameOptions : ScriptableObject
 {
-    public enum AISearchAlgo
-    {
-        Dijkstra, AStar, Navmesh
-    }
-
     public enum AIDifficulty
     {
         Normal, Hard
+    }
+    public enum AISearchAlgo
+    {
+        Dijkstra, AStar, Navmesh
     }
 
     public enum Mode
