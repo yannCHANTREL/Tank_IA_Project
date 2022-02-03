@@ -1705,6 +1705,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e2cf241bed345f54881ff7171704cafd, type: 2}
   - {fileID: 11400000, guid: 14dee889ee8c6244d92bac79d45986c9, type: 2}
   - {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
+  - {fileID: 11400000, guid: e241f0e524ce2894c972274d3ac475a1, type: 2}
+  - {fileID: 11400000, guid: c388da60c177cde449473e12b1b062e7, type: 2}
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
   m_TeamsSpawn:
   - {fileID: 194018016}

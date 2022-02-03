@@ -89,6 +89,7 @@ public class AIMove : MonoBehaviour
 
         Vector3 distance = targetPos - tankPos;
 
+        Debug.DrawLine(tankPos + Vector3.up * 0.2f, tankPos + Vector3.up * 0.2f + distance.normalized * (distance.magnitude - targetDistanceToTarget), Color.white);
         if ((usePathfinding ? Mathf.Abs(distance.magnitude) : Mathf.Abs(distance.magnitude - targetDistanceToTarget)) > m_RadiusTolerance && m_MoveInstructions.m_Move[tankIndex] && !stopMoving) {Move(distance, tankForward, tankIndex, usePathfinding); }
         else { StopMove(tankIndex); }
 

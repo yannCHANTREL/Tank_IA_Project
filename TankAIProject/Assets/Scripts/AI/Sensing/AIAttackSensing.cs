@@ -34,7 +34,7 @@ public class AIAttackSensing : MonoBehaviour
         Vector3 tankPos = transform.position;
         Vector3 capturePos = m_CapturePoint.m_CenterPos;
 
-        Team[] teams = m_TeamList.m_Teams;
+        /*Team[] teams = m_TeamList.m_Teams;
         for (int i = 0; i < teams.Length; i++)
         {
             if (i != m_TeamIndex)
@@ -66,7 +66,33 @@ public class AIAttackSensing : MonoBehaviour
                     }
                 }
             }
-        }
+        }*/
+
+        m_SensedTank.m_AttackingTanks[m_TankIndex].Reset();
+        m_SensedTank.m_EnemyTanksOnCapturePoint[m_TankIndex].Reset();
+        foreach (var tank in m_SensedTank.m_TeamSensedEnemies[m_TeamIndex].m_List)
+        {
+            Transform otherTankTransform = tank.transform;
+            Vector3 otherTankForward = otherTankTransform.forward;
+            Vector3 otherPosition = otherTankTransform.position;
+
+            Color debugColor = Color.green;
+
+            Vector3 distanceToTank = tankPos - otherPosition;
+            if (distanceToTank.magnitude < m_AttackMaxDistance && Vector3.Angle(otherTankForward, distanceToTank) < m_AttackMaxAngle)
+            {
+                debugColor = Color.red;
+                m_SensedTank.m_AttackingTanks[m_TankIndex].m_List.Add(tank);
+            }
+
+            if (m_DebugMode) { DisplayDetectionBounds(otherTankForward, otherPosition, debugColor); }
+
+            Vector3 distanceToCapturePoint = capturePos - otherPosition;
+            if (distanceToCapturePoint.magnitude < m_CapturePoint.m_Radius)
+            {
+                m_SensedTank.m_EnemyTanksOnCapturePoint[m_TankIndex].m_List.Add(tank);
+            }
+        } 
     }
 
     private void DisplayDetectionBounds(Vector3 otherTankForward, Vector3 otherPosition, Color debugColor)

@@ -10579,9 +10579,12 @@ MonoBehaviour:
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PitchRange: 0.1
+  m_SmoothFactor: 0.1
   m_TankIndexManager: {fileID: 5192247799311865055}
   m_MoveAxis: {fileID: 11400000, guid: 0cda5be7a882b8846b1c69802ab77e6f, type: 2}
+  m_LastMoveAxis: {fileID: 11400000, guid: e241f0e524ce2894c972274d3ac475a1, type: 2}
   m_TurnAxis: {fileID: 11400000, guid: cbe5ea80729d4d14f824d3625388bca9, type: 2}
+  m_LastTurnAxis: {fileID: 11400000, guid: c388da60c177cde449473e12b1b062e7, type: 2}
 --- !u!114 &11409376
 MonoBehaviour:
   m_ObjectHideFlags: 0

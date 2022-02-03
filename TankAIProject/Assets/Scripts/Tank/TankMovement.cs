@@ -11,6 +11,7 @@ namespace Complete
         public AudioClip m_EngineIdling;            // Audio to play when the tank isn't moving.
         public AudioClip m_EngineDriving;           // Audio to play when the tank is moving.
 		public float m_PitchRange = 0.2f;           // The amount by which the pitch of the engine noises can vary.
+        public float m_SmoothFactor = 0.2f;
 
         private Rigidbody m_Rigidbody;              // Reference used to move the tank.
         private float m_MovementInputValue;         // The current value of the movement input.
@@ -20,7 +21,9 @@ namespace Complete
 
         [SerializeField] private TankIndexManager m_TankIndexManager;
         [SerializeField] private FloatListVariable m_MoveAxis;
+        [SerializeField] private FloatListVariable m_LastMoveAxis;
         [SerializeField] private FloatListVariable m_TurnAxis;
+        [SerializeField] private FloatListVariable m_LastTurnAxis;
 
         private void Awake ()
         {
@@ -114,9 +117,12 @@ namespace Complete
         {
             if (!m_TankIndexManager || !m_MoveAxis) return;
             // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
+            m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] = m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] * m_SmoothFactor + m_LastMoveAxis.m_Values[m_TankIndexManager.m_TankIndex] * (1 - m_SmoothFactor);
+            
             Vector3 movement = transform.forward * m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] * m_Speed * Time.deltaTime;
 
             m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
+            m_LastMoveAxis.m_Values[m_TankIndexManager.m_TankIndex] = m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex];
         }
 
 
@@ -124,6 +130,8 @@ namespace Complete
         {
             if (!m_TankIndexManager || !m_TurnAxis) return;
 
+            m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex] = m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex] * m_SmoothFactor + m_LastTurnAxis.m_Values[m_TankIndexManager.m_TankIndex] * (1 - m_SmoothFactor);
+            
             // Determine the number of degrees to be turned based on the input, speed and time between frames.
             float turn = m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex] * m_TurnSpeed * Time.deltaTime;
 
@@ -132,6 +140,8 @@ namespace Complete
 
             // Apply this rotation to the rigidbody's rotation.
             m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
+
+            m_LastTurnAxis.m_Values[m_TankIndexManager.m_TankIndex] = m_TurnAxis.m_Values[m_TankIndexManager.m_TankIndex];
         }
     }
 }
