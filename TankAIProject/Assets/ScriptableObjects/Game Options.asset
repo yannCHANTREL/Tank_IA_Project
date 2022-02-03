@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SearchAlgo: 0
   m_AIDifficulty: 0
+  m_BehaviorTree: 0
   m_Mode: 1
   m_NbPlayer: 1
