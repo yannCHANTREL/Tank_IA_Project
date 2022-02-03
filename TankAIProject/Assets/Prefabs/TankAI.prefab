@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_MaxHealth
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 11443146, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
+      propertyPath: m_AI
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 22470720, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
