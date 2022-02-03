@@ -60,7 +60,7 @@ public class HealthObject : MonoBehaviour
             pvManager.Heal(m_AmountHeal);
             Destroy(gameObject);
             
-            Debug.Log("Heal !");
+            //Debug.Log("Heal !");
         }
         else
         {

@@ -13,6 +13,7 @@ public class VisionTest : ConditionTest
     public bool m_TestAlly;
     public bool m_TestEnemy;
     public TeamList m_TeamList;
+    public Vector3 m_VisionAltitude = new Vector3(0, 0.2f, 0);
 
     public enum PositionType { point, tankTarget}
 
@@ -28,9 +29,11 @@ public class VisionTest : ConditionTest
         foreach (var tankManager in m_TeamList.m_Teams[teamIndex].m_TeamTank)
         {
             GameObject tank = tankManager.m_Instance;
-            TankDetectCollider.collisionFeedback collisionFeedback = tank.GetComponent<TankDetectCollider>().DirectionnalSensing(testPos);
             if (tank.GetComponent<TankIndexManager>().m_TankIndex == tankIndex)
             {
+                TankDetectCollider.collisionFeedback collisionFeedback = tank.GetComponent<TankDetectCollider>().DirectionnalSensing(testPos);
+                //Debug.DrawLine(tank.transform.position + m_VisionAltitude, testPos + m_VisionAltitude, Color.red);
+                Debug.Log(collisionFeedback.componentStaticDetected);
                 return !((collisionFeedback.componentStaticDetected && m_TestStatic) || (collisionFeedback.AllyDetected && m_TestAlly) || (collisionFeedback.EnemyDetected && m_TestEnemy));
             }
         }

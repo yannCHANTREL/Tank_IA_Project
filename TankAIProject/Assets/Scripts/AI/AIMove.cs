@@ -45,9 +45,10 @@ public class AIMove : MonoBehaviour
 
         Vector3 targetPos;
         GameObject tankTarget = m_TargetTank.m_Values[tankIndex];
-        if (targetType == TargetType.tank && tankTarget)
+        Vector3ListVariable targetPosList = m_TargetPosContainer.m_Values[tankIndex];
+        if (targetType == TargetType.tank && tankTarget && targetPosList)
         {
-            targetPos = m_TargetPosContainer.m_Values[tankIndex].m_Values[tankIndex];
+            targetPos = targetPosList.m_Values[tankIndex];
         }
         else if (targetType == TargetType.point || (targetType == TargetType.tank && m_MoveInstructions.m_UseDefaultPointValue[tankIndex]))
         {

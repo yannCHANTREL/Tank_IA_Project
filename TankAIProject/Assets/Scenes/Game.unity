@@ -1279,6 +1279,7 @@ GameObject:
   - component: {fileID: 965700880}
   - component: {fileID: 965700881}
   - component: {fileID: 965700882}
+  - component: {fileID: 965700883}
   m_Layer: 0
   m_Name: AIManager
   m_TagString: Untagged
@@ -1358,6 +1359,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TankIndex: 1
   m_TankModeListVariable: {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}
+--- !u!114 &965700883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965700877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b3bbcb173c9334084acc7695baa0e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TankHealth: {fileID: 11400000, guid: e5822f4c3f3668442a3687069a34faf2, type: 2}
+  m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}
 --- !u!1 &1188723416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +1682,7 @@ MonoBehaviour:
   m_MessageText: {fileID: 102963701}
   m_TankPrefab: {fileID: 173472, guid: 756d3a6506f2f8241b4e8badde68567a, type: 3}
   m_TankAIPrefab: {fileID: 8059248493399890314, guid: 1447a59e4d037f644bdd91faec4bc2c3, type: 3}
-  m_TankAmountPerTeam: 2
+  m_TankAmountPerTeam: 3
   m_TankVariableList:
   - {fileID: 11400000, guid: b2f1d6ccf059a864cac29ed1d30f7ed8, type: 2}
   - {fileID: 11400000, guid: 6a2b273e200acfe4188ed97cfacfedea, type: 2}

@@ -15,15 +15,20 @@ public class TankDetectCollider : MonoBehaviour
     [SerializeField] private float m_RayCastBackLength = 1f;
     [SerializeField] private float m_RayCastFrontLength = 5f;
     [SerializeField] private float m_RayCastAnglesOfResearch = 2f;
+    [SerializeField] private float m_SensingAltitudeFactor = 0.2f;
 
     void Start()
     {
         m_Transform = transform;
         Vector3 bounds = gameObject.GetComponent<Collider>().bounds.size / 2;
-        m_FrontRightSensorLocalPos = new Vector3(bounds.x, 0.5f, bounds.z);
+        /*m_FrontRightSensorLocalPos = new Vector3(bounds.x, 0.5f, bounds.z);
         m_BackRightSensorLocalPos = new Vector3(bounds.x, 0.5f, -bounds.z);
         m_BackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, -bounds.z);
-        m_FackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, bounds.z);
+        m_FackLeftSensorLocalPos = new Vector3(-bounds.x, 0.5f, bounds.z);*/
+        m_FrontRightSensorLocalPos = new Vector3(bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, bounds.z);
+        m_BackRightSensorLocalPos = new Vector3(bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, -bounds.z);
+        m_BackLeftSensorLocalPos = new Vector3(-bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, -bounds.z);
+        m_FackLeftSensorLocalPos = new Vector3(-bounds.x, bounds.y * 2.0f * m_SensingAltitudeFactor, bounds.z);
 
 
     }
@@ -169,7 +174,9 @@ public class TankDetectCollider : MonoBehaviour
             
         Vector3 tankPos = m_Transform.position;
         Quaternion tankRotation = m_Transform.rotation;
-        
+
+        target += Vector3.up * m_FrontRightSensorLocalPos.y;
+
         Vector3 frontRightSensorGlobalPos = tankPos + tankRotation * m_FrontRightSensorLocalPos;
         Vector3 backRightSensorGlobalPos = tankPos + tankRotation * m_BackRightSensorLocalPos;
         Vector3 backLeftSensorGlobalPos = tankPos + tankRotation * m_BackLeftSensorLocalPos;
@@ -179,6 +186,8 @@ public class TankDetectCollider : MonoBehaviour
         Vector3 backRightDirection = target - frontRightSensorGlobalPos;
         Vector3 backLeftDirection = target - frontRightSensorGlobalPos;
         Vector3 frontLeftDirection = target - frontRightSensorGlobalPos;
+
+        Debug.DrawLine(frontRightSensorGlobalPos, frontRightSensorGlobalPos + frontRightDirection, Color.red);
 
         RaycastHit[] frontRightHits = Physics.RaycastAll(frontRightSensorGlobalPos, frontRightDirection, frontRightDirection.magnitude);
         RaycastHit[] backRightHits = Physics.RaycastAll(backRightSensorGlobalPos, backRightDirection, backRightDirection.magnitude);

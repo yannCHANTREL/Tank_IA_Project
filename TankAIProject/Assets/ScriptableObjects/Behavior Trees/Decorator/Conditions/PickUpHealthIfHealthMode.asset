@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
   m_Name: PickUpHealthIfHealthMode
   m_EditorClassIdentifier: 
-  m_Status: 2
+  m_Status: 3
   m_Child: {fileID: 11400000, guid: 3a33a0d089bdfa545837d38e3b00102e, type: 2}
   m_Tests:
   - m_ConditionTests: {fileID: 11400000, guid: 60a8945924b09cf4eb96da80d8ee6e60, type: 2}
-    m_Signs: 0
+    m_Signs: 1
   m_CompositionPolicy: 0
