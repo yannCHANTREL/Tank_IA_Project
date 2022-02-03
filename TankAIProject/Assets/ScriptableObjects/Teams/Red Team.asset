@@ -12,13 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193bb6393408c9b44813fa05e8f47acf, type: 3}
   m_Name: Red Team
   m_EditorClassIdentifier: 
-  m_TeamNumber: 1
+  m_TeamNumber: 2
   m_TeamColor: {r: 0.8980392, g: 0.18039216, b: 0.15686275, a: 0}
   m_AI: 1
-  m_CaptureScore: 0
+  m_CaptureScore: 52
   m_TeamTank:
   - m_PlayerColor: {r: 0.8980392, g: 0.18039216, b: 0.15686275, a: 0}
     m_SpawnPoint: {fileID: 0}
-    m_PlayerNumber: 3
+    m_PlayerNumber: 4
+    m_Instance: {fileID: 0}
+  - m_PlayerColor: {r: 0.8980392, g: 0.18039216, b: 0.15686275, a: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_PlayerNumber: 5
+    m_Instance: {fileID: 0}
+  - m_PlayerColor: {r: 0.8980392, g: 0.18039216, b: 0.15686275, a: 0}
+    m_SpawnPoint: {fileID: 0}
+    m_PlayerNumber: 6
     m_Instance: {fileID: 0}
   m_BehaviorTree: {fileID: 11400000, guid: 567b8465ebb0f484a8279071279e18e4, type: 2}

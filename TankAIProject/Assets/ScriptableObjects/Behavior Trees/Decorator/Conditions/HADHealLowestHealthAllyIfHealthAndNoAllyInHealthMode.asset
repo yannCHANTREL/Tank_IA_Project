@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
+  m_Name: HADHealLowestHealthAllyIfHealthAndNoAllyInHealthMode
+  m_EditorClassIdentifier: 
+  m_Status: 2
+  m_Child: {fileID: 11400000, guid: fa863b9f39cd1fe4bba63f6ff4f69a1b, type: 2}
+  m_Tests:
+  - m_ConditionTests: {fileID: 11400000, guid: ccb9b54998b4c6142a1529bbc66142b3, type: 2}
+    m_Signs: 1
+  - m_ConditionTests: {fileID: 11400000, guid: 5f6a59d8a8ecc234fbf9f697530544d0, type: 2}
+    m_Signs: 1
+  m_CompositionPolicy: 0
