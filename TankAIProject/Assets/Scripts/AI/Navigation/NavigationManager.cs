@@ -45,11 +45,15 @@ public class NavigationManager : MonoBehaviour
         List<Vector3> ret = new List<Vector3>();
         
         Tuple<List<Node>, List<Node>> globalPath = await LaunchAlgorithmSearch(posStart, posEnd);
-        List<Node> results = globalPath.Item2;
-        
-        foreach (var result in results)
+
+        if (globalPath != null)
         {
-            ret.Add(new Vector3(result.position.x, 0, result.position.y));
+            List<Node> results = globalPath.Item2;
+
+            foreach (var result in results)
+            {
+                ret.Add(new Vector3(result.position.x, 0, result.position.y));
+            }
         }
 
         return ret;
@@ -59,6 +63,7 @@ public class NavigationManager : MonoBehaviour
     {
         // Get the path
         Path thread = await Task.Run(() => m_ListAlgorithm[m_AlgorithmMode].LaunchSearch(posStart, posEnd));
+        if (thread == null) return null;
         List<Node> entryPath = thread.nodes;
         
         // Get the final path (clean)

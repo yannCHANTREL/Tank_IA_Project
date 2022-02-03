@@ -65,7 +65,6 @@ public class AIMove : MonoBehaviour
         if (usePathfinding)
         {
             bool targetChanged = m_PathManager.m_TargetPos != targetPos;
-            Debug.Log(m_PathManager.m_TargetPos + " | "+ targetPos);
             if (targetType == TargetType.point && (targetChanged || changedTargetType))
             {
                 m_PathManager.SearchPath(tankPos, targetPos);
@@ -79,11 +78,12 @@ public class AIMove : MonoBehaviour
                 }
             }
             m_PathManager.UpdatePath(tankPos);
-            if ((targetChanged || changedTargetType) && !m_PathManager.m_PathFound)
+            if ((targetChanged || changedTargetType || targetType == TargetType.point) && !m_PathManager.m_PathFound)
             {
                 stopMoving = true;
             }
             targetPos = m_PathManager.GetActualWaypoint();
+            DisplayPath(tankPos, m_PathManager.m_ListWayPoints);
         }
 
         Vector3 distance = targetPos - tankPos;
@@ -95,6 +95,15 @@ public class AIMove : MonoBehaviour
         else { StopTurn(tankIndex); }
 
         m_LastTargetType = targetType;
+    }
+    public void DisplayPath(Vector3 currentPos, List<Vector3> listWayPoints)
+    {
+        Vector3 lastPoint = currentPos;
+        foreach (var point in listWayPoints)
+        {
+            Debug.DrawLine(lastPoint, point, Color.red);
+            lastPoint = point;
+        }
     }
 
     private void Move(Vector3 distance, Vector3 tankForward, int tankIndex)

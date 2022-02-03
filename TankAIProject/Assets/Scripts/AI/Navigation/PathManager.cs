@@ -12,11 +12,12 @@ public class PathManager : MonoBehaviour
     [SerializeField]
     private NavigationManager m_NavManager;
         
-    private List<Vector3> m_ListWayPoints;
+    public List<Vector3> m_ListWayPoints;
 
     private void Start()
     {
         m_ListWayPoints = new List<Vector3>();
+        m_TargetPos = new Vector3(60, 0, 60);
     }
 
     private void Update()
@@ -38,16 +39,11 @@ public class PathManager : MonoBehaviour
         for (int i = 0; i < m_ListWayPoints.Count; i++)
         {
             distance = Math.Sqrt(Math.Pow((m_ListWayPoints[i].x - currentPos.x), 2f) +
-                                        Math.Pow((m_ListWayPoints[i].y - currentPos.y), 2f));
+                                        Math.Pow((m_ListWayPoints[i].z - currentPos.z), 2f));
             if (distance < m_RadiusTolerance)
             {
                 m_ListWayPoints.RemoveRange(0,i+1);
             }
-        }
-        if (m_ListWayPoints.Count == 0)
-        {
-            m_TargetPos = currentPos;
-            m_PathFound = false;
         }
         DisplayPath(currentPos);
     }
