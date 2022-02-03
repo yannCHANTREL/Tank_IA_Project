@@ -22,6 +22,11 @@ namespace Complete
             m_FireWait = new WaitForSeconds(m_FireDelay);
         }
 
+        private void OnEnable()
+        {
+            m_Reloading = false;
+        }
+
         public void OnFireCommand()
         {
             if (m_Reloading == false) { StartCoroutine(Fire()); }

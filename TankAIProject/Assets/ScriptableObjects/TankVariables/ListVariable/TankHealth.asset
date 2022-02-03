@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77044d4b212f8d44db3ea3c2b8b0116e, type: 3}
   m_Name: TankHealth
   m_EditorClassIdentifier: 
-  m_Values: []
+  m_Values:
+  - 100
+  - 100
+  - 26.384878
+  - 100
+  - 9.545174
+  - 14.159779

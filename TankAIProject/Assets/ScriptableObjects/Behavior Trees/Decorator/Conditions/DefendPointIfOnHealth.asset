@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefendPointIfOnHealth
   m_EditorClassIdentifier: 
   m_Status: 2
-  m_Child: {fileID: 11400000, guid: 25d4dd68c5911f94aa1919f0aa115230, type: 2}
+  m_Child: {fileID: 11400000, guid: b9600fd36fd010f45b1f6f7f880d5444, type: 2}
   m_Tests:
   - m_ConditionTests: {fileID: 11400000, guid: e125c23cb77cc3c4badca765067d92f3, type: 2}
     m_Signs: 1

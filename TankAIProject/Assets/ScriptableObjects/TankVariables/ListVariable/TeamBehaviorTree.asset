@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10016de49401b446a1207886ba80ef7, type: 3}
   m_Name: TeamBehaviorTree
   m_EditorClassIdentifier: 
-  m_Value: []
+  m_Value:
+  - {fileID: 11400000, guid: 567b8465ebb0f484a8279071279e18e4, type: 2}
+  - {fileID: 11400000, guid: 567b8465ebb0f484a8279071279e18e4, type: 2}
