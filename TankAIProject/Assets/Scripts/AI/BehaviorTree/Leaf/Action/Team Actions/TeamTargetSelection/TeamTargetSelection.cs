@@ -125,7 +125,7 @@ public class TeamTargetSelection : Action
         if (selectedTankIndex == -1 || (m_StrictSelection && strictlySelectedTankIndex == -1)) return Status.failure;
         else
         {
-            m_TeamTankIndexTarget.m_Values[teamIndex] = m_StrictSelection ? strictlySelectedTankIndex : selectedTankIndex;
+            m_TeamTankIndexTarget.m_Values[teamIndex] = !m_StrictSelection && strictlySelectedTankIndex == -1 ? selectedTankIndex : strictlySelectedTankIndex;
             return Status.success;
         }
     }
