@@ -31,8 +31,6 @@ namespace Complete
 
         public CaptureData m_CaptureData;
         
-        // public int m_CaptureScoreForRoundWin;
-        
         public Text m_Text;
         private Coroutine m_Coroutine;
 
@@ -42,6 +40,8 @@ namespace Complete
         public UIGameManager m_UIGameManager;
 
         public TeamBehaviorTreeListVariable m_TeamBehaviorTrees;
+
+        private int m_IndexAlgoUsed;
         
         const float k_MaxDepenetrationVelocity = float.PositiveInfinity;
 
@@ -59,8 +59,8 @@ namespace Complete
             m_TeamList.ResetAllScore();
             m_TeamList.SetTeamSpawn(m_TeamsSpawn);
 
-            SetTeamType();
-            
+            ApplyOptionSettings();
+                
             ResetTankValues();
             SpawnAllTanks();
             SetCameraTargets();
@@ -69,13 +69,17 @@ namespace Complete
             StartCoroutine (GameLoop ());
         }
 
+        private void ApplyOptionSettings()
+        {
+            SetTeamType();
+            m_TankAmountPerTeam = m_GameOptions.m_NbPlayer;
+            m_IndexAlgoUsed = (int) m_GameOptions.m_SearchAlgo;
+        } 
+
         private void SetTeamType()
         {
             switch (m_GameOptions.m_Mode)
             {
-                case GameOptions.Mode.PlayerVSPlayer:
-                    m_TeamList.SetAllTeamAsPlayer();
-                    break;
                 case GameOptions.Mode.PlayerVSAI:
                     m_TeamList.SetOtherTeamsAsAI();
                     break;
@@ -127,7 +131,7 @@ namespace Complete
                         NavigationManager navigationManager = tankManager.m_Instance.GetComponent<NavigationManager>();
                         if (navigationManager)
                         {
-                            navigationManager.ChooseAAlgorithmMode((int) m_GameOptions.m_SearchAlgo);
+                            navigationManager.ChooseAAlgorithmMode(m_IndexAlgoUsed);
                         }
                     }
 

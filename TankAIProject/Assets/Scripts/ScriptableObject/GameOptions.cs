@@ -12,15 +12,17 @@ public class GameOptions : ScriptableObject
 
     public enum AIDifficulty
     {
-        Easy, Normal, Hard
+        Normal, Hard
     }
 
     public enum Mode
     {
-        PlayerVSPlayer, PlayerVSAI, AIVSAI
+        PlayerVSAI, AIVSAI
     }
 
     public AISearchAlgo m_SearchAlgo;
     public AIDifficulty m_AIDifficulty;
     public Mode m_Mode;
+    [Range(1, 3)] 
+    public int m_NbPlayer;
 }
