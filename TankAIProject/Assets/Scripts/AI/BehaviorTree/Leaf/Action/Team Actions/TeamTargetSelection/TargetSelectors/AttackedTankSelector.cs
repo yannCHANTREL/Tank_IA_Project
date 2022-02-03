@@ -8,6 +8,6 @@ public class AttackedTankSelector : TargetSelector
     public SensedTankListVariable m_SensedTank;
     public override bool Test(int tankIndex)
     {
-        return m_SensedTank.m_AttackingTanks[tankIndex].Count > 0; 
+        return m_SensedTank.m_AttackingTanks[tankIndex].m_List.Count > 0; 
     }
 }

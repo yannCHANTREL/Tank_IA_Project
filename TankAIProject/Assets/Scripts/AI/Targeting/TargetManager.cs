@@ -21,13 +21,13 @@ public class TargetManager : MonoBehaviour
         Vector3 tankPos = transform.position;
         RemoveTarget(tankIndex, teamIndex);
 
-        List<GameObject> tankList = m_SensedTank.m_AttackingTanks[tankIndex];
+        List<GameObject> tankList = m_SensedTank.m_AttackingTanks[tankIndex].m_List;
         if (tankList.Count > 0)
         {
             SetNewTarget(GetNearestTankFromList(tankList, tankPos), tankIndex, teamIndex);
             return;
         }
-        tankList = m_SensedTank.m_EnemyTanksOnCapturePoint[tankIndex];
+        tankList = m_SensedTank.m_EnemyTanksOnCapturePoint[tankIndex].m_List;
         if (tankList.Count > 0)
         {
             SetNewTarget(GetNearestTankFromList(tankList, tankPos), tankIndex, teamIndex);
@@ -39,7 +39,7 @@ public class TargetManager : MonoBehaviour
             SetNewTarget(GetNearestTankFromList(tankList, tankPos), tankIndex, teamIndex);
             return;
         }
-        tankList = m_SensedTank.m_TeamSensedEnemies[teamIndex];
+        tankList = m_SensedTank.m_TeamSensedEnemies[teamIndex].m_List;
         if (tankList.Count > 0)
         {
             SetNewTarget(GetNearestTankFromList(tankList, tankPos), tankIndex, teamIndex);
@@ -49,8 +49,12 @@ public class TargetManager : MonoBehaviour
 
     private void RemoveTarget(int tankIndex, int teamIndex)
     {
-        m_TargetCount.m_Values[m_TargetTank.m_Values[tankIndex].GetComponent<TankIndexManager>().m_TankIndex][teamIndex]--;
-        m_TargetTank.m_Values[tankIndex] = null;
+        GameObject tankTarget = m_TargetTank.m_Values[tankIndex];
+        if (tankTarget)
+        {
+            m_TargetCount.m_Values[tankTarget.GetComponent<TankIndexManager>().m_TankIndex].m_List[teamIndex]--;
+            m_TargetTank.m_Values[tankIndex] = null;
+        }
     }
 
     private GameObject GetNearestTankFromList(List<GameObject> tankList, Vector3 tankPos)
@@ -72,15 +76,15 @@ public class TargetManager : MonoBehaviour
     private void SetNewTarget(GameObject target, int tankIndex, int teamIndex)
     {
         m_TargetTank.m_Values[tankIndex] = target;
-        m_TargetCount.m_Values[target.GetComponent<TankIndexManager>().m_TankIndex][teamIndex]++;
+        m_TargetCount.m_Values[target.GetComponent<TankIndexManager>().m_TankIndex].m_List[teamIndex]++;
     }
 
     private List<GameObject> GetNotTargetedEnemyTankList(int teamIndex)
     {
         List<GameObject> tankList = new List<GameObject>();
-        foreach(GameObject tank in m_SensedTank.m_TeamSensedEnemies[teamIndex])
+        foreach(GameObject tank in m_SensedTank.m_TeamSensedEnemies[teamIndex].m_List)
         {
-            if (m_TargetCount.m_Values[tank.GetComponent<TankIndexManager>().m_TankIndex][teamIndex] == 0)
+            if (m_TargetCount.m_Values[tank.GetComponent<TankIndexManager>().m_TankIndex].m_List[teamIndex] == 0)
             {
                 tankList.Add(tank);
             }

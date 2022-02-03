@@ -6,11 +6,11 @@ public abstract class Decorator : Behavior
 {
     public Behavior m_Child;
 
-    public override void AddAITank(int teamIndex, int tankIndex = 0)
+    public override void AddAITank(int teamIndex, int tankIndex = -1)
     {
         m_Child.AddAITank(teamIndex, tankIndex);
     }
-    public override void RemoveAITank(int teamIndex, int tankIndex = 0)
+    public override void RemoveAITank(int teamIndex, int tankIndex = -1)
     {
         m_Child.RemoveAITank(teamIndex, tankIndex);
     }

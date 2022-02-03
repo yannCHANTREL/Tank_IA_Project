@@ -6,7 +6,7 @@ using UnityEngine;
 public class HasTargetTest : ConditionTest
 {
     public GameObjectListVariable m_TargetTank;
-    public override bool Test(int teamIndex, int tankIndex = 0)
+    public override bool Test(int teamIndex, int tankIndex = -1)
     {
         if (m_TargetTank.m_Values[tankIndex])
         {

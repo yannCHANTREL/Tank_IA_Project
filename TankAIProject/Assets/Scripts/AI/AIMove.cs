@@ -42,7 +42,22 @@ public class AIMove : MonoBehaviour
         Vector3 tankRight = m_Transform.right;
         TargetType targetType = m_MoveInstructions.m_TargetType[tankIndex];
         bool changedTargetType = targetType != m_LastTargetType;
-        Vector3 targetPos = targetType == TargetType.point ? m_TargetPointContainer.m_Values[tankIndex].m_CenterPos : m_TargetPosContainer.m_Values[tankIndex].m_Values[tankIndex];
+
+        Vector3 targetPos;
+        GameObject tankTarget = m_TargetTank.m_Values[tankIndex];
+        if (targetType == TargetType.tank && tankTarget)
+        {
+            targetPos = m_TargetPosContainer.m_Values[tankIndex].m_Values[tankIndex];
+        }
+        else if (targetType == TargetType.point || (targetType == TargetType.tank && m_MoveInstructions.m_UseDefaultPointValue[tankIndex]))
+        {
+            targetPos = m_TargetPointContainer.m_Values[tankIndex].m_CenterPos;
+        }
+        else
+        {
+            targetPos = Vector3.zero;
+            stopMoving = true;
+        }
 
         bool usePathfinding = m_MoveInstructions.m_UsePathfinding[tankIndex];
 
@@ -82,7 +97,8 @@ public class AIMove : MonoBehaviour
 
     private void Move(Vector3 distance, Vector3 tankForward, int tankIndex)
     {
-        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance, tankForward) >= 0 != (m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0)? 1 : -1, m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
+        //m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance, tankForward) >= 0 != (m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0)? 1 : -1, m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
+        m_MoveAxis.m_Values[tankIndex] = Mathf.Min(Vector3.Dot(distance.normalized, tankForward) * ((m_MoveInstructions.m_MoveToFireRange[tankIndex] && distance.magnitude - m_FirePlacementRange < 0) ? -1 : 1), m_MoveInstructions.m_Follow[tankIndex] ? 1 : 0);
     }
     
     private void Turn(Vector3 distance, Vector3 tankForward, Vector3 tankRight, int tankIndex)

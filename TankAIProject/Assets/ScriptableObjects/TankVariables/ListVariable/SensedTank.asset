@@ -12,4 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360d30d5ee0c2494091540de1da71beb, type: 3}
   m_Name: SensedTank
   m_EditorClassIdentifier: 
+  m_TankSensedEnemies:
+  - m_List: []
+  - m_List: []
+  - m_List: []
+  - m_List: []
+  m_TeamSensedEnemies:
+  - m_List: []
+  - m_List: []
+  m_AttackingTanks:
+  - m_List: []
+  - m_List: []
+  - m_List: []
+  - m_List: []
+  m_EnemyTanksOnCapturePoint:
+  - m_List: []
+  - m_List: []
+  - m_List: []
+  - m_List: []
   m_TeamList: {fileID: 11400000, guid: 9199d870a5a9dc648ab4cc8adb4a91b4, type: 2}

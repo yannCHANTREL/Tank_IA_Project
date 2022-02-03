@@ -11,7 +11,7 @@ public class AlliedTankCountInModeTest : ConditionTest
     public TeamList m_TeamList;
     public TankModeListVariable m_TankMode;
     public enum TestPolicy { zero, one, all }
-    public override bool Test(int teamIndex, int tankIndex = 0)
+    public override bool Test(int teamIndex, int tankIndex = -1)
     {
         int validedCount = 0;
         List<TankManager> tankManagers = m_TeamList.m_Teams[teamIndex].m_TeamTank;

@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a78a51a899f504f97efb1367c443dd, type: 3}
   m_Name: TargetCount
   m_EditorClassIdentifier: 
+  m_Values:
+  - m_List: 0000000000000000
+  - m_List: 0000000000000000
+  - m_List: 0000000000000000
+  - m_List: 0000000000000000

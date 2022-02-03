@@ -13,6 +13,7 @@ public class TankMoveInstructionListVariable : ListVariable
     public List<bool> m_MoveToFireRange;
     public List<bool> m_MoveForward;
     public List<bool> m_UsePathfinding;
+    public List<bool> m_UseDefaultPointValue;
     public List<TargetType> m_TargetType;
 
 
@@ -24,6 +25,7 @@ public class TankMoveInstructionListVariable : ListVariable
         m_MoveToFireRange.Add(true);
         m_MoveForward.Add(true);
         m_UsePathfinding.Add(false);
+        m_UseDefaultPointValue.Add(false);
         m_TargetType.Add(TargetType.tank);
     }
 
@@ -40,6 +42,7 @@ public class TankMoveInstructionListVariable : ListVariable
         m_MoveToFireRange = new List<bool>();
         m_MoveForward = new List<bool>();
         m_UsePathfinding = new List<bool>();
+        m_UseDefaultPointValue = new List<bool>();
         m_TargetType = new List<TargetType>();
     }
 }

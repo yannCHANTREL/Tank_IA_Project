@@ -10,13 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
-  m_Name: DefendPointIfDefenseModeOrNoTarget
+  m_Name: MoveToCaptureIfNotOnCapture
   m_EditorClassIdentifier: 
-  m_Status: 0
-  m_Child: {fileID: 11400000, guid: c0bc16809b3190946a3c34bd5a167d50, type: 2}
+  m_Status: 2
+  m_Child: {fileID: 11400000, guid: 8e7fb348a31a8474a97fdedeb1620eff, type: 2}
   m_Tests:
-  - m_ConditionTests: {fileID: 11400000, guid: 6289970658f5d4b49ba8183151ee0726, type: 2}
-    m_Signs: 1
-  - m_ConditionTests: {fileID: 11400000, guid: a607c2c7002fc8b468327865a88af33f, type: 2}
+  - m_ConditionTests: {fileID: 11400000, guid: 7fb6a96884a656045888b41868e1c264, type: 2}
     m_Signs: 0
-  m_CompositionPolicy: 1
+  m_CompositionPolicy: 0

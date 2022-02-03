@@ -7,7 +7,7 @@ public class ModeTest : ConditionTest
 {
     public Mode m_ModeToTest;
     public TankModeListVariable m_TankMode;
-    public override bool Test(int teamIndex, int tankIndex = 0)
+    public override bool Test(int teamIndex, int tankIndex = -1)
     {
         if (m_TankMode.m_Values[tankIndex] == m_ModeToTest) return true;
         return false;

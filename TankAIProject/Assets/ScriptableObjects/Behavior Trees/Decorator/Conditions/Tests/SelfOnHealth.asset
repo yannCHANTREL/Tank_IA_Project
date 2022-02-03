@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9fdc5180dc7de4bbe272e935ff10bd, type: 3}
-  m_Name: DefendCapturePoint
+  m_Script: {fileID: 11500000, guid: 4fd29d3ca52a8b146a990f6261ce4399, type: 3}
+  m_Name: SelfOnHealth
   m_EditorClassIdentifier: 
-  m_Status: 0
-  m_Children:
-  - {fileID: 11400000, guid: 8e7fb348a31a8474a97fdedeb1620eff, type: 2}
-  - {fileID: 11400000, guid: 25d4dd68c5911f94aa1919f0aa115230, type: 2}
+  m_Point: {fileID: 11400000, guid: 2345f230f82846a468672d63f7b7685b, type: 2}
+  m_TankPos: {fileID: 11400000, guid: e17fe872aef7dc541976e62ad95e98af, type: 2}

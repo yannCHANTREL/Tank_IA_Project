@@ -13,7 +13,7 @@ public class NavigationManager : MonoBehaviour
     public VirtualGrid m_ClassGrid;
     
     private List<SearchAlgorithm> m_ListAlgorithm;
-    private int m_AlgorithmMode;
+    private int m_AlgorithmMode = 1;
     
     public void Awake()
     {

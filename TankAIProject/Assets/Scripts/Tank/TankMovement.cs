@@ -21,7 +21,6 @@ namespace Complete
         [SerializeField] private TankIndexManager m_TankIndexManager;
         [SerializeField] private FloatListVariable m_MoveAxis;
         [SerializeField] private FloatListVariable m_TurnAxis;
-        [SerializeField] private bool m_AI;
 
         private void Awake ()
         {
@@ -117,16 +116,7 @@ namespace Complete
             // Create a vector in the direction the tank is facing with a magnitude based on the input, speed and the time between frames.
             Vector3 movement = transform.forward * m_MoveAxis.m_Values[m_TankIndexManager.m_TankIndex] * m_Speed * Time.deltaTime;
 
-            // Apply this movement to the rigidbody's position.
-            if (m_AI)
-            {
-                var positionOffset = (3f * Time.fixedDeltaTime);
-                movement = movement * positionOffset;
-                m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
-            } else
-            {
-                m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
-            }
+            m_Rigidbody.MovePosition(m_Rigidbody.position + movement);
         }
 
 

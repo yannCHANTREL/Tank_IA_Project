@@ -95,8 +95,8 @@ namespace Complete
                 Color teamColor = m_TeamList.GetColorTeam(i);
                 
                 AddTeamValue();
-                m_TeamBehaviorTrees.m_Value[i] = m_TeamList.m_Teams[i].m_BehaviorTree;
-
+                if (isAITeam) { m_TeamBehaviorTrees.m_Value[i] = m_TeamList.m_Teams[i].m_BehaviorTree; }
+                
                 // ... For the number of player per team ...
                 for (int j = 0; j < m_TankAmountPerTeam; j++)
                 {

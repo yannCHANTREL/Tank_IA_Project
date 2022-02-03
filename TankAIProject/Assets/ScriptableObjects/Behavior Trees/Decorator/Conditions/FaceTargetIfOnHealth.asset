@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f6f8737d57c3864da7802af1fe92d0d, type: 3}
-  m_Name: SendATankToDefenseIfNoAllyInDefenseMode
+  m_Name: FaceTargetIfOnHealth
   m_EditorClassIdentifier: 
-  m_Status: 0
-  m_Child: {fileID: 11400000, guid: 5601e4fd35c87bd458e31b8c5586f731, type: 2}
+  m_Status: 2
+  m_Child: {fileID: 11400000, guid: 25d4dd68c5911f94aa1919f0aa115230, type: 2}
   m_Tests:
-  - m_ConditionTests: {fileID: 11400000, guid: 6289970658f5d4b49ba8183151ee0726, type: 2}
-    m_Signs: 0
+  - m_ConditionTests: {fileID: 11400000, guid: e125c23cb77cc3c4badca765067d92f3, type: 2}
+    m_Signs: 1
   m_CompositionPolicy: 0

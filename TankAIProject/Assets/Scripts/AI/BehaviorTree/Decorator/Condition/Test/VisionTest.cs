@@ -16,7 +16,7 @@ public class VisionTest : ConditionTest
 
     public enum PositionType { point, tankTarget}
 
-    public override bool Test(int teamIndex, int tankIndex = 0)
+    public override bool Test(int teamIndex, int tankIndex = -1)
     {
         Vector3 testPos = Vector3.zero;
         if (m_PositionType == PositionType.point) { testPos = m_Point.m_CenterPos; }

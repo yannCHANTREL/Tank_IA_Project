@@ -6,7 +6,7 @@ using UnityEngine;
 public class Condition : Decorator
 {
     public List<TestData> m_Tests;
-    public enum Policy { And, Or };
+    public enum Policy { and, or };
 
     public Policy m_CompositionPolicy;
 
@@ -17,11 +17,11 @@ public class Condition : Decorator
 
     }
 
-    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
+    public override Status BHUpdate(bool debugMode, int teamIndex, int tankIndex = -1)
     {
         if (Test(teamIndex, tankIndex))
         {
-            return m_Child.Tick(teamIndex, tankIndex);
+            return m_Child.Tick(debugMode, teamIndex, tankIndex);
         }
         else
         {
@@ -34,14 +34,15 @@ public class Condition : Decorator
 
     }
 
-    public bool Test(int teamIndex, int tankIndex = 0)
+    public bool Test(int teamIndex, int tankIndex = -1)
     {
-        bool isAnd = m_CompositionPolicy == Policy.And;
+        bool isAnd = m_CompositionPolicy == Policy.and;
+        bool isOr = m_CompositionPolicy == Policy.or;
         for (int i = 0; i < m_Tests.Count; i++)
         {
             bool test = m_Tests[i].m_Signs == m_Tests[i].m_ConditionTests.Test(teamIndex, tankIndex);
             if (isAnd && !test) { return false; }
-            if (!isAnd && test) { return true; }
+            if (isOr && test) { return true; }
         }
         return isAnd;
     }

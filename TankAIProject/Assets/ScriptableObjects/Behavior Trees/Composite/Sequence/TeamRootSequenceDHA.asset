@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b9fdc5180dc7de4bbe272e935ff10bd, type: 3}
-  m_Name: DefendHealthPoint
+  m_Name: TeamRootSequenceDHA
   m_EditorClassIdentifier: 
-  m_Status: 0
+  m_Status: 2
   m_Children:
-  - {fileID: 11400000, guid: 8109c9fdf0adf3e4aba905a9ce8a937a, type: 2}
-  - {fileID: 11400000, guid: 25d4dd68c5911f94aa1919f0aa115230, type: 2}
+  - {fileID: 11400000, guid: ea297211c7e995d4b88a5758c2bc7a87, type: 2}
+  - {fileID: 11400000, guid: f7a41d2ddfab32041bc9a52160248f20, type: 2}

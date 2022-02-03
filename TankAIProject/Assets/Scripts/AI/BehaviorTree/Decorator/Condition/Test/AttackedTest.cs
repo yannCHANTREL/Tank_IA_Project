@@ -6,10 +6,10 @@ using UnityEngine;
 public class AttackedTest : ConditionTest
 {
     public SensedTankListVariable m_SensedTank;
-    public override bool Test(int teamIndex, int tankIndex = 0)
+    public override bool Test(int teamIndex, int tankIndex = -1)
     {
         if (!m_SensedTank) return false;
 
-        return m_SensedTank.m_AttackingTanks[tankIndex].Count > 0;
+        return m_SensedTank.m_AttackingTanks[tankIndex].m_List.Count > 0;
     }
 }

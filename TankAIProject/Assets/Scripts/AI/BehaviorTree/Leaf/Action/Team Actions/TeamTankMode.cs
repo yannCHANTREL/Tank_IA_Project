@@ -8,12 +8,12 @@ public class TeamTankMode : Action
     public Mode m_ModeToSet;
     public TeamTankIndexTargetListVariable m_TeamTankTarget;
     public TankModeListVariable m_TankMode;
-    public override void AddAITank(int teamIndex, int tankIndex = 0)
+    public override void AddAITank(int teamIndex, int tankIndex = -1)
     {
 
     }
 
-    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
+    public override Status BHUpdate(bool debugMode, int teamIndex, int tankIndex = -1)
     {
         m_TankMode.m_Values[m_TeamTankTarget.m_Values[teamIndex]] = m_ModeToSet;
         return Status.success;
@@ -29,7 +29,7 @@ public class TeamTankMode : Action
 
     }
 
-    public override void RemoveAITank(int teamIndex, int tankIndex = 0)
+    public override void RemoveAITank(int teamIndex, int tankIndex = -1)
     {
 
     }

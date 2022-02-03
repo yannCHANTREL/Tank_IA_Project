@@ -5,21 +5,25 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BehaviorTree/Action/TeamAction/TeamTargetSelection")]
 public class TeamTargetSelection : Action
 {
+    public enum Policy { and, or };
     public enum SelectionPolicy { lowest, highest }
     public bool m_StrictSelection;
     public SelectionPolicy m_SelectionPolicy;
     public TeamTankIndexTargetListVariable m_TeamTankIndexTarget;
     public TargetSorter m_TargetSorter;
-    public TargetSelector m_TargetSelector;
-    public bool m_TestSign;
     public TeamList m_TeamList;
+    public List<TestData> m_Tests;
+    public Policy m_CompositionPolicy;
 
-    public override void AddAITank(int teamIndex, int tankIndex = 0)
+
+    [System.Serializable]
+    public struct TestData { public TargetSelector m_TargetSelector; public bool m_Signs; }
+    public override void AddAITank(int teamIndex, int tankIndex = -1)
     {
 
     }
 
-    public override Status BHUpdate(int teamIndex, int tankIndex = 0)
+    public override Status BHUpdate(bool debugMode, int teamIndex, int tankIndex = -1)
     {
         int strictlySelectedTankIndex = -1;
         int selectedTankIndex = -1;
@@ -33,7 +37,7 @@ public class TeamTargetSelection : Action
 
             if ((m_SelectionPolicy == SelectionPolicy.lowest && stepScore < strictScore) || (m_SelectionPolicy == SelectionPolicy.highest && stepScore > strictScore))
             {
-                if (m_TargetSelector.Test(stepTankIndex) == m_TestSign)
+                if (Test(stepTankIndex))
                 {
                     strictScore = stepScore;
                     strictlySelectedTankIndex = stepTankIndex;
@@ -47,12 +51,26 @@ public class TeamTargetSelection : Action
                 selectedTankIndex = stepTankIndex;
             }
         }
-        if (selectedTankIndex == -1) return Status.failure;
+        if (debugMode) Debug.Log("Strictly detected : " + strictlySelectedTankIndex + " | Detected :" + selectedTankIndex);
+        if (selectedTankIndex == -1 || (m_StrictSelection && strictlySelectedTankIndex == -1)) return Status.failure;
         else
         {
-            m_TeamTankIndexTarget.m_Values[teamIndex] = strictlySelectedTankIndex != -1 ? strictlySelectedTankIndex : selectedTankIndex;
+            m_TeamTankIndexTarget.m_Values[teamIndex] = m_StrictSelection ? strictlySelectedTankIndex : selectedTankIndex;
             return Status.success;
         }
+    }
+
+    public bool Test(int tankIndex)
+    {
+        bool isAnd = m_CompositionPolicy == Policy.and;
+        bool isOr = m_CompositionPolicy == Policy.or;
+        for (int i = 0; i < m_Tests.Count; i++)
+        {
+            bool test = m_Tests[i].m_Signs == m_Tests[i].m_TargetSelector.Test(tankIndex);
+            if (isAnd && !test) { return false; }
+            if (isOr && test) { return true; }
+        }
+        return isAnd;
     }
 
     public override void OnInitialize()
@@ -65,7 +83,7 @@ public class TeamTargetSelection : Action
 
     }
 
-    public override void RemoveAITank(int teamIndex, int tankIndex = 0)
+    public override void RemoveAITank(int teamIndex, int tankIndex = -1)
     {
 
     }

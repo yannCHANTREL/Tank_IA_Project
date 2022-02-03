@@ -219,6 +219,23 @@ MonoBehaviour:
   m_AStarManager: {fileID: 7912885149352023125}
   m_NavMeshManager: {fileID: -7734663040450953690}
   m_ClassGrid: {fileID: 11400000, guid: c2cdb1d667f9ebd4593636a815576c63, type: 2}
+--- !u!114 &2861812033467588280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059248493399890314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3421e4b7ee195841a9088827e836e84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TargetTank: {fileID: 11400000, guid: 5e32816c7cc3d5c45a9f3774b43ea373, type: 2}
+  m_LastTargetTank: {fileID: 11400000, guid: 6a2b273e200acfe4188ed97cfacfedea, type: 2}
+  m_TargetCount: {fileID: 11400000, guid: 3ed543f7d475df0459bb2b69d333043e, type: 2}
+  m_SensedTank: {fileID: 11400000, guid: a1527205f050bae41a451687dda0efbd, type: 2}
+  m_TankIndexManager: {fileID: 2870660015159044341}
 --- !u!114 &3574630722196496598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +252,7 @@ MonoBehaviour:
   m_TeamBehaviorTrees: {fileID: 0}
   m_TankIndexManager: {fileID: 2870660015159044341}
   m_TreeType: 0
+  m_DebugMode: 0
 --- !u!114 &3997655906782302068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,6 +310,7 @@ MonoBehaviour:
   m_CapturePoint: {fileID: 11400000, guid: c01b950aa9570d54fa38164d9821e586, type: 2}
   m_AttackMaxAngle: 20
   m_AttackMaxDistance: 20
+  m_DebugMode: 0
 --- !u!114 &8785127412315307360
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ public class AllyOnCapturePointTest : ConditionTest
 {
     public TeamList m_TeamList;
     public PointVariable m_CapturePoint;
-    public override bool Test(int teamIndex, int tankIndex = 0)
+    public override bool Test(int teamIndex, int tankIndex = -1)
     {
         foreach (var alliedTankManager in m_TeamList.m_Teams[teamIndex].m_TeamTank)
         {

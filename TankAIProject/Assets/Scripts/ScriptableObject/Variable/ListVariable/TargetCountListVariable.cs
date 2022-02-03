@@ -2,23 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Variables/TargetCountList")]
-public class TargetCountListVariable : GenericListVariable<List<int>>
+[System.Serializable]
+public struct IntList
 {
+    public List<int> m_List;
+
+    public IntList(List<int> list)
+    {
+        m_List = list;
+    }
+
+    public IntList(int listSize)
+    {
+        m_List = new List<int>(listSize);
+        for (int i = 0; i < listSize; i++) { m_List.Add(0); }
+    }
+
+
+    public void Reset()
+    {
+        m_List.Clear();
+    }
+}
+
+[CreateAssetMenu(menuName = "Variables/TargetCountList")]
+public class TargetCountListVariable : ListVariable
+{
+    public List<IntList> m_Values;
+    private int teamSize;
+
     public override void IncrementTankSize()
     {
-        if (m_Values.Count == 0) { m_Values.Add(new List<int>(1)); }
-        else
-        {
-            m_Values.Add(new List<int>(m_Values[0].Count));
-        }
+        m_Values.Add(new IntList(teamSize));
     }
 
     public override void IncrementTeamSize()
     {
+        teamSize++;
         foreach (var tankTargetCountList in m_Values)
         {
-            tankTargetCountList.Add(0);
+            tankTargetCountList.m_List.Add(0);
         }
+    }
+
+    public override void Reset()
+    {
+        teamSize = 0;
+        m_Values = new List<IntList>();
     }
 }

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad4c9b742777f254e9a5a518cbdb7142, type: 3}
-  m_Name: SetDHASpecialModes
+  m_Script: {fileID: 11500000, guid: 4fd29d3ca52a8b146a990f6261ce4399, type: 3}
+  m_Name: SelfOnCapturePoint
   m_EditorClassIdentifier: 
-  m_Status: 0
-  m_Children:
-  - {fileID: 11400000, guid: d3714bbf681dcb645896a0388b815fdb, type: 2}
-  - {fileID: 11400000, guid: ec581d390c6cbae4e93a114ade846833, type: 2}
+  m_Point: {fileID: 11400000, guid: c01b950aa9570d54fa38164d9821e586, type: 2}
+  m_TankPos: {fileID: 11400000, guid: e17fe872aef7dc541976e62ad95e98af, type: 2}

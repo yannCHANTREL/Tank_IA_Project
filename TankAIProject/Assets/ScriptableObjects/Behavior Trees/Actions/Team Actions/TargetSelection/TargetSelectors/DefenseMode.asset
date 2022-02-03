@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b9fdc5180dc7de4bbe272e935ff10bd, type: 3}
-  m_Name: TeamRootSequenceDHA
+  m_Script: {fileID: 11500000, guid: 9c0002519fd7a434a8de53388bf8a1c5, type: 3}
+  m_Name: DefenseMode
   m_EditorClassIdentifier: 
-  m_Status: 0
-  m_Children:
-  - {fileID: 11400000, guid: ea297211c7e995d4b88a5758c2bc7a87, type: 2}
-  - {fileID: 11400000, guid: f52ced6375cd97342b19b7cea51a7285, type: 2}
+  m_ModeToTest: 0
+  m_TankModeListVariable: {fileID: 11400000, guid: defbf57cbad9fcd4197a722ecc769733, type: 2}
