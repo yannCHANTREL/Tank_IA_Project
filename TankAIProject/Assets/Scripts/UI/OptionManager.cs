@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -15,6 +16,9 @@ public class OptionManager : MonoBehaviour
     public Dropdown m_DropdownMode;
     [Space(10)] 
     public string m_GameSceneName;
+    [Space(10)] 
+    public Text m_SliderText;
+    public Slider m_Slider;
 
     private void Start()
     {
@@ -31,6 +35,9 @@ public class OptionManager : MonoBehaviour
         m_DropdownAlgo.value = (int) m_GameOptions.m_SearchAlgo;
         m_DropdownDifficulty.value = (int) m_GameOptions.m_AIDifficulty;
         m_DropdownMode.value = (int) m_GameOptions.m_Mode;
+        
+        // Update Slider Text
+        ChangeSliderText(m_Slider.value);
     }
 
     private List<string> GetEnumString(Type type)
@@ -66,5 +73,11 @@ public class OptionManager : MonoBehaviour
     public void ChangeModeOption(int index)
     {
         m_GameOptions.m_Mode = (GameOptions.Mode)index;
+    }
+
+    public void ChangeSliderText(float value)
+    {
+        m_SliderText.text = value.ToString();
+        m_GameOptions.m_NbPlayer = (int)value;
     }
 }
